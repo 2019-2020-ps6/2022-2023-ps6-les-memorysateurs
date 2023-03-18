@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreerThemeComponent } from './creer-theme/creer-theme.component';
 import { CreerMemoryComponent } from './creer-memory/creer-memory.component';
+import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreerThemeComponent,
-    CreerMemoryComponent
+    CreerMemoryComponent,
+    ListeThemeComponent
   ],
   imports: [
     BrowserModule,

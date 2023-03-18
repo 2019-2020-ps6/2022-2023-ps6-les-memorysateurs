@@ -9,5 +9,5 @@ import {Theme} from "../../models/theme.models";
 export class ThemeService {
   public listeThemes$: BehaviorSubject<Theme[]> = new BehaviorSubject<Theme[]>([]);
 
-  
+
 }
