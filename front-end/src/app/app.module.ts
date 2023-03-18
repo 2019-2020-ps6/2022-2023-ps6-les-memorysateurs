@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { CreerThemeComponent } from './creer-theme/creer-theme.component';
 import { CreerMemoryComponent } from './creer-memory/creer-memory.component';
 import { ListeThemeComponent } from './liste-theme/liste-theme.component';
+import { ThemeComponent } from './theme/theme.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreerThemeComponent,
     CreerMemoryComponent,
-    ListeThemeComponent
+    ListeThemeComponent,
+    ThemeComponent
   ],
   imports: [
     BrowserModule,

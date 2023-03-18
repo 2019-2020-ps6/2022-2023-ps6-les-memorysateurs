@@ -8,7 +8,7 @@ import {ThemeService} from "../services/theme.service";
   styleUrls: ['./liste-theme.component.scss']
 })
 export class ListeThemeComponent {
-  private listeTheme: Theme[] = [];
+  listeTheme: Theme[] = [];
 
   constructor(public themeService: ThemeService) {
     this.themeService.listeThemes$.subscribe((themes: Theme[]) => {
