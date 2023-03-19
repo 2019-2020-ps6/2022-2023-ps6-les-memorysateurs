@@ -1,46 +1,39 @@
 import { Component, OnInit, ElementRef, ViewChild  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormThemeService} from "../services/formTheme.service";
 
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-creer-theme',
   templateUrl: './creer-theme.component.html',
   styleUrls: ['./creer-theme.component.scss']
 })
 export class CreerThemeComponent {
+  themeForm: FormGroup;
   imageData : string | undefined;
-  @ViewChild('stock-image', { static: true })
-  stockImage!: ElementRef<HTMLDivElement>
-  constructor(private http:HttpClient) {}
-  ngOnInit(): void {}
+  // @ts-ignore
+  nom: string;
+  images : any[] = [];
+  constructor(private http:HttpClient, private formBuilder: FormBuilder,private formThemeService: FormThemeService) {
+    this.themeForm = this.formBuilder.group({
+      titre: [''],
+      images: ['']
+    });
+  }
+  ngOnInit(): void {
+  this.banqueImage();
+  }
+  envoyerNom() {
+    this.formThemeService.setNom(this.nom);
+  }
+  envoyerImages(){
+    this.formThemeService.setImages(this.images);
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        console.log(e)
-        this.imageData = e.target.result;
-        const imageElement = document.createElement('img');
-        if (typeof this.imageData === "string") {
-          imageElement.src = this.imageData;
-        }
-        this.stockImage.nativeElement.appendChild(imageElement);
-        const formData = new FormData();
-        formData.append('image', file);
-        this.http.post('/upload', formData).subscribe(
-          (response) => console.log(response),
-          (error) => console.log(error)
-        );
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   afficherFichier(){
     const input = document.getElementById("recup-fichier") as HTMLInputElement;
     const file = input.files?.[0];
-    console.log(file);
     const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
     const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
     const imageElement = document.createElement('img');
@@ -56,12 +49,81 @@ export class CreerThemeComponent {
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
         stockImage2.appendChild(imageElement);
+        this.images.push(imageElement.src);
+        console.log(this.images);
       }
       else{
         stockImage2.removeChild(imageElement);
         stockImage.appendChild(imageElement);
+        const index = this.images.findIndex(image => image ===imageElement.src);
+        if(index !== -1){
+          this.images.splice(index,1);
+
+        }
+        console.log(this.images);
       }
+      this.envoyerImages();
     })
+
+  }
+
+  private async  banqueImage(){
+    const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
+    const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
+    for(let i = 0; i < 2; i++){
+      if(i==0){
+        const imageElement = document.createElement('img');
+        imageElement.style.height = "26%";
+        imageElement.style.width = "26%";
+        imageElement.src = 'assets/images/image014.png';
+        stockImage.appendChild(imageElement);
+        imageElement.addEventListener("click",() =>{
+          if(stockImage.contains(imageElement)) {
+            stockImage.removeChild(imageElement);
+            stockImage2.appendChild(imageElement);
+            this.images.push(imageElement.src);
+            console.log(this.images);
+          }
+          else{
+            stockImage2.removeChild(imageElement);
+            stockImage.appendChild(imageElement);
+            const index = this.images.findIndex(image => image ===imageElement.src);
+            if(index !== -1){
+              this.images.splice(index,1);
+
+            }
+            console.log(this.images);
+          }
+          this.envoyerImages();
+        })
+      }
+      else{
+        const imageElement = document.createElement('img');
+        imageElement.style.height = "26%";
+        imageElement.style.width = "26%";
+        imageElement.src = 'assets/images/image034.png';
+        stockImage.appendChild(imageElement);
+        imageElement.addEventListener("click",() =>{
+          if(stockImage.contains(imageElement)) {
+            stockImage.removeChild(imageElement);
+            stockImage2.appendChild(imageElement);
+            this.images.push(imageElement.src);
+            console.log(this.images);
+          }
+          else{
+            stockImage2.removeChild(imageElement);
+            stockImage.appendChild(imageElement);
+            const index = this.images.findIndex(image => image ===imageElement.src);
+            if(index !== -1){
+              this.images.splice(index,1);
+
+            }
+            console.log(this.images);
+          }
+          this.envoyerImages();
+        })
+      }
+    }
 
   }
 }
