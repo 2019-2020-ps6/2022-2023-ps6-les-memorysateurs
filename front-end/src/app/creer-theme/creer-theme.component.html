@@ -2,18 +2,18 @@
   <div class="container" id="div-gauche">
     <div class="invisible-grey"><p id="Titre-Nouveau-theme">NOUVEAU THEME</p></div>
     <p class = "text-image">Images sélectionées : </p>
-    <div class="stock-image"></div>
+    <div id ="imageChoisi" class="stock-image"></div>
   </div>
   <div class="container" id="div-droit">
-    <div id="div-nom-theme">  </div>
+    <input id="div-nom-theme" type="text" placeholder="Nom du thème"/>
     <p class = "text-image">Toutes les images : </p>
-    <div class="stock-image"></div>
-    <button id="Importer-image">Importer une Image</button></div>
-
+    <div id="imageEnAttente"class="stock-image"></div>
+      <form>
+        <button id="Importer-image">Importer une image</button>
+       <input  id="recup-fichier"type="file" (change)="afficherFichier()" />
+       </form>
+    </div>
 </div>
 
-<div id ="bouton-bas-creer-theme">
-  <button class="bas-vert">RETOUR</button>
-  <button class="bas-jaune">Partager la création</button>
-  <button class="bas-vert">VALIDER</button>
-</div>
+<app-footer-creer-theme></app-footer-creer-theme>
+
