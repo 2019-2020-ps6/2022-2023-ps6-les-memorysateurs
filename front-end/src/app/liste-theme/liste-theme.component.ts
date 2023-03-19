@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-liste-theme',
@@ -10,9 +11,16 @@ import {ThemeService} from "../services/theme.service";
 export class ListeThemeComponent {
   listeTheme: Theme[] = [];
 
-  constructor(public themeService: ThemeService) {
+  constructor(public router: Router, public themeService: ThemeService) {
     this.themeService.listeThemes$.subscribe((themes: Theme[]) => {
       this.listeTheme = themes;
     });
+  }
+
+  onThemeSelectionne(idTheme: number){
+  }
+
+  onAjouterTheme(){
+    this.router.navigateByUrl('creer-memory')
   }
 }

@@ -1,1 +1,8 @@
-<app-theme *ngFor="let themeElement of listeTheme" [theme]="themeElement"></app-theme>
+<div class="liste-theme">
+  <div class="bloc-scrollable">
+    <div class="bloc-ajouter-theme">
+      <button (click)="onAjouterTheme()" class="bouton-ajouter-theme"><h2>Ajouter un thème</h2></button>
+    </div>
+    <app-theme *ngFor="let themeElement of listeTheme" (themeSelectionne)="onThemeSelectionne($event)" [theme]="themeElement"></app-theme>
+  </div>
+</div>

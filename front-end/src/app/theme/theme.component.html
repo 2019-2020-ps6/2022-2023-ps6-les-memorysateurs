@@ -1,4 +1,5 @@
 <div class="theme">
+  <img [src]="theme.images[0]">
   <h2>{{ theme.titre | uppercase}}</h2>
-  <img *ngFor="let imageSource of theme.images" [src]="imageSource" >
+  <button (click)="onSelectionner()" class="bouton-selectionner-theme"> SELECTIONNER </button>
 </div>
