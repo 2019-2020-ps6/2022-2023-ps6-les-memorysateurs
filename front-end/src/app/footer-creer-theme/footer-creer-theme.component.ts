@@ -34,7 +34,6 @@ export class FooterCreerThemeComponent {
       titre : this.nom,
       images : this.images
     };
-    ThemeService.
     console.log(theme.titre);
     console.log(theme.images);
   }
