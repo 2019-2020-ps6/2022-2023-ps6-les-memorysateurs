@@ -19,5 +19,8 @@ public addTheme(theme : Theme){
   this.listeThemes$.next(liste);});
 
 }
+  get(i : number) {
+    return this.listeThemes$.getValue()[i];
+  }
 
 }

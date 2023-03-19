@@ -1,2 +1,23 @@
-<p>creer-memory works!</p>
+<div id="container-creer-memory">
+  <div id="div-theme-choisi">
+    <app-theme  [theme]="themeChoisis"></app-theme>
+  </div>
+  <div id="container-parametres">
+    <div id="div-slider">
+      <p id="texte-temps-memo">Personnaliser le temps de mémorisation initial</p>
+      <div class="slider"></div>
 
+      <div id="div-nombre-cartes">
+        <p id="texte-nombre-cartes">Nombre de cartes</p>
+        <div id="choix-nombre"></div>
+      </div>
+    </div>
+
+
+
+
+    <button class="bas-vert" (click)="lancerPartie()">Lancer Partie</button>
+  </div>
+
+
+</div>
