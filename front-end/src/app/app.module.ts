@@ -9,6 +9,7 @@ import { FooterCreerThemeComponent } from './footer-creer-theme/footer-creer-the
 import { HttpClientModule } from '@angular/common/http';
 import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 import { ThemeComponent } from './theme/theme.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { ThemeComponent } from './theme/theme.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

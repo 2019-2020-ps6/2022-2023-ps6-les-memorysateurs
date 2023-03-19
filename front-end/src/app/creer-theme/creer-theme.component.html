@@ -2,16 +2,17 @@
   <div class="container" id="div-gauche">
     <div class="invisible-grey"><p id="Titre-Nouveau-theme">NOUVEAU THEME</p></div>
     <p class = "text-image">Images sélectionées : </p>
-    <div id ="imageChoisi" class="stock-image"></div>
+    <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
   </div>
   <div class="container" id="div-droit">
-    <input id="div-nom-theme" type="text" placeholder="Nom du thème"/>
+    <input id="div-nom-theme" type="text" placeholder="Nom du thème" [(ngModel)]="nom" (input)="envoyerNom()"/>
+
     <p class = "text-image">Toutes les images : </p>
     <div id="imageEnAttente"class="stock-image"></div>
-      <form>
-        <button id="Importer-image">Importer une image</button>
-       <input  id="recup-fichier"type="file" (change)="afficherFichier()" />
-       </form>
+    <form>
+    <div id="Importer-image">Importer une image</div>
+    <input  id="recup-fichier"type="file" (change)="afficherFichier()" />
+    </form>
     </div>
 </div>
 
