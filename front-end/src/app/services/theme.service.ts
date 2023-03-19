@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, take} from "rxjs";
 import {Theme} from "../../models/theme.models";
 import {LISTE_THEME} from "../../moks/liste-theme.moks";
 
@@ -10,6 +10,14 @@ import {LISTE_THEME} from "../../moks/liste-theme.moks";
 export class ThemeService {
   public listeThemes$: BehaviorSubject<Theme[]> = new BehaviorSubject<Theme[]>(LISTE_THEME);
 
+public addTheme(theme : Theme){
+  let actualList = this.listeThemes$.asObservable();
+  actualList.pipe(
+    take(1)
+  ).subscribe(liste =>{
+  liste.push(theme);
+  this.listeThemes$.next(liste);});
 
+}
 
 }

@@ -15,7 +15,7 @@ export class FooterCreerThemeComponent {
   nom : string;
   // @ts-ignore
   images : any[]= [];
-  constructor(private router: Router,private formThemeService: FormThemeService) {
+  constructor(private router: Router,private formThemeService: FormThemeService,private themeService : ThemeService) {
 
   }
   ngOnInit(): void {
@@ -35,7 +35,8 @@ export class FooterCreerThemeComponent {
       titre : this.nom,
       images : this.images
     };
-    console.log(theme.titre);
-    console.log(theme.images);
+    this.themeService.addTheme(theme);
+    this.router.navigate(['/liste-theme']);
+ 
   }
 }
