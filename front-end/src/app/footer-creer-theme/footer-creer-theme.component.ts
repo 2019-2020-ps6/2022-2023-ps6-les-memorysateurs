@@ -31,6 +31,7 @@ export class FooterCreerThemeComponent {
   }
   ajouterTheme(){
     const theme : Theme = {
+
       titre : this.nom,
       images : this.images
     };

@@ -8,7 +8,7 @@ import {Theme} from "../../models/theme.models";
 })
 export class ThemeComponent {
   @Input() theme!: Theme;
-  @Output() themeSelectionne: EventEmitter<number> = new EventEmitter<number>();
+  @Output() themeSelectionne: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   afficherImages: boolean = false;
   textAfficherImages: string = 'Afficher Images';
@@ -26,7 +26,7 @@ export class ThemeComponent {
   }
 
   onSelectionner(){
-    this.themeSelectionne.emit(this.theme.id);
+    this.themeSelectionne.emit();
   }
 
 

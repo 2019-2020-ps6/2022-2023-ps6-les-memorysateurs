@@ -17,10 +17,10 @@ export class ListeThemeComponent {
     });
   }
 
-  onThemeSelectionne(idTheme: number){
+  onThemeSelectionne(){
   }
 
   onAjouterTheme(){
-    this.router.navigateByUrl('creer-memory')
+    this.router.navigateByUrl('creer-theme')
   }
 }
