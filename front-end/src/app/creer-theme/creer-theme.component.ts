@@ -9,16 +9,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./creer-theme.component.scss']
 })
 export class CreerThemeComponent {
-  themeForm: FormGroup;
+
   imageData : string | undefined;
   // @ts-ignore
   nom: string;
   images : any[] = [];
-  constructor(private http:HttpClient, private formBuilder: FormBuilder,private formThemeService: FormThemeService) {
-    this.themeForm = this.formBuilder.group({
-      titre: [''],
-      images: ['']
-    });
+  constructor(private http:HttpClient,private formThemeService: FormThemeService) {
+
   }
   ngOnInit(): void {
   this.banqueImage();
@@ -125,5 +122,26 @@ export class CreerThemeComponent {
       }
     }
 
+  }
+  afficherErreur(value : boolean){
+   if(value){
+     const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement ;
+     const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
+     if(imageChoisi.childElementCount == 0){
+       imageChoisi.style.background = "#F00000";
+       imageChoisi.style.opacity = "0.8";
+       if(this.nom.length !=0){
+         inputTitre.style.background = "#FFFFFF";
+         inputTitre.style.opacity = "0.5";
+       }
+     }else {
+       inputTitre.style.background = "#F00000";
+       inputTitre.style.opacity = "0.8";
+       if(imageChoisi.childElementCount != 0){
+         imageChoisi.style.background = "#FFFFFF";
+         imageChoisi.style.opacity = "1";
+       }
+     }
+   }
   }
 }

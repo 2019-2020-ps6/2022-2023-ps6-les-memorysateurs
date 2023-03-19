@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {FormThemeService} from "../services/formTheme.service";
@@ -15,6 +15,10 @@ export class FooterCreerThemeComponent {
   nom : string;
   // @ts-ignore
   images : any[]= [];
+
+  @Output()
+  erreur : EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor(private router: Router,private formThemeService: FormThemeService,private themeService : ThemeService) {
 
   }
@@ -31,12 +35,18 @@ export class FooterCreerThemeComponent {
   }
   ajouterTheme(){
     const theme : Theme = {
-
       titre : this.nom,
       images : this.images
     };
-    this.themeService.addTheme(theme);
-    this.router.navigate(['/liste-theme']);
- 
+    if(theme.titre.length != 0 && theme.images.length !=0) {
+      this.erreur.emit(false);
+      this.themeService.addTheme(theme);
+      this.router.navigate(['/liste-theme']);
+    }
+    else{
+      this.erreur.emit(true);
+
+    }
+
   }
 }
