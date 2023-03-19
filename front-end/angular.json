@@ -30,7 +30,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss",
+              "src/app/game/game.component.scss",
+              "src/app/game/card.component.scss",
+              "src/app/game/cardcontainer.component.scss"
             ],
             "scripts": []
           },
@@ -93,12 +97,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss",
+              "src/app/game/card.component.scss",
+              "src/app/game/game.component.scss",
+              "src/app/game/cardcontainer.component.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "deee0431-ad9e-4789-bb2c-6bfb0d6ce8c3"
   }
 }
