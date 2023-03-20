@@ -17,12 +17,7 @@ export class ListeThemeComponent {
     });
   }
 
-  onThemeSelectionne(){
-  }
 
-  onEditerTheme(){
-
-  }
 
   onAjouterTheme(){
     this.router.navigateByUrl('creer-theme')

@@ -9,6 +9,7 @@ import {LISTE_THEME} from "../../moks/liste-theme.moks";
 
 export class ThemeService {
   public listeThemes$: BehaviorSubject<Theme[]> = new BehaviorSubject<Theme[]>(LISTE_THEME);
+  public themeSelectionne$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(LISTE_THEME[0]);
 
 public addTheme(theme : Theme){
   let actualList = this.listeThemes$.asObservable();

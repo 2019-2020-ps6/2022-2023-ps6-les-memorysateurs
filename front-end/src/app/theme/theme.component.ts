@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Theme} from "../../models/theme.models";
+import {ThemeService} from "../services/theme.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-theme',
@@ -8,11 +10,12 @@ import {Theme} from "../../models/theme.models";
 })
 export class ThemeComponent {
   @Input() theme!: Theme;
-  @Output() themeSelectionne: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() editerTheme: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   afficherImages: boolean = false;
   textAfficherImages: string = 'Afficher Images';
+
+  constructor(public router: Router, public themeService: ThemeService) {
+  }
 
   onAfficherImages(){
     if(this.afficherImages){
@@ -27,12 +30,11 @@ export class ThemeComponent {
   }
 
   onSelectionner(){
-    this.themeSelectionne.emit();
+    this.themeService.themeSelectionne$.next(this.theme);
+    this.router.navigateByUrl('')
   }
 
   onEditer(){
-    this.editerTheme.emit();
-
   }
 
 }
