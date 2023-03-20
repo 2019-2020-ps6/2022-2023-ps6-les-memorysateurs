@@ -20,11 +20,12 @@ export class ThemeComponent {
 
   onSelectionner(){
     this.themeService.themeSelectionne$.next(this.theme);
-    this.router.navigateByUrl('')
+    this.router.navigateByUrl('creer-memory')
   }
 
   onEditer(){
-
+    this.themeService.themeSelectionne$.next(this.theme);
+    this.router.navigateByUrl('creer-theme')
   }
 
 }
