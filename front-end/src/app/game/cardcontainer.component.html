@@ -1,3 +1,3 @@
 <div class="card-container" [style.grid-template-columns]="getColumns()">
-    <app-card class="card" *ngFor="let card of cards" [picture]="card.picture" [numCard]="card.numCard" [name]="card.name" [isFlipped]="card.isFlipped"></app-card>
+    <app-card class="card" *ngFor="let card of cards" #card.name (click)="OnClick($event)" (parentClick)="OnClick($event)" [picture]="card.picture" [numCard]="card.numCard" [name]="card.name" [isFlipped]="card.isFlipped"></app-card>
 </div>
