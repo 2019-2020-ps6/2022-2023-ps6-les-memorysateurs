@@ -12,7 +12,7 @@ import {ThemeService} from "../services/theme.service";
 })
 export class FooterCreerThemeComponent {
   // @ts-ignore
-  nom : string;
+  nom : string ="";
   // @ts-ignore
   images : any[]= [];
 
@@ -38,7 +38,7 @@ export class FooterCreerThemeComponent {
       titre : this.nom,
       images : this.images
     };
-    if(theme.titre.length != 0 && theme.images.length !=0) {
+    if((theme.titre != "") && theme.images.length !=0) {
       this.erreur.emit(false);
       this.themeService.addTheme(theme);
       this.router.navigate(['/liste-theme']);

@@ -9,7 +9,7 @@ import {Theme} from "../../models/theme.models";
 export class ThemeComponent {
   @Input() theme!: Theme;
   @Output() themeSelectionne: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() editerTheme: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editerTheme: EventEmitter<Theme> = new EventEmitter<Theme>();
 
   afficherImages: boolean = false;
   textAfficherImages: string = 'Afficher Images';
@@ -31,7 +31,7 @@ export class ThemeComponent {
   }
 
   onEditer(){
-    this.editerTheme.emit();
+    this.editerTheme.emit(this.theme);
 
   }
 

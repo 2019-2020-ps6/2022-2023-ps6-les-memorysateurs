@@ -130,9 +130,11 @@ export class CreerThemeComponent {
      if(imageChoisi.childElementCount == 0){
        imageChoisi.style.background = "#F00000";
        imageChoisi.style.opacity = "0.8";
-       if(this.nom.length !=0){
-         inputTitre.style.background = "#FFFFFF";
-         inputTitre.style.opacity = "0.5";
+       if(this.nom !=""){
+         if(this.nom != undefined) {
+           inputTitre.style.background = "#FFFFFF";
+           inputTitre.style.opacity = "0.5";
+         }
        }
      }else {
        inputTitre.style.background = "#F00000";
