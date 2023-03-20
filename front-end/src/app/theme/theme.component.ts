@@ -24,7 +24,7 @@ export class ThemeComponent {
   }
 
   onEditer(){
-    this.themeService.themeSelectionne$.next(this.theme);
+    this.themeService.themeEdite$.next(this.theme);
     this.router.navigateByUrl('creer-theme')
   }
 
