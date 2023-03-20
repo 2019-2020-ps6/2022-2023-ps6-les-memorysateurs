@@ -8,6 +8,7 @@
   margin-right: auto;
   border-radius: 30px;
   padding-top: 2.5%;
+  padding-bottom: 1%;
   justify-content: space-between;
 }
 #Titre-Nouveau-theme{
@@ -17,7 +18,17 @@
   color: #006A52;
   font-family: Inter;
 }
-
+#supprimer-theme{
+  background: red;
+  position: absolute;
+  bottom: 73%;
+  padding: .2% 1% .2% 1%;
+  color: #FFFFFF;
+  font-size: 200%;
+  font-weight: bold;
+  border-radius: 12px;
+  border: red;
+}
 #form-nom-theme{
 
   border: #FFFFFF;

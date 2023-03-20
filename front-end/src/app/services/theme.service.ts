@@ -28,4 +28,19 @@ public addTheme(theme : Theme){
   setEditTheme(theme : Theme | undefined){
     this.themeEdite$.next(theme);
   }
+
+  removeTheme(theme : Theme | undefined){
+    let actualList = this.listeThemes$.asObservable();
+    let listeA : Theme[] = [];
+    actualList.pipe(
+      take(1)
+    ).subscribe(liste =>{
+      liste.forEach(chaine =>{
+        if(chaine != theme){
+          listeA.push(chaine);
+        }
+      })
+  });
+    this.listeThemes$.next(listeA);
+  }
 }

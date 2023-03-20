@@ -5,6 +5,7 @@ import { FormThemeService} from "../services/formTheme.service";
 import {FormGroup, FormBuilder, Validators, NgModel} from '@angular/forms';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-creer-theme',
   templateUrl: './creer-theme.component.html',
@@ -20,7 +21,8 @@ export class CreerThemeComponent {
   theme : Theme |undefined;
 
 
-  constructor(private http:HttpClient,public formThemeService: FormThemeService, private themeService : ThemeService,private formBuilder : FormBuilder) {
+  constructor(private router: Router,private http:HttpClient,public formThemeService: FormThemeService,
+              private themeService : ThemeService,private formBuilder : FormBuilder) {
     this.themeForm = this.formBuilder.group({
       name: ['']
     });
@@ -72,7 +74,14 @@ export class CreerThemeComponent {
     this.remplirData();
     this.envoyerImages();
     this.envoyerNom();
-
+    if(this.theme != undefined){
+      const titre = document.getElementById("Titre-Nouveau-theme") as HTMLParagraphElement;
+      titre.innerHTML = "MODIFIER LE THEME";
+    }else{
+      const suppr = document.getElementById("supprimer-theme") as HTMLButtonElement;
+      suppr.style.opacity ="0%";
+      suppr.disabled = true;
+    }
   }
 
   envoyerNom() {
@@ -200,5 +209,10 @@ export class CreerThemeComponent {
        }
      }
    }
+  }
+  supprimerTheme(){
+    this.themeService.removeTheme(this.theme);
+    this.themeService.setEditTheme(undefined);
+    this.router.navigate(['/liste-theme']);
   }
 }
