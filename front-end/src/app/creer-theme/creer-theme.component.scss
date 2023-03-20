@@ -23,7 +23,7 @@
   border: #FFFFFF;
   font-weight: bold;
   color: #000000;
-  opacity: 0.5;
+  opacity: 1;
   width: 100%;
   height: 14%;
   margin-top: 2.5% ;
@@ -32,13 +32,13 @@
 }
 #div-nom-theme{
   background: #FFFFFF;
- border: #FFFFFF;
+  border: #FFFFFF;
   font-size: 200%;
   font-weight: bold;
   color: #000000;
-  opacity: 0.5;
+  opacity: 1;
   width: 85%;
-  height: 14%;
+  height: 70%;
   margin-top: 2.5% ;
 
   border-radius: 12px;
@@ -56,14 +56,15 @@
 
 }
 .stock-image{
-  display: flex;
+  display: grid;
   overflow-y: scroll;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
   position: relative;
   height: 380px;
   width: 85.6%;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 20px 20px 0px  0px;
   background-color: white;
   border: 5px dashed #006A52;
 
@@ -79,14 +80,7 @@
     justify-content: center;
     flex-direction: row;
 }
-form{
-  position: relative;
-  width: 100%;
-  height: 51px;
-  left: 6.5%;
-  top:-1%;
 
-}
 #Importer-image{
   font-size: 150%;
   font-weight: bold;
@@ -95,22 +89,20 @@ form{
 
   background: #006A52;
   color: #FFFFFF;
-  padding-left: 28.7%;
-  padding-right: 28.7%;
+  width: 85.6%;
   padding-top: 1%;
   padding-bottom: 2%;
-  width: 507px;
-  height: 51px;
   border-radius: 0px 0px 20px 20px;
-  border: 5px;
+  top: -1%;
+  border: 5px solid #006A52;
 }
 #recup-fichier{
   position: absolute;
-  width: 100%;
+  width: 1%;
   height: 51px;
   left: 25.5%;
-  top:40%;
+  top:70%;
+  left:70%;
   opacity: 0%;
 }
-
 

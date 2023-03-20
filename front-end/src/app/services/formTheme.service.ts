@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormThemeService {
-  private nomSubject: Subject<string> = new Subject<string>();
-  private imageSubject : Subject<any[]> = new Subject<any[]>();
+  public nomSubject$: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  public imageSubject$ : BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   setNom(nom: string) {
-    this.nomSubject.next(nom);
+    this.nomSubject$.next(nom);
   }
 
   getNom(): Observable<string> {
-    return this.nomSubject.asObservable();
+    return this.nomSubject$.asObservable();
   }
 
   setImages(images: any[]) {
-    this.imageSubject.next(images);
+    this.imageSubject$.next(images);
+
   }
 
   getImages(): Observable<any[]> {
-    return this.imageSubject.asObservable();
+    return this.imageSubject$.asObservable();
   }
 }

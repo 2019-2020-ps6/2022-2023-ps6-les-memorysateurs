@@ -20,12 +20,12 @@ export class ThemeComponent {
 
   onSelectionner(){
     this.themeService.themeSelectionne$.next(this.theme);
-    this.router.navigateByUrl('creer-memory')
+    this.router.navigateByUrl('creer-memory');
   }
 
   onEditer(){
     this.themeService.themeEdite$.next(this.theme);
-    this.router.navigateByUrl('creer-theme')
+    this.router.navigateByUrl('creer-theme');
   }
 
 }

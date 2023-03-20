@@ -1,29 +1,86 @@
-import { Component, OnInit, ElementRef, ViewChild  } from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormThemeService} from "../services/formTheme.service";
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, NgModel} from '@angular/forms';
+import {Theme} from "../../models/theme.models";
+import {ThemeService} from "../services/theme.service";
 @Component({
   selector: 'app-creer-theme',
   templateUrl: './creer-theme.component.html',
   styleUrls: ['./creer-theme.component.scss']
 })
 export class CreerThemeComponent {
-
+  public themeForm: FormGroup;
   imageData : string | undefined;
   // @ts-ignore
   nom: string;
   images : any[] = [];
-  constructor(private http:HttpClient,private formThemeService: FormThemeService) {
+  @Input()
+  theme : Theme |undefined;
+
+
+  constructor(private http:HttpClient,public formThemeService: FormThemeService, private themeService : ThemeService,private formBuilder : FormBuilder) {
+    this.themeForm = this.formBuilder.group({
+      name: ['']
+    });
+
 
   }
-  ngOnInit(): void {
-  this.banqueImage();
+  remplirData() : void{
+    this.theme = this.themeService.themeEdite$.value;
+    const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
+    const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
+    if(this.theme != undefined){
+      this.themeForm = this.formBuilder.group({
+        name: [this.theme.titre]
+      });
+      for(let i=0;i< this.theme.images.length;i++){
+
+        const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
+        const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
+        const imageElement = document.createElement('img');
+        imageElement.style.height = "160px";
+        imageElement.style.width = "160px";
+        imageElement.src = this.theme.images[i];
+        stockImage2.appendChild(imageElement);
+        this.images.push(imageElement.src);
+        imageElement.addEventListener("click",() =>{
+          if(stockImage.contains(imageElement)) {
+            stockImage.removeChild(imageElement);
+            stockImage2.appendChild(imageElement);
+            this.images.push(imageElement.src);
+
+          }
+          else{
+            stockImage2.removeChild(imageElement);
+            stockImage.appendChild(imageElement);
+            const index = this.images.findIndex(image => image ===imageElement.src);
+            if(index !== -1){
+              this.images.splice(index,1);
+            }
+          }
+          this.envoyerImages();
+        })
+      }
+    }
+    this.envoyerNom();
+    this.envoyerImages();
   }
+  ngOnInit(): void {
+    this.banqueImage();
+    this.remplirData();
+    this.envoyerImages();
+    this.envoyerNom();
+
+  }
+
   envoyerNom() {
-    this.formThemeService.setNom(this.nom);
+    this.formThemeService.setNom(this.themeForm.value.name);
+
   }
   envoyerImages(){
+
     this.formThemeService.setImages(this.images);
 
   }
@@ -34,8 +91,8 @@ export class CreerThemeComponent {
     const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
     const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
     const imageElement = document.createElement('img');
-    imageElement.style.height = "26%";
-    imageElement.style.width = "26%";
+    imageElement.style.height = "160px";
+    imageElement.style.width = "160px";
     const reader = new FileReader();
     reader.onload = () => {
       imageElement.src = reader.result as string;
@@ -47,7 +104,6 @@ export class CreerThemeComponent {
         stockImage.removeChild(imageElement);
         stockImage2.appendChild(imageElement);
         this.images.push(imageElement.src);
-        console.log(this.images);
       }
       else{
         stockImage2.removeChild(imageElement);
@@ -57,7 +113,6 @@ export class CreerThemeComponent {
           this.images.splice(index,1);
 
         }
-        console.log(this.images);
       }
       this.envoyerImages();
     })
@@ -70,8 +125,8 @@ export class CreerThemeComponent {
     for(let i = 0; i < 2; i++){
       if(i==0){
         const imageElement = document.createElement('img');
-        imageElement.style.height = "26%";
-        imageElement.style.width = "26%";
+        imageElement.style.height = "160px";
+        imageElement.style.width = "160px";
         imageElement.src = 'assets/images/image014.png';
         stockImage.appendChild(imageElement);
         imageElement.addEventListener("click",() =>{
@@ -79,7 +134,7 @@ export class CreerThemeComponent {
             stockImage.removeChild(imageElement);
             stockImage2.appendChild(imageElement);
             this.images.push(imageElement.src);
-            console.log(this.images);
+
           }
           else{
             stockImage2.removeChild(imageElement);
@@ -89,15 +144,15 @@ export class CreerThemeComponent {
               this.images.splice(index,1);
 
             }
-            console.log(this.images);
+
           }
           this.envoyerImages();
         })
       }
       else{
         const imageElement = document.createElement('img');
-        imageElement.style.height = "26%";
-        imageElement.style.width = "26%";
+        imageElement.style.height = "160px";
+        imageElement.style.width = "160px";
         imageElement.src = 'assets/images/image034.png';
         stockImage.appendChild(imageElement);
         imageElement.addEventListener("click",() =>{
@@ -105,7 +160,7 @@ export class CreerThemeComponent {
             stockImage.removeChild(imageElement);
             stockImage2.appendChild(imageElement);
             this.images.push(imageElement.src);
-            console.log(this.images);
+
           }
           else{
             stockImage2.removeChild(imageElement);
@@ -115,7 +170,7 @@ export class CreerThemeComponent {
               this.images.splice(index,1);
 
             }
-            console.log(this.images);
+
           }
           this.envoyerImages();
         })
@@ -130,8 +185,8 @@ export class CreerThemeComponent {
      if(imageChoisi.childElementCount == 0){
        imageChoisi.style.background = "#F00000";
        imageChoisi.style.opacity = "0.8";
-       if(this.nom !=""){
-         if(this.nom != undefined) {
+       if(this.themeForm.value.name !=""){
+         if(this.themeForm.value.name != undefined) {
            inputTitre.style.background = "#FFFFFF";
            inputTitre.style.opacity = "0.5";
          }

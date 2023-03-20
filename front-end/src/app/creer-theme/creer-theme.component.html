@@ -5,16 +5,17 @@
     <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
   </div>
   <div class="container" id="div-droit">
-    <input id="div-nom-theme" type="text" placeholder="Nom du thème" [(ngModel)]="nom" (input)="envoyerNom()"/>
-
+    <form id="form-nom-theme"[formGroup] = "themeForm">
+    <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()"/>
+    </form>
     <p class = "text-image">Toutes les images : </p>
     <div id="imageEnAttente"class="stock-image"></div>
-    <form>
+
     <label id="Importer-image" for="recup-fichier">Importer une image</label>
     <input  id="recup-fichier" type="file" (change)="afficherFichier()" />
-    </form>
+
     </div>
 </div>
 
-<app-footer-creer-theme (erreur)="afficherErreur($event)"></app-footer-creer-theme>
+<app-footer-creer-theme [theme]="theme" (erreur)="afficherErreur($event)"></app-footer-creer-theme>
 

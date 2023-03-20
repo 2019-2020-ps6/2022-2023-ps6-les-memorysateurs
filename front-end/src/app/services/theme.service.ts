@@ -25,4 +25,7 @@ public addTheme(theme : Theme){
     return this.listeThemes$.getValue()[i];
   }
 
+  setEditTheme(theme : Theme | undefined){
+    this.themeEdite$.next(theme);
+  }
 }
