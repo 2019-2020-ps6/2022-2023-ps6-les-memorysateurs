@@ -17,17 +17,6 @@ export class ThemeComponent {
   constructor(public router: Router, public themeService: ThemeService) {
   }
 
-  onAfficherImages(){
-    if(this.afficherImages){
-      this.afficherImages = false;
-      this.textAfficherImages = 'Afficher Images';
-    }
-    else {
-      this.afficherImages = true;
-      this.textAfficherImages = 'Ne plus afficher';
-    }
-
-  }
 
   onSelectionner(){
     this.themeService.themeSelectionne$.next(this.theme);
@@ -35,6 +24,7 @@ export class ThemeComponent {
   }
 
   onEditer(){
+
   }
 
 }

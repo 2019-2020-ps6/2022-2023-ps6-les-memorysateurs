@@ -10,11 +10,11 @@
     <p class = "text-image">Toutes les images : </p>
     <div id="imageEnAttente"class="stock-image"></div>
     <form>
-    <div id="Importer-image">Importer une image</div>
-    <input  id="recup-fichier"type="file" (change)="afficherFichier()" />
+    <label id="Importer-image" for="recup-fichier">Importer une image</label>
+    <input  id="recup-fichier" type="file" (change)="afficherFichier()" />
     </form>
     </div>
 </div>
 
-<app-footer-creer-theme></app-footer-creer-theme>
+<app-footer-creer-theme (erreur)="afficherErreur($event)"></app-footer-creer-theme>
 
