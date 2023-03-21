@@ -1,0 +1,24 @@
+<div class="carre">
+  <div class="container" id="div-gauche">
+    <div class="invisible-grey"><p id="Titre-Nouveau-theme">NOUVEAU THEME</p></div>
+    <button id="supprimer-theme" (click)="supprimerTheme()">Supprimer</button>
+    <p class = "text-image">Images sélectionées : </p>
+    <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
+  </div>
+  <div class="container" id="div-droit">
+    <form id="form-nom-theme"[formGroup] = "themeForm">
+      <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()"/>
+
+    </form>
+
+    <p class = "text-image">Toutes les images : </p>
+    <div id="imageEnAttente"class="stock-image"></div>
+
+    <label id="Importer-image" for="recup-fichier">Importer une image</label>
+    <input  id="recup-fichier" type="file" (change)="afficherFichier()" />
+
+    </div>
+</div>
+
+<app-footer-creer-theme [theme]="theme" (erreur)="afficherErreur($event)"></app-footer-creer-theme>
+

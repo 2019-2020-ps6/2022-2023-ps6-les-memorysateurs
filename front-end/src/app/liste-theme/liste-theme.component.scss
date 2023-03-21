@@ -1,0 +1,36 @@
+$padding : 10px;
+
+.liste-theme {
+  padding-left: 5%;
+  .bloc-scrollable {
+    height: 450px;
+    display: flex;
+    overflow: scroll;
+    padding: 4%;
+    justify-content: flex-start;
+    background: #FFFFFF;
+    border-radius: 12px;
+
+  }
+}
+
+.bloc-ajouter-theme ,app-theme {
+  margin-right: 40px;
+  min-width: 20%;
+  height: 100%;
+}
+.bloc-ajouter-theme {
+  display: flex;
+  background: #EFEFEF;
+  border-radius: 12px;
+  padding: 10px;
+  min-width: calc(20% - 2*$padding);
+  height: calc(100% - 2*$padding);
+}
+
+.bouton-ajouter-theme {
+  color: #006A52;
+  font-weight: bold;
+  border: 4px #006A52 dashed;
+  border-radius: 12px;
+}
