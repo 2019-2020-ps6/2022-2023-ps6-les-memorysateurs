@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import { elementAt } from 'rxjs';
 
 
 @Component({
@@ -8,22 +9,55 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 ]
 })
 
-export class Card implements OnInit {
-onImageClick(event: Event) {
-  event.stopPropagation();
-  this.parentClick.emit(event);
-}
+export class Card implements OnInit, OnChanges {
   ngOnInit(): void {}
-  constructor() {
+  ngDoCheck(): void {
   }
 
-  OnClick(event: any) : void {};
-  @Input() public picture: string = "../../assets/images/1.png";
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log(changes);
+      // if(this.isFlipped) {
+      // }
+      // else {
+      //   .classList.remove('flipped');
+      // }
+      // if(this.isDisabled) {
+      //   .classList.add('disabled');
+      // }
+      // else {
+      //   .classList.remove('disabled');
+      // }
+      // if(!this.isClickable) {
+      //   .classList.add('unclickable');
+      // }
+      // else {
+      //   .classList.remove('unclickable');
+      // }
+
+  }
+
+  changeClass() {
+    return {'flipped': this.isFlipped, 'disabled': this.isDisabled
+    }
+  }
+
+  constructor() {
+  }
+  @Input() public picture: string = "";
   @Input() public numCard: number = 0;
   @Input() public name: string = "test";
   @Input() public isFlipped: boolean = false;
+  @Input() public isDisabled: boolean = false;
+  @Input() public isClickable: boolean = true;
 
-  @Output() parentClick : EventEmitter<Event> = new EventEmitter();
+  @Output() onClickToParent = new EventEmitter<Card>();
 
 
+  @HostListener("click") onClick(){
+      console.log("click");
+      console.log(this);
+      if(this.isClickable && !this.isDisabled) {
+        this.onClickToParent.emit(this);
+      }
+  }
 }
