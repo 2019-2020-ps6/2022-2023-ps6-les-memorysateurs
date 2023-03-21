@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 import { ThemeComponent } from './theme/theme.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CreerPatientComponent } from './creer-patient/creer-patient.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CreerMemoryComponent,
     FooterCreerThemeComponent,
     ListeThemeComponent,
-    ThemeComponent
+    ThemeComponent,
+    CreerPatientComponent
   ],
   imports: [
     BrowserModule,

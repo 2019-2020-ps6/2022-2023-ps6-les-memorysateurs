@@ -1,7 +1,7 @@
 <div class="carre">
   <div class="container" id="div-gauche">
     <div class="invisible-grey"><p id="Titre-Nouveau-theme">NOUVEAU THEME</p></div>
-    <button id="supprimer-theme" (click)="supprimerTheme()">Supprimer</button>
+    <button id="supprimer-theme" *ngIf="theme != undefined" (click)="supprimerTheme()">Supprimer</button>
     <p class = "text-image">Images sélectionées : </p>
     <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
   </div>
