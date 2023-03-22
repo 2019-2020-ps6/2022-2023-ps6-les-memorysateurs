@@ -11,6 +11,7 @@ import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 import { ThemeComponent } from './theme/theme.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreerPatientComponent } from './creer-patient/creer-patient.component';
+import { InfoStadeComponent } from './info-stade/info-stade.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CreerPatientComponent } from './creer-patient/creer-patient.component';
     FooterCreerThemeComponent,
     ListeThemeComponent,
     ThemeComponent,
-    CreerPatientComponent
+    CreerPatientComponent,
+    InfoStadeComponent
   ],
   imports: [
     BrowserModule,

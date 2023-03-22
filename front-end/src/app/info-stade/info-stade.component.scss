@@ -1,0 +1,49 @@
+#pop-up{
+  display: flex;
+  flex-direction: column;
+  background: #EFEFEF;
+  height: 100%;
+  width: 50%;
+  border: 2px solid black;
+  justify-content: space-between;
+}
+#container-texte{
+  font-family: sans-serif;
+  align-self: center;
+}
+.croix {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.croix:before, .croix:after {
+  content: "";
+  position: absolute;
+  top: 75%;
+  left: 75%;
+  height: 2px;
+  border: 2px solid #006A52;
+  border-radius: 12px;
+  background-color: #006A52;
+}
+
+.croix:before {
+  width: 150%;
+  transform: translate(-50%, -50%)rotate(45deg);
+}
+
+.croix:after {
+  width: 150%;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+.titre-stade{
+  font-weight: bold;
+  color: #006A52;
+  font-size: 150%;
+}
+
+.description-stade{
+  font-weight: normal;
+  font-size: 120%;
+}
