@@ -1,12 +1,13 @@
 <div id="container-creer-patient">
+  <button id="supprimer-patient" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
   <div></div>
   <div id="container-donnee-patient">
     <p id="text-nouveau-profil">NOUVEAU PROFIL</p>
     <form id="form-nom-prenom" [formGroup]="patientForm">
     <p class="donnee-patient">Nom :</p>
-    <input class="input-identite" type="text" [formControlName]="'nom'"/>
+    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"/>
     <p class="donnee-patient">Prénom :</p>
-    <input class="input-identite" type="text"[formControlName]="'prenom'"/>
+    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"/>
     </form>
     <div style="display: flex; align-content: flex-end; width: 100%">
     <p class="donnee-patient">Stade de la maladie :</p>

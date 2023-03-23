@@ -15,14 +15,14 @@
 #container-donnee-patient{
   display: flex;
   flex-direction: column;
- // background: blue;
+  // background: blue;
   align-items: center;
 }
 #container-photo-patient{
   display: flex;
   flex-direction: column;
   align-items: center;
-//  background: red;
+  //  background: red;
 }
 
 #text-nouveau-profil{
@@ -46,21 +46,15 @@
   width: 90%;
   height: 20%;
   border-radius: 12px;
-  border: #FFFFFF;
+  border: 3px solid #006A52;
+  background-color: transparent;
   font-size: 150%;
   font-weight: bold;
+  line-height: 250%;
+  padding-left: 10px;
 }
 #info-stade{
-  position: relative;
-  border-radius: 100%;
-  height: 35%;
-  width: 5%;
-  left: 2%;
-  top: 34%;
-  background: #006A52;
-  color: #FFFFFF;
-  font-weight: bold;
-  font-size: 26px;
+margin-left: 10px;
 }
 #container-radio-button{
   position: relative;
@@ -94,11 +88,11 @@ img{
 
 
 }
-#charger-une-photo{
+#modifier-le-profil{
   width: 80%;
-  height: 5%;
-  font-size: 120%;
-  line-height: 150%;
+  height: 8%;
+  font-size: 150%;
+  line-height: 200%;
 }
 #photo-button{
   position: relative;
@@ -106,25 +100,7 @@ img{
   left: 2%;
   opacity: 0;
 }
-#creer-profil{
-  height: 12%;
-  width: 90%;
-  font-size: 180%;
-  line-height: 260%;
-}
-#retour-creer-patient{
-  position: absolute;
-  bottom: 0%;
-  margin-bottom: 1.5%;
-  background: #006A52;
-  font-size: 32px;
-  font-weight: bold;
-  color: #FFFFFF;
-  width: 21%;
-  height: 80px;
-  border-radius: 20px;
-  border: #006A52;
-}
+
 app-info-stade{
   position: absolute;
   top: 50%;
@@ -143,4 +119,35 @@ app-info-stade{
   border-radius: 12px;
   border: red;
 
+}
+#bouton-en-plus{
+  position: absolute;
+  width: 1044px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
+}
+
+#stats{
+  height: 12%;
+  width: 45%;
+  font-size: 180%;
+  line-height: 260%;
+}
+#lancer-partie{
+  font-size: 180%;
+  bottom: 0%;
+  margin-bottom: 1.5%;
+  background: #006A52;
+
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 45%;
+  height: 80px;
+  border-radius: 20px;
+  border: #006A52;
 }

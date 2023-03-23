@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreerPatientComponent } from './creer-patient/creer-patient.component';
 import { InfoStadeComponent } from './info-stade/info-stade.component';
 import { ListePatientComponent } from './liste-patient/liste-patient.component';
+import { ProfilPatientComponent } from './profil-patient/profil-patient.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ListePatientComponent } from './liste-patient/liste-patient.component';
     ItemFrameComponent,
     CreerPatientComponent,
     InfoStadeComponent,
-    ListePatientComponent
+    ListePatientComponent,
+    ProfilPatientComponent
   ],
   imports: [
     BrowserModule,

@@ -58,5 +58,6 @@ export class FooterCreerThemeComponent {
       this.erreur.emit(true);
 
     }
+    this.themeService.setEditTheme(undefined);
   }
 }
