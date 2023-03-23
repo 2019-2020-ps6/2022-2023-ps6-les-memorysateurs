@@ -43,4 +43,13 @@ public addTheme(theme : Theme){
   });
     this.listeThemes$.next(listeA);
   }
+
+  public getThemeById(id : number): Theme{
+    let themeById: Theme = this.listeThemes$.getValue()[0];
+    this.listeThemes$.getValue().forEach(theme => {
+      if(theme.id === id) themeById = theme;
+    })
+    return themeById;
+  }
 }
+

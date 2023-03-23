@@ -1,6 +1,6 @@
 <div class="theme">
-  <img [src]="theme.images[0]">
-  <h2>{{ theme.titre | uppercase}}</h2>
+  <img [src]="item.getImage()">
+  <h2>{{ item.getTitre() | uppercase}}</h2>
   <button (click)="onSelectionner()" class="bouton-selectionner-theme"> SELECTIONNER </button>
   <button (click)="onEditer()" class="bouton-editer-theme"> EDITER </button>
 </div>

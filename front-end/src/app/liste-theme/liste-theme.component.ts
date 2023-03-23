@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";
+import {Cardable} from "../../models/cardable.models";
 
 @Component({
   selector: 'app-liste-theme',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./liste-theme.component.scss']
 })
 export class ListeThemeComponent {
-  listeTheme: Theme[] = [];
+  listeTheme: Cardable[] = [];
 
   constructor(public router: Router, public themeService: ThemeService) {
     this.themeService.listeThemes$.subscribe((themes: Theme[]) => {
