@@ -5,28 +5,30 @@ import {Router} from "@angular/router";
 import {Cardable} from "../../models/cardable.models";
 
 @Component({
-  selector: 'app-theme',
+  selector: 'app-item-frame',
   templateUrl: './item-frame.component.html',
   styleUrls: ['./item-frame.component.scss']
 })
 export class ItemFrameComponent {
   @Input() item!: Cardable;
 
+  @Output()
+  selectionneEvent: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(public router: Router, public themeService: ThemeService) {
+  @Output()
+  editerEvent: EventEmitter<number> = new EventEmitter<number>();
+
+
+  constructor(public router: Router, public itemService: ThemeService) {
   }
 
 
   onSelectionner(){
-    let themeSelectionne: Theme = this.themeService.getThemeById(this.item.getID());
-    this.themeService.themeSelectionne$.next(themeSelectionne);
-    this.router.navigateByUrl('creer-memory');
+    this.selectionneEvent.emit(this.item.getID())
   }
 
   onEditer(){
-    let themeEdite: Theme = this.themeService.getThemeById(this.item.getID());
-    this.themeService.themeEdite$.next(themeEdite);
-    this.router.navigateByUrl('creer-theme');
+    this.editerEvent.emit(this.item.getID())
   }
 
 }
