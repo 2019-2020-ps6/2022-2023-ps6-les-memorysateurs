@@ -7,8 +7,7 @@ export class Theme implements Cardable{
   images: any[];
 
   constructor(titre: string, images: any[]){
-    this.id = Theme.nextId;
-    Theme.nextId++;
+    this.id = Theme.nextId++;
     this.titre = titre;
     this.images = images;
   }
