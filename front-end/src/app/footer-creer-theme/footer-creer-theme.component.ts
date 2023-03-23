@@ -38,10 +38,7 @@ export class FooterCreerThemeComponent {
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
-    const theme: Theme = {
-      titre: this.nom,
-      images: this.images
-    };
+    const theme: Theme = new Theme(this.nom, this. images)
     this.theme = theme;
     ajout = true;
   }
