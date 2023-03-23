@@ -12,6 +12,7 @@ import { ItemFrameComponent } from './item-frame/item-frame.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreerPatientComponent } from './creer-patient/creer-patient.component';
 import { InfoStadeComponent } from './info-stade/info-stade.component';
+import { ListePatientComponent } from './liste-patient/liste-patient.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { InfoStadeComponent } from './info-stade/info-stade.component';
     ListeThemeComponent,
     ItemFrameComponent,
     CreerPatientComponent,
-    InfoStadeComponent
+    InfoStadeComponent,
+    ListePatientComponent
   ],
   imports: [
     BrowserModule,

@@ -6,14 +6,16 @@ import { FooterCreerThemeComponent } from './footer-creer-theme/footer-creer-the
 import {ListeThemeComponent} from "./liste-theme/liste-theme.component";
 import {CreerPatientComponent} from "./creer-patient/creer-patient.component";
 import {InfoStadeComponent} from "./info-stade/info-stade.component";
+import {ListePatientComponent} from "./liste-patient/liste-patient.component";
 
 const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'creer-memory', component: CreerMemoryComponent},
   {path: 'liste-theme', component: ListeThemeComponent},
   {path: 'footer-creer-theme', component: FooterCreerThemeComponent},
   {path: 'creer-patient', component: CreerPatientComponent},
-  {path: 'info-stade', component: InfoStadeComponent}
-  ];
+  {path: 'info-stade', component: InfoStadeComponent},
+  {path: 'liste-patient', component: ListePatientComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

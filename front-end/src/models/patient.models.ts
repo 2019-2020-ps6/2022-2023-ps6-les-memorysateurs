@@ -21,11 +21,11 @@ export class Patient implements Cardable{
   }
 
   getImage(): any {
-    this.photo;
+    return this.photo;
   }
 
   getTitre(): string {
-    return this.prenom + this.nom;
+    return this.prenom + " " + this.nom;
   }
 
   getType(): "patient" | "theme" {
