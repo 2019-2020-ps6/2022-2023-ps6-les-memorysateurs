@@ -3,6 +3,6 @@
     <div class="bloc-ajouter-patient">
       <button (click)="onAjouterPatient()" class="bouton-ajouter-patient"><h2>Ajouter un patient</h2></button>
     </div>
-    <app-item-frame *ngFor="let patientElement of listePatient"  [item]="patientElement"></app-item-frame>
+    <app-item-frame *ngFor="let patientElement of listePatient"  (editerEvent)="onEditer($event)" (selectionneEvent)="onSelectionner($event)" [item]="patientElement"></app-item-frame>
   </div>
 </div>
