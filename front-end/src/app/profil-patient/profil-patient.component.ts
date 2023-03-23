@@ -28,5 +28,9 @@ export class ProfilPatientComponent {
     const stade = document.getElementById("info-stade") as HTMLInputElement;
     stade.innerHTML = "Stade " + this.patient.value?.stade ;
   }
-
+  modifierProfil(){
+    let patientEdite: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
+    this.patientService.patientEdite$.next(patientEdite);
+    this.router.navigateByUrl('creer-patient');
+  }
 }

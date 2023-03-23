@@ -23,7 +23,7 @@ export class ListePatientComponent {
   onSelectionner(id : number){
     let patientSelectionne: Patient = this.patientService.getPatientById(id);
     this.patientService.patientSelectionne$.next(patientSelectionne);
-    this.router.navigateByUrl('liste-theme');
+    this.router.navigateByUrl('profil-patient');
   }
 
   onEditer(id : number){
