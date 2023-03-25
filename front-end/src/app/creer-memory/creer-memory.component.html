@@ -1,6 +1,6 @@
 <div id="container-creer-memory">
   <div id="div-theme-choisi">
-    <app-item-frame  [item]="themeChoisis"></app-item-frame>
+    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeChoisis"></app-item-frame>
   </div>
   <div id="container-parametres">
     <div id="div-slider">

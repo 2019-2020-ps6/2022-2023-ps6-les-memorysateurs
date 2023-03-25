@@ -8,12 +8,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./creer-memory.component.scss']
 })
 export class CreerMemoryComponent {
-  themeChoisis = this.themeService.get(0);
+  themeChoisis = this.themeService.themeSelectionne$.getValue();
   constructor(public router: Router, public themeService: ThemeService) {
 
   }
 
   lancerPartie(){
     console.log("test");
+  }
+
+  onChangerTheme() {
+    this.router.navigateByUrl("liste-theme");
   }
 }
