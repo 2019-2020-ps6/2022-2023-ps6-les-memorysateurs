@@ -31,17 +31,19 @@ public addTheme(theme : Theme){
 
   removeTheme(theme : Theme | undefined){
     let actualList = this.listeThemes$.asObservable();
+
     let listeA : Theme[] = [];
     actualList.pipe(
       take(1)
     ).subscribe(liste =>{
       liste.forEach(chaine =>{
-        if(chaine != theme){
+        if(chaine.id != theme?.id){
           listeA.push(chaine);
         }
       })
   });
     this.listeThemes$.next(listeA);
+
   }
 
   public getThemeById(id : number): Theme{
@@ -50,6 +52,11 @@ public addTheme(theme : Theme){
       if(theme.id === id) themeById = theme;
     })
     return themeById;
+  }
+
+  public setThemes(themes : Theme[]|undefined){
+    if(themes!=undefined)
+      this.listeThemes$.next(themes);
   }
 }
 
