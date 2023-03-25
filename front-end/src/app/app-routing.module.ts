@@ -18,7 +18,7 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'creer-patient', component: CreerPatientComponent},
   {path: 'info-stade', component: InfoStadeComponent},
   {path: 'liste-patient', component: ListePatientComponent},
-  {path: 'profil-patient', component: ProfilPatientComponent}
+  {path: 'profil-patient', component: ProfilPatientComponent},
   { path: 'game', component: Game },
   ];
 
