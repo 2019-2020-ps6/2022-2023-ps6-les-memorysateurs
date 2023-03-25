@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeComponent } from './theme.component';
+import { InfoStadeComponent } from './info-stade.component';
 
-describe('ThemeComponent', () => {
-  let component: ThemeComponent;
-  let fixture: ComponentFixture<ThemeComponent>;
+describe('InfoStadeComponent', () => {
+  let component: InfoStadeComponent;
+  let fixture: ComponentFixture<InfoStadeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThemeComponent ]
+      declarations: [ InfoStadeComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ThemeComponent);
+    fixture = TestBed.createComponent(InfoStadeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

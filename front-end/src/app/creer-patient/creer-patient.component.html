@@ -1,0 +1,43 @@
+<div id="container-creer-patient">
+  <button id="supprimer-patient" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
+  <div></div>
+  <div id="container-donnee-patient">
+    <p id="text-nouveau-profil">NOUVEAU PROFIL</p>
+    <form id="form-nom-prenom" [formGroup]="patientForm">
+    <p class="donnee-patient">Nom :</p>
+    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"/>
+    <p class="donnee-patient">Prénom :</p>
+    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"/>
+    </form>
+    <div style="display: flex; align-content: flex-end; width: 100%">
+    <p class="donnee-patient">Stade de la maladie :</p>
+      <button id="info-stade" (click)="changeInfoBooleen()">i</button>
+    </div>
+    <form id="container-radio-button" [formGroup]="patientForm">
+      <input type="radio" id="radio1" name="radio-group"  checked (click)="setStade()">
+      <label for="radio1" >Stade 3</label>
+      <div></div>
+      <input type="radio" id="radio2" name="radio-group"  (click)="setStade()">
+      <label for="radio2"  >Stade 4</label>
+      <div></div>
+      <input type="radio" id="radio3" name="radio-group" (click)="setStade()" >
+      <label for="radio3"  >Stade 5</label>
+    </form>
+  </div>
+
+  <form id="container-photo-patient" [formGroup]="patientForm">
+    <div style="height: 18%"></div>
+    <div id="photo">
+      <img  id="affichage-photo"/>
+    </div>
+
+    <label class="bouton-vert" id="charger-une-photo" for="photo-button">Charger une photo</label>
+    <div style="height: 10%"></div>
+    <label class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</label>
+    <input id="photo-button"type="file" (change)="afficherPhoto()" [formControlName]="'photo'"/>
+  </form>
+  <div></div>
+</div>
+<button id="retour-creer-patient" class="bouton-vert" (click)="retour()">RETOUR</button>
+<app-info-stade *ngIf="info" (close)="changeInfoBooleen()"></app-info-stade>
+

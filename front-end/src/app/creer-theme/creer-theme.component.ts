@@ -77,10 +77,6 @@ export class CreerThemeComponent {
     if(this.theme != undefined){
       const titre = document.getElementById("Titre-Nouveau-theme") as HTMLParagraphElement;
       titre.innerHTML = "MODIFIER LE THEME";
-    }else{
-      const suppr = document.getElementById("supprimer-theme") as HTMLButtonElement;
-      suppr.style.opacity ="0%";
-      suppr.disabled = true;
     }
   }
 

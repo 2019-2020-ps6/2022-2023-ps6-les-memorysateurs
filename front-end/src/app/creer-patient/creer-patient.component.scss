@@ -1,0 +1,146 @@
+#container-creer-patient{
+  display: grid;
+  //flex-direction: row;
+  grid-template-columns: 0.2fr 2fr 1fr .1fr;
+  width: 1044px;
+  height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #EFEFEF;
+  border-radius: 30px;
+  font-family: sans-serif;
+}
+#container-donnee-patient{
+  display: flex;
+  flex-direction: column;
+ // background: blue;
+  align-items: center;
+}
+#container-photo-patient{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+//  background: red;
+}
+
+#text-nouveau-profil{
+  font-size: 230%;
+  color: #006A52;
+  font-weight: bold;
+}
+#form-nom-prenom{
+  height: 50%;
+  width: 100%;
+}
+.donnee-patient{
+  align-self: baseline;
+  font-size: 150%;
+  font-weight: bold;
+
+}
+.input-identite{
+  position: relative;
+  align-self: baseline;
+  width: 90%;
+  height: 20%;
+  border-radius: 12px;
+  border: #FFFFFF;
+  font-size: 150%;
+  font-weight: bold;
+}
+#info-stade{
+  position: relative;
+  border-radius: 100%;
+  height: 35%;
+  width: 5%;
+  left: 2%;
+  top: 34%;
+  background: #006A52;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 26px;
+}
+#container-radio-button{
+  position: relative;
+  right: 6%;
+  display: grid;
+  grid-template-columns: repeat(2,1.3fr) 1.5fr repeat(2,1.3fr) 1.5fr repeat(2,1.3fr);
+  font-size: 130%;
+  font-weight: bold;
+}
+
+#photo{
+  display: flex;
+  width: 90%;
+  height: 50%;
+  background: #FFFFFF;
+  justify-content: center;
+  align-items: center;
+  border-radius: 17px;
+}
+img{
+  position:relative;
+  height: 70%;
+  width: 70%;
+}
+.bouton-vert{
+  background: #006A52;
+  color: #FFFFFF;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+
+
+}
+#charger-une-photo{
+  width: 80%;
+  height: 5%;
+  font-size: 120%;
+  line-height: 150%;
+}
+#photo-button{
+  position: relative;
+  top : -18%;
+  left: 2%;
+  opacity: 0;
+}
+#creer-profil{
+  height: 12%;
+  width: 90%;
+  font-size: 180%;
+  line-height: 260%;
+}
+#retour-creer-patient{
+  position: absolute;
+  bottom: 0%;
+  margin-bottom: 1.5%;
+  background: #006A52;
+  font-size: 32px;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 21%;
+  height: 80px;
+  border-radius: 20px;
+  border: #006A52;
+}
+app-info-stade{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(15%, -50%);
+}
+#supprimer-patient{
+  background: red;
+  position: absolute;
+  bottom: 87%;
+  left: 73%;
+  padding: .2% 1% .2% 1%;
+  color: #FFFFFF;
+  font-size: 200%;
+  font-weight: bold;
+  border-radius: 12px;
+  border: red;
+
+}

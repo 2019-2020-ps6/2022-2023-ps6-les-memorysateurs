@@ -1,6 +1,6 @@
 $padding : 10px;
 
-.liste-theme {
+.liste-patient {
   padding-left: 5%;
   .bloc-scrollable {
     height: 450px;
@@ -14,12 +14,12 @@ $padding : 10px;
   }
 }
 
-.bloc-ajouter-theme ,app-item-frame {
+.bloc-ajouter-patient ,app-item-frame {
   margin-right: 40px;
   min-width: 20%;
   height: 100%;
 }
-.bloc-ajouter-theme {
+.bloc-ajouter-patient {
   display: flex;
   background: #EFEFEF;
   border-radius: 12px;
@@ -28,7 +28,7 @@ $padding : 10px;
   height: calc(100% - 2*$padding);
 }
 
-.bouton-ajouter-theme {
+.bouton-ajouter-patient {
   color: #006A52;
   font-weight: bold;
   border: 4px #006A52 dashed;
