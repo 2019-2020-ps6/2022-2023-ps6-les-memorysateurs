@@ -21,6 +21,7 @@ import { CardsContainer } from './game/cardcontainer.component';
 import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { Timer } from './game/meter.component';
     HintContainer,
     Button,
     Timer,
+    AuthentificationComponent,
   ],
   imports: [
     BrowserModule,

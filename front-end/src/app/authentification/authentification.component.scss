@@ -1,0 +1,80 @@
+.form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 400px;
+  background: #EFEFEF;
+  width: 50%;
+  margin: 0px auto;
+  border-radius: 12px;
+  box-shadow: lightgray 4px 4px 20px;
+}
+
+.header-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#creer-compte {
+  background: #006A52;
+  color: #FFFFFF;
+  padding: 10px 12px;
+  border-radius: 12px 12px 0px 0;
+  text-align: center;
+  width: 30%;
+  min-width: 200px;
+
+}
+#connexion {
+  width: 70%;
+  font-size: 30px;
+  border-radius: 12px 12px 0px 0;
+  color: #006A52;
+}
+form {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.form-group {
+  background: #EFEFEF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 10px auto;
+  width: 80%;
+}
+
+input {
+  border: 0;
+  border-radius: 12px;
+  height: 40px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.action-buttons {
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+}
+
+.action-buttons {
+
+}
+button {
+  background: #006A52;
+  color: #FFFFFF;
+  border-radius: 12px;
+  border: 0;
+  font-size: 20px;
+  padding: 10px 20px;
+  margin: 20px auto;
+}

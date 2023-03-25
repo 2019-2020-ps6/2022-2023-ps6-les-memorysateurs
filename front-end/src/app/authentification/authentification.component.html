@@ -1,0 +1,22 @@
+<div class="form-card">
+  <div class="header-form">
+    <h2 id="connexion">CONNEXION</h2>
+    <h2 id="creer-compte">CREER UN COMPTE</h2>
+  </div>
+  <form [formGroup]="formGroup">
+    <div class="form-group">
+      <label for="identifiant">Identifiant</label>
+      <input id="identifiant" type="text" formControlName="identifiant">
+    </div>
+
+    <div class="form-group">
+      <label for="motDePasse">Mot de Passe</label>
+      <input id="motDePasse" type="text" formControlName="motDePasse">
+    </div>
+
+  </form>
+
+  <div class="action-buttons">
+    <button type="submit" (click)="onLogin()">Me Connecter</button>
+  </div>
+</div>

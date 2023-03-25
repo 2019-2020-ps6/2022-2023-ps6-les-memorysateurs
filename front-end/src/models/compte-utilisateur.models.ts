@@ -11,6 +11,6 @@ export class CompteUtilisateur {
   }
 
   isCorrect(str:string): boolean {
-    return str === this.motDePasse;
+    return str == this.motDePasse;
   }
 }
