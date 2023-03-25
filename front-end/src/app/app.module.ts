@@ -11,6 +11,13 @@ import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 import { ThemeComponent } from './theme/theme.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
+//game imports
+import { Card } from './game/card.component';
+import { CardsContainer } from './game/cardcontainer.component';
+import { Game, HintContainer } from './game/game.component';
+import { Button } from './utilities/button/btn.component';
+import { Timer } from './game/meter.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +26,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CreerMemoryComponent,
     FooterCreerThemeComponent,
     ListeThemeComponent,
-    ThemeComponent
+    ThemeComponent,
+    Game,
+    CardsContainer,
+    Card,
+    HintContainer,
+    Button,
+    Timer,
   ],
   imports: [
     BrowserModule,
