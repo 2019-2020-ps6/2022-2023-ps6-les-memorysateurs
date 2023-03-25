@@ -1,0 +1,119 @@
+.carre {
+  display:flex;
+  flex-wrap: wrap;
+  width  : 72.7%;
+  //height : 59.3%;
+  background : #EFEFEF;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 30px;
+  padding-top: 2.5%;
+  padding-bottom: 1%;
+  justify-content: space-between;
+}
+#Titre-Nouveau-theme{
+  font-size: 200%;
+  text-align: center;
+  font-weight: bold;
+  color: #006A52;
+  font-family: Inter;
+}
+#supprimer-theme{
+  background: red;
+  position: absolute;
+  bottom: 73%;
+  padding: .2% 1% .2% 1%;
+  color: #FFFFFF;
+  font-size: 200%;
+  font-weight: bold;
+  border-radius: 12px;
+  border: red;
+}
+#form-nom-theme{
+
+  border: #FFFFFF;
+  font-weight: bold;
+  color: #000000;
+  opacity: 1;
+  width: 100%;
+  height: 14%;
+  margin-top: 2.5% ;
+
+  border-radius: 12px;
+}
+#div-nom-theme{
+  background: #FFFFFF;
+  border: #FFFFFF;
+  font-size: 200%;
+  font-weight: bold;
+  color: #000000;
+  opacity: 1;
+  width: 85%;
+  height: 70%;
+  margin-top: 2.5% ;
+
+  border-radius: 12px;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+
+}
+.text-image{
+  font-weight: bold;
+  font-size: 150%;
+
+}
+.stock-image{
+  display: grid;
+  overflow-y: scroll;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
+  position: relative;
+  height: 380px;
+  width: 85.6%;
+  border-radius: 20px 20px 0px  0px;
+  background-color: white;
+  border: 5px dashed #006A52;
+
+}
+.invisible-grey{
+    background: #EFEFEF;
+    display: flex;
+    width: 85%;
+    height: 14%;
+    margin-top: 2.5% ;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#Importer-image{
+  font-size: 150%;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+
+  background: #006A52;
+  color: #FFFFFF;
+  width: 85.6%;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  border-radius: 0px 0px 20px 20px;
+  top: -1%;
+  border: 5px solid #006A52;
+}
+#recup-fichier{
+  position: absolute;
+  width: 1%;
+  height: 51px;
+  left: 25.5%;
+  top:70%;
+  left:70%;
+  opacity: 0%;
+}
+

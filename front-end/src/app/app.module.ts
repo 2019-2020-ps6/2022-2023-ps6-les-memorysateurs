@@ -3,15 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CreerThemeComponent } from './creer-theme/creer-theme.component';
+import { CreerMemoryComponent } from './creer-memory/creer-memory.component';
+import { FooterCreerThemeComponent } from './footer-creer-theme/footer-creer-theme.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ListeThemeComponent } from './liste-theme/liste-theme.component';
+import { ThemeComponent } from './theme/theme.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
+//game imports
 import { Card } from './game/card.component';
 import { CardsContainer } from './game/cardcontainer.component';
 import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    CreerThemeComponent,
+    CreerMemoryComponent,
+    FooterCreerThemeComponent,
+    ListeThemeComponent,
+    ThemeComponent,
     Game,
     CardsContainer,
     Card,
@@ -22,6 +37,9 @@ import { Timer } from './game/meter.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
