@@ -1,6 +1,6 @@
 <div class="item">
   <img [src]="item.getImage()">
   <h2>{{ item.getTitre() | uppercase}}</h2>
-  <button (click)="onSelectionner()" class="bouton-selectionner-item"> SELECTIONNER </button>
-  <button (click)="onEditer()" class="bouton-editer-item"> EDITER </button>
+  <button (click)="onSelectionner()" class="bouton-selectionner-item"> {{selectionnerText}} </button>
+  <button *ngIf="editerEnable" (click)="onEditer()" class="bouton-editer-item"> EDITER </button>
 </div>

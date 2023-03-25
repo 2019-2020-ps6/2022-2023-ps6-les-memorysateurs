@@ -3,6 +3,6 @@
     <div class="bloc-ajouter-theme">
       <button (click)="onAjouterTheme()" class="bouton-ajouter-theme"><h2>Ajouter un thème</h2></button>
     </div>
-    <app-item-frame *ngFor="let themeElement of listeTheme"  (editerEvent)="onEditer($event)" (selectionneEvent)="onSelectionner($event)" [item]="themeElement "></app-item-frame>
+    <app-item-frame *ngFor="let themeElement of listeTheme"  (editerEvent)="onEditer($event)" (selectionneEvent)="onSelectionner($event)" [item]="themeElement" ></app-item-frame>
   </div>
 </div>
