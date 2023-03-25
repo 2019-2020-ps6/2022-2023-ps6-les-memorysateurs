@@ -15,6 +15,13 @@ import { InfoStadeComponent } from './info-stade/info-stade.component';
 import { ListePatientComponent } from './liste-patient/liste-patient.component';
 import { ProfilPatientComponent } from './profil-patient/profil-patient.component';
 
+//game imports
+import { Card } from './game/card.component';
+import { CardsContainer } from './game/cardcontainer.component';
+import { Game, HintContainer } from './game/game.component';
+import { Button } from './utilities/button/btn.component';
+import { Timer } from './game/meter.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +35,13 @@ import { ProfilPatientComponent } from './profil-patient/profil-patient.componen
     InfoStadeComponent,
     ListePatientComponent,
     ProfilPatientComponent
+    ThemeComponent,
+    Game,
+    CardsContainer,
+    Card,
+    HintContainer,
+    Button,
+    Timer,
   ],
   imports: [
     BrowserModule,

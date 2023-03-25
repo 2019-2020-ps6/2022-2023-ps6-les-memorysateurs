@@ -30,7 +30,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss",
+              "src/app/game/game.component.scss",
+              "src/app/game/card.component.scss",
+              "src/app/game/cardcontainer.component.scss"
             ],
             "scripts": []
           },
@@ -93,7 +97,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss",
+              "src/app/game/card.component.scss",
+              "src/app/game/game.component.scss",
+              "src/app/game/cardcontainer.component.scss"
             ],
             "scripts": []
           }
