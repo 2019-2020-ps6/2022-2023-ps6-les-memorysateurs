@@ -34,8 +34,7 @@ import { Timer } from './game/meter.component';
     CreerPatientComponent,
     InfoStadeComponent,
     ListePatientComponent,
-    ProfilPatientComponent
-    ThemeComponent,
+    ProfilPatientComponent,
     Game,
     CardsContainer,
     Card,
