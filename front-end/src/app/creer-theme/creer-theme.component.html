@@ -3,6 +3,7 @@
   <div class="container" id="div-gauche">
     <p id="Titre-Nouveau-theme">NOUVEAU THEME</p>
     <button id="supprimer-theme" (click)="supprimerTheme()">Supprimer</button>
+
     <p class = "text-image">Images sélectionées : </p>
     
     <div class ="importImage">
@@ -25,8 +26,7 @@
       <input  id="recup-fichier" type="file" (change)="afficherFichier()" />
 
       </div>
-    </div>
-    
+   </div>
 </div>
 
 <app-footer-creer-theme [theme]="theme" (erreur)="afficherErreur($event)"></app-footer-creer-theme>

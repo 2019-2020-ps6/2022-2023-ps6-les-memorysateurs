@@ -8,8 +8,12 @@ import { CreerMemoryComponent } from './creer-memory/creer-memory.component';
 import { FooterCreerThemeComponent } from './footer-creer-theme/footer-creer-theme.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListeThemeComponent } from './liste-theme/liste-theme.component';
-import { ThemeComponent } from './theme/theme.component';
+import { ItemFrameComponent } from './item-frame/item-frame.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CreerPatientComponent } from './creer-patient/creer-patient.component';
+import { InfoStadeComponent } from './info-stade/info-stade.component';
+import { ListePatientComponent } from './liste-patient/liste-patient.component';
+import { ProfilPatientComponent } from './profil-patient/profil-patient.component';
 
 //game imports
 import { Card } from './game/card.component';
@@ -26,7 +30,11 @@ import { Timer } from './game/meter.component';
     CreerMemoryComponent,
     FooterCreerThemeComponent,
     ListeThemeComponent,
-    ThemeComponent,
+    ItemFrameComponent,
+    CreerPatientComponent,
+    InfoStadeComponent,
+    ListePatientComponent,
+    ProfilPatientComponent,
     Game,
     CardsContainer,
     Card,
