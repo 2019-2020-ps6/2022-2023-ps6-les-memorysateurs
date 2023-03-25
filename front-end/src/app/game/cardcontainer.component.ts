@@ -28,26 +28,25 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
   public isHinted: boolean = false;
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
   
-  hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
+  hinted : Card[] = this.children.filter(x => !x.isFlipped && !x.isDisabled);
 
   subscription: Subscription;
 
   @Output() initCards = [
-    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 0, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 1, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 2, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 3, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 4, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 5, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 6, isFlipped: false, isDisabled: false},
-    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 7, isFlipped: false, isDisabled: false},
+    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 0},
+    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 1},
+    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 2},
+    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 3},
+    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 4},
+    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 5},
+    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 6},
+    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 7},
   ]
 
 
   constructor(private sender : TimerService, private timerService: TimerService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(!this.isHinted && num > 0) {
-        console.log(sender);
         this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
         this.isHinted = true;
         this.reveal(this.hinted);
@@ -134,14 +133,15 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
         this.reset(clickable);
 
       }
-      
     }
-    
     // setup clickable cards
     clickable.forEach(element => {
       element.clickable();
     });
-    event.ngOnChanges(event);
+
+    //check if the game is over
+    // TODO: move to next page
+    this.children.filter(x => !x.isDisabled).length == 0 ? console.log("Game Over") : {};
   }
 
   public getAllFlipped() {
@@ -165,52 +165,10 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
       element.reveal();
     });
   }
+  
   public async reset(cards : Card[]) {
     cards.forEach(element => {
       element.reset();
     });
   }
-
-  // public async OnClick(event: any) {
-  //   event.stopPropagation();
-  //   if(!event?.target.classList.contains('disabled')) {
-  //     event?.target.classList.toggle('flipped');
-  //     var flipped = document.getElementsByClassName("flipped");
-  //     if(flipped.length == 2) {
-  //       console.log(flipped.length);
-  //         //TODO : check if the cards are the same
-  //         if(flipped[1].getAttribute("ng-reflect-name") == flipped[0].getAttribute("ng-reflect-name")) {
-  //           console.log(flipped[1].getAttribute("ng-reflect-name") + " " + flipped[0].getAttribute("ng-reflect-name"));
-  //           await this.delay(1000);
-  //           Array.prototype.forEach.call(flipped, function(card) {
-  //             card.classList.add('checked');
-  //           });
-  //           await this.delay(2000);
-  //           flipped[0].classList.add('disabled');
-  //           flipped[1].classList.add('disabled');
-  //           flipped[0].classList.remove('flipped');
-  //           event?.target.classList.remove('flipped');
-            
-  //         }
-  //         else {
-  //           //TODO: sleep 1 second before removing the flipped class
-  //           await this.delay(1000);
-  //           //TODO
-  //           flipped[0].classList.add('not-checked');
-  //           flipped[1].classList.add('not-checked');
-  //           await this.delay(2000);
-  //           flipped[0].classList.remove('not-checked');
-  //           flipped[1].classList.remove('not-checked');
-  //           event?.target.classList.remove('flipped');
-  //       }
-  //     }
-  //     else if(flipped.length > 2) {
-  //       Array.prototype.forEach.call(flipped, function(card) {
-  //         card.classList.remove('flipped');
-  //       });
-  //     }
-  //     var cardsFind = document.getElementsByClassName("card");
-  
-  //   }
-  // }
 }

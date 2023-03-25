@@ -106,8 +106,6 @@ export class Card implements OnInit, OnChanges {
   }
 
   @HostListener("click") onClick(){
-      console.log("click");
-      console.log(this);
       if(this.isClickable && !this.isDisabled) {
         this.onClickToParent.emit(this);
       }
