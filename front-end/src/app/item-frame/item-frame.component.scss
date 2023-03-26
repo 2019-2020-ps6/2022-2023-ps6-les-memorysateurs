@@ -1,36 +1,44 @@
 .item{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-rows: 2fr .2fr .1fr .5fr;
   align-items: center;
-  width: 100%;
+  justify-items: center;
   height: 100%;
   color: #006A52;
-
   background: #EFEFEF;
-  border-radius: 10px;
+  border-radius: 20px;
 
-  img {
-    margin-top: 20px;
-    width: 80%;
-    height: 40%;
+  &>* {
+    margin: 10px;
+  }
+  .img-ctn {
+    display: flex;
+    height: 85%;
+    width: 85%;
     background: #FFFFFF;
     border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    &>img {
+      width: 90%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+    }
   }
 
   .bouton-selectionner-item {
     margin: 10px;
     padding: 10px;
-    width: 80%;
+    width: 85%;
     border: 0;
     border-radius: 12px;
-    background: #006A52 ;
+    background: #006A52;
     color: #FFFFFF;
     font-weight: bold;
   }
 
   .bouton-editer-item {
-    margin-bottom: 10px;
     padding: 10px;
     width: 60%;
     border: 0;
