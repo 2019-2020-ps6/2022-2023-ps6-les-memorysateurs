@@ -3,6 +3,7 @@ import {Patient} from "../../models/patient.models";
 import {Router} from "@angular/router";
 import {FormBuilder} from "@angular/forms";
 import {PatientService} from "../services/patient.service";
+import {ThemeService} from "../services/theme.service";
 
 
 @Component({
@@ -13,7 +14,7 @@ import {PatientService} from "../services/patient.service";
 export class ProfilPatientComponent {
   public patient = this.patientService.patientSelectionne$;
 
-  constructor(private router: Router,private patientService : PatientService) {}
+  constructor(private router: Router,private patientService : PatientService,private themeService : ThemeService) {}
 
   ngOnInit(): void {
     this.remplirData();
@@ -36,7 +37,7 @@ export class ProfilPatientComponent {
 
   navReglagePartie(){
     let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
-    this.patientService.patientSelectionne$.next(patientSelect);
+    this.themeService.setThemes(patientSelect.themes);
     this.router.navigateByUrl('creer-memory');
   }
 }
