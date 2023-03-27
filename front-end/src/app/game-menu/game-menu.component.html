@@ -1,13 +1,11 @@
-<div *ngIf="router.url !== '/game'">
-
-  <div class="menu-container" [class.active]="isMenuOpen">
+<div class="game-menu-container" [class.active]="isMenuOpen">
 
     <div class="burger-menu" (click)="toggleMenu()">
       <div class="burger-menu-line"></div>
       <div class="burger-menu-line"></div>
       <div class="burger-menu-line"></div>
     </div>
-
+  
     <div class="menu-content">
       <div class="menu-header">
         <div class="menu-header-title">Les memorysateurs</div>
@@ -15,14 +13,13 @@
       </div>
       <div class="menu-body">
         <div class="menu-body-item">
-          <a routerLink="/liste-patient" routerLinkActive="active" (click)="toggleMenu()">Accueil</a>
+          <a routerLink="/creer-memory" routerLinkActive="active" (click)="toggleMenu()">Paramètres</a>
         </div>
         <div class="menu-body-item">
-          <a routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">Theme</a>
+          <a routerLink="/liste-patient" routerLinkActive="active" (click)="toggleMenu()">Quitter</a>
         </div>
       </div>
     </div>
-
+  
   </div>
   
-</div>

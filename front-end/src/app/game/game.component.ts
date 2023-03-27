@@ -12,10 +12,8 @@ import { TimerService } from '../services/timer.service';
 
 export class Game implements OnInit {
   ngOnInit():void {}
-  constructor() {}
-  public menu : MenuComponent = new MenuComponent();
+  constructor(private menu: MenuComponent) {};
 }
-
 
 
 @Component({
