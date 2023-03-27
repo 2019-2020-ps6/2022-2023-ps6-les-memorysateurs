@@ -6,10 +6,10 @@
     <div id="div-slider">
       <p id="texte-temps-memo">Personnaliser le temps de mémorisation</p>
       <div class="slider">
-          <input #range type="range" min="{{min}}" max="{{max}}" value="{{value}}" name="slider" id="sliderTime" ng-model="value" (input)="valueTimeChange(range.value)">
         <div class="rangeTimer" id="divSliderTimeOut">
           <output #output id="sliderTimeOut" ng-model="value">{{(value)| number:'2.0-0'}}s</output>
         </div>
+          <input #range type="range" min="{{min}}" max="{{max}}" value="{{value}}" name="slider" id="sliderTime" ng-model="value" (input)="valueTimeChange(range.value)">
       </div>
       <div class="background-slider"></div>
     </div>
@@ -17,7 +17,7 @@
     <div id="div-nombre-cartes">
       <p id="texte-nombre-cartes">Nombre de cartes</p>
       <div id="choix-nombre">
-        <input type="range" id="nbcarterange" list="list-nbr" min="2" max="4">
+        <input #rangeNbCard type="range" id="nbcarterange" list="list-nbr" min="2" max="4" value="3" (input)="valueNbCard(rangeNbCard.value)">
         <datalist id="list-nbr">
           <p>4</p>
           <p>6</p>

@@ -51,7 +51,7 @@
   position: relative;
   margin: 0%;
   width: 100%;
-  padding-top: 6px;
+  padding: 10px 0;
   
 }
 
@@ -107,8 +107,8 @@ output {
     -webkit-appearance: none;
     appearance: none;
     height: 60px;
-    width: 40px;
-    border: 2px solid #006A52;
+    width: 60px;
+    border: 5px solid #006A52;
     border-radius: 10px;
     transition: transform .2s ease-in-out;
   }
@@ -117,7 +117,7 @@ output {
 #div-nombre-cartes{
   display: block;
   flex-direction: column;
-  width: 90%;
+  width: 30%;
   & * {
     width: 100%;
   }
@@ -141,8 +141,10 @@ output {
   }
   p {
     color: #006A52;
-    width: 40px;
+    width: 60px;
+    font-size: 20px;
     text-align: center;
+    font-weight: bold;
   }
 }
 

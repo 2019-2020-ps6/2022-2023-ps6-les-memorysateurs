@@ -38,6 +38,10 @@ export class CreerMemoryComponent implements OnInit {
     output.style.left = (calcc*(1-size))*100 + "%";
   }
 
+  valueNbCard(value : any) {
+
+  }
+
   valueNbCardTipsChange(value : any) {
   }
 
