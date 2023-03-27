@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import {FormThemeService} from "../services/formTheme.service";
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
+import {Patient} from "../../models/patient.models";
+import {PatientService} from "../services/patient.service";
 
 
 @Component({
@@ -19,8 +21,9 @@ export class FooterCreerThemeComponent {
   theme : Theme |undefined;
   @Output()
   erreur : EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor(private router: Router,public formThemeService: FormThemeService,private themeService : ThemeService,) {
+  bas_jaune : boolean = true;
+  supprimer : boolean = false;
+  constructor(private router: Router,public formThemeService: FormThemeService,private themeService : ThemeService,private patientService :PatientService) {
 
   }
   ngOnInit(): void {
@@ -31,6 +34,16 @@ export class FooterCreerThemeComponent {
     this.formThemeService.imageSubject$.subscribe(images => {
       this.images = images;
     });
+    const bouton = document.getElementById("boutonChangeant") as HTMLButtonElement;
+    if(this.theme == undefined){
+      this.bas_jaune = true;
+      this.supprimer = false;
+      bouton.innerHTML = "Partager la Création";
+    }else{
+      this.bas_jaune = false;
+      this.supprimer = true;
+      bouton.innerHTML = "Supprimer";
+    }
   }
   retourListeTheme() {
     this.themeService.setEditTheme(undefined);
@@ -60,5 +73,20 @@ export class FooterCreerThemeComponent {
 
     }
     this.themeService.setEditTheme(undefined);
+  }
+
+  clickPartagerOuSupprimer(){
+    if(this.supprimer) {
+      this.themeService.removeTheme(this.theme);
+      this.themeService.setEditTheme(undefined);
+      const patient = this.patientService.patientSelectionne$;
+      let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
+      patientSelect.setThemes(this.themeService.listeThemes$.value);
+
+      this.router.navigate(['/liste-theme']);
+    }
+    if(this.bas_jaune){
+      console.log("partage");
+    }
   }
 }

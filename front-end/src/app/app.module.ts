@@ -42,7 +42,6 @@ import { MenuComponent } from './menu/menu.component';
     HintContainer,
     Button,
     Timer,
-    ThemeComponent,
     MenuComponent
   ],
   imports: [

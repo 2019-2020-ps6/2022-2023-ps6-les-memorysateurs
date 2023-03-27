@@ -19,8 +19,10 @@ export class CreerThemeComponent {
   // @ts-ignore
   nom: string;
   images : any[] = [];
+  URL : string="";
   @Input()
   theme : Theme |undefined;
+
 
 
   constructor(private router: Router,private http:HttpClient,public formThemeService: FormThemeService,
@@ -208,13 +210,38 @@ export class CreerThemeComponent {
      }
    }
   }
-  supprimerTheme(){
-    this.themeService.removeTheme(this.theme);
-    this.themeService.setEditTheme(undefined);
-    const patient = this.patientService.patientSelectionne$;
-    let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
-    patientSelect.setThemes(this.themeService.listeThemes$.value);
 
-    this.router.navigate(['/liste-theme']);
+
+  importerImageURL(){
+    if(this.URL==""){
+      return;
+    }
+    const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
+    const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
+    const imageElement = document.createElement('img');
+    imageElement.style.height = "160px";
+    imageElement.style.width = "160px";
+    const reader = new FileReader();
+    imageElement.src = this.URL;
+    stockImage.appendChild(imageElement);
+    imageElement.addEventListener("click",() =>{
+      if(stockImage.contains(imageElement)) {
+        stockImage.removeChild(imageElement);
+        stockImage2.appendChild(imageElement);
+        this.images.push(imageElement.src);
+      }
+      else{
+        stockImage2.removeChild(imageElement);
+        stockImage.appendChild(imageElement);
+        const index = this.images.findIndex(image => image ===imageElement.src);
+        if(index !== -1){
+          this.images.splice(index,1);
+
+        }
+      }
+      this.envoyerImages();
+    })
+    this.URL ="";
   }
+
 }
