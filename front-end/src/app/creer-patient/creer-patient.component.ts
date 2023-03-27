@@ -90,7 +90,7 @@ creerProfilPatient(){
   }
 if(!erreur) {
   if (this.patient == undefined) {
-    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade']);
+    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined);
     this.patient = patient;
     ajout = true;
   } else {

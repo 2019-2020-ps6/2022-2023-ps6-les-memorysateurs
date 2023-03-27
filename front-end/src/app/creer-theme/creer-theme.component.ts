@@ -185,7 +185,7 @@ export class CreerThemeComponent {
   }
   afficherErreur(value : boolean){
    if(value){
-     const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement ;
+     const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement;
      const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
      if(imageChoisi.childElementCount == 0){
        imageChoisi.style.background = "#F00000";

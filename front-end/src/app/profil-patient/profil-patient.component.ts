@@ -33,4 +33,10 @@ export class ProfilPatientComponent {
     this.patientService.patientEdite$.next(patientEdite);
     this.router.navigateByUrl('creer-patient');
   }
+
+  navReglagePartie(){
+    let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
+    this.patientService.patientSelectionne$.next(patientSelect);
+    this.router.navigateByUrl('creer-memory');
+  }
 }
