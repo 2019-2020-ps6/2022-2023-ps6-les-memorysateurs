@@ -10,7 +10,7 @@ import {Theme} from "../../models/theme.models";
 
 export class PatientService {
   public listePatient$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(LISTE_PATIENT);
-  public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
+    public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
   public patientEdite$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
 
   public addPatient(patient : Patient){

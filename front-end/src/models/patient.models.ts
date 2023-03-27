@@ -1,4 +1,7 @@
 import {Cardable} from "./cardable.models";
+import {ThemeService} from "../app/services/theme.service";
+import {Theme} from "./theme.models";
+import {LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
 
 export class Patient implements Cardable{
   static nextId: number = 0;
@@ -7,14 +10,26 @@ export class Patient implements Cardable{
   prenom : string;
   photo : any;
   stade : 3 | 4  | 5 ;
+  themes : Theme[] = [];
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5) {
+
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
     this.photo = photo;
     this.stade = stade;
+    if(listeT !=undefined)
+    listeT.forEach(t =>{
+      this.themes.push(t);
+    })
+    else
+      LISTE_THEME.forEach(t =>{
+        this.themes.push(t);
+      })
   }
+
+
 
   getID(): number {
     return this.id;
@@ -30,5 +45,15 @@ export class Patient implements Cardable{
 
   getType(): "patient" | "theme" {
     return "patient";
+  }
+
+  getThemes() : Theme[]{
+    return this.themes;
+  }
+  setThemes(themes2 : Theme[]) {
+    this.themes = themes2;
+  }
+  ajouterTheme(t : Theme){
+    this.themes.push(t);
   }
 }

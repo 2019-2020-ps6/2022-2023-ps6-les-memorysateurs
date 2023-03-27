@@ -6,6 +6,8 @@ import {FormGroup, FormBuilder, Validators, NgModel} from '@angular/forms';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";
+import {Patient} from "../../models/patient.models";
+import {PatientService} from "../services/patient.service";
 @Component({
   selector: 'app-creer-theme',
   templateUrl: './creer-theme.component.html',
@@ -22,7 +24,7 @@ export class CreerThemeComponent {
 
 
   constructor(private router: Router,private http:HttpClient,public formThemeService: FormThemeService,
-              private themeService : ThemeService,private formBuilder : FormBuilder) {
+              private themeService : ThemeService,private formBuilder : FormBuilder,private patientService : PatientService) {
     this.themeForm = this.formBuilder.group({
       name: ['']
     });
@@ -185,7 +187,7 @@ export class CreerThemeComponent {
   }
   afficherErreur(value : boolean){
    if(value){
-     const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement ;
+     const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement;
      const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
      if(imageChoisi.childElementCount == 0){
        imageChoisi.style.background = "#F00000";
@@ -209,6 +211,10 @@ export class CreerThemeComponent {
   supprimerTheme(){
     this.themeService.removeTheme(this.theme);
     this.themeService.setEditTheme(undefined);
+    const patient = this.patientService.patientSelectionne$;
+    let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
+    patientSelect.setThemes(this.themeService.listeThemes$.value);
+
     this.router.navigate(['/liste-theme']);
   }
 }
