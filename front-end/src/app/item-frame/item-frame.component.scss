@@ -1,9 +1,10 @@
 .item{
   display: grid;
-  grid-template-rows: 2fr .2fr .1fr .5fr;
+  grid-template-rows: 2fr .2fr .3fr .5fr;
   align-items: center;
   justify-items: center;
-  height: 100%;
+  height: 500px;
+  width: 270px;
   color: #006A52;
   background: #EFEFEF;
   border-radius: 20px;
