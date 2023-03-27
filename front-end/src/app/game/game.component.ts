@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-import { Menu } from '../menu/menu.component';
+import { MenuComponent } from '../menu/menu.component';
 import { TimerService } from '../services/timer.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { TimerService } from '../services/timer.service';
 export class Game implements OnInit {
   ngOnInit():void {}
   constructor() {}
-  public menu : Menu = new Menu();
+  public menu : MenuComponent = new MenuComponent();
 }
 
 

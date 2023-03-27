@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreerThemeComponent } from './creer-theme/creer-theme.component';
@@ -9,7 +9,7 @@ import { FooterCreerThemeComponent } from './footer-creer-theme/footer-creer-the
 import { HttpClientModule } from '@angular/common/http';
 import { ListeThemeComponent } from './liste-theme/liste-theme.component';
 import { ItemFrameComponent } from './item-frame/item-frame.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CreerPatientComponent } from './creer-patient/creer-patient.component';
 import { InfoStadeComponent } from './info-stade/info-stade.component';
 import { ListePatientComponent } from './liste-patient/liste-patient.component';
@@ -23,10 +23,10 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { MenuComponent } from './menu/menu.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
     CreerThemeComponent,
     CreerMemoryComponent,
     FooterCreerThemeComponent,
@@ -42,11 +42,10 @@ import { MenuComponent } from './menu/menu.component';
     HintContainer,
     Button,
     Timer,
-    ThemeComponent,
-    MenuComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

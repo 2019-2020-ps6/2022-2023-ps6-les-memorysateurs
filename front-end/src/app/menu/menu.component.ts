@@ -1,15 +1,4 @@
-import { Component, Directive, ElementRef, HostListener } from '@angular/core';
-
-@Directive({
-  selector: '[appToggleMenu]'
-})
-export class ToggleMenuDirective {
-  constructor(private el: ElementRef) { }
-
-  @HostListener('click') onClick() {
-    this.el.nativeElement.classList.toggle('active');
-  }
-}
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
