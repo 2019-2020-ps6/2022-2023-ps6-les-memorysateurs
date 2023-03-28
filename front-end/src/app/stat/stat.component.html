@@ -1,28 +1,36 @@
-<div id="container-stats">
-    <div id="container-profil">
-      <img id="photo-profil" src="assets/images/profile-placeholder.png" alt="photo de profil">
-      <div id="info-profil">
-        <h2>{{ patient?.getTitre() }}</h2>
-        <p>{{ patient?.stade }}ème stade de la maladie</p>
-      </div>
+<div class="profil-patient">
+  <div class="profil-header">
+    <div class="profil-image-container">
+      <img class="profil-image" src="{{patient.getImage()}}" alt="Photo de profil">
     </div>
-    <div id="container-donnees">
-      <div class="info-container">
-        <p class="info-titre">Temps de jeu total :</p>
-        <p class="info-valeur">{{ tempsDeJeu }} heures</p>
-      </div>
-      <div class="info-container">
-        <p class="info-titre">Nombre total d'essais :</p>
-        <p class="info-valeur">{{ nbEssai }}</p>
-      </div>
-      <div class="info-container">
-        <p class="info-titre">Nombre total d'erreurs :</p>
-        <p class="info-valeur">{{ nbErreur }}</p>
-      </div>
-      <div class="info-container">
-        <p class="info-titre">Nombre total d'indices utilisés :</p>
-        <p class="info-valeur">{{ nbIndices }}</p>
+    <div class="profil-info-container">
+      <h2>{{patient.prenom}} {{patient.nom}}</h2>
+      <div class="profil-info-lignes">
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Stade :</p>
+          <p class="profil-info-valeur">{{patient.stade}}</p>
+        </div>
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Parties jouées :</p>
+          <p class="profil-info-valeur">{{partiesJouees}}</p>
+        </div>
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Temps de jeu :</p>
+          <p class="profil-info-valeur">{{tempsJeu}}</p>
+        </div>
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Nombre d'essais :</p>
+          <p class="profil-info-valeur">{{nbEssais}}</p>
+        </div>
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Nombre d'erreurs :</p>
+          <p class="profil-info-valeur">{{nbErreurs}}</p>
+        </div>
+        <div class="profil-info-ligne">
+          <p class="profil-info-titre">Nombre d'indices :</p>
+          <p class="profil-info-valeur">{{nbIndices}}</p>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
