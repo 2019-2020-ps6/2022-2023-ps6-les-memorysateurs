@@ -1,0 +1,28 @@
+<div id="container-stats">
+    <div id="container-profil">
+      <img id="photo-profil" src="assets/images/profile-placeholder.png" alt="photo de profil">
+      <div id="info-profil">
+        <h2>{{ patient?.getTitre() }}</h2>
+        <p>{{ patient?.stade }}ème stade de la maladie</p>
+      </div>
+    </div>
+    <div id="container-donnees">
+      <div class="info-container">
+        <p class="info-titre">Temps de jeu total :</p>
+        <p class="info-valeur">{{ tempsDeJeu }} heures</p>
+      </div>
+      <div class="info-container">
+        <p class="info-titre">Nombre total d'essais :</p>
+        <p class="info-valeur">{{ nbEssai }}</p>
+      </div>
+      <div class="info-container">
+        <p class="info-titre">Nombre total d'erreurs :</p>
+        <p class="info-valeur">{{ nbErreur }}</p>
+      </div>
+      <div class="info-container">
+        <p class="info-titre">Nombre total d'indices utilisés :</p>
+        <p class="info-valeur">{{ nbIndices }}</p>
+      </div>
+    </div>
+  </div>
+  

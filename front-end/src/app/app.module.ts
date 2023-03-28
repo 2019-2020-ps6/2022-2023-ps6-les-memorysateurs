@@ -23,6 +23,7 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { MenuComponent } from './menu/menu.component';
 import { GameMenuComponent } from './game-menu/game-menu.component';
+import { StatComponent } from './stat/stat.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { GameMenuComponent } from './game-menu/game-menu.component';
     Button,
     Timer,
     GameMenuComponent,
+    StatComponent,
   ],
   imports: [
     BrowserModule,
