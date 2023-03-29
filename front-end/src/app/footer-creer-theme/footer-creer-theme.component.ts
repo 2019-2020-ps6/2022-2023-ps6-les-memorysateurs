@@ -49,6 +49,7 @@ export class FooterCreerThemeComponent {
     this.themeService.setEditTheme(undefined);
     this.router.navigate(['/liste-theme']);
   }
+
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
@@ -70,7 +71,7 @@ export class FooterCreerThemeComponent {
       this.router.navigate(['/liste-theme']);
     } else {
       this.erreur.emit(true);
-
+      this.theme = undefined;
     }
     this.themeService.setEditTheme(undefined);
   }
