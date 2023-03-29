@@ -1,81 +1,51 @@
-.profil-patient {
+.stat-patient {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   
-  .profil-header {
-    width: 48%;
+  #container-infos {
+    display: flex;
+    align-items: center;
     
-    #container-donnee-patient {
+    #photo {
+      margin-right: 1rem;
+      
+      #affichage-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+    
+    .profil-info {
       display: flex;
       flex-direction: column;
       
-      #form-nom-prenom {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        
-        .donnee-patient {
-          font-weight: bold;
-          margin-right: 10px;
-        }
-        
-        .input-identite {
-          border: none;
-          border-bottom: 1px solid black;
-          width: 60%;
-          padding: 5px;
-          margin-right: 10px;
-          
-          &:focus {
-            outline: none;
-          }
-        }
-      }
-      
-      #info-stade {
+      .profil-nom {
         font-weight: bold;
       }
       
-      .profil-info-ligne {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        
-        .profil-info-titre {
-          font-weight: bold;
-          margin-right: 10px;
-        }
-        
-        .profil-info-valeur {
-          font-weight: normal;
-        }
+      .profil-stade {
+        margin-top: 0.5rem;
+      }
+      
+      .profil-info-valeur {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: gray;
       }
     }
   }
   
-  .bloc-statistiques {
-    width: 48%;
+  .stat-temps, .stat-essais, .stat-erreurs, .stat-indices {
     display: flex;
     flex-direction: column;
     
-    .profil-info-ligne {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      
-      .profil-info-titre {
-        font-weight: bold;
-        margin-right: 10px;
-      }
-      
-      .profil-info-valeur {
-        font-weight: normal;
-      }
+    .profil-info-titre {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
     }
   }
 }

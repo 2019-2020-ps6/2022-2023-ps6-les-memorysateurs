@@ -1,29 +1,27 @@
-<div class="profil-patient">
-  <div class="profil-header">
-    <div id="container-donnee-patient">
-      
-      <div class="profil-info-ligne">
-        <p class="profil-info-titre">Parties jouées :</p>
-        <p class="profil-info-valeur">{{partiesJouees}}</p>
-      </div>
-    </div>    
-    <div class="profil-info-ligne">
-      <p class="profil-info-titre">Temps de jeu :</p>
-      <p class="profil-info-valeur">{{tempsDeJeu}}</p>
+<div class="stat-patient">
+  <div id="container-infos">
+    <div id="photo">
+      <img  id="affichage-photo"/>
     </div>
-    <div class="profil-info-ligne">
-      <p class="profil-info-titre">Nombre d'essais :</p>
-      <p class="profil-info-valeur">{{nbEssai}}</p>
-    </div>
-    <div class="profil-info-ligne">
-      <p class="profil-info-titre">Nombre d'erreurs :</p>
-      <p class="profil-info-valeur">{{nbErreur}}</p>
-    </div>
-    <div class="profil-info-ligne">
-      <p class="profil-info-titre">Nombre d'indices :</p>
-      <p class="profil-info-valeur">{{nbIndices}}</p>
+    <div class="profil-info">
+      <p class="profil-nom">{{nom}}</p>
+      <p class="profil-prenom">{{prenom}}</p>
+      <p class="profil-stade">{{stade}}</p>
+      <p class="profil-info-valeur">{{partiesJouees}} parties jouées</p>
     </div>
   </div>
+  <div class="stat-temps">
+      <p class="profil-info-titre">Temps de jeu : {{tempsDeJeu}}</p>
+    </div>
+    <div class="stat-essais">
+      <p class="profil-info-titre">Nombre d'essais : {{nbEssai}}</p>
+    </div>
+    <div class="stat-erreurs">
+      <p class="profil-info-titre">Nombre d'erreurs : {{nbErreur}}</p>
+    </div>
+    <div class="stat-indices">
+      <p class="profil-info-titre">Nombre d'indices : {{nbIndices}}</p>
+    </div>
 </div>
 
 

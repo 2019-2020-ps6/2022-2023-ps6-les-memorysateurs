@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
-import {Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-stat',
@@ -16,23 +14,20 @@ export class StatComponent implements OnInit {
   public nbEssai: number = 0;
   public nbErreur: number = 0;
   public nbIndices: number = 0;
+  public nom: string = "";
+  public prenom: string = "";
+  public stockImage: string = "";
+  public stade: string = "";
 
-  constructor(private router: Router,private patientService : PatientService) {}
+  constructor(private patientService: PatientService) { }
+  
 
   ngOnInit(): void {
-    this.remplirData();
-  }
+    this.nom = this.patient.value?.nom as string;
+    this.prenom = this.patient.value?.prenom as string;
+    this.stockImage = this.patient.value?.photo as string;
+    this.stade = "Stade " + this.patient.value?.stade as string;
 
-  remplirData(){
-    const name = document.getElementById("input-nom") as HTMLInputElement;
-    name.innerHTML = this.patient.value?.nom as string;
-    const prenom = document.getElementById("input-prenom") as HTMLInputElement;
-    prenom.innerHTML = this.patient.value?.prenom as string;
-    const stockImage = document.getElementById("affichage-photo") as HTMLImageElement;
-    stockImage.src = this.patient.value?.photo as string;
-    const stade = document.getElementById("info-stade") as HTMLInputElement;
-    stade.innerHTML = "Stade " + this.patient.value?.stade ;
-    
     // On remplit des données pour l'exemple
     this.partiesJouees = Math.floor(Math.random() * 100);
     this.tempsDeJeu = Math.floor(Math.random() * 1000);
@@ -40,5 +35,6 @@ export class StatComponent implements OnInit {
     this.nbErreur = Math.floor(Math.random() * 10);
     this.nbIndices = Math.floor(Math.random() * 20);
   }
+
 
 }
