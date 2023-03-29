@@ -10,7 +10,8 @@ import {PatientService} from "../services/patient.service";
 export class StatComponent implements OnInit {
   public patient = this.patientService.patientSelectionne$;
   public partiesJouees: number = 0;
-  public tempsDeJeu: number = 0;
+  public tempsDeJeuMin: number = 0;
+  public tempsDeJeuSec: number = 0;
   public nbEssai: number = 0;
   public nbErreur: number = 0;
   public nbIndices: number = 0;
@@ -18,6 +19,11 @@ export class StatComponent implements OnInit {
   public prenom: string = "";
   public stockImage: string = "";
   public stade: string = "";
+
+  isTempsOpen = false;
+  isEssaisOpen = false;
+  isErreursOpen = false;
+  isIndicesOpen = false;
 
   constructor(private patientService: PatientService) { }
   
@@ -29,12 +35,28 @@ export class StatComponent implements OnInit {
     this.stade = "Stade " + this.patient.value?.stade as string;
 
     // On remplit des données pour l'exemple
-    this.partiesJouees = Math.floor(Math.random() * 100);
-    this.tempsDeJeu = Math.floor(Math.random() * 1000);
-    this.nbEssai = Math.floor(Math.random() * 50);
+    this.partiesJouees = Math.floor(Math.random() * 30);
+    this.tempsDeJeuMin = Math.floor(Math.random() * 10);
+    this.tempsDeJeuSec = Math.floor(Math.random() * 60);
+    this.nbEssai = Math.floor(Math.random() * 30);
     this.nbErreur = Math.floor(Math.random() * 10);
     this.nbIndices = Math.floor(Math.random() * 20);
   }
 
+  toggleTemps() {
+    this.isTempsOpen = !this.isTempsOpen;
+  }
+  
+  toggleEssais() {
+    this.isEssaisOpen = !this.isEssaisOpen;
+  }
+
+  toggleErreurs() {
+    this.isErreursOpen = !this.isErreursOpen;
+  }
+
+  toggleIndices() {
+    this.isIndicesOpen = !this.isIndicesOpen;
+  }
 
 }
