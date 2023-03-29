@@ -187,7 +187,7 @@ export class CreerThemeComponent {
 
        inputTitre.style.background = "#F00000";
        inputTitre.style.opacity = "0.8";
-       if(imageChoisi.childElementCount != 0){
+       if(imageChoisi.childElementCount >=4){
          this.erreurImage = false;
          imageChoisi.style.background = "#FFFFFF";
          imageChoisi.style.opacity = "1";
