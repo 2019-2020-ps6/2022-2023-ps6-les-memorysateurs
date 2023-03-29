@@ -1,15 +1,6 @@
-import { Component, Directive, ElementRef, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-@Directive({
-  selector: '[appToggleMenu]'
-})
-export class ToggleMenuDirective {
-  constructor(private el: ElementRef) { }
-
-  @HostListener('click') onClick() {
-    this.el.nativeElement.classList.toggle('active');
-  }
-}
 
 @Component({
   selector: 'app-menu',
@@ -18,6 +9,7 @@ export class ToggleMenuDirective {
 })
 export class MenuComponent {
   isMenuOpen = false;
+  constructor(public router: Router) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

@@ -29,6 +29,7 @@ export class ProfilPatientComponent {
     const stade = document.getElementById("info-stade") as HTMLInputElement;
     stade.innerHTML = "Stade " + this.patient.value?.stade ;
   }
+  
   modifierProfil(){
     let patientEdite: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
     this.patientService.patientEdite$.next(patientEdite);
@@ -39,5 +40,11 @@ export class ProfilPatientComponent {
     let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
     this.themeService.setThemes(patientSelect.themes);
     this.router.navigateByUrl('creer-memory');
+  }
+
+  navStat(){
+    let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
+    this.patientService.patientSelectionne$.next(patientSelect);
+    this.router.navigateByUrl('stat');
   }
 }

@@ -1,0 +1,168 @@
+<div class="stat-patient">
+  <div id="container-infos">
+    <div id="photo">
+      <img [src]="stockImage">
+    </div>
+    <div class="profil-info">
+      <p class="profil-nom">{{nom}}</p>
+      <p class="profil-prenom">{{prenom}}</p>
+      <p class="profil-stade">{{stade}}</p>
+      <p class="profil-parties">{{partiesJouees}} parties jouées</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-lines">
+      <p class="stat-title">Temps de jeu : {{tempsDeJeuMin}}min {{tempsDeJeuSec}}s</p>
+        <div class="plus-temps" (click)="toggleTemps()">+</div>
+    </div>
+    <div class="stat-lines">
+      <p class="stat-title">Nombre d'essais : {{nbEssai}}</p>
+      <div class="plus-essais" (click)="toggleEssais()">+</div>
+    </div>
+    <div class="stat-lines">
+      <p class="stat-title">Nombre d'erreurs : {{nbErreur}}</p>
+      <div class="plus-erreurs" (click)="toggleErreurs()">+</div>
+    </div>
+    <div class="stat-lines">
+      <p class="stat-title">Nombre d'indices : {{nbIndices}}</p>
+      <div class="plus-indices" (click)="toggleIndices()">+</div>
+    </div>
+  </div>
+</div>
+
+<div class="temps-content" [class.active]="isTempsOpen">
+  <p class="temps-title">Temps de jeu : {{tempsDeJeuMin}}min {{tempsDeJeuSec}}s</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Stade</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cartes</th>
+        <th scope="col">Temps</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>3min 25s</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>3min 40s</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>3min 00s</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="essais-content" [class.active]="isEssaisOpen">
+  <p class="essais-title">Nombre d'essais : {{nbEssai}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Stade</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cartes</th>
+        <th scope="col">Essais</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>11</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>18</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="erreurs-content" [class.active]="isErreursOpen">
+  <p class="erreurs-title">Nombre d'erreurs : {{nbErreur}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Stade</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cartes</th>
+        <th scope="col">Erreurs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>14</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="indices-content" [class.active]="isIndicesOpen">
+  <p class="indices-title">Nombre d'indices : {{nbIndices}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Stade</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cartes</th>
+        <th scope="col">Indices</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>12/03/2023</td>
+        <td>8</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
