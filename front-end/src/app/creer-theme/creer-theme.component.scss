@@ -160,3 +160,12 @@ div.importImage {
   font-weight: bold;
   height: 108%;
 }
+
+app-erreur-creer-theme{
+  position: absolute;
+
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

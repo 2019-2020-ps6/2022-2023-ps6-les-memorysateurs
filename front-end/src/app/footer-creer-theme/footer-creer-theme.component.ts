@@ -63,7 +63,7 @@ export class FooterCreerThemeComponent {
     ajout = false;
     }
 
-    if ((this.theme.titre != "") && this.theme.images.length != 0) {
+    if ((this.theme.titre != "") && this.theme.images.length >=4) {
       this.erreur.emit(false);
       if(ajout) {
         this.themeService.addTheme(this.theme);

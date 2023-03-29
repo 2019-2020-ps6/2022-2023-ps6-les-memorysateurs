@@ -22,7 +22,12 @@ export class CreerThemeComponent {
   URL : string="";
   @Input()
   theme : Theme |undefined;
+  @Input()
+  erreurImage = false;
+  @Input()
+  erreurTitre = false;
 
+  popup=false;
 
 
   constructor(private router: Router,private http:HttpClient,public formThemeService: FormThemeService,
@@ -131,12 +136,11 @@ export class CreerThemeComponent {
   private async  banqueImage(){
     const stockImage = document.getElementById("imageEnAttente") as HTMLDivElement;
     const stockImage2 = document.getElementById("imageChoisi") as HTMLDivElement;
-    for(let i = 0; i < 2; i++){
-      if(i==0){
+    for(let i = 0; i < 4; i++){
         const imageElement = document.createElement('img');
         imageElement.style.height = "160px";
         imageElement.style.width = "160px";
-        imageElement.src = 'assets/images/image014.png';
+        imageElement.src = 'assets/images/image'+i+".png";
         stockImage.appendChild(imageElement);
         imageElement.addEventListener("click",() =>{
           if(stockImage.contains(imageElement)) {
@@ -158,52 +162,33 @@ export class CreerThemeComponent {
           this.envoyerImages();
         })
       }
-      else{
-        const imageElement = document.createElement('img');
-        imageElement.style.height = "160px";
-        imageElement.style.width = "160px";
-        imageElement.src = 'assets/images/image034.png';
-        stockImage.appendChild(imageElement);
-        imageElement.addEventListener("click",() =>{
-          if(stockImage.contains(imageElement)) {
-            stockImage.removeChild(imageElement);
-            stockImage2.appendChild(imageElement);
-            this.images.push(imageElement.src);
 
-          }
-          else{
-            stockImage2.removeChild(imageElement);
-            stockImage.appendChild(imageElement);
-            const index = this.images.findIndex(image => image ===imageElement.src);
-            if(index !== -1){
-              this.images.splice(index,1);
-
-            }
-
-          }
-          this.envoyerImages();
-        })
-      }
     }
-
-  }
   afficherErreur(value : boolean){
+    this.popup = value;
    if(value){
      const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement;
      const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
-     if(imageChoisi.childElementCount == 0){
+     if(imageChoisi.childElementCount <4){
+       this.erreurImage = true;
+
+       console.log(this.erreurImage);
        imageChoisi.style.background = "#F00000";
        imageChoisi.style.opacity = "0.8";
        if(this.themeForm.value.name !=""){
          if(this.themeForm.value.name != undefined) {
+           this.erreurTitre = false;
            inputTitre.style.background = "#FFFFFF";
            inputTitre.style.opacity = "0.5";
          }
        }
-     }else {
+     } if(this.themeForm.value.name ==""){
+       this.erreurTitre = true;
+
        inputTitre.style.background = "#F00000";
        inputTitre.style.opacity = "0.8";
        if(imageChoisi.childElementCount != 0){
+         this.erreurImage = false;
          imageChoisi.style.background = "#FFFFFF";
          imageChoisi.style.opacity = "1";
        }
@@ -242,6 +227,10 @@ export class CreerThemeComponent {
       this.envoyerImages();
     })
     this.URL ="";
+  }
+
+  popupChange(value : boolean){
+    this.popup = value;
   }
 
 }

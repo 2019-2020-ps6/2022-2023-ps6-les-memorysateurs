@@ -22,6 +22,7 @@ import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { MenuComponent } from './menu/menu.component';
+import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MenuComponent } from './menu/menu.component';
     HintContainer,
     Button,
     Timer,
-    MenuComponent
+    MenuComponent,
+    ErreurCreerThemeComponent
   ],
   imports: [
     BrowserModule,
