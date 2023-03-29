@@ -14,6 +14,7 @@ export class CreerMemoryComponent implements OnInit {
   max = 60;
   value = this.min;
   
+  numberOfCards = [4, 6, 8];
 
   //nb de carte
   minNbCardTips = 2;
@@ -39,7 +40,7 @@ export class CreerMemoryComponent implements OnInit {
   }
 
   valueNbCard(value : any) {
-
+    
   }
 
   valueNbCardTipsChange(value : any) {

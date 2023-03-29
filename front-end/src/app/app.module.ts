@@ -15,6 +15,9 @@ import { InfoStadeComponent } from './info-stade/info-stade.component';
 import { ListePatientComponent } from './liste-patient/liste-patient.component';
 import { ProfilPatientComponent } from './profil-patient/profil-patient.component';
 
+//creation memory
+import { SliderNumberComponent } from './slider-number/slider-number.component';
+
 //game imports
 import { Card } from './game/card.component';
 import { CardsContainer } from './game/cardcontainer.component';
@@ -41,6 +44,7 @@ import { Timer } from './game/meter.component';
     HintContainer,
     Button,
     Timer,
+    SliderNumberComponent,
   ],
   imports: [
     BrowserModule,
