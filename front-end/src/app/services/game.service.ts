@@ -6,8 +6,8 @@ import {BehaviorSubject} from "rxjs";
 })
 
 export class GameService {
-  nombreCartes$: BehaviorSubject<number> = new BehaviorSubject<number>(8);
-  nombreCartesIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(4);
-  dureeIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(2);
+  public nombreCartes$: BehaviorSubject<number> = new BehaviorSubject<number>(8);
+  public nombreCartesIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(4);
+  public dureeIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(5);
 
 }

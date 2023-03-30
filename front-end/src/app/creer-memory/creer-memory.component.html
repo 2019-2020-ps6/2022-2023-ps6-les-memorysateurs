@@ -1,14 +1,14 @@
 <div id="container-creer-memory">
   <div id="div-theme-choisi">
-    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeChoisis" [editerEnable]="false" [selectionnerText]="'Choisir un Thème'"></app-item-frame>
+    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [editerEnable]="false" [selectionnerText]="'Choisir un Thème'"></app-item-frame>
   </div>
   <div id="container-parametres">
     <div id="div-slider">
       <p id="texte-temps-memo">Personnaliser le temps de mémorisation</p>
       <div class="slider">
-          <input #range type="range" min="{{min}}" max="{{max}}" value="{{value}}" name="slider" id="sliderTime" ng-model="value" (input)="valueTimeChange(range.value)">
+          <input #range type="range" min="{{min}}" max="{{max}}" value="{{dureeIndice}}" name="slider" id="sliderTime" ng-model="value" (input)="onValueTimeChange(range.valueAsNumber)">
         <div class="rangeTimer" id="divSliderTimeOut">
-          <output #output id="sliderTimeOut" ng-model="value">{{(value)| number:'2.0-0'}}s</output>
+          <output #output id="sliderTimeOut" ng-model="value">{{(dureeIndice)| number:'2.0-0'}}s</output>
         </div>
       </div>
       <div class="background-slider"></div>
@@ -17,7 +17,7 @@
     <div id="div-nombre-cartes">
       <p id="texte-nombre-cartes">Nombre de cartes</p>
       <div id="choix-nombre">
-        <input type="range" id="nbcarterange" list="list-nbr" min="2" max="4">
+        <input type="range" id="nbcarterange" list="list-nbr" min="2" max="4" (input)="onNbCarteChange(range.valueAsNumber)">
         <datalist id="list-nbr">
           <p>4</p>
           <p>6</p>
@@ -25,11 +25,11 @@
         </datalist>
       </div>
     </div>
-    
+
     <div id="div-slider">
       <div class="slider">
         <p id="texte-temps-memo">Personnaliser le nombre de cartes retournées par indice</p>
-        
+
       </div>
     </div>
   </div>
