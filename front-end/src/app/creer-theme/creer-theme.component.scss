@@ -25,7 +25,8 @@
 #supprimer-theme{
   background: red;
   position: absolute;
-  bottom: 73%;
+  bottom: 82.5%;
+  right: 45%;
   padding: .2% 1% .2% 1%;
   color: #FFFFFF;
   font-size: 200%;
@@ -81,8 +82,8 @@
 }
 .stock-image{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
   overflow-y: scroll;
   scrollbar-color: #006A52 #EFEFEF;
   scrollbar-width: thin;
@@ -112,7 +113,7 @@
   color: #FFFFFF;
   width: calc(100% - 10px);
   padding-top: 1%;
-  padding-bottom: 2%;
+  padding-bottom: 0.5%;
   border-radius: 0px 0px 20px 20px;
   border: 5px solid #006A52;
 }
@@ -134,4 +135,37 @@ div.importImage {
   width: 100%;
   height: 380px;
 }
+#container-URL{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 1%;
 
+}
+#url-image{
+  width: 80%;
+  height: 100%;
+  border-radius: 12px  0px  0px  12px;
+  border: 1px solid black;
+  color: dodgerblue;
+  opacity: 1;
+  font-size: 100%;
+}
+#importer-URL{
+  border-radius: 0px 12px 12px 0px;
+  border: 1px solid black;
+  background: #006A52;
+  color: #FFFFFF;
+  font-size: 110%;
+  font-weight: bold;
+  height: 108%;
+}
+
+app-erreur-creer-theme{
+  position: absolute;
+
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

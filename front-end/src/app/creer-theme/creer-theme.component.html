@@ -2,19 +2,18 @@
   <!--left-->
   <div class="container" id="div-gauche">
     <p id="Titre-Nouveau-theme">NOUVEAU THEME</p>
-    <button id="supprimer-theme" (click)="supprimerTheme()">Supprimer</button>
 
     <p class = "text-image">Images sélectionées : </p>
-    
+
     <div class ="importImage">
-      <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
+      <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()" (change)="erreurImageDisable()"></div>
     </div>
   </div>
 
   <!--right-->
   <div class="container" id="div-droit">
     <form id="form-nom-theme"[formGroup] = "themeForm">
-      <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()"/>
+      <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()" (click)="erreurTitreDisable()"/>
 
     </form>
 
@@ -24,10 +23,13 @@
 
       <label id="Importer-image" for="recup-fichier">Importer une image</label>
       <input  id="recup-fichier" type="file" (change)="afficherFichier()" />
-
+      <div id="container-URL">
+      <input id="url-image"  [(ngModel)]="URL" type="text" placeholder="URL d'une image"/>
+      <button id="importer-URL" (click)="importerImageURL()">Importer URL</button>
+      </div>
       </div>
    </div>
 </div>
-
+<app-erreur-creer-theme [erreurImage]="erreurImage" [erreurTitre]="erreurTitre" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-creer-theme>
 <app-footer-creer-theme [theme]="theme" (erreur)="afficherErreur($event)"></app-footer-creer-theme>
 

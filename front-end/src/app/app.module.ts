@@ -22,8 +22,14 @@ import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { MenuComponent } from './menu/menu.component';
+
+import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
+import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
+
+
 import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
+
 
 @NgModule({
   declarations: [
@@ -44,8 +50,12 @@ import { StatComponent } from './stat/stat.component';
     HintContainer,
     Button,
     Timer,
+    MenuComponent,
+    ErreurCreerThemeComponent,
+    ErreurCreerPatientComponent
     GameMenuComponent,
     StatComponent,
+
   ],
   imports: [
     BrowserModule,
