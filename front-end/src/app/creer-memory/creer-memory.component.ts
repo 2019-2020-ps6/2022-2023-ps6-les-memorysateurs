@@ -15,6 +15,7 @@ export class CreerMemoryComponent implements OnInit {
   max = 60;
 
   numberOfCards = [4, 6, 8];
+  numberOfCardsTips : number[]= [];
 
   //paramètres
   nombreCarte!: number;
@@ -25,6 +26,14 @@ export class CreerMemoryComponent implements OnInit {
   constructor(public router: Router, public themeService: ThemeService, public gameService: GameService) {
     gameService.nombreCartes$.subscribe((nombreCarte: number) => {
       this.nombreCarte = nombreCarte;
+      let nbCardsForTips = nombreCarte/2;
+      this.numberOfCardsTips = [2];
+      for (let i = 1; i < nbCardsForTips; i++) {
+        this.numberOfCardsTips.push((i+1)*2);
+      }
+      if(this.nombreCartesIndice >= nbCardsForTips*2) {
+        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
+      }
     })
 
     gameService.nombreCartesIndice$.subscribe((nombreCartesIndice: number) => {
@@ -46,7 +55,7 @@ export class CreerMemoryComponent implements OnInit {
   onValueTimeChange(newDuration : number) {
     this.gameService.dureeIndice$.next(newDuration);
 
-    //modification style pour que l'affichage de l'input reste cohéren
+    //modification style pour que l'affichage de l'input reste cohérent
     var output = (document.getElementById("sliderTimeOut") as HTMLFormElement);
     var container = (document.getElementById("divSliderTimeOut") as HTMLFormElement);
     var calcc = ((newDuration - this.min) / (this.max - this.min));

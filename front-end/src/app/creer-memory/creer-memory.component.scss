@@ -121,5 +121,17 @@ output {
 }
 
 .bas-vert{
-  columns: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-lauch {
+  background-color: #006A52;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 20px 50px;
+  border-radius: 20px;
+  border: none;
 }

@@ -15,16 +15,12 @@
       <div class="background-slider"></div>
     </div>
 
-    <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'"></app-slider-number>
-
-    <div id="div-slider">
-      <div class="slider">
-        <p id="texte-temps-memo">Personnaliser le nombre de cartes retournées par indice</p>
-
-      </div>
-    </div>
+    <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'" [name]="'nbcard'" [service]="gameService.nombreCartes$"></app-slider-number>
+    <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
   </div>
   <br>
-  <button class="bas-vert" (click)="lancerPartie()">Lancer Partie</button>
+  <div class="bas-vert">
+    <button class="btn-lauch" (click)="lancerPartie()">Lancer Partie</button>
+  </div>
 
 </div>

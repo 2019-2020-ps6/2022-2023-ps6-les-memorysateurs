@@ -3,8 +3,8 @@
     <div id="choix-nombre">
         <button (click)="onClickMinus()">-</button>
         <div *ngFor="let num of numbers">
-            <input type="radio" name="nbcard" id="card{{num}}" value="{{num}}" class="nbcards">
-            <label for="card{{num}}">{{num}}</label>
+            <input type="radio" name="{{name}}" id="card{{num}}{{name}}" value="{{num}}" class="nbcards" (click)="onClickRadio($event)">
+            <label for="card{{num}}{{name}}">{{num}}</label>
         </div>
         <button (click)="onClickPlus()">+</button>
     </div>
