@@ -3,7 +3,7 @@
     <div id="choix-nombre">
         <button (click)="onClickMinus()">-</button>
         <div *ngFor="let num of numbers">
-            <input type="radio" name="nbcard" id="card{{num}}" value="{{num}}" class="nbcards">
+            <input type="radio" name="nbcard" id="card{{num}}" value="{{num}}" class="nbcards" (input)="onChangementValeur(num)">
             <label for="card{{num}}">{{num}}</label>
         </div>
         <button (click)="onClickPlus()">+</button>

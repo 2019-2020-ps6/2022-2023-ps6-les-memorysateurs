@@ -1,4 +1,14 @@
-import { Component, Input, Output, QueryList, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  QueryList,
+  ViewChildren,
+  ElementRef,
+  OnInit,
+  AfterViewInit,
+  EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'app-slider-number',
@@ -8,6 +18,9 @@ import { Component, Input, Output, QueryList, ViewChildren, ElementRef, OnInit, 
 export class SliderNumberComponent implements OnInit, AfterViewInit {
   @Input() title : string = "";
   @Input() numbers : number[] = [];
+
+  @Output()
+  valeurChangeEvent: EventEmitter<number> = new EventEmitter<number>();
 
   radioButtons = document.getElementsByClassName("nbcards") as HTMLCollectionOf<HTMLInputElement>;
 
@@ -27,8 +40,11 @@ export class SliderNumberComponent implements OnInit, AfterViewInit {
   public onClickMinus() {
     const current = Array.from(this.radioButtons).findIndex((radio) => radio.checked);
     const next = (current === 0) ? current : current - 1;
-    
+
     this.radioButtons[next].checked = true;
+
+    let nouvelleValeur = this.numbers[next];
+    this.valeurChangeEvent.emit(nouvelleValeur);
   }
 
   public onClickPlus() {
@@ -36,6 +52,12 @@ export class SliderNumberComponent implements OnInit, AfterViewInit {
     const next = (current === this.radioButtons.length - 1) ? current : current + 1;
 
     this.radioButtons[next].checked = true;
+    let nouvelleValeur = this.numbers[next];
+    this.valeurChangeEvent.emit(nouvelleValeur);
+  }
+
+  onChangementValeur(nouvelleValeur : number){
+    this.valeurChangeEvent.emit(nouvelleValeur);
   }
 
 }

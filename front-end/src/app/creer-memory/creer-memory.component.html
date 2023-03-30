@@ -15,7 +15,7 @@
       <div class="background-slider"></div>
     </div>
 
-    <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'"></app-slider-number>
+    <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'" (valeurChangeEvent)="onNbCarteChange($event)"></app-slider-number>
 
     <div id="div-slider">
       <div class="slider">
