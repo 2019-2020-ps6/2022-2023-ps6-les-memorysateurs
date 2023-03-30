@@ -52,7 +52,7 @@ import { StatComponent } from './stat/stat.component';
     Timer,
     MenuComponent,
     ErreurCreerThemeComponent,
-    ErreurCreerPatientComponent
+    ErreurCreerPatientComponent,
     GameMenuComponent,
     StatComponent,
 
