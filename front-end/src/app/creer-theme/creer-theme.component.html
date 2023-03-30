@@ -6,14 +6,14 @@
     <p class = "text-image">Images sélectionées : </p>
 
     <div class ="importImage">
-      <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()"></div>
+      <div id ="imageChoisi" class="stock-image" [(ngModel)]="images" (ngModelChange)="envoyerImages()" (change)="erreurImageDisable()"></div>
     </div>
   </div>
 
   <!--right-->
   <div class="container" id="div-droit">
     <form id="form-nom-theme"[formGroup] = "themeForm">
-      <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()"/>
+      <input id="div-nom-theme" type="text"  placeholder="Nom du thème" [formControlName]="'name'"  (input)="envoyerNom()" (click)="erreurTitreDisable()"/>
 
     </form>
 

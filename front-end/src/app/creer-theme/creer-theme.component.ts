@@ -112,16 +112,18 @@ export class CreerThemeComponent {
       imageElement.src = reader.result as string;
     }
     reader.readAsDataURL(file as Blob);
-    stockImage.appendChild(imageElement);
+    stockImage.prepend(imageElement);
     imageElement.addEventListener("click",() =>{
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
         stockImage2.appendChild(imageElement);
         this.images.push(imageElement.src);
+        if(this.erreurImage)
+        this.erreurImageDisable();
       }
       else{
         stockImage2.removeChild(imageElement);
-        stockImage.appendChild(imageElement);
+        stockImage.prepend(imageElement);
         const index = this.images.findIndex(image => image ===imageElement.src);
         if(index !== -1){
           this.images.splice(index,1);
@@ -147,11 +149,12 @@ export class CreerThemeComponent {
             stockImage.removeChild(imageElement);
             stockImage2.appendChild(imageElement);
             this.images.push(imageElement.src);
-
+            if(this.erreurImage)
+            this.erreurImageDisable();
           }
           else{
             stockImage2.removeChild(imageElement);
-            stockImage.appendChild(imageElement);
+            stockImage.prepend(imageElement);
             const index = this.images.findIndex(image => image ===imageElement.src);
             if(index !== -1){
               this.images.splice(index,1);
@@ -172,25 +175,20 @@ export class CreerThemeComponent {
      if(imageChoisi.childElementCount <4){
        this.erreurImage = true;
 
-       console.log(this.erreurImage);
        imageChoisi.style.background = "#F00000";
-       imageChoisi.style.opacity = "0.8";
+       imageChoisi.style.opacity = "0.5";
        if(this.themeForm.value.name !=""){
          if(this.themeForm.value.name != undefined) {
-           this.erreurTitre = false;
-           inputTitre.style.background = "#FFFFFF";
-           inputTitre.style.opacity = "0.5";
+           this.erreurTitreDisable();
          }
        }
      } if(this.themeForm.value.name ==""){
        this.erreurTitre = true;
 
        inputTitre.style.background = "#F00000";
-       inputTitre.style.opacity = "0.8";
+       inputTitre.style.opacity = "0.5";
        if(imageChoisi.childElementCount >=4){
-         this.erreurImage = false;
-         imageChoisi.style.background = "#FFFFFF";
-         imageChoisi.style.opacity = "1";
+         this.erreurImageDisable();
        }
      }
    }
@@ -208,7 +206,7 @@ export class CreerThemeComponent {
     imageElement.style.width = "160px";
     const reader = new FileReader();
     imageElement.src = this.URL;
-    stockImage.appendChild(imageElement);
+    stockImage.prepend(imageElement);
     imageElement.addEventListener("click",() =>{
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
@@ -217,7 +215,7 @@ export class CreerThemeComponent {
       }
       else{
         stockImage2.removeChild(imageElement);
-        stockImage.appendChild(imageElement);
+        stockImage.prepend  (imageElement);
         const index = this.images.findIndex(image => image ===imageElement.src);
         if(index !== -1){
           this.images.splice(index,1);
@@ -231,6 +229,19 @@ export class CreerThemeComponent {
 
   popupChange(value : boolean){
     this.popup = value;
+  }
+  erreurImageDisable(){
+    const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
+    this.erreurImage = false;
+    imageChoisi.style.background = "#FFFFFF";
+    imageChoisi.style.opacity = "1";
+  }
+
+  erreurTitreDisable(){
+    const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement;
+    this.erreurTitre = false;
+    inputTitre.style.background = "#FFFFFF";
+    inputTitre.style.opacity = "1";
   }
 
 }
