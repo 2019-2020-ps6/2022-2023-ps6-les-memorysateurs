@@ -5,9 +5,9 @@
     <p id="text-nouveau-profil">NOUVEAU PROFIL</p>
     <form id="form-nom-prenom" [formGroup]="patientForm">
     <p class="donnee-patient">Nom :</p>
-    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"/>
+    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'" (click)="erreurNomDisable()"/>
     <p class="donnee-patient">Prénom :</p>
-    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"/>
+    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'" (click)="erreurPrenomDisable()"/>
     </form>
     <div style="display: flex; align-content: flex-end; width: 100%">
     <p class="donnee-patient">Stade de la maladie :</p>
@@ -39,5 +39,7 @@
   <div></div>
 </div>
 <button id="retour-creer-patient" class="bouton-vert" (click)="retour()">RETOUR</button>
+
+<app-erreur-creer-patient [erreurNom]="erreurNom" [erreurPrenom]="erreurPrenom" [erreurPhoto]="erreurPhoto" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-creer-patient>
 <app-info-stade *ngIf="info" (close)="changeInfoBooleen()"></app-info-stade>
 

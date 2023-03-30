@@ -23,6 +23,7 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { MenuComponent } from './menu/menu.component';
 import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
+import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-the
     Button,
     Timer,
     MenuComponent,
-    ErreurCreerThemeComponent
+    ErreurCreerThemeComponent,
+    ErreurCreerPatientComponent
   ],
   imports: [
     BrowserModule,
