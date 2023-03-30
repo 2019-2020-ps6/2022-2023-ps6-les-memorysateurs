@@ -14,6 +14,8 @@ export class CreerMemoryComponent implements OnInit {
   min: number = 5;
   max = 60;
 
+  numberOfCards = [4, 6, 8];
+
   //paramètres
   nombreCarte!: number;
   nombreCartesIndice!: number;
@@ -58,7 +60,7 @@ export class CreerMemoryComponent implements OnInit {
     this.gameService.nombreCartes$.next(value);
   }
 
-  onNbCardTipsChange(value : any) {
+  onNbCardTipsChange(value : number) {
   }
 
   lancerPartie(){
