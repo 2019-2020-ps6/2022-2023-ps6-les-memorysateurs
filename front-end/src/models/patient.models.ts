@@ -29,6 +29,8 @@ export class Patient implements Cardable{
       })
   }
 
+
+
   getID(): number {
     return this.id;
   }
@@ -48,7 +50,9 @@ export class Patient implements Cardable{
   getThemes() : Theme[]{
     return this.themes;
   }
-
+  setThemes(themes2 : Theme[]) {
+    this.themes = themes2;
+  }
   ajouterTheme(t : Theme){
     this.themes.push(t);
   }

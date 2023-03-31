@@ -1,0 +1,193 @@
+.stat-patient {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+  margin-top: 100px;
+}
+
+#container-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 550px;
+  width: 270px;
+  background: #EFEFEF;
+  border-radius: 20px;
+  margin-left: 100px;
+}
+
+#photo {
+  background-color: white;
+  border-radius: 12px;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profil-nom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-bottom: 0px;
+}
+
+.profil-prenom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-top: 0px;
+}
+
+.profil-stade {
+  font-size: 20px;
+  color: black;
+}
+
+.profil-parties {
+  font-size: 28px;
+  font-weight: bold;
+  color: black;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-lines {
+  margin: 10px;
+  background-color: #EFEFEF;
+  border-radius: 20px;
+  margin-right: 200px;
+  width: 1300px;
+  height: 120px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding-right: 30px;
+}
+
+.stat-title, .temps-title, .essais-title, .erreurs-title, .indices-title {
+  margin-left: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  color: black;
+  width: 700px;
+}
+
+
+.temps-content.active, .essais-content.active, .erreurs-content.active, .indices-content.active {
+  display: block;
+}
+
+.temps-content, .essais-content, .erreurs-content, .indices-content {
+  display: none;
+  background-color: #EFEFEF;
+  width: 1330px;
+  height: 550px;
+  left: 438px;
+  top: 160px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 24px;
+  line-height: 1.5;
+  text-align: justify;
+  position: absolute;
+  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  margin-right: 200px;
+  padding: 50px;
+}
+
+.plus-temps, .plus-essais, .plus-erreurs, .plus-indices {
+  font-size: 48px;
+  color: white;
+  background-color: #006A52;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.plus-temps:hover, .plus-essais:hover, .plus-erreurs:hover, .plus-indices:hover {
+  transform: scale(1.2);
+}
+
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  color: #000;
+  width: 1000px;
+  background: white;
+  border-radius: 20px;
+}
+
+thead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #006A52;
+  width: 100%;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px 20px 0px 0px;
+}
+
+th, td {
+  padding-right: 90px;
+  padding-left: 90px;
+}
+
+.moyenne {
+  display: flex;
+}
+
+.moyenne-title {
+  color: #fff;
+  background-color: #006A52;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 30px;
+  border-radius: 25px;
+  margin-left: 300px;
+
+}
+
+.moyenne-res {
+  color: #006A52;
+  background-color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 30px;
+  border-radius: 25px;
+  margin-left: 30px;
+  width: 130px;
+}
+
+.triangle-vert {
+  color: #33CC33;
+  font-size: 100px;
+}
+
+.triangle-rouge {
+  color: #FF0000;
+  font-size: 100px;
+  rotate: 180deg;
+}

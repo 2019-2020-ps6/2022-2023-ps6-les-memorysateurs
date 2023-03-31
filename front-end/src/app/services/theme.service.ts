@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject, take} from "rxjs";
 import {Theme} from "../../models/theme.models";
 import {LISTE_THEME} from "../../moks/liste-theme.moks";
+import {PatientService} from "./patient.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class ThemeService {
   public listeThemes$: BehaviorSubject<Theme[]> = new BehaviorSubject<Theme[]>(LISTE_THEME);
   public themeSelectionne$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(LISTE_THEME[0]);
   public themeEdite$: BehaviorSubject<Theme | undefined> = new BehaviorSubject<Theme | undefined>(undefined);
+
+
 
 public addTheme(theme : Theme){
   let actualList = this.listeThemes$.asObservable();
@@ -37,10 +40,11 @@ public addTheme(theme : Theme){
       take(1)
     ).subscribe(liste =>{
       liste.forEach(chaine =>{
+
         if(chaine.id != theme?.id){
           listeA.push(chaine);
         }
-      })
+       })
   });
     this.listeThemes$.next(listeA);
 
@@ -55,8 +59,10 @@ public addTheme(theme : Theme){
   }
 
   public setThemes(themes : Theme[]|undefined){
-    if(themes!=undefined)
+    if(themes!=undefined) {
       this.listeThemes$.next(themes);
+      this.themeSelectionne$.next(themes[0]);
+    }
   }
 }
 
