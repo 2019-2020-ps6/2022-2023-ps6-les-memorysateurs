@@ -13,19 +13,23 @@
 
   <div class="stats">
     <div class="stat-lines">
-      <p class="stat-title">Temps de jeu : {{tempsDeJeuMin}}min {{tempsDeJeuSec}}s</p>
-        <div class="plus-temps" (click)="toggleTemps()">+</div>
+      <p class="stat-title">Temps de jeu</p>
+      <span class="triangle-vert">&#x25B2;</span>
+      <div class="plus-temps" (click)="toggleTemps()">+</div>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'essais : {{nbEssai}}</p>
+      <span class="triangle-rouge">&#x25B2;</span>
       <div class="plus-essais" (click)="toggleEssais()">+</div>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'erreurs : {{nbErreur}}</p>
+      <span class="triangle-rouge">&#x25B2;</span>
       <div class="plus-erreurs" (click)="toggleErreurs()">+</div>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'indices : {{nbIndices}}</p>
+      <span class="triangle-vert">&#x25B2;</span>
       <div class="plus-indices" (click)="toggleIndices()">+</div>
     </div>
   </div>

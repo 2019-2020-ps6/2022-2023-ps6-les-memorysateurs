@@ -62,15 +62,15 @@
 
 .stat-lines {
   margin: 10px;
-  padding: 20px;
   background-color: #EFEFEF;
   border-radius: 20px;
   margin-right: 200px;
-  width: 1200px;
-  height: 80px;
+  width: 1300px;
+  height: 120px;
   display: flex;
   justify-content: space-between; 
   align-items: center;
+  padding-right: 30px;
 }
 
 .stat-title, .temps-title, .essais-title, .erreurs-title, .indices-title {
@@ -88,9 +88,9 @@
 .temps-content, .essais-content, .erreurs-content, .indices-content {
   display: none;
   background-color: #EFEFEF;
-  width: 1240px;
+  width: 1330px;
   height: 550px;
-  left: 472px;
+  left: 438px;
   top: 180px;
   padding: 50px;
   box-sizing: border-box;
@@ -178,4 +178,15 @@ th, td {
   border-radius: 25px;
   margin-left: 30px;
   width: 130px;
+}
+
+.triangle-vert {
+  color: #33CC33;
+  font-size: 100px;
+}
+
+.triangle-rouge {
+  color: #FF0000;
+  font-size: 100px;
+  rotate: 180deg;
 }
