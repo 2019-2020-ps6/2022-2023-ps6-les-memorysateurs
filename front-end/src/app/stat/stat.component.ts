@@ -10,11 +10,6 @@ import {PatientService} from "../services/patient.service";
 export class StatComponent implements OnInit {
   public patient = this.patientService.patientSelectionne$;
   public partiesJouees: number = 0;
-  public tempsDeJeuMin: number = 0;
-  public tempsDeJeuSec: number = 0;
-  public nbEssai: number = 0;
-  public nbErreur: number = 0;
-  public nbIndices: number = 0;
   public nom: string = "";
   public prenom: string = "";
   public stockImage: string = "";
@@ -36,11 +31,6 @@ export class StatComponent implements OnInit {
 
     // On remplit des données pour l'exemple
     this.partiesJouees = Math.floor(Math.random() * 30);
-    this.tempsDeJeuMin = Math.floor(Math.random() * 10);
-    this.tempsDeJeuSec = Math.floor(Math.random() * 60);
-    this.nbEssai = Math.floor(Math.random() * 30);
-    this.nbErreur = Math.floor(Math.random() * 10);
-    this.nbIndices = Math.floor(Math.random() * 20);
   }
 
   toggleTemps() {
