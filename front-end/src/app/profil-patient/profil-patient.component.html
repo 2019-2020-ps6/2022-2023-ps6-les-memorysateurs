@@ -4,9 +4,9 @@
     <div style="height: 10%"></div>
     <div id="form-nom-prenom" >
       <p class="donnee-patient">Nom :</p>
-      <p class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"></p>
+      <p class="input-identite" type="text" id="input-nom"[ngModel]="'nom'"></p>
       <p class="donnee-patient">Prénom :</p>
-      <p class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"></p>
+      <p class="input-identite" id="input-prenom" type="text"[ngModel]="'prenom'"></p>
     </div>
     <div style="display: flex; align-content: flex-end; width: 100%">
       <p class="donnee-patient">Stade de la maladie :</p>
