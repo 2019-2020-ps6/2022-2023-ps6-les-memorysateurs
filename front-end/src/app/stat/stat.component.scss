@@ -22,7 +22,6 @@
   border-radius: 12px;
 }
 
-
 .profil-info {
   display: flex;
   flex-direction: column;
@@ -68,13 +67,15 @@
   border-radius: 20px;
   margin-right: 200px;
   width: 1200px;
+  height: 80px;
   display: flex;
   justify-content: space-between; 
+  align-items: center;
 }
 
 .stat-title, .temps-title, .essais-title, .erreurs-title, .indices-title {
   margin-left: 50px;
-  font-size: 24px;
+  font-size: 35px;
   font-weight: bold;
   color: black;
 }
@@ -122,6 +123,7 @@
   transform: scale(1.2);
 }
 
+
 .table {
   display: flex;
   flex-direction: column;
@@ -150,4 +152,30 @@ thead {
 th, td {
   padding-right: 90px;
   padding-left: 90px;
+}
+
+.moyenne {
+  display: flex;
+}
+
+.moyenne-title {
+  color: #fff;
+  background-color: #006A52;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 30px;
+  border-radius: 25px;
+  margin-left: 300px;
+
+}
+
+.moyenne-res {
+  color: #006A52;
+  background-color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 30px;
+  border-radius: 25px;
+  margin-left: 30px;
+  width: 130px;
 }
