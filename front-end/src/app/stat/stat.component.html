@@ -13,26 +13,30 @@
 
   <div class="stats">
     <div class="stat-lines">
-      <p class="stat-title">Temps de jeu : {{tempsDeJeuMin}}min {{tempsDeJeuSec}}s</p>
-        <div class="plus-temps" (click)="toggleTemps()">+</div>
+      <p class="stat-title">Temps de jeu</p>
+      <span class="triangle-vert">&#x25B2;</span>
+      <div class="plus-temps" (click)="toggleTemps()">+</div>
     </div>
     <div class="stat-lines">
-      <p class="stat-title">Nombre d'essais : {{nbEssai}}</p>
+      <p class="stat-title">Nombre d'essais</p>
+      <span class="triangle-rouge">&#x25B2;</span>
       <div class="plus-essais" (click)="toggleEssais()">+</div>
     </div>
     <div class="stat-lines">
-      <p class="stat-title">Nombre d'erreurs : {{nbErreur}}</p>
+      <p class="stat-title">Nombre d'erreurs</p>
+      <span class="triangle-rouge">&#x25B2;</span>
       <div class="plus-erreurs" (click)="toggleErreurs()">+</div>
     </div>
     <div class="stat-lines">
-      <p class="stat-title">Nombre d'indices : {{nbIndices}}</p>
+      <p class="stat-title">Nombre d'indices</p>
+      <span class="triangle-vert">&#x25B2;</span>
       <div class="plus-indices" (click)="toggleIndices()">+</div>
     </div>
   </div>
 </div>
 
 <div class="temps-content" [class.active]="isTempsOpen">
-  <p class="temps-title">Temps de jeu : {{tempsDeJeuMin}}min {{tempsDeJeuSec}}s</p>
+  <p class="temps-title">Temps de jeu</p>
   <table class="table">
     <thead>
       <tr>
@@ -70,7 +74,7 @@
 </div>
 
 <div class="essais-content" [class.active]="isEssaisOpen">
-  <p class="essais-title">Nombre d'essais : {{nbEssai}}</p>
+  <p class="essais-title">Nombre d'essais</p>
   <table class="table">
     <thead>
       <tr>
@@ -108,7 +112,7 @@
 </div>
 
 <div class="erreurs-content" [class.active]="isErreursOpen">
-  <p class="erreurs-title">Nombre d'erreurs : {{nbErreur}}</p>
+  <p class="erreurs-title">Nombre d'erreurs</p>
   <table class="table">
     <thead>
       <tr>
@@ -146,7 +150,7 @@
 </div>
 
 <div class="indices-content" [class.active]="isIndicesOpen">
-  <p class="indices-title">Nombre d'indices : {{nbIndices}}</p>
+  <p class="indices-title">Nombre d'indices</p>
   <table class="table">
     <thead>
       <tr>
