@@ -15,22 +15,22 @@
     <div class="stat-lines">
       <p class="stat-title">Temps de jeu</p>
       <span class="triangle-vert">&#x25B2;</span>
-      <div class="plus-temps" (click)="toggleTemps()">+</div>
+      <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isErreursOpen)" class="bouton-tableau" id="plus-temps" (click)="toggleTemps()">+</button>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'essais</p>
       <span class="triangle-rouge">&#x25B2;</span>
-      <div class="plus-essais" (click)="toggleEssais()">+</div>
+      <button *ngIf="!(isTempsOpen ||isIndicesOpen ||isErreursOpen)" id="plus-essais" class="bouton-tableau" (click)="toggleEssais()">+</button>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'erreurs</p>
       <span class="triangle-rouge">&#x25B2;</span>
-      <div class="plus-erreurs" (click)="toggleErreurs()">+</div>
+      <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isTempsOpen)"id="plus-erreurs" class="bouton-tableau" (click)="toggleErreurs()">+</button>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'indices</p>
       <span class="triangle-vert">&#x25B2;</span>
-      <div class="plus-indices" (click)="toggleIndices()">+</div>
+      <button *ngIf="!(isEssaisOpen ||isTempsOpen ||isErreursOpen)" id="plus-indices" class="bouton-tableau"(click)="toggleIndices()">+</button>
     </div>
   </div>
 </div>
