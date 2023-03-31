@@ -9,5 +9,6 @@ export class GameService {
   public nombreCartes$: BehaviorSubject<number> = new BehaviorSubject<number>(6);
   public nombreCartesIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(4);
   public dureeIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(5);
+  public timerEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
 }

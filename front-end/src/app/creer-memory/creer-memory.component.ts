@@ -21,6 +21,7 @@ export class CreerMemoryComponent implements OnInit {
   nombreCarte!: number;
   nombreCartesIndice!: number;
   dureeIndice!: number;
+  timerEnabled!: boolean;
 
 
   constructor(public router: Router, public themeService: ThemeService, public gameService: GameService) {
@@ -44,6 +45,10 @@ export class CreerMemoryComponent implements OnInit {
       this.dureeIndice = dureeIndice;
     })
 
+    gameService.timerEnabled$.subscribe((timerEnabled: boolean) => {
+      this.timerEnabled = timerEnabled;
+    })
+
     themeService.themeSelectionne$.subscribe((theme: Theme) => {
       this.themeSelectionne = theme;
     })
@@ -54,15 +59,6 @@ export class CreerMemoryComponent implements OnInit {
 
   onValueTimeChange(newDuration : number) {
     this.gameService.dureeIndice$.next(newDuration);
-
-    //modification style pour que l'affichage de l'input reste cohérent
-    var output = (document.getElementById("sliderTimeOut") as HTMLFormElement);
-    var container = (document.getElementById("divSliderTimeOut") as HTMLFormElement);
-    var calcc = ((newDuration - this.min) / (this.max - this.min));
-    var size = (output.offsetWidth)/container.offsetWidth;
-    console.log((calcc*(1-size))*100);
-    output.style.left = (calcc*(1-size))*100 + "%";
-
   }
 
   onNbCarteChange(value: number){
@@ -78,5 +74,15 @@ export class CreerMemoryComponent implements OnInit {
 
   onChangerTheme() {
     this.router.navigateByUrl("liste-theme");
+  }
+  
+  toggleEnableTimer() {
+    this.gameService.timerEnabled$.next(!this.timerEnabled);
+    if(this.timerEnabled) {
+      document.getElementById("sliderTime")!.removeAttribute("disabled");
+    }
+    else {
+      document.getElementById("sliderTime")!.setAttribute("disabled", "true");
+    }
   }
 }
