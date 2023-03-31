@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";
@@ -18,10 +18,14 @@ export class ListeThemeComponent {
     this.themeService.listeThemes$.subscribe((themes: Theme[]) => {
       this.listeTheme = themes;
     });
+
+
+  }
+
+  ngOnInit(): void {
     let patientSelect = this.patientService.patientSelectionne$;
     this.themeService.setThemes(patientSelect.value?.themes);
   }
-
 
   onSelectionner(id : number){
     let themeSelectionne: Theme = this.themeService.getThemeById(id);

@@ -144,3 +144,11 @@ app-info-stade{
   border: red;
 
 }
+
+app-erreur-creer-patient{
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
