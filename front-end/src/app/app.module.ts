@@ -15,12 +15,16 @@ import { InfoStadeComponent } from './info-stade/info-stade.component';
 import { ListePatientComponent } from './liste-patient/liste-patient.component';
 import { ProfilPatientComponent } from './profil-patient/profil-patient.component';
 
+//creation memory
+import { SliderNumberComponent } from './slider-number/slider-number.component';
+
 //game imports
 import { Card } from './game/card.component';
 import { CardsContainer } from './game/cardcontainer.component';
 import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
+import { ResultatPartieComponent } from './resultat-partie/resultat-partie.component';
 import { MenuComponent } from './menu/menu.component';
 
 import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
@@ -50,12 +54,13 @@ import { StatComponent } from './stat/stat.component';
     HintContainer,
     Button,
     Timer,
+    ResultatPartieComponent,
+    SliderNumberComponent
     MenuComponent,
     ErreurCreerThemeComponent,
     ErreurCreerPatientComponent,
     GameMenuComponent,
     StatComponent,
-
   ],
   imports: [
     BrowserModule,
