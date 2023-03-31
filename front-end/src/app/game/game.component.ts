@@ -39,7 +39,7 @@ export class HintContainer implements OnInit {
   progress : number = 0;
   subscription: Subscription;
 
-  constructor(public sender: TimerService, private timerService: TimerService) {
+  constructor(public sender: TimerService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       this.progress = num;
     });

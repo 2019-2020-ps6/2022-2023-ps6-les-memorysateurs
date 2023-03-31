@@ -1,4 +1,5 @@
 import { Component, Input, Output, QueryList, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-slider-number',
@@ -8,34 +9,45 @@ import { Component, Input, Output, QueryList, ViewChildren, ElementRef, OnInit, 
 export class SliderNumberComponent implements OnInit, AfterViewInit {
   @Input() title : string = "";
   @Input() numbers : number[] = [];
-
-  radioButtons = document.getElementsByClassName("nbcards") as HTMLCollectionOf<HTMLInputElement>;
+  @Input() name = '';
+  @Input() service : BehaviorSubject<any> = new BehaviorSubject<any>(0);
 
   constructor() {
   }
   ngAfterViewInit(): void {
-    var firstele = this.radioButtons[0] as HTMLInputElement;
-    console.log(firstele);
-    if(firstele != undefined) {
-      // add checked value to the first element
-      firstele.checked = true;
-    }
+    console.log(this.service.value);
+    this.service.subscribe((value: number) => {
+      // find the element with the value
+      const ele = Array.from(document.getElementsByName(this.name)).find((radio) => (radio as HTMLInputElement).value === value.toString());
+      if(ele != undefined) {
+        (ele as HTMLInputElement).checked = true;
+      }
+    });
   }
+
   ngOnInit(): void {
   }
 
   public onClickMinus() {
-    const current = Array.from(this.radioButtons).findIndex((radio) => radio.checked);
+    const current = Array.from(document.getElementsByName(this.name)).findIndex((radio) => (radio as HTMLInputElement).checked);
     const next = (current === 0) ? current : current - 1;
     
-    this.radioButtons[next].checked = true;
+    (document.getElementsByName(this.name)[next] as HTMLInputElement).checked = true;
+    
+    this.service.next((document.getElementsByName(this.name)[next] as HTMLInputElement).value);
+  }
+
+  public onClickRadio(event: any) {
+    this.service.next(event.target.value);
   }
 
   public onClickPlus() {
-    const current = Array.from(this.radioButtons).findIndex((radio) => radio.checked);
-    const next = (current === this.radioButtons.length - 1) ? current : current + 1;
+    const current = Array.from(document.getElementsByName(this.name)).findIndex((radio) => (radio as HTMLInputElement).checked);
+    const next = (current === document.getElementsByName(this.name).length - 1) ? current : current + 1;
 
-    this.radioButtons[next].checked = true;
+    (document.getElementsByName(this.name)[next] as HTMLInputElement).checked = true;
+    
+    this.service.next((document.getElementsByName(this.name)[next] as HTMLInputElement).value);
   }
 
 }

@@ -15,16 +15,26 @@ export class CreerMemoryComponent implements OnInit {
   max = 60;
 
   numberOfCards = [4, 6, 8];
+  numberOfCardsTips : number[]= [];
 
   //paramètres
   nombreCarte!: number;
   nombreCartesIndice!: number;
   dureeIndice!: number;
+  timerEnabled!: boolean;
 
 
   constructor(public router: Router, public themeService: ThemeService, public gameService: GameService) {
     gameService.nombreCartes$.subscribe((nombreCarte: number) => {
       this.nombreCarte = nombreCarte;
+      let nbCardsForTips = nombreCarte/2;
+      this.numberOfCardsTips = [2];
+      for (let i = 1; i < nbCardsForTips; i++) {
+        this.numberOfCardsTips.push((i+1)*2);
+      }
+      if(this.nombreCartesIndice >= nbCardsForTips*2) {
+        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
+      }
     })
 
     gameService.nombreCartesIndice$.subscribe((nombreCartesIndice: number) => {
@@ -33,6 +43,10 @@ export class CreerMemoryComponent implements OnInit {
 
     gameService.dureeIndice$.subscribe((dureeIndice: number) => {
       this.dureeIndice = dureeIndice;
+    })
+
+    gameService.timerEnabled$.subscribe((timerEnabled: boolean) => {
+      this.timerEnabled = timerEnabled;
     })
 
     themeService.themeSelectionne$.subscribe((theme: Theme) => {
@@ -45,15 +59,6 @@ export class CreerMemoryComponent implements OnInit {
 
   onValueTimeChange(newDuration : number) {
     this.gameService.dureeIndice$.next(newDuration);
-
-    //modification style pour que l'affichage de l'input reste cohéren
-    var output = (document.getElementById("sliderTimeOut") as HTMLFormElement);
-    var container = (document.getElementById("divSliderTimeOut") as HTMLFormElement);
-    var calcc = ((newDuration - this.min) / (this.max - this.min));
-    var size = (output.offsetWidth)/container.offsetWidth;
-    console.log((calcc*(1-size))*100);
-    output.style.left = (calcc*(1-size))*100 + "%";
-
   }
 
   onNbCarteChange(value: number){
@@ -69,5 +74,15 @@ export class CreerMemoryComponent implements OnInit {
 
   onChangerTheme() {
     this.router.navigateByUrl("liste-theme");
+  }
+  
+  toggleEnableTimer() {
+    this.gameService.timerEnabled$.next(!this.timerEnabled);
+    if(this.timerEnabled) {
+      document.getElementById("sliderTime")!.removeAttribute("disabled");
+    }
+    else {
+      document.getElementById("sliderTime")!.setAttribute("disabled", "true");
+    }
   }
 }
