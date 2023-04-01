@@ -50,6 +50,10 @@ export class TimerService {
         this.subject.next(this.progress);
     }
 
+    setDuration(duration: number) {
+        this.startTime = duration;
+    }
+
     getTimer(): Observable<any> {
         return this.subject.asObservable();
     }

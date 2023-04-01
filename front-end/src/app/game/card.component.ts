@@ -15,25 +15,6 @@ export class Card implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      console.log(changes);
-      // if(this.isFlipped) {
-      // }
-      // else {
-      //   .classList.remove('flipped');
-      // }
-      // if(this.isDisabled) {
-      //   .classList.add('disabled');
-      // }
-      // else {
-      //   .classList.remove('disabled');
-      // }
-      // if(!this.isClickable) {
-      //   .classList.add('unclickable');
-      // }
-      // else {
-      //   .classList.remove('unclickable');
-      // }
-
   }
 
   changeClass() {

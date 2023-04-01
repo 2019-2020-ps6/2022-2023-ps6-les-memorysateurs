@@ -55,6 +55,7 @@ import {MenuComponent} from "./menu/menu.component";
     Timer,
     ResultatPartieComponent,
     SliderNumberComponent,
+    MenuComponent,
     ErreurCreerThemeComponent,
     ErreurCreerPatientComponent,
     GameMenuComponent,
