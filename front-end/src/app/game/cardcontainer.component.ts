@@ -5,6 +5,7 @@ import { HintContainer } from './game.component';
 import { TimerService } from '../services/timer.service';
 import { Theme } from 'src/models/theme.models';
 import {Router} from "@angular/router";
+import {GameService} from "../services/game.service";
 
 // @Directive({selector: 'button[counting]'})
 
@@ -38,7 +39,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   initCards: any[] = [];
 
 
-  constructor(private sender : TimerService, public router : Router) {
+  constructor(private sender : TimerService, public gameService: GameService, public router : Router) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(!this.isHinted && num > 0) {
         this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -118,6 +119,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         flipped.forEach(element => {
           element.disappear();
         });
+
+        this.gameService.addCarteTrouvee(flipped[0].picture)
       }
       // cards are not the same
       else {
