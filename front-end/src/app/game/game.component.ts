@@ -16,7 +16,6 @@ import {Theme} from "../../models/theme.models";
 
 export class Game implements OnInit {
   ngOnInit():void {
-
   }
 
   public nbCards : number = 0;
@@ -42,7 +41,6 @@ export class Game implements OnInit {
       this.theme = theme;
     });
   };
-
 }
 
 

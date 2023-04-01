@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { HintContainer } from './game.component';
 import { TimerService } from '../services/timer.service';
 import { Theme } from 'src/models/theme.models';
+import {Router} from "@angular/router";
+import {GameService} from "../services/game.service";
 
 // @Directive({selector: 'button[counting]'})
 
@@ -35,12 +37,13 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   subscription: Subscription;
   
   @Input() public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
+
   @Input() public nbCards: number = 2;
   
   initCards: any[] = [];
 
 
-  constructor(private sender : TimerService) {
+  constructor(private sender : TimerService, public gameService: GameService, public router : Router) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(!this.isHinted && num > 0) {
         this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -65,7 +68,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     let allcardsSrc: string[] = this.theme.images;
     let cardSrcChoose: string[] = [];
     for(let i = 0; i < this.nbCards/2; i++) {
-      let ind = Math.random()*this.nbCards/2;
+      let ind = Math.random()*allcardsSrc.length;
       ind = Math.floor(ind);
       cardSrcChoose.push(allcardsSrc[ind]);
       allcardsSrc.splice(ind, 1);
@@ -99,7 +102,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   public getColumns(): string {
     return 'repeat(' + this.nbCards/2 + ', .1fr)';
   }
-  
+
   // ON CLICK EVENT VERIFY SEQUENCES
   public async onClickEvent(event : any) {
 
@@ -112,7 +115,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
     // get all cards flipped
     var flipped = this.children.filter(x => x.isFlipped);
-    
+
     // setup unclickable cards
     var clickable = this.children.filter(x => x.isClickable && !x.isDisabled);
     clickable.forEach(element => {
@@ -132,6 +135,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         flipped.forEach(element => {
           element.disappear();
         });
+
+        this.gameService.addCarteTrouvee(flipped[0].picture)
       }
       // cards are not the same
       else {
@@ -170,7 +175,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       element.reveal();
     });
   }
-  
+
   public async reset(cards : Card[]) {
     cards.forEach(element => {
       element.reset();

@@ -1,3 +1,4 @@
+
 import { Component, Input, Output, QueryList, ViewChildren, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
@@ -31,9 +32,10 @@ export class SliderNumberComponent implements OnInit, AfterViewInit {
   public onClickMinus() {
     const current = Array.from(document.getElementsByName(this.name)).findIndex((radio) => (radio as HTMLInputElement).checked);
     const next = (current === 0) ? current : current - 1;
-    
+
+
     (document.getElementsByName(this.name)[next] as HTMLInputElement).checked = true;
-    
+
     this.service.next((document.getElementsByName(this.name)[next] as HTMLInputElement).value);
   }
 
@@ -46,7 +48,7 @@ export class SliderNumberComponent implements OnInit, AfterViewInit {
     const next = (current === document.getElementsByName(this.name).length - 1) ? current : current + 1;
 
     (document.getElementsByName(this.name)[next] as HTMLInputElement).checked = true;
-    
+
     this.service.next((document.getElementsByName(this.name)[next] as HTMLInputElement).value);
   }
 
