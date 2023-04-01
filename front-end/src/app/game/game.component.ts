@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-import { Menu } from '../menu/menu.component';
+
+import { MenuComponent } from '../menu/menu.component';
+
 import { TimerService } from '../services/timer.service';
 
 @Component({
@@ -12,10 +14,10 @@ import { TimerService } from '../services/timer.service';
 
 export class Game implements OnInit {
   ngOnInit():void {}
-  constructor() {}
-  public menu : Menu = new Menu();
-}
 
+  constructor() {};
+
+}
 
 
 @Component({
@@ -37,7 +39,7 @@ export class HintContainer implements OnInit {
   progress : number = 0;
   subscription: Subscription;
 
-  constructor(public sender: TimerService, private timerService: TimerService) {
+  constructor(public sender: TimerService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       this.progress = num;
     });

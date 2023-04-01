@@ -11,6 +11,9 @@ import {ListePatientComponent} from "./liste-patient/liste-patient.component";
 import {ProfilPatientComponent} from "./profil-patient/profil-patient.component";
 import { Game } from './game/game.component';
 import {ResultatPartieComponent} from "./resultat-partie/resultat-partie.component";
+import {ErreurCreerThemeComponent} from "./erreur-creer-theme/erreur-creer-theme.component";
+import { StatComponent } from './stat/stat.component';
+
 
 const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'creer-memory', component: CreerMemoryComponent},
@@ -20,8 +23,10 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'info-stade', component: InfoStadeComponent},
   {path: 'liste-patient', component: ListePatientComponent},
   {path: 'profil-patient', component: ProfilPatientComponent},
-  { path: 'game', component: Game },
-  {path: 'resultat-partie', component: ResultatPartieComponent}
+  {path: 'resultat-partie', component: ResultatPartieComponent},
+  { path: 'erreur-creer-theme', component: ErreurCreerThemeComponent },
+  {path: 'game', component: Game},
+  {path: 'stat', component: StatComponent}
   ];
 
 @NgModule({
