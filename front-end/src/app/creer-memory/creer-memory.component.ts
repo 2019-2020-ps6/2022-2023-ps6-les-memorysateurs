@@ -69,7 +69,7 @@ export class CreerMemoryComponent implements OnInit {
   }
 
   lancerPartie(){
-    this.router.navigateByUrl("resultat-partie");
+    this.router.navigateByUrl("game");
   }
 
   onChangerTheme() {

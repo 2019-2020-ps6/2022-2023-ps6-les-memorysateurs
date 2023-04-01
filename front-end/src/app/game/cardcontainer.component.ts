@@ -30,6 +30,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   @Input() public Timer : number = 5000;
   public isHinted: boolean = false;
   public isAnimating: boolean = false;
+  public isStarted: boolean = true;
   
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
 
@@ -66,6 +67,10 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   }
 
   public cardToHint() : Card[] {
+    if(this.isStarted) {
+        this.isStarted = false;
+        return this.children.toArray();
+    }
     let index = this.nbCardsForHint/2;
     let result = new Array<Card>();
     let cards = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -94,10 +99,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       });
       index--;
     }
-
-
     return result;
-
   }
 
   async ngAfterViewInit(): Promise<void> {

@@ -4,9 +4,9 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class TimerService {
     isRunning : boolean = false;
-    startTime : number = 600;
+    startTime : number = 1800;
     progress : number = this.startTime;
-    step : number = 10;
+    step : number = 17;
     private subject = new Subject<number>();
     isEnable : boolean = true;
 
