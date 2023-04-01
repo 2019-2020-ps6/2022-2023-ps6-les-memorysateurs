@@ -27,12 +27,15 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   @Input() public transitionTime : number = 2000;
   @Input() public Timer : number = 5000;
   public isHinted: boolean = false;
+  
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
 
   hinted : Card[] = this.children.filter(x => !x.isFlipped && !x.isDisabled);
 
   subscription: Subscription;
+  
   @Input() public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
+  @Input() public nbCards: number = 2;
   
   initCards: any[] = [];
 
@@ -50,15 +53,27 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       }
     });
   }
-  ngAfterViewInit(): void {
-    this.reveal(this.children.toArray());
+  async ngAfterViewInit(): Promise<void> {
+    await this.delay(1000);
+    this.sender.startTimer();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
   ngOnInit(): void {
-    this.initCards = this.theme.images.map((x, i) => {
+    let allcardsSrc: string[] = this.theme.images;
+    let cardSrcChoose: string[] = [];
+    for(let i = 0; i < this.nbCards/2; i++) {
+      let ind = Math.random()*this.nbCards/2;
+      ind = Math.floor(ind);
+      cardSrcChoose.push(allcardsSrc[ind]);
+      allcardsSrc.splice(ind, 1);
+      console.log("all card :", allcardsSrc);
+    }
+    console.log(cardSrcChoose);
+
+    this.initCards = cardSrcChoose.map((x, i) => {
       return {picture: x, numCard: i+1, numGrid: i};
     });
     this.initCards = this.initCards.concat(this.initCards);
@@ -82,7 +97,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   // SETUP GRID
   public getColumns(): string {
-    return 'repeat(' + this.theme.images.length + ', 1fr)';
+    return 'repeat(' + this.nbCards/2 + ', .1fr)';
   }
   
   // ON CLICK EVENT VERIFY SEQUENCES

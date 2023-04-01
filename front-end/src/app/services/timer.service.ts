@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 export class TimerService {
     isRunning : boolean = false;
     startTime : number = 600;
-    progress : number = 0;
+    progress : number = this.startTime;
     step : number = 10;
     private subject = new Subject<number>();
 
@@ -32,7 +32,7 @@ export class TimerService {
     }
 
     resetTimer() {
-        this.progress = this.startTime.valueOf();
+        this.progress = this.startTime;
     }
 
     pauseTimer() {
