@@ -21,7 +21,7 @@ export class Game implements OnInit {
   public nbCards : number = 0;
   public nbCardsTips : number = 0;
   public timer : number = 0;
-  public enableTimer : boolean = true;
+  public enableTimer : boolean = false;
   public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
 
   constructor(private gameService : GameService, private themeService : ThemeService) {
@@ -51,7 +51,7 @@ export class Game implements OnInit {
        Indice
     </button>
     <div class="meter">
-      <div class="meter-bar">{{sender.isInRun() ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}</div>
+      <div class="meter-bar">{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}</div>
     </div>
   `,
   styleUrls: ['./game.component.scss', '../utilities/button/btn.component.scss']
@@ -62,7 +62,8 @@ export class HintContainer implements OnInit, AfterViewInit {
   isRunning : boolean = false;
   progress : number = 0;
   subscription: Subscription;
-  @Input() public duration : number = 0;
+  @Input() public enableTimer : boolean = true;
+  @Input() public duration : number = 10;
 
   constructor(public sender: TimerService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
@@ -70,6 +71,7 @@ export class HintContainer implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit(): void {
+    this.sender.setEnableTimer(this.enableTimer);
     this.sender.setDuration(this.duration*60);
   }
 

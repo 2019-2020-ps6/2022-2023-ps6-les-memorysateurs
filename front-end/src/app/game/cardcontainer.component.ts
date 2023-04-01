@@ -29,10 +29,13 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   @Input() public transitionTime : number = 2000;
   @Input() public Timer : number = 5000;
   public isHinted: boolean = false;
+  public isAnimating: boolean = false;
   
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
 
   hinted : Card[] = this.children.filter(x => !x.isFlipped && !x.isDisabled);
+
+  private nbCardsForHint : number = 2;
 
   subscription: Subscription;
   
@@ -45,17 +48,58 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   constructor(private sender : TimerService, public gameService: GameService, public router : Router) {
     this.subscription = this.sender.getTimer().subscribe( num => {
-      if(!this.isHinted && num > 0) {
-        this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
-        this.isHinted = true;
-        this.reveal(this.hinted);
-      }
-      if(num == 0) {
+      if(num == 0 && !this.isAnimating) {
         this.isHinted = false;
         this.reset(this.hinted);
       }
+      else if(!this.isHinted && !this.isAnimating) {
+        this.hinted = this.cardToHint();
+        this.isHinted = true;
+        this.reveal(this.hinted);
+      }
     });
+
+    this.gameService.nombreCartesIndice$.subscribe(nbCards => {
+      this.nbCardsForHint = nbCards;
+    });
+
   }
+
+  public cardToHint() : Card[] {
+    let index = this.nbCardsForHint/2;
+    let result = new Array<Card>();
+    let cards = this.children.filter(x => !x.isFlipped && !x.isDisabled);
+    let flipped = this.children.filter(x => x.isFlipped && !x.isDisabled);
+    if(flipped.length > 0) {
+      flipped.forEach(x => {
+        flipped.splice(flipped.indexOf(x), 1);
+        let lstCard = cards.filter(y => y.numCard == x.numCard);
+        lstCard.forEach(x => {
+          result.push(x);
+          cards.splice(cards.indexOf(x), 1);
+        });
+        index--;
+      });
+    }
+
+    while(index > 0 && cards.length > 0) {
+      let ind = Math.random()*cards.length;
+      ind = Math.floor(ind);
+      let cardTmp = cards[ind];
+      let lstCard = cards;
+      lstCard = lstCard.filter(x => x.numCard == cardTmp.numCard);
+      lstCard.forEach(x => {
+        result.push(x);
+        cards.splice(cards.indexOf(x), 1);
+      });
+      index--;
+    }
+
+
+    return result;
+
+  }
+
   async ngAfterViewInit(): Promise<void> {
     await this.delay(1000);
     this.sender.startTimer();
@@ -72,9 +116,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       ind = Math.floor(ind);
       cardSrcChoose.push(allcardsSrc[ind]);
       allcardsSrc.splice(ind, 1);
-      console.log("all card :", allcardsSrc);
     }
-    console.log(cardSrcChoose);
 
     this.initCards = cardSrcChoose.map((x, i) => {
       return {picture: x, numCard: i+1, numGrid: i};
@@ -105,7 +147,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   // ON CLICK EVENT VERIFY SEQUENCES
   public async onClickEvent(event : any) {
-
+    this.isAnimating = true;
     if(this.getAllFlipped().length >= 2 && event.isFlipped == false) {
       return;
     }
@@ -161,9 +203,13 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       element.clickable();
     });
 
+    
+    this.isAnimating = false;
+    this.sender.resetTimer();
     //check if the game is over
     // TODO: move to next page
     this.children.filter(x => !x.isDisabled).length == 0 ? console.log("Game Over") : {};
+
   }
 
   public getAllFlipped() {

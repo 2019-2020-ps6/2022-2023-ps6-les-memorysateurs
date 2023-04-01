@@ -8,14 +8,23 @@ export class TimerService {
     progress : number = this.startTime;
     step : number = 10;
     private subject = new Subject<number>();
+    isEnable : boolean = true;
 
     sendTimer(time: number) {
         this.subject.next(time);
     }
 
-    startTimer() {
+    async startTimer() {
         this.isRunning = true;
-        this.funcTimer();
+        if(this.isEnable) {
+            await this.funcTimer();
+            this.progress = 0;
+            this.subject.next(this.progress);
+        }
+        else {
+            this.progress = -1;
+            this.subject.next(this.progress);
+        }
     }
 
     async funcTimer() {
@@ -24,6 +33,7 @@ export class TimerService {
             this.progress--;
             this.subject.next(this.progress);
         }
+        this.progress = 0;
         this.isRunning = false;
     }
 
@@ -60,5 +70,21 @@ export class TimerService {
 
     isInRun() : boolean {
         return this.isRunning;
+    }
+
+    enableTimer() {
+        this.isEnable = true;
+    }
+
+    disableTimer() {
+        this.isEnable = false;
+    }
+
+    setEnableTimer(bool: boolean) {
+        this.isEnable = bool;
+    }
+
+    public isEnableTimer() : boolean {
+        return this.isEnable;
     }
 }
