@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background: #D9D9D9;
+  background: #EFEFEF;
   border-radius: 12px;
 }
 #profil-patient {
@@ -22,9 +22,10 @@
 }
 
 #photo-patient {
-  width: 160px;
-  height: 160px;
+  width: 220px;
+  height: 220px;
   border-radius: 12px;
+  background: #FFFFFF;
 }
 
 #nom-patient {
@@ -48,6 +49,8 @@
 #boite-images-trouvees {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
   width: 60%;
   height: 140px;
   padding: 40px;
@@ -57,8 +60,8 @@
 }
 
 .image-trouvee {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
 }
 #boite-boutons-resultat-partie {
   display: flex;
