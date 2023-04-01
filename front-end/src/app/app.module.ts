@@ -55,7 +55,7 @@ import { StatComponent } from './stat/stat.component';
     Button,
     Timer,
     ResultatPartieComponent,
-    SliderNumberComponent
+    SliderNumberComponent,
     MenuComponent,
     ErreurCreerThemeComponent,
     ErreurCreerPatientComponent,

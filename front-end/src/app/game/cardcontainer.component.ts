@@ -1,8 +1,9 @@
 import { Card } from './card.component';
-import { Component, OnInit, OnChanges, OnDestroy, ViewChildren, QueryList, Input, SimpleChanges, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, ViewChildren, QueryList, Input, SimpleChanges, Output, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HintContainer } from './game.component';
 import { TimerService } from '../services/timer.service';
+import { Theme } from 'src/models/theme.models';
 
 // @Directive({selector: 'button[counting]'})
 
@@ -21,30 +22,22 @@ import { TimerService } from '../services/timer.service';
   styleUrls: ['./cardcontainer.component.scss']
 })
 
-export class CardsContainer implements OnInit, OnChanges, OnDestroy {
+export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   @Input() public transitionTime : number = 2000;
   @Input() public Timer : number = 5000;
   public isHinted: boolean = false;
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
-  
+
   hinted : Card[] = this.children.filter(x => !x.isFlipped && !x.isDisabled);
 
   subscription: Subscription;
-
-  @Output() initCards = [
-    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 0},
-    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 1},
-    {picture: '../../assets/images/1.png', numCard: 1, numGrid: 2},
-    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 3},
-    {picture: '../../assets/images/1.png', numCard: 2, numGrid: 4},
-    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 5},
-    {picture: '../../assets/images/1.png', numCard: 4, numGrid: 6},
-    {picture: '../../assets/images/1.png', numCard: 3, numGrid: 7},
-  ]
+  @Input() public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
+  
+  initCards: any[] = [];
 
 
-  constructor(private sender : TimerService, private timerService: TimerService) {
+  constructor(private sender : TimerService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(!this.isHinted && num > 0) {
         this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -57,14 +50,24 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
       }
     });
   }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+  ngAfterViewInit(): void {
+    this.reveal(this.children.toArray());
   }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
   ngOnInit(): void {
+    this.initCards = this.theme.images.map((x, i) => {
+      return {picture: x, numCard: i+1, numGrid: i};
+    });
+    this.initCards = this.initCards.concat(this.initCards);
+    this.initCards.sort(() => Math.random() - 0.5);
+    this.children.forEach((x, i) => {
+      x.numCard = this.initCards[i].numCard;
+      x.numGrid = this.initCards[i].numGrid;
+      x.picture = this.initCards[i].picture;
+    });
   }
 
   // DELAY
@@ -79,7 +82,7 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
 
   // SETUP GRID
   public getColumns(): string {
-    return 'repeat(' + this.initCards.length/2 + ', 1fr)';
+    return 'repeat(' + this.theme.images.length + ', 1fr)';
   }
   
   // ON CLICK EVENT VERIFY SEQUENCES
@@ -90,7 +93,6 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
     }
     else {
       event.flip();
-      this.flipCheck(event);
     }
 
     // get all cards flipped
@@ -146,18 +148,6 @@ export class CardsContainer implements OnInit, OnChanges, OnDestroy {
 
   public getAllFlipped() {
     return this.children.filter(x => x.isFlipped);
-  }
-
-  public flipCheck(event: any) {
-    if(this.getAllFlipped().length==2) {
-        //TODO: check if the cards are the same and disable them if they are or flip event back if they are not
-    }
-    else if(this.getAllFlipped().length>2) {
-      this.getAllFlipped().forEach(element => {
-        element.isFlipped = false;
-      });
-    }
-    
   }
 
   public async reveal(cards : Card[]) {
