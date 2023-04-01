@@ -1,0 +1,89 @@
+.resultat-partie {
+  display: flex;
+  height: 600px;
+}
+
+#profil-patient, #boite-droite {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #D9D9D9;
+  border-radius: 12px;
+}
+#profil-patient {
+
+  width: 30%;
+}
+
+#boite-droite {
+  width: 70%;
+}
+
+#photo-patient {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+}
+
+#nom-patient {
+  font-size: 40px;
+  color: #006A52;
+}
+
+#nb-parties-jouees-patient {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#message-felicitation {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+  color: #006A52;
+}
+
+#boite-images-trouvees {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  height: 140px;
+  padding: 40px;
+  background: #FFFFFF;
+  border-radius: 12px;
+
+}
+
+.image-trouvee {
+  width: 60px;
+  height: 60px;
+}
+#boite-boutons-resultat-partie {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+#bouton-statistiques, #bouton-relancer-partie {
+  padding: 20px;
+  background: #006A52;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+#stade-patient {
+  font-size: 20px;
+  margin: 0;
+}
+
+#texte-images-trouvees {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
