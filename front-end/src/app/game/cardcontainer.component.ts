@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { HintContainer } from './game.component';
 import { TimerService } from '../services/timer.service';
 import { Theme } from 'src/models/theme.models';
+import {Router} from "@angular/router";
 
 // @Directive({selector: 'button[counting]'})
 
@@ -33,11 +34,11 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   subscription: Subscription;
   @Input() public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
-  
+
   initCards: any[] = [];
 
 
-  constructor(private sender : TimerService) {
+  constructor(private sender : TimerService, public router : Router) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(!this.isHinted && num > 0) {
         this.hinted = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -84,7 +85,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   public getColumns(): string {
     return 'repeat(' + this.theme.images.length + ', 1fr)';
   }
-  
+
   // ON CLICK EVENT VERIFY SEQUENCES
   public async onClickEvent(event : any) {
 
@@ -97,7 +98,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
     // get all cards flipped
     var flipped = this.children.filter(x => x.isFlipped);
-    
+
     // setup unclickable cards
     var clickable = this.children.filter(x => x.isClickable && !x.isDisabled);
     clickable.forEach(element => {
@@ -155,7 +156,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       element.reveal();
     });
   }
-  
+
   public async reset(cards : Card[]) {
     cards.forEach(element => {
       element.reset();
