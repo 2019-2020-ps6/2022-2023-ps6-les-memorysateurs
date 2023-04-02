@@ -7,7 +7,7 @@
     <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
     <div id="div-slider">
       <div id="div-timer-enable">
-        <label for="enableTimer">Activer le timer</label>
+        <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
         <input id="enableTimer" type="checkbox" (click)="toggleEnableTimer()" checked/>
       </div>
           <p id="texte-temps-memo">Personnaliser le temps de mémorisation</p>

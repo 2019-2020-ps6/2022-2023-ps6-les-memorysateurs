@@ -1,68 +1,150 @@
+#circle-menu {
+    position: absolute;
+    top: -92px;
+    left: -45px;
+    width: 200px;
+    height: 200px;
+    background-color: #006A52;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+#blur-menu {
+    scale: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    transition: background-color 0.2s ease-in-out, scale 0s ease-in-out 0.2s;
+    background-color: transparent;
+    &.active {
+        scale: 1;
+        background-color: rgb(0, 107, 82, 0.2);
+        transition: background-color 0.2s ease-in-out, scale 0s ease-in-out 0s;
+    }
+}
+
+header {
+    height: 80px;
+    display: grid;
+    grid-template-columns: 200px .3fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "logo menu";
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    margin-bottom: 25px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 85px;
+    overflow: hidden;
+  position: relative;
+    &>img {
+        display: block;
+        min-height: 100%;
+        min-width: 100%;
+    }
+}
+
 .burger-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 50px;
+    height: 45px;
     cursor: pointer;
+    margin-left: 27px;
 }
 
 .burger-menu-line {
-    width: 50px;
-    height: 5px;
-    background-color: #006A52;
+    width: 70px;
+    height: 7px;
+    background-color: #FFFFFF;
     transition: all 0.3s ease-in-out;
+    border-radius: 5px;
 }
 
-.active .burger-menu-line:nth-child(1) {
-    opacity: 0;
+.menu-header-cross-close {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background-color: #FFFFFF;
+        z-index: 2;
+        border-radius: 5px;
+        transform: rotate(45deg);
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 100%;
+        height: 8px;
+        background-color: #FFFFFF;
+        z-index: 2;
+        border-radius: 5px;
+        transform: rotate(-45deg);
+    }
 }
 
-.active .burger-menu-line:nth-child(2) {
-    transform: rotate(180deg);
-}
-
-.active .burger-menu-line:nth-child(3) {
-    opacity: 0;
-}
-
-.menu-container .menu-content {
-    display: none;
-}
-
-.menu-container.active .menu-content {
-    display: block;
-}
-
-.menu-content {
+.menu-container {
     background-color: #006A52;
+    scale: 0;
     position: fixed;
-    width: 30%;
+    width: 450px;
     height: 100%;
     z-index: 3;
-
+    top: 0;
+    left: -100%;
+    transition: left 0.5s ease, scale 0s ease 0.6s;
+    animation-delay: 0s;
+    &.active {
+        transition: left 0.5s ease, scale 0s ease 0s;
+        left: 0;
+        scale: 1;
+    }
 }
 
 .menu-header {
     align-items: center;
-    padding: 1rem;
-}
-
-.menu-header div {
-    font-size: xx-large;
-    color: #fff;
+    display: flex;
+    justify-content: right;
+    padding: 1rem 2rem 0rem 0rem;
 }
 
 .menu-body-item {
     padding: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
-.menu-body a {
+.menu-body-item a {
     font-size: x-large;
     color: #fff;
-    text-decoration: none; 
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 }
 
-.menu-body a:hover {
+.menu-body-item:hover>a {
     color: #006A52;
 }
 
