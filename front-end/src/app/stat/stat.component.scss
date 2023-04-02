@@ -68,7 +68,7 @@
   width: 1300px;
   height: 120px;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   padding-right: 30px;
 }
@@ -105,7 +105,7 @@
   padding: 50px;
 }
 
-.plus-temps, .plus-essais, .plus-erreurs, .plus-indices {
+#plus-temps, #plus-essais, #plus-erreurs, #plus-indices {
   font-size: 48px;
   color: white;
   background-color: #006A52;
