@@ -10,7 +10,7 @@
     <h3 id="message-felicitation">Bravo pour cette partie !</h3>
     <p id="texte-images-trouvees">Les images que vous avez trouvées :</p>
     <div id="boite-images-trouvees">
-      <img *ngFor="let image of imageTheme" class="image-trouvee" [src]="image">
+      <img *ngFor="let image of imageTrouvees" class="image-trouvee" [src]="image">
     </div>
     <div id="boite-boutons-resultat-partie">
       <button (click)="onStatistiques()" id="bouton-statistiques">Statistiques</button>

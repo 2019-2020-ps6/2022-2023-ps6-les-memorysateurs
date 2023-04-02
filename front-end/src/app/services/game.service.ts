@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, map} from "rxjs";
+import {BehaviorSubject, map, take} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,10 @@ export class GameService {
   public imagesCartesTrouvees$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   addCarteTrouvee(imageCarte: string) {
-    this.imagesCartesTrouvees$.pipe(
-      map((array) => [...array, imageCarte])
-    ).subscribe((newArray) => {
-      this.imagesCartesTrouvees$.next(newArray);
+    let actualListe = this.imagesCartesTrouvees$.asObservable();
+    actualListe.pipe(take(1)).subscribe((listeImages: string[]) => {
+      listeImages.push(imageCarte);
+      this.imagesCartesTrouvees$.next(listeImages);
     });
   }
 
