@@ -1,57 +1,43 @@
-<div *ngIf="router.url !== '/game'">
 
+  <div id="circle-menu"></div>
+  <div id="blur-menu" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+  <header>
+  <div class="burger-menu" (click)="toggleMenu()">
+    <div class="burger-menu-line"></div>
+    <div class="burger-menu-line"></div>
+    <div class="burger-menu-line"></div>
+  </div>
+  <div class="logo">
+    <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
+  </div>
+      
   <div class="menu-container" [class.active]="isMenuOpen">
-
-    <div class="burger-menu" (click)="toggleMenu()">
-      <div class="burger-menu-line"></div>
-      <div class="burger-menu-line"></div>
-      <div class="burger-menu-line"></div>
-    </div>
-
     <div class="menu-content">
       <div class="menu-header">
-        <div class="menu-header-title">Les memorysateurs</div>
-        <div class="menu-header-close" (click)="toggleMenu()"></div>
+        <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
       </div>
-      <div class="menu-body">
-        <div class="menu-body-item">
-          <a routerLink="/liste-patient" routerLinkActive="active" (click)="toggleMenu()">Accueil</a>
-        </div>
-        <div class="menu-body-item">
-          <a routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">Theme</a>
-        </div>
+
+      <div *ngIf="router.url !== '/game'">
+            <div class="menu-body">
+              <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active"  (click)="toggleMenu()">
+                <a>Accueil</a>
+              </div>
+              <div class="menu-body-item" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
+                <a>Theme</a>
+              </div>
+            </div>
+      </div>
+
+      <div *ngIf="router.url == '/game'">
+            <div class="menu-body">
+              <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active" (click)="toggleMenu()">
+                <a>Paramètres</a>
+              </div>
+              <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active" (click)="toggleMenu()">
+                <a>Quitter</a>
+              </div>
+            </div>
       </div>
     </div>
-
   </div>
-  
-</div>
-
-<div *ngIf="router.url == '/game'">
-
-  <div class="menu-container" [class.active]="isMenuOpen">
-
-    <div class="burger-menu" (click)="toggleMenu()">
-      <div class="burger-menu-line"></div>
-      <div class="burger-menu-line"></div>
-      <div class="burger-menu-line"></div>
-    </div>
-
-    <div class="menu-content">
-      <div class="menu-header">
-        <div class="menu-header-title">Les memorysateurs</div>
-        <div class="menu-header-close" (click)="toggleMenu()"></div>
-      </div>
-      <div class="menu-body">
-        <div class="menu-body-item">
-          <a routerLink="/creer-memory" routerLinkActive="active" (click)="toggleMenu()">Paramètres</a>
-        </div>
-        <div class="menu-body-item">
-          <a routerLink="/liste-patient" routerLinkActive="active" (click)="toggleMenu()">Quitter</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  
-</div>
+</header>
