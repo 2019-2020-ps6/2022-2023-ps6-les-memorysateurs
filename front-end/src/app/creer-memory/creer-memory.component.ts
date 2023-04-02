@@ -69,13 +69,13 @@ export class CreerMemoryComponent implements OnInit {
   }
 
   lancerPartie(){
-    console.log("test");
+    this.router.navigateByUrl("game");
   }
 
   onChangerTheme() {
     this.router.navigateByUrl("liste-theme");
   }
-  
+
   toggleEnableTimer() {
     this.gameService.timerEnabled$.next(!this.timerEnabled);
     if(this.timerEnabled) {

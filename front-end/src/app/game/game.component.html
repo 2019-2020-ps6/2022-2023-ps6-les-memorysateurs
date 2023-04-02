@@ -1,5 +1,7 @@
-<app-game-menu></app-game-menu>
 
 <section class="game-board">
-	<app-cardcontainer></app-cardcontainer>
+	<div class="centered">
+		<app-cardcontainer [theme]="theme" [nbCards]="nbCards"></app-cardcontainer>
+	</div>
+	<app-hintcontainer [duration]="timer" [enableTimer]="enableTimer"></app-hintcontainer>
 </section>

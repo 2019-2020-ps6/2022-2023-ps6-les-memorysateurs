@@ -1,1 +1,21 @@
-<p>resultat-partie works!</p>
+<div class="resultat-partie">
+  <div id="profil-patient">
+    <!-- <img id="photo-patient" [src]="patientSelectionne.getImage()">
+    <h3 id="nom-patient">{{patientSelectionne.getTitre()}}</h3>
+    <p id="stade-patient">Stade {{patientSelectionne.stade}}</p>
+    <p id="nb-parties-jouees-patient">24 Parties jouées</p> -->
+  </div>
+
+  <div id="boite-droite">
+    <h3 id="message-felicitation">Bravo pour cette partie !</h3>
+    <p id="texte-images-trouvees">Les images que vous avez trouvées :</p>
+    <div id="boite-images-trouvees">
+      <img *ngFor="let image of imageTrouvees" class="image-trouvee" [src]="image">
+    </div>
+    <div id="boite-boutons-resultat-partie">
+      <button (click)="onStatistiques()" id="bouton-statistiques">Statistiques</button>
+      <button (click)="onRelancerPartie()" id="bouton-relancer-partie">Relancer Partie</button>
+    </div>
+
+  </div>
+</div>

@@ -25,7 +25,6 @@ import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { ResultatPartieComponent } from './resultat-partie/resultat-partie.component';
-import { MenuComponent } from './menu/menu.component';
 
 import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
 import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
@@ -33,7 +32,7 @@ import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer
 
 import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
-
+import {MenuComponent} from "./menu/menu.component";
 
 @NgModule({
   declarations: [
@@ -55,7 +54,7 @@ import { StatComponent } from './stat/stat.component';
     Button,
     Timer,
     ResultatPartieComponent,
-    SliderNumberComponent
+    SliderNumberComponent,
     MenuComponent,
     ErreurCreerThemeComponent,
     ErreurCreerPatientComponent,
