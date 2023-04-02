@@ -1,17 +1,37 @@
 .carre {
-  display: flex;
+  display: grid;
   flex-direction: row;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 10px;
   min-width: auto;
-   width  : 72.7%;
-  // height : 59.3%;
+  width : 72.7%;
   background : #EFEFEF;
   margin-left: auto;
   margin-right: auto;
   border-radius: 30px;
   padding: 20px;
-  padding-bottom: 1%;
+  padding-bottom: 20px;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #EFEFEF;
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #006A52;
+  border-radius: 30px;
+  :hover {
+    background: #006A52;
+  }
 }
 
 #Titre-Nouveau-theme{
@@ -136,34 +156,33 @@ div.importImage {
   height: 380px;
 }
 #container-URL{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr .5fr;
   justify-content: center;
   flex-direction: row;
-  margin-top: 1%;
-
+  margin-top: 10px;
+  height: 70px;
 }
 #url-image{
-  width: 80%;
-  height: 100%;
   border-radius: 12px  0px  0px  12px;
-  border: 1px solid black;
+  border: 5px dashed #006A52;
+  border-right: none;
   color: dodgerblue;
   opacity: 1;
   font-size: 100%;
 }
 #importer-URL{
   border-radius: 0px 12px 12px 0px;
-  border: 1px solid black;
   background: #006A52;
   color: #FFFFFF;
   font-size: 110%;
   font-weight: bold;
-  height: 108%;
+  border: 5px solid #006A52;
+  border-left: none;
 }
 
 app-erreur-creer-theme{
   position: absolute;
-
   width: 100%;
   top: 50%;
   left: 50%;

@@ -1,7 +1,7 @@
 #container-creer-patient{
   display: grid;
   //flex-direction: row;
-  grid-template-columns: 0.2fr 2fr 1fr .1fr;
+  grid-template-columns: 0.1fr 2fr 1fr .1fr;
   width: 1044px;
   height: 600px;
   position: absolute;
@@ -18,12 +18,6 @@
  // background: blue;
   align-items: center;
 }
-#container-photo-patient{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-//  background: red;
-}
 
 #text-nouveau-profil{
   font-size: 230%;
@@ -36,7 +30,7 @@
 }
 .donnee-patient{
   align-self: baseline;
-  font-size: 150%;
+  font-size: 22px;
   font-weight: bold;
 
 }
@@ -47,70 +41,111 @@
   height: 20%;
   border-radius: 12px;
   border: #FFFFFF;
-  font-size: 150%;
+  font-size: 22px;
   font-weight: bold;
 }
 #info-stade{
   position: relative;
   border-radius: 100%;
-  height: 35%;
-  width: 5%;
+  height: 25px;
+  width: 25px;
   left: 2%;
   top: 34%;
   background: #006A52;
+  border: none;
   color: #FFFFFF;
   font-weight: bold;
   font-size: 26px;
+  cursor: pointer;
 }
 #container-radio-button{
   position: relative;
   right: 6%;
   display: grid;
   grid-template-columns: repeat(2,1.3fr) 1.5fr repeat(2,1.3fr) 1.5fr repeat(2,1.3fr);
-  font-size: 130%;
+  font-size: 20px;
   font-weight: bold;
+}
+
+
+#container-photo-patient{
+  display: grid;
+  grid-template-rows: 400px 1fr;
+  align-content: center;
+  width: 100%;
+  margin: 20px 0;
+  margin-top: 80px;
+  padding: 0;
 }
 
 #photo{
   display: flex;
-  width: 90%;
-  height: 50%;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
   background: #FFFFFF;
   justify-content: center;
   align-items: center;
   border-radius: 17px;
 }
-img{
-  position:relative;
-  height: 70%;
+
+#photo-section {
   width: 70%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fit-end {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .bouton-vert{
   background: #006A52;
   color: #FFFFFF;
   font-weight: bold;
   border-radius: 15px;
   text-align: center;
-
-
+  cursor: pointer;
 }
+
 #charger-une-photo{
-  width: 80%;
-  height: 5%;
-  font-size: 120%;
-  line-height: 150%;
+  width: 90%;
+  height: 35px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 #photo-button{
-  position: relative;
-  top : -18%;
-  left: 2%;
-  opacity: 0;
+  display: none;
 }
 #creer-profil{
-  height: 12%;
-  width: 90%;
-  font-size: 180%;
-  line-height: 260%;
+  height: 75px;
+  width: 100%;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  border: none;
 }
 #retour-creer-patient{
   position: absolute;
@@ -124,13 +159,9 @@ img{
   height: 80px;
   border-radius: 20px;
   border: #006A52;
+  margin: 15px;
 }
-app-info-stade{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(15%, -50%);
-}
+
 #supprimer-patient{
   background: red;
   position: absolute;
@@ -145,10 +176,82 @@ app-info-stade{
 
 }
 
-app-erreur-creer-patient{
+#pop-up {
+  position: fixed;
+  top: 0%;
+  right: -100%;
+  background: #FFFFFF;
+  font-family: sans-serif;
+  width: 50%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 200px 1fr;
+  z-index: 1;
+  background: #EFEFEF;
+  &>* {
+    margin: 20px 50px;
+  }
+  scale: 0;
+  transition: right 0.5s ease-in-out, scale 0s ease-in-out 0.5s;
+  &.active {
+    transition: right 0.5s ease-in-out, scale 0s ease-in-out 0s;
+    right: 0;
+    scale: 1;
+  }
+}
+
+.croix {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  cursor: pointer;
+}
+
+.croix:before, .croix:after {
+  content: "";
   position: absolute;
+  top: 75%;
+  left: 75%;
+  height: 5px;
+  border: 2px solid #006A52;
+  border-radius: 12px;
+  background-color: #006A52;
+}
+
+.croix:before {
+  width: 150%;
+  transform: translate(-50%, -50%)rotate(45deg);
+}
+
+.croix:after {
+  width: 150%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.titre-stade{
+  font-weight: bold;
+  color: #006A52;
+  font-size: 150%;
+}
+
+.description-stade{
+  font-weight: normal;
+  font-size: 120%;
+}
+
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 100%;
+  background-color: transparent;
+  z-index: 0;
+  scale: 0;
+  transition: background-color 0.2s ease-in-out, scale 0s ease-in-out 0.2s;
+  &.active {
+    transition: background-color 0.2s ease-in-out, scale 0s ease-in-out 0s;
+    background-color: rgba(0,0,0,.4);
+    scale: 1;
+  }
 }
