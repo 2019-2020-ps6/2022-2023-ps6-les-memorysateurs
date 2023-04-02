@@ -111,7 +111,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit(): void {
-    let allcardsSrc: string[] = this.theme.images;
+    let allcardsSrc: string[] = [...this.theme.images];
     let cardSrcChoose: string[] = [];
     for(let i = 0; i < this.nbCards/2; i++) {
       let ind = Math.random()*allcardsSrc.length;
@@ -130,6 +130,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       x.numGrid = this.initCards[i].numGrid;
       x.picture = this.initCards[i].picture;
     });
+    console.log(this.theme.images);
   }
 
   // DELAY
