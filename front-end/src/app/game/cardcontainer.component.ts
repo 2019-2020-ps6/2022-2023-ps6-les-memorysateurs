@@ -31,7 +31,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   public isHinted: boolean = false;
   public isAnimating: boolean = false;
   public isStarted: boolean = true;
-  
+
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
 
   hinted : Card[] = this.children.filter(x => !x.isFlipped && !x.isDisabled);
@@ -39,11 +39,11 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   private nbCardsForHint : number = 2;
 
   subscription: Subscription;
-  
+
   @Input() public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
 
   @Input() public nbCards: number = 2;
-  
+
   initCards: any[] = [];
 
 
@@ -180,7 +180,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
           element.disappear();
         });
 
-        this.gameService.addCarteTrouvee(flipped[0].picture)
+        this.gameService.addCarteTrouvee(flipped[0].picture);
       }
       // cards are not the same
       else {
@@ -205,12 +205,12 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       element.clickable();
     });
 
-    
+
     this.isAnimating = false;
     this.sender.resetTimer();
     //check if the game is over
     // TODO: move to next page
-    this.children.filter(x => !x.isDisabled).length == 0 ? console.log("Game Over") : {};
+    this.children.filter(x => !x.isDisabled).length == 0 ? this.router.navigateByUrl("resultat-partie") : {};
 
   }
 

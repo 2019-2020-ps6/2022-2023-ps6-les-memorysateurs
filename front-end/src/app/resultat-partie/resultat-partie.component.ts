@@ -12,12 +12,12 @@ import {Patient} from "../../models/patient.models";
   styleUrls: ['./resultat-partie.component.scss']
 })
 export class ResultatPartieComponent {
-  imageTheme!: any[];
+  imageTrouvees!: string[];
   patientSelectionne!: Patient;
 
   constructor(public router: Router, public themeService: ThemeService,public patientService: PatientService, public gameService: GameService) {
-    themeService.themeSelectionne$.subscribe((theme: Theme) =>{
-      this.imageTheme = theme.images;
+    gameService.imagesCartesTrouvees$.subscribe((images: string[]) =>{
+      this.imageTrouvees = images;
     });
 
     patientService.patientSelectionne$.subscribe((patient: Patient | undefined) => {
@@ -33,6 +33,7 @@ export class ResultatPartieComponent {
   }
 
   onRelancerPartie() {
+    this.gameService.imagesCartesTrouvees$.next([]);
     this.router.navigateByUrl("creer-memory");
   }
 }
