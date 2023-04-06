@@ -33,6 +33,7 @@ import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer
 import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
+import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {MenuComponent} from "./menu/menu.component";
     ErreurCreerPatientComponent,
     GameMenuComponent,
     StatComponent,
+    PartagerThemeComponent,
   ],
   imports: [
     BrowserModule,

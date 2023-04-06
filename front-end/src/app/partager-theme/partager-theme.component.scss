@@ -1,0 +1,150 @@
+#container-partager-theme{
+  display: grid;
+  grid-template-columns: .8fr 2fr;
+  min-width: auto;
+  width : 72.7%;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #EFEFEF;
+  border-radius: 30px;
+  font-family: sans-serif;
+}
+#container-infos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+#photo {
+  margin : 10px;
+  background-color: white;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+img{
+  height: 100%;
+  width: 100%;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.profil-nom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-bottom: 0px;
+}
+
+.profil-prenom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-top: 0px;
+}
+
+.bouton-changer {
+  background: #006A52;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: calc(250px);
+  height: 50px;
+  border-radius: 20px;
+  border: #006A52;
+  text-align: center;
+  position: relative;
+  bottom: 3%;
+  left: 2%;
+}
+
+#formulaire-paratge{
+  display: grid;
+  //flex-direction: column;
+  grid-template-columns: 1fr;
+  grid-template-rows: .5fr 1fr .5fr 3fr;
+  margin-left: 0%;
+ // align-items: center;
+  justify-content: space-between;
+  margin : 5%;
+  max-width: 100%;
+}
+input{
+  background: white;
+  border-radius: 12px;
+  border: 1px solid white;
+  width: 100%;
+  font-size: 20px;
+}
+p{
+  font-weight: bold;
+  font-size: 20px;
+}
+#input-tel{
+  height: 100%;
+}
+#input-msg{
+  height: 80%;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid white;
+  width: 100%;
+  font-size: 20px;
+  padding: 1%;
+  resize: none;
+}
+.bouton-vert{
+
+  background: #006A52;
+  font-size: 25px;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: calc(150px + 10%);
+  height: 80px;
+  border-radius: 20px;
+  border: #006A52;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+
+}
+
+#retour{
+  left: 0%;
+}
+
+#envoyer{
+  right: 0%;
+}
+
+#bouton-bas-partager-theme{
+  position: absolute;
+  bottom: 1.32%;
+  width: 100%;
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  padding-top: 2%;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+
+}
