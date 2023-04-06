@@ -4,10 +4,10 @@
   <div id="container-donnee-patient">
     <p id="text-nouveau-profil">NOUVEAU PROFIL</p>
     <form id="form-nom-prenom" [formGroup]="patientForm">
-    <p class="donnee-patient">Nom :</p>
-    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'" (click)="erreurNomDisable()"/>
     <p class="donnee-patient">Prénom :</p>
-    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'" (click)="erreurPrenomDisable()"/>
+    <input class="input-identite" type="text" id="input-prenom"[formControlName]="'prenom'" (click)="erreurPrenomDisable()"/>
+    <p class="donnee-patient">Nom :</p>
+    <input class="input-identite" id="input-nom" type="text"[formControlName]="'nom'" (click)="erreurNomDisable()"/>
     </form>
     <div style="display: flex; align-content: flex-end; width: 100%">
       <p class="donnee-patient">Stade de la maladie :</p>
