@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Cardable} from "../../models/cardable.models";
 import {Router} from "@angular/router";
 import {ThemeService} from "../services/theme.service";
@@ -22,6 +22,14 @@ export class PartagerThemeComponent {
   public stockImage: string = "";
   public stade: string = "";
 
+  @Input()
+  erreurMessage = false;
+  @Input()
+  erreurTelephone = false;
+
+
+  popup=false;
+
   constructor(public router: Router,public formBuilder: FormBuilder,public patientService : PatientService,public themeService : ThemeService) {
 
     this.messageForm = this.formBuilder.group({
@@ -44,6 +52,29 @@ export class PartagerThemeComponent {
   }
 
   envoyer(){
-    console.log("Tel : " + this.messageForm.value.telephone +  "\n message : " + this.messageForm.value.message);
+    this.verifierErreur();
+    if(!this.popup)
+      console.log("Tel : " + this.messageForm.value.telephone +  "\n message : " + this.messageForm.value.message);
+  }
+
+  verifierErreur(){
+    if(this.messageForm.value.telephone.length != 10){
+    this.erreurTelephone = true;
+    }else{
+      this.erreurTelephone = false;
+    }
+    if(this.messageForm.value.message.length ==0){
+      this.erreurMessage = true;
+    }
+    else{
+      this.erreurMessage =false;
+    }
+    this.popup = this.erreurMessage ||this.erreurTelephone;
+  }
+  changerPatient(){
+    this.router.navigate(['/liste-patient']);
+  }
+  popupChange(value : boolean){
+    this.popup = value;
   }
 }

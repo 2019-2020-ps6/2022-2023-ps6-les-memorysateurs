@@ -34,6 +34,7 @@ import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
 import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
+import { ErreurPartagerThemeComponent } from './erreur-partager-theme/erreur-partager-theme.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { PartagerThemeComponent } from './partager-theme/partager-theme.componen
     GameMenuComponent,
     StatComponent,
     PartagerThemeComponent,
+    ErreurPartagerThemeComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
       <p class="profil-nom">{{nom}}</p>
       <p class="profil-prenom">{{prenom}}</p>
       <p class="profil-stade">{{stade}}</p>
-      <button class="bouton-changer">CHANGER DE PATIENT</button>
+      <button class="bouton-changer" (click)="changerPatient()">CHANGER DE PATIENT</button>
     </div>
   </div>
 
@@ -22,3 +22,5 @@
 <button id="retour" class="bouton-vert" (click)="retour()">RETOUR</button>
 <button id="envoyer" class="bouton-vert" (click)="envoyer()">ENVOYER</button>
 </div>
+
+<app-erreur-partager-theme  [erreurMessage]="erreurMessage" [erreurTelephone]="erreurTelephone" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-partager-theme>
