@@ -29,7 +29,7 @@ export class ResultatPartieComponent {
   }
 
   onStatistiques() {
-    this.router.navigateByUrl("");
+    this.router.navigateByUrl("stat");
   }
 
   onRelancerPartie() {

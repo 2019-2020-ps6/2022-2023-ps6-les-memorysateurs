@@ -1,0 +1,6 @@
+<div id="pop-up">
+  <p class="message-erreur" id="erreur-telephone" *ngIf="erreurTelephone" >VEUILLEZ SAISIR UN NUMÉRO DE TÉLÉPHONE VALIDE</p>
+  <p class="message-erreur" id="erreur-et"  *ngIf="erreurTelephone && erreurMessage">ET</p>
+  <p class="message-erreur" id="erreur-message" *ngIf="erreurMessage" >VEUILLEZ SAISIR LE CONTENU DU MESSAGE</p>
+  <button id="ok-pop-up" (click)="fermerPopup()"> ok</button>
+</div>

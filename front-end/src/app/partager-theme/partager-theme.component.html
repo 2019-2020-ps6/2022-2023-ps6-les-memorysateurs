@@ -1,0 +1,26 @@
+<div id="container-partager-theme">
+  <div id="container-infos">
+    <div id="photo">
+      <img [src]="stockImage">
+    </div>
+    <div class="profil-info">
+      <p class="profil-nom">{{nom}}</p>
+      <p class="profil-prenom">{{prenom}}</p>
+      <p class="profil-stade">{{stade}}</p>
+      <button class="bouton-changer" (click)="changerPatient()">CHANGER DE PATIENT</button>
+    </div>
+  </div>
+
+  <form id="formulaire-paratge" [formGroup]="messageForm">
+    <p>Numéro de téléphone : </p>
+    <input id="input-tel" type="tel" [formControlName]="'telephone'"/>
+    <p>Message : </p>
+    <textarea id="input-msg"  [formControlName]="'message'"></textarea>
+  </form>
+</div>
+<div id="bouton-bas-partager-theme">
+<button id="retour" class="bouton-vert" (click)="retour()">RETOUR</button>
+<button id="envoyer" class="bouton-vert" (click)="envoyer()">ENVOYER</button>
+</div>
+
+<app-erreur-partager-theme  [erreurMessage]="erreurMessage" [erreurTelephone]="erreurTelephone" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-partager-theme>
