@@ -19,17 +19,17 @@
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'essais</p>
-      <span class="triangle-rouge">&#x25B2;</span>
+      <span [ngClass]="{'triangle-vert' : progresEssais,'triangle-rouge' : !progresEssais}">&#x25B2;</span>
       <button *ngIf="!(isTempsOpen ||isIndicesOpen ||isErreursOpen)" id="plus-essais" class="bouton-tableau" (click)="toggleEssais()">+</button>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'erreurs</p>
-      <span class="triangle-rouge">&#x25B2;</span>
+      <span [ngClass]="{'triangle-vert' : progresErreurs,'triangle-rouge' : !progresErreurs}">&#x25B2;</span>
       <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isTempsOpen)"id="plus-erreurs" class="bouton-tableau" (click)="toggleErreurs()">+</button>
     </div>
     <div class="stat-lines">
       <p class="stat-title">Nombre d'indices</p>
-      <span class="triangle-vert">&#x25B2;</span>
+      <span [ngClass]="{'triangle-vert' : progresIndices,'triangle-rouge' : !progresIndices}">&#x25B2;</span>
       <button *ngIf="!(isEssaisOpen ||isTempsOpen ||isErreursOpen)" id="plus-indices" class="bouton-tableau"(click)="toggleIndices()">+</button>
     </div>
   </div>

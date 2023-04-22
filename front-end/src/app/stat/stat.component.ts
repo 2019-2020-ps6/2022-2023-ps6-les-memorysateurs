@@ -136,6 +136,12 @@ export class StatComponent implements OnInit {
     // @ts-ignore
     totalTemps = totalTemps/this.patient.getValue()?.getStats()?.length;
     moyenneTemps.innerHTML = "" + Math.floor(totalTemps/60) +"min" + Math.floor(totalTemps%60) +"s";
+    // @ts-ignore
+    if(totalTemps >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getTemps()){
+      this.progresTemps = true;
+    }else{
+      this.progresTemps = false;
+    }
   }
 
   setUpTabEssais(){
@@ -170,6 +176,12 @@ export class StatComponent implements OnInit {
     // @ts-ignore
     totalEssais = totalEssais/this.patient.getValue()?.getStats()?.length;
     moyenneEssais.innerHTML = ""+ Math.floor(totalEssais);
+    // @ts-ignore
+    if(totalEssais >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getEssais()){
+      this.progresEssais = true;
+    }else{
+      this.progresEssais = false;
+    }
   }
   setUpTabErreurs(){
     let grid = document.getElementById("tab-erreurs") as HTMLDivElement;
@@ -203,6 +215,13 @@ export class StatComponent implements OnInit {
     // @ts-ignore
     totalErreurs = totalErreurs/this.patient.getValue()?.getStats()?.length;
     moyenneErreurs.innerHTML = ""+ Math.floor(totalErreurs);
+    // @ts-ignore
+    if(totalErreurs >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getErreurs()){
+      this.progresErreurs = true;
+    }else{
+      this.progresErreurs = false;
+    }
+
   }
 
   setUpTabIndices(){
@@ -237,5 +256,12 @@ export class StatComponent implements OnInit {
     // @ts-ignore
     totalIndices = totalIndices/this.patient.getValue()?.getStats()?.length;
     moyenneIndices.innerHTML = ""+ Math.floor(totalIndices);
+
+    // @ts-ignore
+    if(totalIndices >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getIndices()){
+      this.progresIndices = true;
+    }else{
+      this.progresIndices = false;
+    }
   }
 }
