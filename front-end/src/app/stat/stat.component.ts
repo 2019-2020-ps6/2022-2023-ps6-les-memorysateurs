@@ -32,7 +32,40 @@ export class StatComponent implements OnInit {
     this.boutonsTableau= document.getElementsByClassName("bouton-tableau");
 
     // On remplit des données pour l'exemple
-    this.partiesJouees = Math.floor(Math.random() * 30);
+    this.partiesJouees = <number>this.patient.getValue()?.getStats()?.length;
+    console.log(this.patient.getValue()?.getStat(0));
+
+    let grid = document.getElementById("tab-temps") as HTMLDivElement;
+    let totalTemps = 0;
+    //pour le temps
+    // @ts-ignore
+
+    for( let i =this.patient.getValue()?.getStats()?.length-1; i>=0;i--){
+      let stats = this.patient.getValue()?.getStat(0);
+      let stade = document.createElement('p');
+      stade.innerHTML = "" + this.patient.getValue()?.stade;
+      grid.append(stade);
+      let date = document.createElement('p');
+      let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
+      date.innerHTML = "" +tmp?.getDay() +"/"+ tmp?.getMonth() + "/" +tmp?.getFullYear();
+      grid.append(date);
+      let cartes = document.createElement('p');
+      cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();
+      grid.append(cartes);
+      let temps = document.createElement('p');
+      let secondes = this.patient.getValue()?.getStat(i)?.getTemps();
+      if(secondes != undefined)
+      totalTemps += secondes;
+      // @ts-ignore
+      temps.innerHTML = "" + Math.floor(secondes/60) +"min" + Math.floor(secondes%60) +"s" ;
+      grid.append(temps);
+
+    }
+    let moyenneTemps = document.getElementById("moyenne-temps") as HTMLParagraphElement;
+
+    // @ts-ignore
+    totalTemps = totalTemps/this.patient.getValue()?.getStats()?.length;
+    moyenneTemps.innerHTML = "" + Math.floor(totalTemps/60) +"min" + Math.floor(totalTemps%60) +"s";
   }
 
   toggleTemps() {

@@ -118,6 +118,7 @@
   align-items: center;
   justify-content: center;
   z-index: 3;
+  border: #006A52 solid 1px;
 }
 
 .plus-temps:hover, .plus-essais:hover, .plus-erreurs:hover, .plus-indices:hover {
@@ -125,7 +126,7 @@
 }
 
 
-.table {
+.table, {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,3 +192,31 @@ th, td {
   font-size: 100px;
   rotate: 180deg;
 }
+#header-temps{
+  display: grid;
+  height: 10%;
+  width: 80%;
+  border-radius: 20px 20px 0px 0px;
+  grid-template-columns: repeat(4, 1fr);
+
+  background: #006A52;
+  color: white;
+  font-weight: bold;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-items: center;
+  padding-bottom: 10px;
+}
+#tab-temps{
+  display: grid;
+  overflow-y : auto;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 0px 0px 20px 20px;
+  width: 80%;
+  height: 40%;
+  background: white;
+  color: black;
+  align-items: center; /* aligne les éléments verticalement au centre */
+  justify-items: center;
+}
+

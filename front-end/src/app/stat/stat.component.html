@@ -37,39 +37,16 @@
 
 <div class="temps-content" [class.active]="isTempsOpen">
   <p class="temps-title">Temps de jeu</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Stade</th>
-        <th scope="col">Date</th>
-        <th scope="col">Cartes</th>
-        <th scope="col">Temps</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>3min 25s</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>3min 40s</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>3min 00s</td>
-      </tr>
-    </tbody>
-  </table>
+<div id="header-temps">
+  <p scope="col">Stade</p>
+  <p  scope="col">Date</p >
+  <p  scope="col">Cartes</p >
+  <p  scope="col">Temps</p >
+</div>
+  <div id="tab-temps"></div>
   <div class="moyenne">
     <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res">3min 25s</p>
+    <p class="moyenne-res" id="moyenne-temps">3min 25s</p>
   </div>
 </div>
 
