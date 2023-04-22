@@ -14,7 +14,7 @@
   <div class="stats">
     <div class="stat-lines">
       <p class="stat-title">Temps de jeu</p>
-      <span class="triangle-vert">&#x25B2;</span>
+      <span [ngClass]="{'triangle-vert' : progresTemps,'triangle-rouge' : !progresTemps}" >&#x25B2;</span>
       <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isErreursOpen)" class="bouton-tableau" id="plus-temps" (click)="toggleTemps()">+</button>
     </div>
     <div class="stat-lines">
@@ -37,129 +37,60 @@
 
 <div class="temps-content" [class.active]="isTempsOpen">
   <p class="temps-title">Temps de jeu</p>
-<div id="header-temps">
+<div class="tab-header" id="header-temps">
   <p scope="col">Stade</p>
   <p  scope="col">Date</p >
   <p  scope="col">Cartes</p >
   <p  scope="col">Temps</p >
 </div>
-  <div id="tab-temps"></div>
+  <div class="tableau" id="tab-temps"></div>
   <div class="moyenne">
     <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res" id="moyenne-temps">3min 25s</p>
+    <p class="moyenne-res" id="moyenne-temps"></p>
   </div>
 </div>
 
 <div class="essais-content" [class.active]="isEssaisOpen">
   <p class="essais-title">Nombre d'essais</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Stade</th>
-        <th scope="col">Date</th>
-        <th scope="col">Cartes</th>
-        <th scope="col">Essais</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>11</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>8</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>18</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="tab-header" id="header-essais">
+    <p scope="col">Stade</p>
+    <p  scope="col">Date</p >
+    <p  scope="col">Cartes</p >
+    <p  scope="col">Essais</p >
+  </div>
+  <div class="tableau" id="tab-essais"></div>
   <div class="moyenne">
     <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res">12</p>
+    <p class="moyenne-res" id="moyenne-essais"></p>
   </div>
 </div>
 
 <div class="erreurs-content" [class.active]="isErreursOpen">
   <p class="erreurs-title">Nombre d'erreurs</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Stade</th>
-        <th scope="col">Date</th>
-        <th scope="col">Cartes</th>
-        <th scope="col">Erreurs</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>7</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>14</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="tab-header" id="header-erreurs">
+    <p scope="col">Stade</p>
+    <p  scope="col">Date</p >
+    <p  scope="col">Cartes</p >
+    <p  scope="col">Erreurs</p >
+  </div>
+  <div class="tableau" id="tab-erreurs"></div>
   <div class="moyenne">
     <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res">8</p>
+    <p class="moyenne-res" id="moyenne-erreurs"></p>
   </div>
 </div>
 
 <div class="indices-content" [class.active]="isIndicesOpen">
   <p class="indices-title">Nombre d'indices</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Stade</th>
-        <th scope="col">Date</th>
-        <th scope="col">Cartes</th>
-        <th scope="col">Indices</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>12/03/2023</td>
-        <td>8</td>
-        <td>1</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="tab-header" id="header-indices">
+    <p scope="col">Stade</p>
+    <p  scope="col">Date</p >
+    <p  scope="col">Cartes</p >
+    <p  scope="col">Indices</p >
+  </div>
+  <div class="tableau" id="tab-indices"></div>
   <div class="moyenne">
     <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res">1.67</p>
+    <p class="moyenne-res" id="moyenne-indices"></p>
   </div>
 </div>

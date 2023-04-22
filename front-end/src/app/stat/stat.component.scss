@@ -192,7 +192,7 @@ th, td {
   font-size: 100px;
   rotate: 180deg;
 }
-#header-temps{
+.tab-header{
   display: grid;
   height: 10%;
   width: 80%;
@@ -207,7 +207,7 @@ th, td {
   justify-items: center;
   padding-bottom: 10px;
 }
-#tab-temps{
+.tableau{
   display: grid;
   overflow-y : auto;
   grid-template-columns: repeat(4, 1fr);
