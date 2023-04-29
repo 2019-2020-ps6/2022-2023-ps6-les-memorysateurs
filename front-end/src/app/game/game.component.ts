@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import {Component, OnInit, AfterViewInit, OnDestroy, Input, Output} from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 import { MenuComponent } from '../menu/menu.component';
@@ -23,6 +23,8 @@ export class Game implements OnInit {
   public timer : number = 0;
   public enableTimer : boolean = false;
   public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
+
+
 
   constructor(private gameService : GameService, private themeService : ThemeService) {
     this.gameService.nombreCartes$.subscribe( num => {
@@ -64,8 +66,9 @@ export class HintContainer implements OnInit, AfterViewInit {
   subscription: Subscription;
   @Input() public enableTimer : boolean = true;
   @Input() public duration : number = 10;
+  //stats
 
-  constructor(public sender: TimerService) {
+  constructor(public sender: TimerService, public gameService : GameService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       this.progress = num;
     });
@@ -83,6 +86,7 @@ export class HintContainer implements OnInit, AfterViewInit {
     if (this.sender.isInRun()) {
       this.sender.clearTimer();
     } else {
+      this.gameService.incrementIndices();
       this.sender.resetTimer();
       this.sender.startTimer();
     }

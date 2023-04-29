@@ -18,6 +18,10 @@
 }
 
 #photo {
+  display: flex;
+  height: 45%;
+  width: 90%;
+  justify-content: center;
   background-color: white;
   border-radius: 12px;
 }

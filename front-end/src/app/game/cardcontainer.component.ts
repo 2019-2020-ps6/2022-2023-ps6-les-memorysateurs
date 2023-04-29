@@ -1,11 +1,13 @@
 import { Card } from './card.component';
 import { Component, OnInit, OnChanges, OnDestroy, ViewChildren, QueryList, Input, SimpleChanges, Output, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {interval, Subscription} from 'rxjs';
 import { HintContainer } from './game.component';
 import { TimerService } from '../services/timer.service';
 import { Theme } from 'src/models/theme.models';
 import {Router} from "@angular/router";
 import {GameService} from "../services/game.service";
+import {PatientService} from "../services/patient.service";
+import {Statistiques} from "../../models/statistiques.models";
 
 // @Directive({selector: 'button[counting]'})
 
@@ -25,6 +27,9 @@ import {GameService} from "../services/game.service";
 })
 
 export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
+
+  temps: number = 0;
+  intervalId: Subscription;
 
   @Input() public transitionTime : number = 2000;
   @Input() public Timer : number = 5000;
@@ -46,8 +51,9 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   initCards: any[] = [];
 
-
-  constructor(private sender : TimerService, public gameService: GameService, public router : Router) {
+  @Input()
+  indices : number =0;
+  constructor(private sender : TimerService, public gameService: GameService, public router : Router,public patientService : PatientService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(num == 0 && !this.isAnimating) {
         this.isHinted = false;
@@ -63,7 +69,9 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     this.gameService.nombreCartesIndice$.subscribe(nbCards => {
       this.nbCardsForHint = nbCards;
     });
-
+    this.intervalId = interval(1000).subscribe(() => {
+      this.temps++;
+    });
   }
 
   public cardToHint() : Card[] {
@@ -118,6 +126,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       ind = Math.floor(ind);
       cardSrcChoose.push(allcardsSrc[ind]);
       allcardsSrc.splice(ind, 1);
+
     }
 
     this.initCards = cardSrcChoose.map((x, i) => {
@@ -168,6 +177,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     });
 
     if(flipped.length == 2) {
+      this.gameService.incrementEssais();
+
       await this.delayTransition();
       // cards are the same
       if(flipped[1].numCard == flipped[0].numCard) {
@@ -186,6 +197,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       // cards are not the same
       else {
         //set status not matching
+        this.gameService.incrementErreurs();
         flipped.forEach(element => {
           element.nomatch();
         });
@@ -210,8 +222,22 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     this.isAnimating = false;
     this.sender.resetTimer();
     //check if the game is over
-    // TODO: move to next page
-    this.children.filter(x => !x.isDisabled).length == 0 ? this.router.navigateByUrl("resultat-partie") : {};
+
+    this.endGame();
+
+  }
+  endGame(){
+    if( this.children.filter(x => !x.isDisabled).length == 0){
+      //envoyer les stats
+      let patient = this.patientService.patientSelectionne$.getValue();
+
+      let stats = new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date(),this.initCards.length);
+      patient?.addStats(stats);
+      this.gameService.resetGameStats();
+      this.intervalId.unsubscribe();
+      this.router.navigateByUrl("resultat-partie");
+
+    }
 
   }
 

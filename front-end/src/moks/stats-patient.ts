@@ -7,4 +7,6 @@ export const LISTE_Stats: Statistiques[] = [
   new Statistiques(200,6,2,2,new Date(2023,4),8),
   new Statistiques(251,12,8,0,new Date(2023,4),8)
 
-  ]
+  ];
+
+export const LISTE_STATS_VIDE : Statistiques[] =[];

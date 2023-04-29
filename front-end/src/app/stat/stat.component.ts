@@ -117,7 +117,7 @@ export class StatComponent implements OnInit {
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
-      date.innerHTML = "" +tmp?.getDay() +"/"+ tmp?.getMonth() + "/" +tmp?.getFullYear();
+      date.innerHTML = "" +tmp?.toLocaleDateString('fr-FR');
       grid.append(date);
       let cartes = document.createElement('p');
       cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();
@@ -157,7 +157,7 @@ export class StatComponent implements OnInit {
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
-      date.innerHTML = "" +tmp?.getDay() +"/"+ tmp?.getMonth() + "/" +tmp?.getFullYear();
+      date.innerHTML = "" +tmp?.toLocaleDateString('fr-FR');
       grid.append(date);
       let cartes = document.createElement('p');
       cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();
@@ -196,7 +196,7 @@ export class StatComponent implements OnInit {
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
-      date.innerHTML = "" +tmp?.getDay() +"/"+ tmp?.getMonth() + "/" +tmp?.getFullYear();
+      date.innerHTML = "" +tmp?.toLocaleDateString('fr-FR');
       grid.append(date);
       let cartes = document.createElement('p');
       cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();
@@ -237,7 +237,7 @@ export class StatComponent implements OnInit {
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
-      date.innerHTML = "" +tmp?.getDay() +"/"+ tmp?.getMonth() + "/" +tmp?.getFullYear();
+      date.innerHTML = "" +tmp?.toLocaleDateString('fr-FR');
       grid.append(date);
       let cartes = document.createElement('p');
       cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();

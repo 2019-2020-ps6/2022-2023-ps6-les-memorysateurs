@@ -12,16 +12,18 @@ export class Patient implements Cardable{
   photo : any;
   stade : 3 | 4  | 5 ;
   themes : Theme[] = [];
-  stats? : Statistiques[] = [];
+  stats : Statistiques[] = [];
 
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats? : Statistiques[]) {
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
     this.photo = photo;
     this.stade = stade;
-    this.stats = stats;
+    if(stats != undefined)
+      this.stats = stats;
+
     if(listeT !=undefined)
     listeT.forEach(t =>{
       this.themes.push(t);
@@ -61,16 +63,16 @@ export class Patient implements Cardable{
     this.themes.push(t);
   }
 
-  getStats() : Statistiques[]|undefined{
+  getStats() : Statistiques[]{
     return this.stats;
   }
-  getStat(i : number) : Statistiques|undefined{
-    return this.stats?.at(i);
+  getStat(i : number) : Statistiques | undefined{
+    return this.stats.at(i);
   }
   setStats(stats : Statistiques[]) {
     this.stats = stats;
   }
   addStats(stats : Statistiques){
-    this.stats?.push(stats);
+    this.stats.push(stats);
   }
 }
