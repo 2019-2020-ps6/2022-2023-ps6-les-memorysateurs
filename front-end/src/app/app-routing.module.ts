@@ -27,7 +27,7 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'resultat-partie', component: ResultatPartieComponent},
   { path: 'erreur-creer-theme', component: ErreurCreerThemeComponent },
   {path: 'game', component: Game},
-  {path: 'partager-theme', component: PartagerThemeComponent},
+  {path: 'partager-theme', component: PartagerThemeComponent  },
   {path: 'stat', component: StatComponent}
   ];
 
