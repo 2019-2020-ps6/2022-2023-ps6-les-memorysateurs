@@ -14,6 +14,7 @@ export class GameService {
   public nombreErreurs$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public nombreEssais$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public nombreIndices$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public nombreErreurAvantIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(3);
 
   addCarteTrouvee(imageCarte: string) {
     let actualListe = this.imagesCartesTrouvees$.asObservable();

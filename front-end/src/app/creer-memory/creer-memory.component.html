@@ -5,6 +5,8 @@
   <div id="container-parametres">
     <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'" [name]="'nbcard'" [service]="gameService.nombreCartes$"></app-slider-number>
     <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
+    <app-slider-number [numbers]="numberOfErrors" [title]="'Nombre d\'erreurs consécutives avant l\'activation de l\'indice'" [name]="'nbErreurs'" [service]="gameService.nombreErreurAvantIndice$"></app-slider-number>
+
     <div id="div-slider">
       <div id="div-timer-enable">
         <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
@@ -19,6 +21,7 @@
       </div>
       <div class="background-slider"></div>
     </div>
+
   </div>
   <br>
   <div class="bas-vert">
