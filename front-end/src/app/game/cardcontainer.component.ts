@@ -30,7 +30,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   temps: number = 0;
   intervalId: Subscription;
-
+  erreurConsecutives : number = 0;
   @Input() public transitionTime : number = 2000;
   @Input() public Timer : number = 5000;
   public isHinted: boolean = false;
@@ -182,6 +182,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       await this.delayTransition();
       // cards are the same
       if(flipped[1].numCard == flipped[0].numCard) {
+        this.erreurConsecutives = 0;
         //set status matching
         flipped.forEach(element => {
           element.match();
@@ -198,16 +199,25 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       else {
         //set status not matching
         this.gameService.incrementErreurs();
+        this.erreurConsecutives ++;
         flipped.forEach(element => {
           element.nomatch();
         });
+
         await this.delayTransition();
         flipped.forEach(element => {
           element.reset();
         });
+
         //display tips
         this.sender.resetTimer();
-        this.sender.startTimer();
+        if(this.erreurConsecutives%this.gameService.nombreErreurAvantIndice$.getValue() == 0) {
+          if(this.erreurConsecutives >= 2 * this.gameService.nombreErreurAvantIndice$.getValue() &&this.gameService.nombreCartesIndice$.getValue()>2 ){
+            this.gameService.nombreCartesIndice$.next(this.gameService.nombreCartesIndice$.getValue()-2)
+          }
+          this.sender.startTimer();
+        }
+
         //flip cards back
         this.reset(clickable);
 
