@@ -212,6 +212,9 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         //display tips
         this.sender.resetTimer();
         if(this.erreurConsecutives%this.gameService.nombreErreurAvantIndice$.getValue() == 0) {
+          if(this.erreurConsecutives >= 2 * this.gameService.nombreErreurAvantIndice$.getValue() &&this.gameService.nombreCartesIndice$.getValue()>2 ){
+            this.gameService.nombreCartesIndice$.next(this.gameService.nombreCartesIndice$.getValue()-2)
+          }
           this.sender.startTimer();
         }
 
