@@ -11,6 +11,10 @@
   border-radius: 30px;
   padding: 20px;
   padding-bottom: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
@@ -187,4 +191,11 @@ app-erreur-creer-theme{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+app-footer-creer-theme{
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: calc(15% - 10px);
 }

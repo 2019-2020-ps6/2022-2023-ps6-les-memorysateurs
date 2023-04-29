@@ -5,6 +5,7 @@ import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
 import {Router} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
+import {LISTE_STATS_VIDE} from "../../moks/stats-patient";
 @Component({
   selector: 'app-creer-patient',
   templateUrl: './creer-patient.component.html',
@@ -80,7 +81,7 @@ creerProfilPatient(){
   }
 if(!erreur) {
   if (this.patient == undefined) {
-    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined);
+    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined,undefined);
     this.patient = patient;
     ajout = true;
   } else {

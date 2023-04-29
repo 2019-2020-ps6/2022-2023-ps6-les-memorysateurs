@@ -16,6 +16,7 @@ export class CreerMemoryComponent implements OnInit {
 
   numberOfCards = [4, 6, 8];
   numberOfCardsTips : number[]= [];
+  numberOfErrors = [1,2,3,4];
 
   //paramètres
   nombreCarte!: number;

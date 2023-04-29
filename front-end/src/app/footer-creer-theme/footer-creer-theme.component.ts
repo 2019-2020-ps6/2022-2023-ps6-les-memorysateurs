@@ -87,7 +87,7 @@ export class FooterCreerThemeComponent {
       this.router.navigate(['/liste-theme']);
     }
     if(this.bas_jaune){
-      console.log("partage");
+      this.router.navigate(['/partager-theme']);
     }
   }
 }
