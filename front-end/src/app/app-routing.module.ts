@@ -11,6 +11,7 @@ import {ListePatientComponent} from "./liste-patient/liste-patient.component";
 import {ProfilPatientComponent} from "./profil-patient/profil-patient.component";
 import { Game } from './game/game.component';
 import {AuthentificationComponent} from "./authentification/authentification.component";
+import {CreerCompteComponent} from "./creer-compte/creer-compte.component";
 
 const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'creer-memory', component: CreerMemoryComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'liste-patient', component: ListePatientComponent},
   {path: 'profil-patient', component: ProfilPatientComponent},
   { path: 'game', component: Game },
-  {path: 'authentification', component: AuthentificationComponent}
+  {path: 'authentification', component: AuthentificationComponent},
+  {path: 'creer-compte', component: CreerCompteComponent}
   ];
 
 @NgModule({

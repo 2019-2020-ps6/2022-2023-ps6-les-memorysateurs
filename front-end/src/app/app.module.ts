@@ -22,6 +22,7 @@ import { Game, HintContainer } from './game/game.component';
 import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
+import { CreerCompteComponent } from './creer-compte/creer-compte.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AuthentificationComponent } from './authentification/authentification.c
     Button,
     Timer,
     AuthentificationComponent,
+    CreerCompteComponent,
   ],
   imports: [
     BrowserModule,

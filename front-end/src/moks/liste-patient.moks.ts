@@ -6,3 +6,4 @@ export const LISTE_PATIENT: Patient[] = [
   new Patient('Dubois', 'Sophie', 'assets/images/patient-femme.png', 5),
   new Patient('Gato', 'Martin', 'assets/images/patient-homme.png', 4)
 ]
+
