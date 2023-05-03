@@ -32,8 +32,8 @@
     position: absolute;
     top: -92px;
     left: -45px;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     background-color: red;
     z-index: -1;
     border-radius: 50%;
@@ -85,28 +85,46 @@ header {
     border-radius: 5px;
 }
 
-.burger-menu-line-game-1 {
-    width: 70px;
-    height: 7px;
-    background-color: #FFFFFF;
-    border-radius: 5px;
-    rotate: 45deg;
-}
-
-.burger-menu-line-game-2 {
-    width: 70px;
-    height: 7px;
-    background-color: #FFFFFF;
-    border-radius: 5px;
-    rotate: -45deg;
-}
-
 .menu-header-cross-close {
     position: relative;
     width: 75px;
     height: 75px;
     margin-bottom: 50px;
     cursor: pointer;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background-color: #FFFFFF;
+        z-index: 2;
+        border-radius: 5px;
+        transform: rotate(45deg);
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 100%;
+        height: 8px;
+        background-color: #FFFFFF;
+        z-index: 2;
+        border-radius: 5px;
+        transform: rotate(-45deg);
+    }
+}
+
+.menu-header-cross-game {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    top: 10px;
+    left: -5px;
     &::before {
         content: "";
         position: absolute;

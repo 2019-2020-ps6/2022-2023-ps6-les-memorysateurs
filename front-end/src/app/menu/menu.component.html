@@ -35,8 +35,7 @@
   <div id="blur-menu" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
   <header>
     <div class="burger-menu" (click)="toggleMenu()">
-      <div class="burger-menu-line-game-1"></div>
-      <div class="burger-menu-line-game-2"></div>
+      <div class="menu-header-cross-game"></div>
     </div>
     <div class="logo">
       <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
@@ -48,8 +47,8 @@
           <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
         </div>
         <div class="menu-body">
-          <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active"  (click)="toggleMenu()">
-            <a href="/creer-memory" onclick="return confirm('Êtes-vous sûr de vouloir quitter ?')">Quitter</a>
+          <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active"  (click)="confirmExit() && toggleMenu()">
+            <a>Quitter</a>
           </div>
         </div>
       </div>
