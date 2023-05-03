@@ -28,6 +28,17 @@
     }
 }
 
+#circle-menu-game {
+    position: absolute;
+    top: -92px;
+    left: -45px;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    z-index: -1;
+    border-radius: 50%;
+}
+
 header {
     height: 80px;
     display: grid;
@@ -72,6 +83,22 @@ header {
     background-color: #FFFFFF;
     transition: all 0.3s ease-in-out;
     border-radius: 5px;
+}
+
+.burger-menu-line-game-1 {
+    width: 70px;
+    height: 7px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    rotate: 45deg;
+}
+
+.burger-menu-line-game-2 {
+    width: 70px;
+    height: 7px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    rotate: -45deg;
 }
 
 .menu-header-cross-close {
@@ -124,6 +151,24 @@ header {
     }
 }
 
+.menu-container-game {
+    background-color: red;
+    scale: 0;
+    position: fixed;
+    width: 450px;
+    height: 100%;
+    z-index: 3;
+    top: 0;
+    left: -100%;
+    transition: left 0.5s ease, scale 0s ease 0.6s;
+    animation-delay: 0s;
+    &.active {
+        transition: left 0.5s ease, scale 0s ease 0s;
+        left: 0;
+        scale: 1;
+    }
+}
+
 .menu-header {
     align-items: center;
     display: flex;
@@ -145,7 +190,7 @@ header {
 }
 
 .menu-body-item:hover>a {
-    color: #006A52;
+    color: black;
 }
 
 .menu-body-item:hover {
