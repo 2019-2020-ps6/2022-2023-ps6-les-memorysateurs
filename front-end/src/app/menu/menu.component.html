@@ -17,16 +17,14 @@
         <div class="menu-header">
           <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
         </div>
-
-              <div class="menu-body">
-                <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active"  (click)="toggleMenu()">
-                  <a>Accueil</a>
-                </div>
-                <div class="menu-body-item" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
-                  <a>Theme</a>
-                </div>
-              </div>
-        
+        <div class="menu-body">
+          <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active"  (click)="toggleMenu()">
+            <a>Accueil</a>
+          </div>
+          <div class="menu-body-item" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
+            <a>Theme</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -49,13 +47,11 @@
         <div class="menu-header">
           <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
         </div>
-
-              <div class="menu-body">
-                <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active"  (click)="toggleMenu()">
-                  <a href="/creer-memory" onclick="return confirm('Êtes-vous sûr de vouloir quitter ?')">Quitter</a>
-                </div>
-              </div>
-        
+        <div class="menu-body">
+          <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active"  (click)="toggleMenu()">
+            <a href="/creer-memory" onclick="return confirm('Êtes-vous sûr de vouloir quitter ?')">Quitter</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
