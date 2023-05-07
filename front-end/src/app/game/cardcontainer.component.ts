@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {GameService} from "../services/game.service";
 import {PatientService} from "../services/patient.service";
 import {Statistiques} from "../../models/statistiques.models";
+import { Combinaison } from 'src/models/combinaison.models';
+import { ListCombinaison } from 'src/models/listcombinaison.models';
 
 // @Directive({selector: 'button[counting]'})
 
@@ -36,6 +38,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
   public isHinted: boolean = false;
   public isAnimating: boolean = false;
   public isStarted: boolean = true;
+  public combinaisons : ListCombinaison = new ListCombinaison();
+  public isErrorReccurent : boolean = false;
 
   @ViewChildren(Card) children: QueryList<Card> = new QueryList<Card>();
 
@@ -49,6 +53,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   @Input() public nbCards: number = 2;
 
+
   initCards: any[] = [];
 
   @Input()
@@ -60,7 +65,12 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         this.reset(this.hinted);
       }
       else if(!this.isHinted && !this.isAnimating) {
-        this.hinted = this.cardToHint();
+        if(!this.isErrorReccurent){
+          this.hinted = this.cardToHint();
+        }
+        else {
+          this.isErrorReccurent = false;
+        }
         this.isHinted = true;
         this.reveal(this.hinted);
       }
@@ -72,6 +82,10 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     this.intervalId = interval(1000).subscribe(() => {
       this.temps++;
     });
+
+    this.gameService.combinations$.subscribe(combinations => {
+      this.combinaisons = combinations;
+    });
   }
 
   public cardToHint() : Card[] {
@@ -80,16 +94,18 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         return this.children.toArray();
     }
     let index = this.nbCardsForHint/2;
+
     let result = new Array<Card>();
-    let cards = this.children.filter(x => !x.isFlipped && !x.isDisabled);
+
+    let cards = this.children.filter(x => !x.isDisabled);
     let flipped = this.children.filter(x => x.isFlipped && !x.isDisabled);
     if(flipped.length > 0) {
       flipped.forEach(x => {
         flipped.splice(flipped.indexOf(x), 1);
         let lstCard = cards.filter(y => y.numCard == x.numCard);
-        lstCard.forEach(x => {
-          result.push(x);
-          cards.splice(cards.indexOf(x), 1);
+        lstCard.forEach(y => {
+          result.push(y);
+          cards.splice(cards.indexOf(y), 1);
         });
         index--;
       });
@@ -157,9 +173,12 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     return 'repeat(' + this.nbCards/2 + ', .1fr)';
   }
 
+
+
   // ON CLICK EVENT VERIFY SEQUENCES
   public async onClickEvent(event : any) {
     this.isAnimating = true;
+
     if(this.getAllFlipped().length >= 2 && event.isFlipped == false) {
       return;
     }
@@ -170,14 +189,17 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     // get all cards flipped
     var flipped = this.children.filter(x => x.isFlipped);
 
-    // setup unclickable cards
-    var clickable = this.children.filter(x => x.isClickable && !x.isDisabled);
+    // setup unclickable cards to avoid click during animation
+    var clickable = this.children.filter(x => !x.isDisabled);
     clickable.forEach(element => {
       element.unclickable();
     });
 
     if(flipped.length == 2) {
+      // increment number of tries
       this.gameService.incrementEssais();
+      // add combination to list
+      this.gameService.addCombinaison(flipped[0], flipped[1]);
 
       await this.delayTransition();
       // cards are the same
@@ -187,6 +209,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         flipped.forEach(element => {
           element.match();
         });
+        
         await this.delayTransition();
         //disable & delete cards
         flipped.forEach(element => {
@@ -200,6 +223,11 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         //set status not matching
         this.gameService.incrementErreurs();
         this.erreurConsecutives ++;
+
+        //set card to hint due to error
+        this.isErrorReccurent = true;
+        this.hinted = this.cardToHint();
+
         flipped.forEach(element => {
           element.nomatch();
         });
@@ -212,7 +240,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         //display tips
         this.sender.resetTimer();
         if(this.erreurConsecutives%this.gameService.nombreErreurAvantIndice$.getValue() == 0) {
-          if(this.erreurConsecutives >= 2 * this.gameService.nombreErreurAvantIndice$.getValue() &&this.gameService.nombreCartesIndice$.getValue()>2 ){
+          if(this.erreurConsecutives >= 2 * this.gameService.nombreErreurAvantIndice$.getValue() && this.gameService.nombreCartesIndice$.getValue()>2 ){
             this.gameService.nombreCartesIndice$.next(this.gameService.nombreCartesIndice$.getValue()-2)
           }
           this.sender.startTimer();
@@ -236,6 +264,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     this.endGame();
 
   }
+
   endGame(){
     if( this.children.filter(x => !x.isDisabled).length == 0){
       //envoyer les stats

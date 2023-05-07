@@ -10,7 +10,7 @@ export class Patient implements Cardable{
   nom : string;
   prenom : string;
   photo : any;
-  stade : 3 | 4  | 5 ;
+  stade : 3 | 4 | 5 ;
   themes : Theme[] = [];
   stats : Statistiques[] = [];
 

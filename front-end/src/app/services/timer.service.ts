@@ -64,6 +64,10 @@ export class TimerService {
         this.startTime = duration;
     }
 
+    getDuration(): number {
+        return this.startTime;
+    }
+
     getTimer(): Observable<any> {
         return this.subject.asObservable();
     }

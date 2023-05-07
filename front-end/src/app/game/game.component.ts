@@ -7,6 +7,7 @@ import { TimerService } from '../services/timer.service';
 import { GameService } from '../services/game.service';
 import { ThemeService } from '../services/theme.service';
 import {Theme} from "../../models/theme.models";
+import { Combinaison } from 'src/models/combinaison.models';
 
 @Component({
   selector: 'app-game',
@@ -23,7 +24,7 @@ export class Game implements OnInit {
   public timer : number = 0;
   public enableTimer : boolean = false;
   public theme: Theme = new Theme('Default', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png']);
-
+  public lastCombinaison? : Combinaison;
 
 
   constructor(private gameService : GameService, private themeService : ThemeService) {
@@ -42,6 +43,9 @@ export class Game implements OnInit {
     this.themeService.themeSelectionne$.subscribe( theme => {
       this.theme = theme;
     });
+    this.gameService.combinations$.subscribe( combinaison => {
+      this.lastCombinaison = combinaison.lastCombinaison;
+    });
   };
 }
 
@@ -49,12 +53,14 @@ export class Game implements OnInit {
 @Component({
   selector: 'app-hintcontainer',
   template: `
-    <button (click)="toggleTimer()">
-       Indice
-    </button>
-    <div class="meter">
-      <div class="meter-bar">{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}</div>
-    </div>
+    <section id="hintcontainer">
+      <div id="meter">
+        <div id="meter-bar"><!--{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}--></div>
+      </div>
+      <button (click)="toggleTimer()">
+        Indice
+      </button>
+</section>
   `,
   styleUrls: ['./game.component.scss', '../utilities/button/btn.component.scss']
 })
@@ -65,17 +71,49 @@ export class HintContainer implements OnInit, AfterViewInit {
   progress : number = 0;
   subscription: Subscription;
   @Input() public enableTimer : boolean = true;
-  @Input() public duration : number = 10;
   //stats
 
   constructor(public sender: TimerService, public gameService : GameService) {
+    this.sender.setDuration(this.gameService.dureeIndice$.value*60);
+    this.sender.resetTimer();
+    
     this.subscription = this.sender.getTimer().subscribe( num => {
       this.progress = num;
+      let bar = document.getElementById("meter-bar");
+      if(bar != null) {
+        bar.style.width = (num/this.sender.getDuration()*100) + "%";
+      }
+    });
+    this.gameService.isRecurentCombinaison$.subscribe(isRecurrent => {
+      let popup = document.getElementById("combSection");
+       if(isRecurrent) {
+          if(popup != null) {
+            popup.style.animationName = "";
+            void popup.offsetWidth;
+            popup.style.animationName = "slide-up";
+          }
+          let popuptext = document.getElementById("numberRecurenceCombinaison");
+          if(popuptext != null) {
+            popuptext.innerHTML = "Cette combinaison est revenue " + this.gameService.combinations$.value.recurenceOfLastCombinaison().toString() + " fois";
+          }
+       }
     });
   }
   ngAfterViewInit(): void {
     this.sender.setEnableTimer(this.enableTimer);
-    this.sender.setDuration(this.duration*60);
+    let popup = document.getElementById("combSection");
+
+    if(popup != null) {
+      //if the popup is clicked, the animation is reseted.
+      popup.addEventListener("click", () => {
+        let popup = document.getElementById("combSection");
+        if(popup != null) {
+          popup.style.animationName = "";
+          void popup.offsetWidth;
+        }
+        let container = document.getElementById("cardCombContainer");
+      });
+    }
   }
 
   ngOnInit() {
@@ -83,6 +121,7 @@ export class HintContainer implements OnInit, AfterViewInit {
   }
 
   toggleTimer() {
+    
     if (this.sender.isInRun()) {
       this.sender.clearTimer();
     } else {
