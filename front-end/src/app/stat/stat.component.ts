@@ -113,7 +113,7 @@ export class StatComponent implements OnInit {
     for( let i =this.patient.getValue()?.getStats()?.length-1; i>=0;i--){
       let stats = this.patient.getValue()?.getStat(0);
       let stade = document.createElement('p');
-      stade.innerHTML = "" + this.patient.getValue()?.stade;
+      stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
@@ -153,7 +153,7 @@ export class StatComponent implements OnInit {
     for( let i =this.patient.getValue()?.getStats()?.length-1; i>=0;i--){
       let stats = this.patient.getValue()?.getStat(0);
       let stade = document.createElement('p');
-      stade.innerHTML = "" + this.patient.getValue()?.stade;
+      stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
@@ -192,7 +192,7 @@ export class StatComponent implements OnInit {
     for( let i =this.patient.getValue()?.getStats()?.length-1; i>=0;i--){
       let stats = this.patient.getValue()?.getStat(0);
       let stade = document.createElement('p');
-      stade.innerHTML = "" + this.patient.getValue()?.stade;
+      stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();
@@ -233,7 +233,7 @@ export class StatComponent implements OnInit {
     for( let i =this.patient.getValue()?.getStats()?.length-1; i>=0;i--){
       let stats = this.patient.getValue()?.getStat(0);
       let stade = document.createElement('p');
-      stade.innerHTML = "" + this.patient.getValue()?.stade;
+      stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
       grid.append(stade);
       let date = document.createElement('p');
       let tmp : Date | undefined= this.patient.getValue()?.getStat(i)?.getDate();

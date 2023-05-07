@@ -5,15 +5,16 @@ private erreurs : number = 0;
 private indices : number = 0;
 private date : Date;
 private nbCartes : number = 0;
+private stade : number = 0
 
-
-constructor(temps : number,essais : number,erreurs : number,indices : number,date : Date,nbCartes : number) {
+constructor(temps : number,essais : number,erreurs : number,indices : number,date : Date,nbCartes : number,stade : number) {
   this.temps = temps;
   this.essais = essais;
   this.erreurs = erreurs;
   this.indices = indices;
   this.date = date;
   this.nbCartes = nbCartes;
+  this.stade = stade;
 }
   getTemps(): number {
     return this.temps;
@@ -60,6 +61,15 @@ constructor(temps : number,essais : number,erreurs : number,indices : number,dat
   setDate(value: Date) {
     this.date = value;
   }
+
+  getStade(): number {
+    return this.stade;
+  }
+
+  setStade(value: number) {
+    this.stade = value;
+  }
+
 
   implementErreurs(){
     this.erreurs ++;

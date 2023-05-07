@@ -7,10 +7,10 @@ $padding : 20px;
     overflow-y: hidden;
     overflow-x: scroll;
     gap: 20px;
-    padding: 20px 0; 
+    padding: 20px 0;
     justify-content: flex-start;
     border-radius: 12px;
-    
+
   }
 }
 
@@ -21,7 +21,7 @@ $padding : 20px;
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #EFEFEF;
+  background: #CFCFCF;
   border-radius: 30px;
 }
 
@@ -38,7 +38,7 @@ $padding : 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EFEFEF;
+  background: #CFCFCF;
   border-radius: 20px;
   min-width: 270px;
   height: 500px;
