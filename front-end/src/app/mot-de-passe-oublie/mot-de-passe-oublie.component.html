@@ -1,0 +1,14 @@
+<div class="form-card">
+  <h2>MOT DE PASSE OUBLIE</h2>
+  <p>Veuillez renseigner votre adresse mail, un mail vous sera envoyé pour pouvoir changer votre mot de passe.</p>
+  <form [formGroup]="formGroup">
+    <label for="adresseEmail">Adresse email</label>
+    <input id="adresseEmail" type="text" formControlName="adresseEmail">
+
+  </form>
+  <div id="div-boutons">
+    <button type="submit" (click)="onRetour()">Retour</button>
+    <button type="submit" (click)="onValider()">Valider</button>
+  </div>
+
+</div>

@@ -23,6 +23,7 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { CreerCompteComponent } from './creer-compte/creer-compte.component';
+import { MotDePasseOublieComponent } from './mot-de-passe-oublie/mot-de-passe-oublie.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CreerCompteComponent } from './creer-compte/creer-compte.component';
     Timer,
     AuthentificationComponent,
     CreerCompteComponent,
+    MotDePasseOublieComponent,
   ],
   imports: [
     BrowserModule,

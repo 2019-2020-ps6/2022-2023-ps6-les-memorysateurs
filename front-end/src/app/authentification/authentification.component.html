@@ -1,7 +1,10 @@
 <div class="form-card">
   <div class="header-form">
     <h2 id="connexion">CONNEXION</h2>
-    <h2 id="creer-compte">CREER UN COMPTE</h2>
+    <a href="creer-compte">
+      <h2 id="creer-compte">CREER UN COMPTE</h2>
+    </a>
+
   </div>
   <form [formGroup]="formGroup">
     <div class="form-group">
@@ -16,7 +19,9 @@
 
   </form>
 
-  <div class="action-buttons">
-    <button type="submit" (click)="onLogin()">Me Connecter</button>
-  </div>
+  <p id="mot-de-passe-oublie">
+    <a  href="mot-de-passe-oublie">mot de passe oublié</a>
+  </p>
+
+  <button type="submit" (click)="onLogin()">Me Connecter</button>
 </div>

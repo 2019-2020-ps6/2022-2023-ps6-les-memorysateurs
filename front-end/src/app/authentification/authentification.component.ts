@@ -20,8 +20,6 @@ export class AuthentificationComponent {
   }
 
   onLogin(){
-    console.log(this.formGroup.value['identifiant']);
-    console.log(this.formGroup.value['motDePasse']);
     this.authentificationService.login(this.formGroup.value['identifiant'], this.formGroup.value['motDePasse']);
     if(this.authentificationService.isAuthentifie()) this.router.navigateByUrl('liste-patient');
   }
