@@ -30,13 +30,13 @@
   appearance: none;
   position: relative;
   padding: 0;
-  background-color: #EFEFEF;
+  background-color: #CFCFCF;
   border: solid 4px #006A52;
   max-width: 25px;
   min-height: 25px;
   border-radius: 15px;
   transition: all .2s ease-in-out;
-  
+
   &::after {
     content: "";
     position: absolute;
@@ -47,11 +47,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #EFEFEF;
+    background-color: #CFCFCF;
     transition: all .2s ease-in-out;
   }
   &:checked {
-    
+
     border-radius: 7px;
     &::after {
       content: "";
@@ -122,7 +122,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #EFEFEF;
+  background-color: #CFCFCF;
   border-radius: 20px;
   padding: 35px 0;
   gap: 10px;
@@ -135,7 +135,7 @@
 .slider {
   display: flex;
   flex-direction: row;
-  background-color: #EFEFEF;
+  background-color: #CFCFCF;
   height : 100%;
   width: 100%;
   gap: 10px;
@@ -198,7 +198,7 @@ output {
   position: relative;
   background: transparent;
   height: 60px;
-  
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;

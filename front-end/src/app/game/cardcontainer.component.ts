@@ -270,7 +270,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       //envoyer les stats
       let patient = this.patientService.patientSelectionne$.getValue();
 
-      let stats = new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date(),this.initCards.length);
+      // @ts-ignore
+      let stats = new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date(),this.initCards.length,patient?.stade );
       patient?.addStats(stats);
       this.gameService.resetGameStats();
       this.intervalId.unsubscribe();
