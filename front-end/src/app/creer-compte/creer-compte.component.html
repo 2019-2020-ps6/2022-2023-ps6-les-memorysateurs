@@ -1,33 +1,40 @@
 <div class="form-card">
   <div class="header-form">
     <a href="authentification">
-      <h2 id="connexion">CONNEXION</h2>
+      <h2 id="connexion">
+        CONNEXION
+      </h2>
     </a>
-
-    <h2 id="creer-compte">CREER UN COMPTE</h2>
+    <h2 id="creer-compte">
+      <span>CREER UN COMPTE</span>
+    </h2>
   </div>
-  <form [formGroup]="formGroup">
-    <div class="form-group">
-      <label for="identifiant">Identifiant</label>
-      <input id="identifiant" type="text" formControlName="identifiant">
+  <div class="content">
+    <form [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="identifiant">Identifiant</label>
+        <input id="identifiant" type="text" formControlName="identifiant">
+      </div>
+
+      <div class="form-group">
+        <label for="adresseEmail">Email</label>
+        <input id="adresseEmail" type="text" formControlName="adresseEmail">
+      </div>
+
+      <div class="form-group">
+        <label for="motDePasse">Mot de Passe</label>
+        <input id="motDePasse" type="text" formControlName="motDePasse">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmerMotDePasse">Confirmer le mot de passe</label>
+        <input id="confirmerMotDePasse" type="text" formControlName="confirmerMotDePasse">
+      </div>
+
+    </form>
+    <div class="container-button">
+      <button type="submit" (click)="onValider()">Valider</button>
     </div>
-
-    <div class="form-group">
-      <label for="adresseEmail">Email</label>
-      <input id="adresseEmail" type="text" formControlName="adresseEmail">
-    </div>
-
-    <div class="form-group">
-      <label for="motDePasse">Mot de Passe</label>
-      <input id="motDePasse" type="text" formControlName="motDePasse">
-    </div>
-
-    <div class="form-group">
-      <label for="confirmerMotDePasse">Confirmer le mot de passe</label>
-      <input id="confirmerMotDePasse" type="text" formControlName="confirmerMotDePasse">
-    </div>
-
-  </form>
-
-  <button type="submit" (click)="onValider()">Valider</button>
+  </div>
+  
 </div>
