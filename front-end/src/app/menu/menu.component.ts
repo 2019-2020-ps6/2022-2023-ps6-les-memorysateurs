@@ -12,9 +12,17 @@ export class MenuComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+
   }
 
   confirmExit() {
-    return confirm('Êtes-vous sûr de vouloir quitter ?');
+    let bool = confirm('Êtes-vous sûr de vouloir quitter ?');
+
+    if(bool) {
+
+      this.router.navigate(['/creer-memory']);
+    }
+    this.toggleMenu();
+    return bool;
   }
 }
