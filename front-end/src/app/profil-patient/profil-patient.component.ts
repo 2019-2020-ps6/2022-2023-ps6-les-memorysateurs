@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Patient} from "../../models/patient.models";
 import {Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
 import {PatientService} from "../services/patient.service";
 import {ThemeService} from "../services/theme.service";
 
