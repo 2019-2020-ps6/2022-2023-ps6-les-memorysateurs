@@ -1,13 +1,20 @@
 .stat-patient {
   display: grid;
-  grid-template-columns: 0.3fr 1fr;
+  grid-template-columns: 0.3fr .7fr;
   grid-gap: 50px;
   margin-top: 5%;
+
+}
+
+p {
+  line-height: normal;
+  margin: 0;
+  padding: 0;
 }
 
 #container-infos {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: .7fr 1fr;
   align-items: center;
   justify-content: center;
   height: 550px;
@@ -19,7 +26,7 @@
 
 #photo {
   display: flex;
-  height: 45%;
+  height: 100%;
   width: 90%;
   justify-content: center;
   background-color: white;
@@ -30,7 +37,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  background-color: blue;
+  
 }
 
 .profil-nom {
@@ -38,6 +47,16 @@
   font-weight: bold;
   color: #006A52;
   margin-bottom: 0px;
+  background-color: red;
+}
+
+.nomprenom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0px;
+  background-color: blue;
 }
 
 .profil-prenom {
@@ -45,6 +64,7 @@
   font-weight: bold;
   color: #006A52;
   margin-top: 0px;
+  background-color: red;
 }
 
 .profil-stade {
@@ -57,80 +77,6 @@
   font-weight: bold;
   color: black;
 }
-
-.stats {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.stat-lines {
-  margin: 10px;
-  background-color: #CFCFCF;
-  border-radius: 20px;
-  margin-right: 200px;
-  width: 90%;
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 30px;
-}
-
-.stat-title, .temps-title, .essais-title, .erreurs-title, .indices-title {
-  margin-left: 50px;
-  font-size: 35px;
-  font-weight: bold;
-  color: black;
-  width: 60%;
-}
-
-
-.temps-content.active, .essais-content.active, .erreurs-content.active, .indices-content.active {
-  display: block;
-}
-
-.temps-content, .essais-content, .erreurs-content, .indices-content {
-  display: none;
-  background-color: #CFCFCF;
-  width: 69.1%;
-  height: 55%;
-  left: 25.5%;
-  top: 20%;
-  box-sizing: border-box;
-  color: white;
-  font-size: 24px;
-  line-height: 1.5;
-  text-align: justify;
-  position: absolute;
-  border-bottom-left-radius: 20px;
-  border-radius: 20px;
-  margin-right: 10%;
-  padding: 50px;
-
-}
-
-#plus-temps, #plus-essais, #plus-erreurs, #plus-indices {
-  font-size: 48px;
-  color: white;
-  background-color: #006A52;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  border-radius: 50%;
-  width: 75px;
-  height: 75px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  border: #006A52 solid 1px;
-}
-
-.plus-temps:hover, .plus-essais:hover, .plus-erreurs:hover, .plus-indices:hover {
-  transform: scale(1.2);
-}
-
-
 
 thead {
   display: flex;
@@ -145,68 +91,20 @@ thead {
   border-radius: 20px 20px 0px 0px;
 }
 
-
-.moyenne {
+.containerStats {
+  position: relative;
+  width: 90%;
+  height: 100%;
   display: flex;
-}
-
-.moyenne-title {
-  color: #fff;
-  background-color: #006A52;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 30px;
-  border-radius: 25px;
-  margin-left: 300px;
-
-}
-
-.moyenne-res {
-  color: #006A52;
-  background-color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 30px;
-  border-radius: 25px;
-  margin-left: 30px;
-  width: 130px;
-}
-
-.triangle-vert {
-  color: #33CC33;
-  font-size: 100px;
-}
-
-.triangle-rouge {
-  color: #FF0000;
-  font-size: 100px;
-  rotate: 180deg;
-}
-.tab-header{
-  display: grid;
-  height: 10%;
-  width: 80%;
-  border-radius: 20px 20px 0px 0px;
-  grid-template-columns: repeat(4, 1fr);
-
-  background: #006A52;
-  color: white;
-  font-weight: bold;
-  grid-template-rows: auto;
+  flex-direction: column;
   align-items: center;
-  justify-items: center;
-  padding-bottom: 10px;
-}
-.tableau{
-  display: grid;
-  overflow-y : auto;
-  grid-template-columns: repeat(4, 1fr);
-  border-radius: 0px 0px 20px 20px;
-  width: 80%;
-  height: 40%;
-  background: white;
-  color: black;
-  align-items: center; /* aligne les éléments verticalement au centre */
-  justify-items: center;
+  justify-content: center;
+  gap: 20px;
+  & > app-statcontainer {
+    width: 100%;
+  }
 }
 
+app-statcontainer.invisible {
+  display: none;
+}

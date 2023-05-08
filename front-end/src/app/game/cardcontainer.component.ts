@@ -11,16 +11,6 @@ import {Statistiques} from "../../models/statistiques.models";
 import { Combinaison } from 'src/models/combinaison.models';
 import { ListCombinaison } from 'src/models/listcombinaison.models';
 
-// @Directive({selector: 'button[counting]'})
-
-// class CountClicks {
-//   numberOfClicks = 0;
-
-//   @HostListener('click', ['$event.target'])
-//   onClick(btn) {
-//     console.log('button', btn, 'number of clicks:', this.numberOfClicks++);
-//   }
-// }
 
 @Component({
   selector: 'app-cardcontainer',
@@ -155,7 +145,6 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       x.numGrid = this.initCards[i].numGrid;
       x.picture = this.initCards[i].picture;
     });
-    console.log(this.theme.images);
   }
 
   // DELAY

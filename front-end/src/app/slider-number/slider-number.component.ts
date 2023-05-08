@@ -16,7 +16,6 @@ export class SliderNumberComponent implements OnInit, AfterViewInit {
   constructor() {
   }
   ngAfterViewInit(): void {
-    console.log(this.service.value);
     this.service.subscribe((value: number) => {
       // find the element with the value
       const ele = Array.from(document.getElementsByName(this.name)).find((radio) => (radio as HTMLInputElement).value === value.toString());

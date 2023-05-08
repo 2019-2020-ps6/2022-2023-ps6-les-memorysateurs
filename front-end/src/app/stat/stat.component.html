@@ -4,93 +4,19 @@
       <img [src]="stockImage">
     </div>
     <div class="profil-info">
-      <p class="profil-prenom">{{prenom}}</p>
-      <p class="profil-nom">{{nom}}</p>
+      <div class="nomprenom">
+        <p class="profil-prenom">{{prenom}}</p>
+        <p class="profil-nom">{{nom}}</p>
+      </div>
       <p class="profil-stade">{{stade}}</p>
       <p class="profil-parties">{{partiesJouees}} parties jouées</p>
     </div>
   </div>
-
-  <div class="stats">
-    <div class="stat-lines">
-      <p class="stat-title">Temps de jeu</p>
-      <span [ngClass]="{'triangle-vert' : progresTemps,'triangle-rouge' : !progresTemps}" >&#x25B2;</span>
-      <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isErreursOpen)" class="bouton-tableau" id="plus-temps" (click)="toggleTemps()">+</button>
-    </div>
-    <div class="stat-lines">
-      <p class="stat-title">Nombre d'essais</p>
-      <span [ngClass]="{'triangle-vert' : progresEssais,'triangle-rouge' : !progresEssais}">&#x25B2;</span>
-      <button *ngIf="!(isTempsOpen ||isIndicesOpen ||isErreursOpen)" id="plus-essais" class="bouton-tableau" (click)="toggleEssais()">+</button>
-    </div>
-    <div class="stat-lines">
-      <p class="stat-title">Nombre d'erreurs</p>
-      <span [ngClass]="{'triangle-vert' : progresErreurs,'triangle-rouge' : !progresErreurs}">&#x25B2;</span>
-      <button *ngIf="!(isEssaisOpen ||isIndicesOpen ||isTempsOpen)"id="plus-erreurs" class="bouton-tableau" (click)="toggleErreurs()">+</button>
-    </div>
-    <div class="stat-lines">
-      <p class="stat-title">Nombre d'indices</p>
-      <span [ngClass]="{'triangle-vert' : progresIndices,'triangle-rouge' : !progresIndices}">&#x25B2;</span>
-      <button *ngIf="!(isEssaisOpen ||isTempsOpen ||isErreursOpen)" id="plus-indices" class="bouton-tableau"(click)="toggleIndices()">+</button>
-    </div>
+  <div class="containerStats">
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isTemps}" [data]="'Temps'" [title]="'Temps de jeu'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isEssais}" id="essais" [data]="'Essais'" [title]="'Nombre d\'essais'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isErreurs}" id="erreurs" [data]="'Erreurs'" [title]="'Nombre d\'erreurs'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isIndices}" id="indices" [data]="'Indices'" [title]="'Nombre d\'indices'" (activeEmitter)="activeStat($event)"></app-statcontainer>
   </div>
 </div>
-
-<div class="temps-content" [class.active]="isTempsOpen">
-  <p class="temps-title">Temps de jeu</p>
-<div class="tab-header" id="header-temps">
-  <p scope="col">Stade</p>
-  <p  scope="col">Date</p >
-  <p  scope="col">Cartes</p >
-  <p  scope="col">Temps</p >
-</div>
-  <div class="tableau" id="tab-temps"></div>
-  <div class="moyenne">
-    <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res" id="moyenne-temps"></p>
-  </div>
-</div>
-
-<div class="essais-content" [class.active]="isEssaisOpen">
-  <p class="essais-title">Nombre d'essais</p>
-  <div class="tab-header" id="header-essais">
-    <p scope="col">Stade</p>
-    <p  scope="col">Date</p >
-    <p  scope="col">Cartes</p >
-    <p  scope="col">Essais</p >
-  </div>
-  <div class="tableau" id="tab-essais"></div>
-  <div class="moyenne">
-    <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res" id="moyenne-essais"></p>
-  </div>
-</div>
-
-<div class="erreurs-content" [class.active]="isErreursOpen">
-  <p class="erreurs-title">Nombre d'erreurs</p>
-  <div class="tab-header" id="header-erreurs">
-    <p scope="col">Stade</p>
-    <p  scope="col">Date</p >
-    <p  scope="col">Cartes</p >
-    <p  scope="col">Erreurs</p >
-  </div>
-  <div class="tableau" id="tab-erreurs"></div>
-  <div class="moyenne">
-    <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res" id="moyenne-erreurs"></p>
-  </div>
-</div>
-
-<div class="indices-content" [class.active]="isIndicesOpen">
-  <p class="indices-title">Nombre d'indices</p>
-  <div class="tab-header" id="header-indices">
-    <p scope="col">Stade</p>
-    <p  scope="col">Date</p >
-    <p  scope="col">Cartes</p >
-    <p  scope="col">Indices</p >
-  </div>
-  <div class="tableau" id="tab-indices"></div>
-  <div class="moyenne">
-    <p class="moyenne-title">Moyenne</p>
-    <p class="moyenne-res" id="moyenne-indices"></p>
-  </div>
-</div>
+  

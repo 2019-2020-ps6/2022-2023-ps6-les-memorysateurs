@@ -16,6 +16,41 @@ constructor(temps : number,essais : number,erreurs : number,indices : number,dat
   this.nbCartes = nbCartes;
   this.stade = stade;
 }
+
+  getByDataTypeToString(dataType : string) : string {
+    dataType = dataType.toLowerCase();
+    switch (dataType) {
+      case "temps":
+        return "" + Math.floor(this.temps/60) +"min" + Math.floor(this.temps%60) +"s" ;
+      case "essais":
+        return ""+ Math.floor(this.essais);
+      case "erreurs":
+        return ""+ Math.floor(this.erreurs);
+      case "indices":
+        return ""+ Math.floor(this.indices);
+      default:
+        return "";
+    }
+  }
+  
+
+  getByDataType(dataType : string) : number {
+    dataType = dataType.toLowerCase();
+    switch (dataType) {
+      case "temps":
+        return this.temps;
+      case "essais":
+        return this.essais;
+      case "erreurs":
+        return this.erreurs;
+      case "indices":
+        return this.indices;
+      default:
+        return 0;
+    }
+  }
+
+
   getTemps(): number {
     return this.temps;
   }

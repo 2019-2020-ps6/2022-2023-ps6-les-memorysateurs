@@ -35,6 +35,7 @@ import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
 import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
 import { ErreurPartagerThemeComponent } from './erreur-partager-theme/erreur-partager-theme.component';
+import { StatContainerComponent } from './stat/statcontainer.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ErreurPartagerThemeComponent } from './erreur-partager-theme/erreur-par
     StatComponent,
     PartagerThemeComponent,
     ErreurPartagerThemeComponent,
+    StatContainerComponent
   ],
   imports: [
     BrowserModule,

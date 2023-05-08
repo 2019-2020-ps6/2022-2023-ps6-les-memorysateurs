@@ -1,0 +1,23 @@
+<div class="stat-lines">
+    <div class="header">
+        <p class="title">{{title}}</p>
+        <span [ngClass]="{'triangle-vert' : progres,'triangle-rouge' : !progres}" >&#x25B2;</span>
+        <button class="plus" (click)="toggle()" [ngClass]="{'active' : isActive}">{{(isActive)?"-":"+"}}</button>
+    </div>
+    
+    <div class="content" [class.active]="isActive">
+        <div class="tabcontainer">
+            <div class="tab-header" id="header">
+                <p scope="col">Stade</p>
+                <p  scope="col">Date</p >
+                <p  scope="col">Cartes</p >
+                <p  scope="col">{{data}}</p >
+            </div>
+            <div class="tableau" id="{{idTab}}"></div>
+        </div>
+        <div class="moyenne">
+            <p class="moyenne-title">Moyenne</p>
+            <p class="moyenne-res" id="moyenne">{{moyenne}}</p>
+        </div>
+    </div>
+</div>

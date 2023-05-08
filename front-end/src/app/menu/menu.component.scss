@@ -31,9 +31,9 @@
 #circle-menu-game {
     position: absolute;
     top: -92px;
-    left: -45px;
-    width: 180px;
-    height: 180px;
+    left: -80px;
+    width: 200px;
+    height: 200px;
     background-color: red;
     z-index: -1;
     border-radius: 50%;
@@ -119,11 +119,11 @@ header {
 
 .menu-header-cross-game {
     position: relative;
-    width: 75px;
-    height: 75px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 50px;
     cursor: pointer;
-    top: 10px;
+    top: 20px;
     left: -5px;
     &::before {
         content: "";
