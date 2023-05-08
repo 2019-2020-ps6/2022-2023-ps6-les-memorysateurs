@@ -87,4 +87,8 @@ export class CreerMemoryComponent implements OnInit {
       document.getElementById("sliderTime")!.setAttribute("disabled", "true");
     }
   }
+
+  retour(): void {
+    window.history.back();
+  }
 }

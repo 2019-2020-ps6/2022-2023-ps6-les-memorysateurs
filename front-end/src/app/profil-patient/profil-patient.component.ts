@@ -46,4 +46,8 @@ export class ProfilPatientComponent {
     this.patientService.patientSelectionne$.next(patientSelect);
     this.router.navigateByUrl('stat');
   }
+
+  retour(): void {
+    window.history.back();
+  }
 }

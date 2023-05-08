@@ -52,4 +52,8 @@ export class StatComponent implements OnInit {
       }
       this.isDisplayed = this.isTemps || this.isIndices || this.isErreurs || this.isEssais;
   }
+
+  retour(): void {
+    window.history.back();
+  }
 }
