@@ -31,13 +31,13 @@ import { PatientService } from '../services/patient.service';
         let grid = document.getElementById(this.idTab) as HTMLDivElement;
         let total = 0;
 
-        
-        let cnt = 0;
-    
+
+
+
         // @ts-ignore
         for( let i =this.patient.getValue()?.getStats()?.length-1; i>=Math.max(0, this.patient.getValue()?.getStats()?.length-4);i--){
 
-            if(cnt++ > 5) {}
+
             //stade
             let stade = document.createElement('p');
             stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
@@ -61,15 +61,15 @@ import { PatientService } from '../services/patient.service';
                 total += datai;
             grid.append(datap);
 
-    
+
         }
 
-        let moyennep = document.getElementById("moyenne") as HTMLParagraphElement;
-    
-        
-        // @ts-ignore
-        total = total/this.patient.getValue()?.getStats()?.length;
-        moyennep.innerHTML = this.moyenneToString(total,this.data);
+      let moyennep = document.getElementById("moyenne"+this.idTab) as HTMLParagraphElement;
+
+
+      // @ts-ignore
+      total = total/this.patient.getValue()?.getStats()?.length;
+      moyennep.innerHTML = this.moyenneToString(total,this.data);
         // @ts-ignore
         if(total >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getByDataType(this.data)){
           this.progres = true;
@@ -84,10 +84,12 @@ import { PatientService } from '../services/patient.service';
             case "temps":
                 return "" + Math.floor(n/60) +"min" + Math.floor(n%60) +"s" ;
             case "essais":
+
                 return ""+ Math.floor(n);
             case "erreurs":
                 return ""+ Math.floor(n);
             case "indices":
+
                 return ""+ Math.floor(n);
             default:
                 return "";
@@ -98,5 +100,5 @@ import { PatientService } from '../services/patient.service';
         this.isActive = !this.isActive;
         this.activeEmitter.emit(this.data);
     }
-  
+
 }
