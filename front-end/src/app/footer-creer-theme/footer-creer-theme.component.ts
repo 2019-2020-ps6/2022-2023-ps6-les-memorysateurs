@@ -47,7 +47,7 @@ export class FooterCreerThemeComponent {
   }
   retourListeTheme() {
     this.themeService.setEditTheme(undefined);
-    this.router.navigate(['/liste-theme']);
+    window.history.back();
   }
 
   ajouterTheme(){

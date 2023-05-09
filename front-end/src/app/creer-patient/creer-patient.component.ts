@@ -5,7 +5,7 @@ import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
 import {Router} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
-import {LISTE_STATS_VIDE} from "../../moks/stats-patient";
+
 @Component({
   selector: 'app-creer-patient',
   templateUrl: './creer-patient.component.html',
@@ -68,7 +68,7 @@ afficherPhoto(){
 
 retour(){
   this.patientService.setEditPatient(undefined);
-  this.router.navigate(['/liste-patient']);
+  window.history.back();
 }
 creerProfilPatient(){
 

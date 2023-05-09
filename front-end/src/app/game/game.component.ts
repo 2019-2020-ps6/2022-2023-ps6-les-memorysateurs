@@ -46,7 +46,9 @@ export class Game implements OnInit {
     this.gameService.combinations$.subscribe( combinaison => {
       this.lastCombinaison = combinaison.lastCombinaison;
     });
+    this.gameService.imagesCartesTrouvees$.next([]);
   };
+
 }
 
 
@@ -76,7 +78,7 @@ export class HintContainer implements OnInit, AfterViewInit {
   constructor(public sender: TimerService, public gameService : GameService) {
     this.sender.setDuration(this.gameService.dureeIndice$.value*60);
     this.sender.resetTimer();
-    
+
     this.subscription = this.sender.getTimer().subscribe( num => {
       this.progress = num;
       let bar = document.getElementById("meter-bar");
@@ -121,7 +123,7 @@ export class HintContainer implements OnInit, AfterViewInit {
   }
 
   toggleTimer() {
-    
+
     if (this.sender.isInRun()) {
       this.sender.clearTimer();
     } else {

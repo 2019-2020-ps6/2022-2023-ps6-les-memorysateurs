@@ -1,7 +1,7 @@
 import {Cardable} from "./cardable.models";
 import {ThemeService} from "../app/services/theme.service";
 import {Theme} from "./theme.models";
-import {LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
+import {LISTE_DEFAUT, LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
 import {Statistiques} from "./statistiques.models";
 
 export class Patient implements Cardable{
@@ -29,7 +29,7 @@ export class Patient implements Cardable{
       this.themes.push(t);
     })
     else
-      LISTE_THEME.forEach(t =>{
+      LISTE_DEFAUT.forEach(t =>{
         this.themes.push(t);
       })
 

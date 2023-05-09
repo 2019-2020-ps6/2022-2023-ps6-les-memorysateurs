@@ -29,11 +29,12 @@ export class ResultatPartieComponent {
   }
 
   onStatistiques() {
+
     this.router.navigateByUrl("stat");
   }
 
   onRelancerPartie() {
-    this.gameService.imagesCartesTrouvees$.next([]);
+
     this.router.navigateByUrl("creer-memory");
   }
 }
