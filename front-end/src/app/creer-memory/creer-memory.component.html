@@ -1,5 +1,4 @@
 <div id="container-creer-memory">
-  <button class="bouton-retour" (click)="retour()">Retour</button>
   <div id="div-theme-choisi">
     <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [editerEnable]="false" [selectionnerText]="'Choisir un Thème'"></app-item-frame>
   </div>
@@ -33,3 +32,5 @@
   </div>
 
 </div>
+
+<button class="bouton-retour" (click)="retour()">Retour</button>

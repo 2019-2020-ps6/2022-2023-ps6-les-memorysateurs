@@ -10,7 +10,7 @@
   padding-top: 50px;
   border-radius: 0 0 12px 12px;
   // box-shadow: lightgray 4px 4px 20px;
-  background: #EFEFEF;
+  background: #CFCFCF;
   display: flex;
   flex-direction: column;
 }
@@ -45,7 +45,7 @@ a:has(#connexion) {
   font-size: 30px;
   border-radius: 12px 12px 0px 0;
   color: #006A52;
-  background: #EFEFEF;
+  background: #CFCFCF;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -63,7 +63,6 @@ form {
 }
 
 .form-group {
-  background: #EFEFEF;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -77,6 +76,7 @@ input {
   height: 50px;
   width: 100%;
   margin-top: 5px;
+  text-indent: 15px;
 }
 
 label {
