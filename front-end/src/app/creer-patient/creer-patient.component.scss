@@ -103,6 +103,9 @@
       top: 50%;
       transform: translateY(-50%);
     }
+    &:checked + label::before {
+      background: #006A52;
+    }
   }
 }
 
@@ -312,4 +315,11 @@ img{
     background-color: rgba(0,0,0,.4);
     scale: 1;
   }
+}
+
+pp-erreur-creer-patient {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

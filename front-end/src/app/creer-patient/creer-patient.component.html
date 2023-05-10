@@ -44,9 +44,9 @@
   </div>
 </div>
 
+<app-erreur-creer-patient [erreurNom]="erreurNom" [erreurPrenom]="erreurPrenom" [erreurPhoto]="erreurPhoto" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-creer-patient>
 <button id="retour-creer-patient" class="bouton-vert" (click)="retour()">RETOUR</button>
 
-<app-erreur-creer-patient [erreurNom]="erreurNom" [erreurPrenom]="erreurPrenom" [erreurPhoto]="erreurPhoto" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-creer-patient>
 
 <div id="pop-up" [class.active]="info">
   <div class="croix" (click)="changeInfoBooleen()"></div>
