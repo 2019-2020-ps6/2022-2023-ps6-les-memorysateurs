@@ -1,0 +1,34 @@
+<div class="form-card">
+  <div class="header-form">
+    <h2 id="connexion">
+      <span>CONNEXION</span>
+    </h2>
+    
+    <a href="creer-compte">
+    <h2 id="creer-compte">
+        CREER UN COMPTE
+    </h2>
+  </a>
+  </div>
+  <div class="content">
+    <form [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="identifiant">Identifiant</label>
+        <input id="identifiant" type="text" formControlName="identifiant">
+      </div>
+  
+      <div class="form-group">
+        <label for="motDePasse">Mot de Passe</label>
+        <input id="motDePasse" type="text" formControlName="motDePasse">
+      </div>
+  
+    </form>
+  
+    <p id="mot-de-passe-oublie">
+      <a  href="mot-de-passe-oublie">mot de passe oublié ?</a>
+    </p>
+    <div class="container-button">
+      <button type="submit" (click)="onLogin()">Me Connecter</button>
+    </div>
+  </div>
+</div>

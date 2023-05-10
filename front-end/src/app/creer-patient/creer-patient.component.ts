@@ -5,6 +5,7 @@ import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
 import {Router} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
+import {AuthentificationService} from "../services/authentification.service";
 
 @Component({
   selector: 'app-creer-patient',
@@ -15,6 +16,7 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
+  
   @Input()
   erreurNom = false;
   @Input()

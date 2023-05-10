@@ -14,8 +14,12 @@ export class Patient implements Cardable{
   themes : Theme[] = [];
   stats : Statistiques[] = [];
 
+  idUtilisateur : number;
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined) {
+
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined, idUtilisateur : number) {
+
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
@@ -33,6 +37,7 @@ export class Patient implements Cardable{
         this.themes.push(t);
       })
 
+    this.idUtilisateur = idUtilisateur;
   }
 
 

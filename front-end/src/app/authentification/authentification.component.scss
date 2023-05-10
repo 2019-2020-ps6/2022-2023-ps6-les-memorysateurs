@@ -1,0 +1,120 @@
+.form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 950px;
+  margin: 0 auto;
+}
+
+.content {
+  padding-top: 50px;
+  border-radius: 0 0 12px 12px;
+  // box-shadow: lightgray 4px 4px 20px;
+  background: #EFEFEF;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-form {
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  &>* {
+    text-align: center;
+  }
+}
+
+a:has(#creer-compte) {
+  height: 100%;
+  background: #006A52;
+  border-radius: 12px 12px 0px 0;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+#connexion {
+  height: 100%;
+  font-size: 30px;
+  border-radius: 12px 12px 0px 0;
+  color: #006A52;
+  background: #EFEFEF;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  &>span {
+    height: 50%;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-group {
+  background: #EFEFEF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+}
+
+input {
+  border: none;
+  border-radius: 12px;
+  height: 50px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+label {
+  font-weight: bold;
+  margin: 5px 0 5px 10px;
+}
+
+.container-button {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  width: 100%;
+  height: 70px;
+  margin-top: 50px;
+}
+
+button {
+  text-transform: uppercase;
+  align-self: flex-end;
+  background: #006A52;
+  color: #FFFFFF;
+  border-radius: 12px;
+  border: 0;
+  font-size: 20px;
+  width: 38%;
+  height: 100%;
+  margin: 20px;
+}
+
+#mot-de-passe-oublie {
+  margin: 20px auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  &>* {
+    color: dodgerblue;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+}
