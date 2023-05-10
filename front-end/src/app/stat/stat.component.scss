@@ -1,0 +1,132 @@
+.stat-patient {
+  display: grid;
+  grid-template-columns: 0.3fr .7fr;
+  grid-gap: 50px;
+  margin-top: 5%;
+
+}
+
+p {
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+#container-infos {
+  display: grid;
+  grid-template-rows: .7fr 1fr;
+  align-items: center;
+  justify-content: center;
+  height: 550px;
+  width: 80%;
+  background: #CFCFCF;
+  border-radius: 20px;
+  margin-left: 20%;
+}
+
+#photo {
+  display: flex;
+  height: 100%;
+  width: 90%;
+  justify-content: center;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+
+}
+
+.profil-nom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-bottom: 0px;
+
+}
+
+.nomprenom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0px;
+
+}
+
+.profil-prenom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-top: 0px;
+
+}
+
+.profil-stade {
+  font-size: 20px;
+  color: black;
+}
+
+.profil-parties {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+thead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #006A52;
+  width: 100%;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.containerStats {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  & > app-statcontainer {
+    width: 100%;
+  }
+}
+
+app-statcontainer.invisible {
+  display: none;
+}
+
+.bouton-retour{
+  background-color: #FFFFFF;
+  color: #006A52;
+  font-weight: bold;
+  border-radius: 15px;
+  border: 2px solid #006A52;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 30px;
+  font-size: 30px;
+}
+
+.bouton-retour:hover{
+  background-color: #006A52;
+  color: #FFFFFF;
+}

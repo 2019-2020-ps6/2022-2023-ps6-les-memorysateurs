@@ -4,13 +4,13 @@
   <div id="container-donnee-patient">
     <p id="text-nouveau-profil">NOUVEAU PROFIL</p>
     <form id="form-nom-prenom" [formGroup]="patientForm">
-    <p class="donnee-patient">Nom :</p>
-    <input class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"/>
     <p class="donnee-patient">Prénom :</p>
-    <input class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"/>
+    <input class="input-identite" type="text" id="input-prenom"[formControlName]="'prenom'" (click)="erreurPrenomDisable()"/>
+    <p class="donnee-patient">Nom :</p>
+    <input class="input-identite" id="input-nom" type="text"[formControlName]="'nom'" (click)="erreurNomDisable()"/>
     </form>
     <div style="display: flex; align-content: flex-end; width: 100%">
-    <p class="donnee-patient">Stade de la maladie :</p>
+      <p class="donnee-patient">Stade de la maladie :</p>
       <button id="info-stade" (click)="changeInfoBooleen()">i</button>
     </div>
     <form id="container-radio-button" [formGroup]="patientForm">
@@ -26,18 +26,37 @@
   </div>
 
   <form id="container-photo-patient" [formGroup]="patientForm">
-    <div style="height: 18%"></div>
     <div id="photo">
-      <img  id="affichage-photo"/>
+      <div id="photo-section">
+        <img  id="affichage-photo"/>
+      </div>
+      <label class="bouton-vert" id="charger-une-photo" for="photo-button">Charger une photo</label>
+      <input id="photo-button"type="file" (change)="afficherPhoto()" [formControlName]="'photo'"/>
     </div>
-
-    <label class="bouton-vert" id="charger-une-photo" for="photo-button">Charger une photo</label>
-    <div style="height: 10%"></div>
-    <label class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</label>
-    <input id="photo-button"type="file" (change)="afficherPhoto()" [formControlName]="'photo'"/>
+    <div class="fit-end">
+      <button class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</button>
+    </div>
   </form>
-  <div></div>
 </div>
 <button id="retour-creer-patient" class="bouton-vert" (click)="retour()">RETOUR</button>
-<app-info-stade *ngIf="info" (close)="changeInfoBooleen()"></app-info-stade>
 
+<app-erreur-creer-patient [erreurNom]="erreurNom" [erreurPrenom]="erreurPrenom" [erreurPhoto]="erreurPhoto" *ngIf="popup" (popup)="popupChange($event)"></app-erreur-creer-patient>
+
+<div id="pop-up" [class.active]="info">
+  <div class="croix" (click)="changeInfoBooleen()"></div>
+  <div id="container-texte">
+    <div>
+      <p class="titre-stade"id="titre-stade-3">Stade 3 : déclin cognitif léger</p>
+      <p class="description-stade"id="description-stade-3">Lorsque les pertes de mémoire et les troubles cognitifs deviennent plus fréquents et commencent à être remarqués.</p>
+    </div>
+    <div>
+      <p class="titre-stade"id="titre-stade-4">Stade 4 : déclin cognitif modéré</p>
+      <p class="description-stade"id="description-stade-4">La personne présente clairement des signes de déficit mental et cognitif, indiquant un début de démence ou de maladie d'Alzheimer.</p>
+    </div>
+    <div>
+      <p class="titre-stade"id="titre-stade-5">Stade 5 : déclin cognitif relativement grave</p>
+      <p class="description-stade"id="description-stade-5">Le patient risque de ne plus être capable de s'acquitter normalement des tâches du quotidien.</p>
+    </div>
+  </div>
+</div>
+<div class="blur" [class.active]="info" (click)="changeInfoBooleen()"></div>

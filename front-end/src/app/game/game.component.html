@@ -1,4 +1,15 @@
-<section class="game-board">
-	<app-cardcontainer></app-cardcontainer>
-	<app-hintcontainer></app-hintcontainer>
+<section class="sectContainer">
+	<section class="game-board">
+		<div class="centered">
+			<app-cardcontainer  [theme]="theme" [nbCards]="nbCards"></app-cardcontainer>
+		</div>
+	<app-hintcontainer [enableTimer]="enableTimer"></app-hintcontainer>
+	</section>
+	<section id="combSection">
+		<div id="cardCombContainer">
+			<app-card [isFlipped]="true" [isClickable]="false" id="card1"  *ngFor="let card of lastCombinaison" #card.name [picture]="card.picture" [numCard]="card.numCard" [numGrid]="card.numGrid"></app-card>
+		</div>
+		<div id="gradientBackground"></div>
+		<p id="numberRecurenceCombinaison">Cette combinaison est revenu x fois</p>
+	</section>
 </section>

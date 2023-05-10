@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Theme} from "../../models/theme.models";
 import {Patient} from "../../models/patient.models";
@@ -6,6 +6,7 @@ import {PatientService} from "../services/patient.service";
 import {Router} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
 import {AuthentificationService} from "../services/authentification.service";
+
 @Component({
   selector: 'app-creer-patient',
   templateUrl: './creer-patient.component.html',
@@ -15,8 +16,17 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
-  constructor(private router: Router,public formBuilder: FormBuilder,private patientService : PatientService,
-              public authentificationService : AuthentificationService) {
+  
+  @Input()
+  erreurNom = false;
+  @Input()
+  erreurPrenom = false;
+  @Input()
+  erreurPhoto = false;
+
+
+  popup=false;
+  constructor(private router: Router,public formBuilder: FormBuilder,private patientService : PatientService) {
     this.patientForm = this.formBuilder.group({
       nom : [''],
       prenom : [''],
@@ -43,7 +53,7 @@ afficherPhoto(){
       stockImage.src = reader.result as string;
     }
     reader.readAsDataURL(file as Blob);
-
+  this.erreurPhotoDisable();
 
   }
   setStade(){
@@ -60,40 +70,20 @@ afficherPhoto(){
 
 retour(){
   this.patientService.setEditPatient(undefined);
-  this.router.navigate(['/liste-patient']);
+  window.history.back();
 }
 creerProfilPatient(){
 
   let ajout : boolean = false;
   let erreur = false;
   const image = document.getElementById("affichage-photo") as HTMLImageElement;
-  if(this.patientForm.value['nom']==''){
-    const nom = document.getElementById("input-nom") as HTMLInputElement;
-    nom.style.background = "#F00000";
+  if(this.patientForm.value['nom'] == "" || this.patientForm.value['prenom'] == ""  ||image.src ==''){
     erreur = true;
-  }else{
-    const nom = document.getElementById("input-nom") as HTMLInputElement;
-    nom.style.background = "#FFFFFF";
-  }
-  if(this.patientForm.value['prenom']==''){
-    const prenom = document.getElementById("input-prenom") as HTMLInputElement;
-    prenom.style.background = "#F00000";
-    erreur = true;
-  }else{
-    const prenom = document.getElementById("input-prenom") as HTMLInputElement;
-    prenom.style.background = "#FFFFFF";
-  }
-  if(image.src ==''){
-    image.style.background = "#F00000";
-    erreur = true;
-  }else{
-
-    image.style.background = "#FFFFFF";
+    this.afficherErreur(erreur);
   }
 if(!erreur) {
   if (this.patient == undefined) {
-    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'],
-      image.src, this.patientForm.value['stade'],  this.authentificationService.utilisateurConnecte$.getValue()?.id!);
+    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined,undefined);
     this.patient = patient;
     ajout = true;
   } else {
@@ -111,6 +101,35 @@ if(!erreur) {
   this.patientService.setEditPatient(undefined);
 }
 }
+afficherErreur(erreur : boolean){
+
+if(this.patientForm.value['nom']==''){
+  const nom = document.getElementById("input-nom") as HTMLInputElement;
+  nom.style.background = "#F00000";
+  nom.style.opacity = "0.5";
+  this.erreurNom = erreur;
+}else{
+  this.erreurNomDisable();
+}
+  if(this.patientForm.value['prenom']==''){
+    const prenom = document.getElementById("input-prenom") as HTMLInputElement;
+    prenom.style.background = "#F00000";
+    prenom.style.opacity = "0.5";
+    this.erreurPrenom = erreur;
+  }else{
+   this.erreurPrenomDisable();
+  }
+  const image = document.getElementById("affichage-photo") as HTMLImageElement;
+  if(image.src ==''){
+    image.style.background = "#F00000";
+    image.style.opacity = "0.5";
+    this.erreurPhoto = erreur;
+  }else{
+    this.erreurPhotoDisable();
+  }
+  this.popup = erreur;
+}
+
 
   changeInfoBooleen(){
     this.info = !this.info;
@@ -153,5 +172,27 @@ if(!erreur) {
     this.patientService.setEditPatient(undefined);
     this.router.navigate(['/liste-patient']);
   }
+  popupChange(value : boolean){
+    this.popup = value;
+  }
 
+  erreurNomDisable(){
+    const nom = document.getElementById("input-nom") as HTMLInputElement;
+    nom.style.background = "#FFFFFF";
+    nom.style.opacity = "1";
+    this.erreurNom = false;
+  }
+  erreurPrenomDisable(){
+    const prenom = document.getElementById("input-prenom") as HTMLInputElement;
+    prenom.style.background = "#FFFFFF";
+    prenom.style.opacity = "1";
+    this.erreurPrenom = false;
+  }
+
+  erreurPhotoDisable(){
+    const image = document.getElementById("affichage-photo") as HTMLImageElement;
+    image.style.background = "#FFFFFF";
+    image.style.opacity = "1";
+    this.erreurPhoto = false;
+  }
 }

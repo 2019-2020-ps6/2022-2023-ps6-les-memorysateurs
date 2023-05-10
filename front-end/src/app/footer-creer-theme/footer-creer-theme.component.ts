@@ -1,9 +1,11 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {FormThemeService} from "../services/formTheme.service";
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
+import {Patient} from "../../models/patient.models";
+import {PatientService} from "../services/patient.service";
+
 
 @Component({
   selector: 'app-footer-creer-theme',
@@ -19,8 +21,9 @@ export class FooterCreerThemeComponent {
   theme : Theme |undefined;
   @Output()
   erreur : EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor(private router: Router,public formThemeService: FormThemeService,private themeService : ThemeService) {
+  bas_jaune : boolean = true;
+  supprimer : boolean = false;
+  constructor(private router: Router,public formThemeService: FormThemeService,private themeService : ThemeService,private patientService :PatientService) {
 
   }
   ngOnInit(): void {
@@ -31,10 +34,22 @@ export class FooterCreerThemeComponent {
     this.formThemeService.imageSubject$.subscribe(images => {
       this.images = images;
     });
+    const bouton = document.getElementById("boutonChangeant") as HTMLButtonElement;
+    if(this.theme == undefined){
+      this.bas_jaune = true;
+      this.supprimer = false;
+      bouton.innerHTML = "Partager la Création";
+    }else{
+      this.bas_jaune = false;
+      this.supprimer = true;
+      bouton.innerHTML = "Supprimer";
+    }
   }
-  retourListeTheme() {   this.themeService.setEditTheme(undefined);
-    this.router.navigate(['/liste-theme']);
+  retourListeTheme() {
+    this.themeService.setEditTheme(undefined);
+    window.history.back();
   }
+
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
@@ -48,7 +63,7 @@ export class FooterCreerThemeComponent {
     ajout = false;
     }
 
-    if ((this.theme.titre != "") && this.theme.images.length != 0) {
+    if ((this.theme.titre != "") && this.theme.images.length >=4) {
       this.erreur.emit(false);
       if(ajout) {
         this.themeService.addTheme(this.theme);
@@ -56,8 +71,23 @@ export class FooterCreerThemeComponent {
       this.router.navigate(['/liste-theme']);
     } else {
       this.erreur.emit(true);
-
+      this.theme = undefined;
     }
     this.themeService.setEditTheme(undefined);
+  }
+
+  clickPartagerOuSupprimer(){
+    if(this.supprimer) {
+      this.themeService.removeTheme(this.theme);
+      this.themeService.setEditTheme(undefined);
+      const patient = this.patientService.patientSelectionne$;
+      let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
+      patientSelect.setThemes(this.themeService.listeThemes$.value);
+
+      this.router.navigate(['/liste-theme']);
+    }
+    if(this.bas_jaune){
+      this.router.navigate(['/partager-theme']);
+    }
   }
 }

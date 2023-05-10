@@ -1,14 +1,22 @@
+.centered {
+  margin-top: 50px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #container-creer-patient{
   display: grid;
   //flex-direction: row;
-  grid-template-columns: 0.2fr 2fr 1fr .1fr;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr .1fr;
+  padding: 20px;
   width: 1044px;
   height: 600px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #EFEFEF;
+  position: relative;
+  background: #CFCFCF;
   border-radius: 30px;
   font-family: sans-serif;
 }
@@ -18,12 +26,6 @@
   // background: blue;
   align-items: center;
 }
-#container-photo-patient{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  //  background: red;
-}
 
 #text-nouveau-profil{
   font-size: 230%;
@@ -31,27 +33,49 @@
   font-weight: bold;
 }
 #form-nom-prenom{
-  height: 50%;
+  height: 90%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  &>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.align {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
   width: 100%;
 }
+
 .donnee-patient{
   align-self: baseline;
-  font-size: 150%;
   font-weight: bold;
-
+  font-size: 20px;
+  padding-left: 10px;
+  margin: 0;
 }
 .input-identite{
   position: relative;
   align-self: baseline;
+  font-size: 20px;
   width: 90%;
-  height: 20%;
+  height: auto;
   border-radius: 12px;
   border: 3px solid #006A52;
   background-color: transparent;
-  font-size: 150%;
   font-weight: bold;
-  line-height: 250%;
-  padding-left: 10px;
+  padding: 15px 20px;
+  margin-top: 5px;
 }
 #info-stade{
 margin-left: 10px;
@@ -65,14 +89,29 @@ margin-left: 10px;
   font-weight: bold;
 }
 
-#photo{
+
+#container-photo-patient{
   display: flex;
-  width: 90%;
-  height: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background: #FFFFFF;
+  border-radius: 17px;
+  width: 100%;
+  height: 85%;
+  padding: 20px 0;
+  //  background: red;
+}
+
+#photo {
+  overflow: hidden;
+  position: relative;
+  min-width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 17px;
 }
 img{
   position:relative;
@@ -89,16 +128,10 @@ img{
 
 }
 #modifier-le-profil{
-  width: 80%;
-  height: 8%;
+  border: none;
+  width: 90%;
   font-size: 150%;
   line-height: 200%;
-}
-#photo-button{
-  position: relative;
-  top : -18%;
-  left: 2%;
-  opacity: 0;
 }
 
 app-info-stade{
@@ -120,34 +153,50 @@ app-info-stade{
   border: red;
 
 }
+
 #bouton-en-plus{
-  position: absolute;
-  width: 1044px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 1/3;
+  grid-row: 2;
   font-family: sans-serif;
+  height: 100%;
+  &>* {
+    font-size: 180%;
+    bottom: 0%;
+    margin-bottom: 1.5%;
+    background: #006A52;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 45%;
+    height: 80px;
+    border-radius: 20px;
+    border: #006A52;
+  }
 }
 
-#stats{
-  height: 12%;
-  width: 45%;
-  font-size: 180%;
-  line-height: 260%;
-}
-#lancer-partie{
-  font-size: 180%;
-  bottom: 0%;
-  margin-bottom: 1.5%;
-  background: #006A52;
-
+.bouton-retour{
+  background-color: #FFFFFF;
+  color: #006A52;
   font-weight: bold;
-  color: #FFFFFF;
-  width: 45%;
-  height: 80px;
-  border-radius: 20px;
-  border: #006A52;
+  border-radius: 15px;
+  border: 2px solid #006A52;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 30px;
+  font-size: 30px;
 }
+
+.bouton-retour:hover{
+  background-color: #006A52;
+  color: #FFFFFF;
+}
+
+

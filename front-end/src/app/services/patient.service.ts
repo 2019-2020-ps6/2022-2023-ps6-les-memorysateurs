@@ -11,7 +11,7 @@ import {AuthentificationService} from "./authentification.service";
 
 export class PatientService {
   public listePatient$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(LISTE_PATIENT);
-  public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
+    public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(LISTE_PATIENT[0]);
   public patientEdite$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
 
 

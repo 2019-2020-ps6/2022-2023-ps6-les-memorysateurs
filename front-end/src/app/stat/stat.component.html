@@ -1,0 +1,23 @@
+<div class="stat-patient">
+  <button class="bouton-retour" (click)="retour()">Retour</button>
+  <div id="container-infos">
+    <div id="photo">
+      <img [src]="stockImage">
+    </div>
+    <div class="profil-info">
+      <div class="nomprenom">
+        <p class="profil-prenom">{{prenom}}</p>
+        <p class="profil-nom">{{nom}}</p>
+      </div>
+      <p class="profil-stade">{{stade}}</p>
+      <p class="profil-parties">{{partiesJouees}} parties jouées</p>
+    </div>
+  </div>
+  <div class="containerStats">
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isTemps}" [data]="'Temps'" [title]="'Temps de jeu'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isEssais}" id="essais" [data]="'Essais'" [title]="'Nombre d\'essais'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isErreurs}" id="erreurs" [data]="'Erreurs'" [title]="'Nombre d\'erreurs'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+    <app-statcontainer [ngClass]="{'invisible': this.isDisplayed && !this.isIndices}" id="indices" [data]="'Indices'" [title]="'Nombre d\'indices'" (activeEmitter)="activeStat($event)"></app-statcontainer>
+  </div>
+</div>
+

@@ -1,0 +1,73 @@
+$padding: 10px;
+
+
+
+button {
+    background-color: #006A52;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    min-width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background-color: #004D3D;
+    }
+    &:first-child {
+        border-radius: 30px 15px 15px 30px;
+    }
+    &:last-child {
+        border-radius: 15px 30px 30px 15px;
+    }
+}
+
+#div-nombre-cartes {
+    display: flex;
+    flex-direction: column;
+    min-width: 90%;
+    align-items: center;
+    justify-content: center;
+    background-color: #CFCFCF;
+    border-radius: 20px;
+    padding: $padding;
+  }
+
+#texte-nombre-cartes {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.nbcards {
+    display: none;
+    &:checked + label {
+        border: solid 4px #006A52;
+        color: #006A52;
+        transition: all .1s ease-in;
+    }
+    & + label {
+        text-align: center;
+        padding: 10px;
+        border-radius: 15px;
+        border: solid 4px transparent;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+        transition: none;
+    }
+}
+
+#choix-nombre {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+}

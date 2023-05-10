@@ -1,9 +1,10 @@
 #pop-up{
+  position: absolute;
+  top:0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  background: #EFEFEF;
-  height: 100%;
-  width: 80%;
+  background: #CFCFCF;
   border: 2px solid black;
   justify-content: space-between;
 }

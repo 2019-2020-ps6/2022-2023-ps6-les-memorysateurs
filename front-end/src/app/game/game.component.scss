@@ -1,31 +1,143 @@
 
 section.game-board {
-    display: grid;
-    grid-template-columns: 1fr 0.3fr;
-    grid-template-areas: "board board" "board board";
-    background-color: #f5f5f5;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     align-items: center;
 }
 
 app-hintcontainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
 }
 
-.meter {
+#meter {
     display: flex;
-    height: 50px;
-    width: 200px;
+    flex-wrap: wrap;
+    height: 20px;
+    width: 100%;
     background-color: white;
     text-align: center;
-    justify-content: center;
     align-items: center;
     margin-top: 10px;
     color : #000;
-    border-radius: 5px;
+    border-radius: 30px;
     font-size: 20px;
     font-weight: bold;
+}
+
+#numberRecurenceCombinaison {
+    z-index: 1;
+    position: absolute;
+    bottom: 10px;
+}
+
+#meter-bar {
+    width: 0;
+    height: 100%;
+    border-radius: 30px;
+    background-color: #4CAF50;
+    transition: background-color linear;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hintcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: none;
+}
+
+button {
+    transition: all 0.2s ease-in-out;
+}
+
+.sectContainer {
+    overflow: hidden;
+    position: relative;
+}
+
+$popheight: 175px;
+
+@keyframes combSection {
+    0%, 100% {
+        bottom: -$popheight*2;
+    }
+    10%, 90% {
+        bottom: 0;
+    }
+}
+
+#combSection {
+    //annim
+    position: fixed;
+    bottom: -$popheight*2;
+    left: 0;
+    width: 100%;
+    height: $popheight;
+    animation: all 15s ease-in-out;
+
+    //content
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    
+    & > p {
+        position: absolute;
+        bottom: 0;
+    }
+}
+  
+@keyframes slide-up {
+    0%, 100%{
+      bottom: -$popheight*2;
+    }
+    10%, 90% {
+      bottom: 0px;
+    }
+}
+
+#cardCombContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: -60px;
+    z-index: -1;
+    padding-top: 10px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.808) 20%, rgba(255, 255, 255, 0) 70%);
+    & * {
+        cursor: auto;
+    }
+    & > * {
+        scale: 0.7;
+    }
+    & > *:first-child {
+        rotate: -30deg;
+    }
+
+    
+    & > *:last-child {
+        rotate: 30deg;
+    }
+}
+
+#gradientBackground {
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(ellipse at 50% 175%, rgba(0, 63, 47, 0.808) 25%, rgba(255, 255, 255, 0) 65%);
 }

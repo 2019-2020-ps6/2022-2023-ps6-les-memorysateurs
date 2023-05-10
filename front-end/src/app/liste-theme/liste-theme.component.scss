@@ -1,31 +1,47 @@
-$padding : 10px;
+$padding : 20px;
 
 .liste-theme {
-  padding-left: 5%;
+  padding: 50px 5%;
   .bloc-scrollable {
-    height: 450px;
     display: flex;
-    overflow: scroll;
-    padding: 4%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    gap: 20px;
+    padding: 20px 0;
     justify-content: flex-start;
-    background: #FFFFFF;
     border-radius: 12px;
 
   }
 }
 
-.bloc-ajouter-theme ,app-item-frame {
-  margin-right: 40px;
-  min-width: 20%;
-  height: 100%;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #CFCFCF;
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #006A52;
+  border-radius: 30px;
+  :hover {
+    background: #006A52;
+  }
+}
+
 .bloc-ajouter-theme {
   display: flex;
-  background: #EFEFEF;
-  border-radius: 12px;
-  padding: 10px;
-  min-width: calc(20% - 2*$padding);
-  height: calc(100% - 2*$padding);
+  align-items: center;
+  justify-content: center;
+  background: #CFCFCF;
+  border-radius: 20px;
+  min-width: 270px;
+  height: 500px;
 }
 
 .bouton-ajouter-theme {
@@ -33,4 +49,6 @@ $padding : 10px;
   font-weight: bold;
   border: 4px #006A52 dashed;
   border-radius: 12px;
+  width: 85%;
+  height: 90%;
 }

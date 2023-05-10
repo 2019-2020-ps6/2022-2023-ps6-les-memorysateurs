@@ -1,7 +1,10 @@
 #bouton-bas-creer-theme{
+  position: absolute;
+  width: 100%;
   display:flex;
   flex-wrap: wrap;
   flex-direction: row;
+  gap: 20px;
   padding-top: 2%;
   align-content: center;
   margin-left: auto;
@@ -10,20 +13,36 @@
 }
 .bas-vert{
   background: #006A52;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   color: #FFFFFF;
-  width: 21%;
+  width: calc(150px + 10%);
   height: 80px;
   border-radius: 20px;
   border: #006A52;
+  bottom: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+
 }
 .bas-jaune{
   background: #FCC938;
   font-size: 180%;
   font-weight: bold;
   color: #FFFFFF;
-  width: 21%;
+  width: 350px;
+  height: 80px;
+  border-radius: 20px;
+  border: #FCC938;
+}
+
+.supprimer{
+  background: #FF0000;
+  font-size: 180%;
+  font-weight: bold;
+  color: #FFFFFF;
+  width: 350px;
   height: 80px;
   border-radius: 20px;
   border: #FCC938;

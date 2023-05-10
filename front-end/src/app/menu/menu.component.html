@@ -1,0 +1,60 @@
+
+<div *ngIf="router.url !== '/game'">
+  <div id="circle-menu"></div>
+  <div id="blur-menu" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+  <header>
+    <div class="burger-menu" (click)="toggleMenu()">
+      <div class="burger-menu-line"></div>
+      <div class="burger-menu-line"></div>
+      <div class="burger-menu-line"></div>
+    </div>
+    <div class="logo">
+      <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
+    </div>
+
+    <div class="menu-container" [class.active]="isMenuOpen">
+      <div class="menu-content">
+        <div class="menu-header">
+          <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
+        </div>
+        <div class="menu-body">
+          <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active"  (click)="toggleMenu()">
+            <a>Accueil</a>
+          </div>
+          <div class="menu-body-item" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
+            <a>Theme</a>
+          </div>
+          <div class="menu-body-item" routerLink="/connexion" routerLinkActive="active" (click)="toggleMenu()">
+            <a>Déconnexion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div *ngIf="router.url == '/game'">
+  <div id="circle-menu-game"></div>
+  <div id="blur-menu" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+  <header>
+    <div class="burger-menu" (click)="toggleMenu()">
+      <div class="menu-header-cross-game"></div>
+    </div>
+    <div class="logo">
+      <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
+    </div>
+
+    <div class="menu-container-game" [class.active]="isMenuOpen">
+      <div class="menu-content">
+        <div class="menu-header">
+          <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
+        </div>
+        <div class="menu-body">
+          <div class="menu-body-item"  (click)=" confirmExit() ">
+            <a>Quitter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>

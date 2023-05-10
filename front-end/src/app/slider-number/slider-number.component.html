@@ -1,0 +1,11 @@
+<div id="div-nombre-cartes">
+    <p id="texte-nombre-cartes">{{title}}</p>
+    <div id="choix-nombre">
+        <button (click)="onClickMinus()">-</button>
+        <div *ngFor="let num of numbers">
+            <input type="radio" name="{{name}}" id="card{{num}}{{name}}" value="{{num}}" class="nbcards" (click)="onClickRadio($event)">
+            <label for="card{{num}}{{name}}">{{num}}</label>
+        </div>
+        <button (click)="onClickPlus()">+</button>
+    </div>
+  </div>

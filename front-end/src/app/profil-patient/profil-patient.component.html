@@ -1,36 +1,35 @@
-<div id="container-creer-patient">
-  <div></div>
-  <div id="container-donnee-patient">
-    <div style="height: 10%"></div>
-    <div id="form-nom-prenom" >
-      <p class="donnee-patient">Nom :</p>
-      <p class="input-identite" type="text" id="input-nom"[formControlName]="'nom'"></p>
-      <p class="donnee-patient">Prénom :</p>
-      <p class="input-identite" id="input-prenom" type="text"[formControlName]="'prenom'"></p>
-    </div>
-    <div style="display: flex; align-content: flex-end; width: 100%">
-      <p class="donnee-patient">Stade de la maladie :</p>
-      <p class="donnee-patient" id="info-stade">Stade 4</p>
+<button class="bouton-retour" (click)="retour()">Retour</button>
+<div class="centered">
+  <div id="container-creer-patient">
+    <div id="container-donnee-patient">
+      <div id="form-nom-prenom" >
+        <div>
+          <p class="donnee-patient">Prénom :</p>
+          <p class="input-identite" type="text" id="input-prenom"[ngModel]="'prenom'"></p>
+        </div>
+        <div>
+          <p class="donnee-patient">Nom :</p>
+          <p class="input-identite" id="input-nom" type="text"[ngModel]="'nom'"></p>
+        </div>
+        <div class="align">
+          <p class="donnee-patient">Stade de la maladie : <span id="info-stade">Stade 4</span></p>
+        </div>
+      </div>
+
     </div>
 
+    <div id="container-photo-patient" >
+      <div id="photo">
+        <img  id="affichage-photo"/>
+      </div>
+      <button class="bouton-vert" id="modifier-le-profil" (click)="modifierProfil()" >Modifier le profil</button>
+    </div>
+    <div id="bouton-en-plus">
+      <button class="bouton-vert"  id="stats" (click)="navStat()">STATISTIQUES</button>
+      <button id="lancer-partie" class="bouton-vert" (click)="navReglagePartie()">LANCER UNE PARTIE</button>
+    </div>
   </div>
-
-  <div id="container-photo-patient" >
-    <div style="height: 10%"></div>
-    <div id="photo">
-      <img  id="affichage-photo"/>
-    </div>
-
-    <label class="bouton-vert" id="modifier-le-profil" (click)="modifierProfil()" >Modifier le profil</label>
-    <div style="height: 10%"></div>
-
-
-  </div>
-  <div></div>
 </div>
-<div id="bouton-en-plus">
-  <label class="bouton-vert"  id="stats" >Statistiques</label>
-  <button id="lancer-partie" class="bouton-vert" >LANCER UNE PARTIE</button></div>
 
 
 
