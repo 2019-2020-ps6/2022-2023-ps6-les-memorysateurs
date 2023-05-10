@@ -25,4 +25,15 @@ export class MenuComponent {
     this.toggleMenu();
     return bool;
   }
+  confirmDeconection() {
+    let bool = confirm('Êtes-vous sûr de vouloir vous déconnecter ?');
+
+    if(bool) {
+
+      this.router.navigate(['/authentification']);
+    }
+    this.toggleMenu();
+    return bool;
+  }
+
 }
