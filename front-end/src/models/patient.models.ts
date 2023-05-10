@@ -7,13 +7,15 @@ export class Patient implements Cardable{
   prenom : string;
   photo : any;
   stade : 3 | 4  | 5 ;
+  idUtilisateur : number;
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5) {
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5, idUtilisateur : number) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
     this.photo = photo;
     this.stade = stade;
+    this.idUtilisateur = idUtilisateur;
   }
 
   getID(): number {

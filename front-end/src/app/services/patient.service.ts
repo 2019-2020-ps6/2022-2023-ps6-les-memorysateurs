@@ -3,6 +3,7 @@ import {BehaviorSubject, take} from "rxjs";
 import {Patient} from "../../models/patient.models";
 import {LISTE_PATIENT} from "../../moks/liste-patient.moks";
 import {Theme} from "../../models/theme.models";
+import {AuthentificationService} from "./authentification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class PatientService {
   public listePatient$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(LISTE_PATIENT);
   public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
   public patientEdite$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
+
+
 
   public addPatient(patient : Patient){
     let actualList = this.listePatient$.asObservable();
