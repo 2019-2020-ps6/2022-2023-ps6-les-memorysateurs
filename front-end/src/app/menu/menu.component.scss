@@ -192,6 +192,14 @@ header {
     display: flex;
     justify-content: right;
     padding: 1rem 2rem 0rem 0rem;
+    position: relative;
+}
+
+
+.menu-body-item:last-child:is(#deconection) {
+    position: absolute;
+    bottom: 0;
+    width: 86%;
 }
 
 .menu-body-item {

@@ -22,3 +22,8 @@ export const LISTE_THEME_2: Theme[] = [
   new Theme('Theme 2', ['assets/images/image034.png']),
 
 ]
+
+export const LISTE_DEFAUT: Theme[] = [
+  new Theme('Défaut', ['assets/images/default/clock.png','assets/images/default/spacejet.png', 'assets/images/default/ring.png', 'assets/images/default/hamster.png'])
+
+]

@@ -5,7 +5,8 @@ import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
 import {Router} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
-import {LISTE_STATS_VIDE} from "../../moks/stats-patient";
+import {AuthentificationService} from "../services/authentification.service";
+
 @Component({
   selector: 'app-creer-patient',
   templateUrl: './creer-patient.component.html',
@@ -15,6 +16,7 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
+  
   @Input()
   erreurNom = false;
   @Input()
@@ -68,7 +70,7 @@ afficherPhoto(){
 
 retour(){
   this.patientService.setEditPatient(undefined);
-  this.router.navigate(['/liste-patient']);
+  window.history.back();
 }
 creerProfilPatient(){
 
@@ -81,7 +83,7 @@ creerProfilPatient(){
   }
 if(!erreur) {
   if (this.patient == undefined) {
-    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined,undefined);
+    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined,undefined, 0);
     this.patient = patient;
     ajout = true;
   } else {

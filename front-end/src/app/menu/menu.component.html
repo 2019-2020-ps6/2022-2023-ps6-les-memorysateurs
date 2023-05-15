@@ -11,7 +11,7 @@
     <div class="logo">
       <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
     </div>
-        
+
     <div class="menu-container" [class.active]="isMenuOpen">
       <div class="menu-content">
         <div class="menu-header">
@@ -23,6 +23,9 @@
           </div>
           <div class="menu-body-item" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
             <a>Theme</a>
+          </div>
+          <div id="deconection" class="menu-body-item" routerLink="/connexion" routerLinkActive="active" (click)="confirmDeconection()">
+            <a>Déconnexion</a>
           </div>
         </div>
       </div>
@@ -40,14 +43,14 @@
     <div class="logo">
       <img src="../assets/images/memorysateur/memorysateurs.png" alt="Memorysateurs">
     </div>
-        
+
     <div class="menu-container-game" [class.active]="isMenuOpen">
       <div class="menu-content">
         <div class="menu-header">
           <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
         </div>
         <div class="menu-body">
-          <div class="menu-body-item" routerLink="/creer-memory" routerLinkActive="active"  (click)="confirmExit() && toggleMenu() ">
+          <div class="menu-body-item"  (click)=" confirmExit() ">
             <a>Quitter</a>
           </div>
         </div>

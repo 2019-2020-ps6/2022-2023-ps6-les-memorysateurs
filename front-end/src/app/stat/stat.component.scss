@@ -1,9 +1,11 @@
 .stat-patient {
   display: grid;
-  grid-template-columns: 0.3fr .7fr;
-  grid-gap: 50px;
-  margin-top: 5%;
-
+  grid-template-columns: .3fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 p {
@@ -12,34 +14,50 @@ p {
   padding: 0;
 }
 
-#container-infos {
-  display: grid;
-  grid-template-rows: .7fr 1fr;
+.centered {
+  display: flex;
+  width: 100%;
+  height: 100%;
   align-items: center;
   justify-content: center;
-  height: 550px;
-  width: 80%;
+
+}
+
+#container-infos {
+  display: grid;
+  grid-template-rows: .7fr .3fr;
+
+  height: 95%;
+  width: 300px;
   background: #CFCFCF;
   border-radius: 20px;
-  margin-left: 20%;
+  gap: 10px;
+  padding: 20px;
 }
 
 #photo {
   display: flex;
-  height: 100%;
-  width: 90%;
   justify-content: center;
-  background-color: white;
-  border-radius: 12px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  &>img{
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    overflow: hidden;
+  }
+
+  background-color: #FFFFFF;
+  border-radius: 15px;
 }
 
 .profil-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  background-color: blue;
-  
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
 .profil-nom {
@@ -47,7 +65,7 @@ p {
   font-weight: bold;
   color: #006A52;
   margin-bottom: 0px;
-  background-color: red;
+
 }
 
 .nomprenom {
@@ -56,7 +74,7 @@ p {
   align-items: center;
   justify-content: flex-start;
   margin-top: 0px;
-  background-color: blue;
+
 }
 
 .profil-prenom {
@@ -64,7 +82,7 @@ p {
   font-weight: bold;
   color: #006A52;
   margin-top: 0px;
-  background-color: red;
+
 }
 
 .profil-stade {
@@ -109,24 +127,19 @@ app-statcontainer.invisible {
   display: none;
 }
 
-.bouton-retour{
-  background-color: #FFFFFF;
-  color: #006A52;
-  font-weight: bold;
-  border-radius: 15px;
-  border: 2px solid #006A52;
-  text-align: center;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: all 0.3s ease;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 30px;
-  font-size: 30px;
-}
 
-.bouton-retour:hover{
-  background-color: #006A52;
+.bouton-retour{
+  position: absolute;
+  bottom: 0%;
+  margin-bottom: 1.5%;
+  background: #006A52;
+  font-size: 32px;
+  font-weight: bold;
   color: #FFFFFF;
+  width: 21%;
+  height: 80px;
+  border-radius: 20px;
+  border: #006A52;
+  margin: 15px;
+  text-transform: uppercase;
 }

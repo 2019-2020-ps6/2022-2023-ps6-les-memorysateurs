@@ -29,6 +29,9 @@ import { ResultatPartieComponent } from './resultat-partie/resultat-partie.compo
 import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
 import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
 
+import { AuthentificationComponent } from './authentification/authentification.component';
+import { CreerCompteComponent } from './creer-compte/creer-compte.component';
+import { MotDePasseOublieComponent } from './mot-de-passe-oublie/mot-de-passe-oublie.component';
 
 import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
@@ -65,7 +68,10 @@ import { StatContainerComponent } from './stat/statcontainer.component';
     StatComponent,
     PartagerThemeComponent,
     ErreurPartagerThemeComponent,
-    StatContainerComponent
+    StatContainerComponent,
+    AuthentificationComponent,
+    CreerCompteComponent,
+    MotDePasseOublieComponent,
   ],
   imports: [
     BrowserModule,

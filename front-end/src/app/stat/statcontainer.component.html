@@ -4,7 +4,7 @@
         <span [ngClass]="{'triangle-vert' : progres,'triangle-rouge' : !progres}" >&#x25B2;</span>
         <button class="plus" (click)="toggle()" [ngClass]="{'active' : isActive}">{{(isActive)?"-":"+"}}</button>
     </div>
-    
+
     <div class="content" [class.active]="isActive">
         <div class="tabcontainer">
             <div class="tab-header" id="header">
@@ -17,7 +17,7 @@
         </div>
         <div class="moyenne">
             <p class="moyenne-title">Moyenne</p>
-            <p class="moyenne-res" id="moyenne">{{moyenne}}</p>
+            <p class="moyenne-res" id="moyenne{{idTab}}"></p>
         </div>
     </div>
 </div>

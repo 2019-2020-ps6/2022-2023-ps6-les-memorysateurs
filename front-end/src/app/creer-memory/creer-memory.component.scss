@@ -226,24 +226,19 @@ output {
   border: none;
 }
 
-.bouton-retour{
-  background-color: #FFFFFF;
-  color: #006A52;
-  font-weight: bold;
-  border-radius: 15px;
-  border: 2px solid #006A52;
-  text-align: center;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: all 0.3s ease;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 30px;
-  font-size: 30px;
-}
 
-.bouton-retour:hover{
-  background-color: #006A52;
+.bouton-retour{
+  position: absolute;
+  bottom: 0%;
+  margin-bottom: 1.5%;
+  background: #006A52;
+  font-size: 32px;
+  font-weight: bold;
   color: #FFFFFF;
+  width: 21%;
+  height: 80px;
+  border-radius: 20px;
+  border: #006A52;
+  margin: 15px;
+  text-transform: uppercase;
 }

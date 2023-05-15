@@ -212,6 +212,7 @@ export class CreerThemeComponent {
         stockImage.removeChild(imageElement);
         stockImage2.appendChild(imageElement);
         this.images.push(imageElement.src);
+        this.erreurImageDisable();
       }
       else{
         stockImage2.removeChild(imageElement);

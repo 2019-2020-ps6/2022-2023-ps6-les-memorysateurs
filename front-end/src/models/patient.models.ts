@@ -1,7 +1,7 @@
 import {Cardable} from "./cardable.models";
 import {ThemeService} from "../app/services/theme.service";
 import {Theme} from "./theme.models";
-import {LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
+import {LISTE_DEFAUT, LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
 import {Statistiques} from "./statistiques.models";
 
 export class Patient implements Cardable{
@@ -14,8 +14,10 @@ export class Patient implements Cardable{
   themes : Theme[] = [];
   stats : Statistiques[] = [];
 
+  idUtilisateur : number;
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined) {
+
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined, idUtilisateur : number) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
@@ -29,10 +31,11 @@ export class Patient implements Cardable{
       this.themes.push(t);
     })
     else
-      LISTE_THEME.forEach(t =>{
+      LISTE_DEFAUT.forEach(t =>{
         this.themes.push(t);
       })
 
+    this.idUtilisateur = idUtilisateur;
   }
 
 

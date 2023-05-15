@@ -48,7 +48,7 @@ export class PartagerThemeComponent {
 
   retour(){
     this.themeService.setEditTheme(undefined);
-    this.router.navigate(['/liste-theme']);
+    window.history.back();
   }
 
   envoyer(){
@@ -60,14 +60,20 @@ export class PartagerThemeComponent {
   verifierErreur(){
     if(this.messageForm.value.telephone.length != 10){
     this.erreurTelephone = true;
+    let tel = document.getElementById("input-tel") as HTMLDivElement;
+    tel.style.background = "#F00000";
+    tel.style.opacity = "0.5";
     }else{
-      this.erreurTelephone = false;
+      this.erreurTelDisable();
     }
     if(this.messageForm.value.message.length ==0){
       this.erreurMessage = true;
+      let msg = document.getElementById("input-msg") as HTMLTextAreaElement;
+      msg.style.background = "#F00000";
+      msg.style.opacity = "0.5";
     }
     else{
-      this.erreurMessage =false;
+      this.erreurMsgDisable();
     }
     this.popup = this.erreurMessage ||this.erreurTelephone;
   }
@@ -76,5 +82,18 @@ export class PartagerThemeComponent {
   }
   popupChange(value : boolean){
     this.popup = value;
+  }
+  erreurTelDisable(){
+    let tel = document.getElementById("input-tel") as HTMLDivElement;
+    this.erreurTelephone = false;
+    tel.style.background = "#FFFFFF";
+    tel.style.opacity = "1";
+  }
+
+  erreurMsgDisable(){
+    let msg = document.getElementById("input-msg") as HTMLDivElement;
+    this.erreurMessage = false;
+    msg.style.background = "#FFFFFF";
+    msg.style.opacity = "1";
   }
 }
