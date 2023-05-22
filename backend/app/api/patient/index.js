@@ -2,15 +2,14 @@ const { Router } = require('express')
 
 const { Ergo, Patient } = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-const { filterPatientsFromErgoz, getPatientFromErgo } = require('./manager')
+const { filterPatientsFromErgo, getPatientFromErgo } = require('./manager')
 
 const router = new Router({ mergeParams: true })
 
 router.get('/', (req, res) => {
   try {
     // Check if ergoId exists, if not it will throw a NotFoundError
-    Ergo.getById(req.params.ergoId)
-    res.status(200).json(filterPatientsFromErgoz(req.params.ergoId))
+    res.status(200).json(filterPatientsFromErgo(req.query.ergoId))
   } catch (err) {
     manageAllErrors(res, err)
   }
