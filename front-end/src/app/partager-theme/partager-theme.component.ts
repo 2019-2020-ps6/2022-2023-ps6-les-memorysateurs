@@ -21,7 +21,7 @@ export class PartagerThemeComponent {
   public prenom: string = "";
   public stockImage: string = "";
   public stade: string = "";
-
+  frenchPhoneNumberRegex: RegExp = /^(0|\+33\s?|0033\s?)[1-9](\s?\d{2}){4}$/;
   @Input()
   erreurMessage = false;
   @Input()
@@ -58,7 +58,7 @@ export class PartagerThemeComponent {
   }
 
   verifierErreur(){
-    if(this.messageForm.value.telephone.length != 10){
+    if(!this.frenchPhoneNumberRegex.test(this.messageForm.value.telephone)){
     this.erreurTelephone = true;
     let tel = document.getElementById("input-tel") as HTMLDivElement;
     tel.style.background = "#F00000";
