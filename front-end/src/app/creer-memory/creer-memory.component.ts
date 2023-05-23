@@ -3,6 +3,7 @@ import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";
 import {GameService} from "../services/game.service";
+import {PatientService} from "../services/patient.service";
 @Component({
   selector: 'app-creer-memory',
   templateUrl: './creer-memory.component.html',
@@ -26,7 +27,8 @@ export class CreerMemoryComponent implements OnInit {
   timerEnabled!: boolean;
 
 
-  constructor(public router: Router, public themeService: ThemeService, public gameService: GameService) {
+  constructor(public router: Router, public themeService: ThemeService, public gameService: GameService,public patientService : PatientService) {
+    gameService.setReglages(patientService.patientSelectionne$.value);
     gameService.nombreCartes$.subscribe((nombreCarte: number) => {
       this.nombreCarte = nombreCarte;
       let nbCardsForTips = nombreCarte/2;
