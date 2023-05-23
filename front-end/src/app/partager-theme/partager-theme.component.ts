@@ -58,7 +58,7 @@ export class PartagerThemeComponent {
   }
 
   verifierErreur(){
-    if(!this.frenchPhoneNumberRegex.test(this.messageForm.value.telephone)){
+    if(!  this.frenchPhoneNumberRegex.test(this.messageForm.value.telephone)){
     this.erreurTelephone = true;
     let tel = document.getElementById("input-tel") as HTMLDivElement;
     tel.style.background = "#F00000";
