@@ -6,3 +6,4 @@ module.exports = new BaseModel('Ergo', {
   email: Joi.string().required(),
   password: Joi.string().required()
 })
+

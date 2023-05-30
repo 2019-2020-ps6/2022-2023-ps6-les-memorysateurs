@@ -1,25 +1,43 @@
-import {BehaviorSubject, take} from "rxjs";
+import {BehaviorSubject, Subject, take} from "rxjs";
 import {CompteUtilisateur} from "../../models/compte-utilisateur.models";
-import {UTILISATEURS} from "../../moks/utilisateurs.moks";
 import {Injectable} from "@angular/core";
 import {Theme} from "../../models/theme.models";
-import { serverUrl, httpOptionsBase } from '../configs/server.config';
-import {HttpClient} from "@angular/common/http";
+
+import { HttpClient } from '@angular/common/http';
+import { GlobalsService } from "./globals.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
-  public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>(UTILISATEURS);
+
+  private users: CompteUtilisateur[] = [];
+
+  public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>([]);
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
 
+
+  public userSelected$: Subject<CompteUtilisateur> = new Subject();
+
+  constructor(private http: HttpClient, private globals: GlobalsService) {
+    this.retrieveUsers(globals.getURL() + "api/ergo");
+  }
+
+  retrieveUsers(url : string): void {
+    this.http.get<CompteUtilisateur[]>(url).subscribe((userList) => {
+      this.users = userList;
+      this.listeUtilisateurs$.next(this.users);
+    });
+  }
 
   login(identifiant: string, motDePasse: string){
     console.log(identifiant);
     console.log(motDePasse);
-    this.listeUtilisateurs$.getValue().forEach(utilisateur => {
-      if((identifiant == utilisateur.identifiant) && (utilisateur.isCorrect(motDePasse))) this.utilisateurConnecte$.next(utilisateur);
-    } );
+
+    this.retrieveUsers(this.globals.getURL() + "api/ergo/" + identifiant + "/" + motDePasse + "/");
+
+
   }
 
   public addCompteUtilisateur(compteUtilisateur : CompteUtilisateur){

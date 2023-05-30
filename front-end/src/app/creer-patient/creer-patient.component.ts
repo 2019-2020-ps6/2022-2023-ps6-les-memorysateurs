@@ -16,7 +16,7 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
-  
+
   @Input()
   erreurNom = false;
   @Input()
@@ -168,9 +168,12 @@ if(this.patientForm.value['nom']==''){
 
   }
   supprimerPatient(){
-    this.patientService.removePatient(this.patient);
-    this.patientService.setEditPatient(undefined);
-    this.router.navigate(['/liste-patient']);
+    let bool = confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');
+    if(bool) {
+      this.patientService.removePatient(this.patient);
+      this.patientService.setEditPatient(undefined);
+      this.router.navigate(['/liste-patient']);
+    }
   }
   popupChange(value : boolean){
     this.popup = value;
