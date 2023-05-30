@@ -11,9 +11,10 @@ const NotFoundError = require('../../utils/errors/not-found-error.js')
  * This function filters among the patients to return only the patient linked with the given ergoId.
  * @param ergoId
  */
-const filtrerPatientsFromErgo = (idErgo) => {
-  const themes = Theme.get()
-  return themes.filter((theme) => theme.idErgo === idErgo)
+const filterPatientsFromErgo = (ergoId) => {
+  const patients = Patient.get()
+  const parsedId = parseInt(ergoId, 10)
+  return patients.filter((patient) => patient.ergoId === parsedId)
 }
 
 /**
