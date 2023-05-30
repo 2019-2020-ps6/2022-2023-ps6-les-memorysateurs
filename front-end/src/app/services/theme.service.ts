@@ -2,7 +2,8 @@ import {Injectable} from "@angular/core";
 import {BehaviorSubject, take} from "rxjs";
 import {Theme} from "../../models/theme.models";
 import {LISTE_THEME} from "../../moks/liste-theme.moks";
-import {PatientService} from "./patient.service";
+import { HttpClient } from "@angular/common/http";
+import { GlobalsService } from "./globals.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,24 @@ export class ThemeService {
   public themeSelectionne$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(LISTE_THEME[0]);
   public themeEdite$: BehaviorSubject<Theme | undefined> = new BehaviorSubject<Theme | undefined>(undefined);
 
+  public themes: Theme[] = [];
 
+
+
+  private userUrl: string;
+
+  constructor(private http: HttpClient, private globals: GlobalsService) {
+    this.userUrl = globals.getURL() + "api/theme";
+    this.retrieveThemes();
+  }
+
+  
+  retrieveThemes(): void {
+    this.http.get<Theme[]>(this.userUrl).subscribe((themeList) => {
+      this.themes = themeList;
+      this.listeThemes$.next(this.themes);
+    });
+  }
 
 public addTheme(theme : Theme){
   let actualList = this.listeThemes$.asObservable();
