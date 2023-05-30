@@ -7,7 +7,6 @@ import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { HttpClient } from '@angular/common/http';
 import { GlobalsService } from "./globals.service";
 
-
 @Injectable({
   providedIn: 'root'
 })
