@@ -3,9 +3,9 @@ import {CompteUtilisateur} from "../../models/compte-utilisateur.models";
 import {UTILISATEURS} from "../../moks/utilisateurs.moks";
 import {Injectable} from "@angular/core";
 import {Theme} from "../../models/theme.models";
-import { serverUrl, httpOptionsBase } from '../configs/server.config';
 import { HttpClient } from '@angular/common/http';
 import { GlobalsService } from "./globals.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,6 @@ export class AuthentificationService {
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
 
   public userSelected$: Subject<CompteUtilisateur> = new Subject();
-
-  private userUrl = serverUrl + '/users';
-
-  private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
     this.retrieveUsers();
