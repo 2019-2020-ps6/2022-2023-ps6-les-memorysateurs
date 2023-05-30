@@ -12,9 +12,6 @@ import {HttpClient} from "@angular/common/http";
 export class AuthentificationService {
   public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>(UTILISATEURS);
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
-  public userSelected$: take<User> = new take();
-  private userUrl = serverUrl + '/users';
-  private httpOptions = httpOptionsBase;
 
 
   login(identifiant: string, motDePasse: string){
