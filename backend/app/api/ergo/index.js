@@ -13,9 +13,11 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:ergoId', (req, res) => {
+router.get('/:email/:password', (req, res) => {
   try {
-    res.status(200).json(Ergo.getById(req.params.ergoId))
+    let all = Ergo.get()
+    let ergo = all.find(ergo => ergo.email === req.params.email && ergo.password === req.params.password)
+    res.status(200).json(ergo)
   } catch (err) {
     manageAllErrors(res, err)
   }
