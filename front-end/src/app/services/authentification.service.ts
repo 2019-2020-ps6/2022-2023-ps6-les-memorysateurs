@@ -2,6 +2,7 @@ import {BehaviorSubject, Subject, take} from "rxjs";
 import {CompteUtilisateur} from "../../models/compte-utilisateur.models";
 import {Injectable} from "@angular/core";
 import {Theme} from "../../models/theme.models";
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalsService } from "./globals.service";
 
@@ -15,6 +16,7 @@ export class AuthentificationService {
 
   public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>([]);
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
+
 
   public userSelected$: Subject<CompteUtilisateur> = new Subject();
 
