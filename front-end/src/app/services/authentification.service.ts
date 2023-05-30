@@ -3,6 +3,8 @@ import {CompteUtilisateur} from "../../models/compte-utilisateur.models";
 import {UTILISATEURS} from "../../moks/utilisateurs.moks";
 import {Injectable} from "@angular/core";
 import {Theme} from "../../models/theme.models";
+import { serverUrl, httpOptionsBase } from '../configs/server.config';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,10 @@ import {Theme} from "../../models/theme.models";
 export class AuthentificationService {
   public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>(UTILISATEURS);
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
+  public userSelected$: take<User> = new take();
+  private userUrl = serverUrl + '/users';
+  private httpOptions = httpOptionsBase;
+
 
   login(identifiant: string, motDePasse: string){
     console.log(identifiant);
