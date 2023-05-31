@@ -17,10 +17,17 @@ export class AuthentificationComponent {
       identifiant: [null],
       motDePasse: [null]
       });
+    this.authentificationService.utilisateurConnecte$.subscribe(user => {
+      if(user != undefined){
+        this.router.navigate(['/liste-patient']);
+      }
+    });
   }
 
   onLogin(){
     this.authentificationService.login(this.formGroup.value['identifiant'], this.formGroup.value['motDePasse']);
-    if(this.authentificationService.isAuthentifie()) this.router.navigateByUrl('liste-patient');
+    console.log(this.authentificationService.userSelected$);
   }
+
+
 }

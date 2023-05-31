@@ -1,14 +1,14 @@
 export class CompteUtilisateur {
   static nextId: number;
   id: number;
-  identifiant: string;
   email: string;
+  name : string;
   private motDePasse: string;
 
-  constructor(identifiant: string, email: string, motDePasse: string) {
-    this.id = CompteUtilisateur.nextId++;
-    this.identifiant = identifiant;
+  constructor(id: number, name: string, email: string, motDePasse: string) {
+    this.id = id;
     this.email = email;
+    this.name = name;
     this.motDePasse =motDePasse;
   }
 
