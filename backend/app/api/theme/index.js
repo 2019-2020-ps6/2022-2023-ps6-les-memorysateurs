@@ -1,14 +1,16 @@
 const { Router } = require('express')
 
-const { Theme } = require('../../models')
+const { Theme, Patient} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-const { filtrerThemesFromErgo, getThemeFromErgo } = require('./manager')
+const { filtrerThemesFromPatient, getThemeFromPatient } = require('./manager')
 
 const router = new Router()
 
 router.get('/', (req, res) => {
     try {
-        res.status(200).json(filtrerThemesFromErgo(req.query.idErgo))
+        // Check if patientId exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+        res.status(200).json(filtrerThemesFromPatient(req.query.patientId))
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -16,7 +18,9 @@ router.get('/', (req, res) => {
 
 router.get('/:themeId', (req, res) => {
     try {
-        res.status(200).json(getThemeFromErgo(req.query.idErgo, req.params.themeId))
+        // Check if patientId exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+        res.status(200).json(getThemeFromPatient(req.query.patientId, req.params.themeId))
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -25,7 +29,11 @@ router.get('/:themeId', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        const theme = Theme.create({ ...req.body })
+        // Check if patient exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+        const themeToCreate = req.body
+        themeToCreate.patientId = req.query.patientId
+        const theme = Theme.create(themeToCreate)
         res.status(201).json(theme)
     } catch (err) {
         manageAllErrors(res, err)
@@ -34,7 +42,14 @@ router.post('/', (req, res) => {
 
 router.put('/:themeId', (req, res) => {
     try {
-        res.status(200).json(Theme.update(req.params.themeId, req.body))
+        // Check if the theme id exists & if the theme has the same patientId as the one provided in the url.
+        const theme = getThemeFromPatient(req.query.patientId, req.params.themeId)
+
+        const themeUpdate = req.body
+        themeUpdate.patientId = theme.patientId
+
+        const updatedTheme = Theme.update(req.params.themeId, themeUpdate)
+        res.status(200).json(updatedTheme)
     } catch (err) {
         manageAllErrors(res, err)
     }
