@@ -26,7 +26,7 @@ export class AuthentificationComponent {
 
   onLogin(){
     this.authentificationService.login(this.formGroup.value['identifiant'], this.formGroup.value['motDePasse']);
-    console.log(this.authentificationService.userSelected$);
+    console.log(this.authentificationService.utilisateurConnecte$);
   }
 
 

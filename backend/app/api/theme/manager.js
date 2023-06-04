@@ -6,8 +6,10 @@ const NotFoundError = require('../../utils/errors/not-found-error.js')
 
 const filtrerThemesFromPatient = (idPatient) => {
     const themes = Theme.get()
-    return themes.filter((theme) => theme.patientId === idPatient)
+    return themes.filter((theme) => theme.patientId === idPatient || theme.patientId === undefined)
 }
+
+
 
 const getThemeFromPatient = (patientId, themeId) => {
     const themesPatient = filtrerThemesFromPatient(patientId);

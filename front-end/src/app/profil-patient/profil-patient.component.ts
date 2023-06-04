@@ -37,7 +37,7 @@ export class ProfilPatientComponent {
 
   navReglagePartie(){
     let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
-    this.themeService.setThemes(patientSelect.themes);
+    //this.themeService.setThemes(patientSelect.themes);
     this.router.navigateByUrl('creer-memory');
   }
 

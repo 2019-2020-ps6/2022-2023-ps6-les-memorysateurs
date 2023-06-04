@@ -41,7 +41,8 @@ export class Game implements OnInit {
       this.timer = num;
     });
     this.themeService.themeSelectionne$.subscribe( theme => {
-      this.theme = theme;
+      if(theme != undefined)
+        this.theme = theme;
     });
     this.gameService.combinations$.subscribe( combinaison => {
       this.lastCombinaison = combinaison.lastCombinaison;

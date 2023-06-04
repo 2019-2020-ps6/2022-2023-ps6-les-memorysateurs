@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
     try {
         // Check if patientId exists, if not it will throw a NotFoundError
         Patient.getById(req.query.patientId)
+    
         res.status(200).json(filtrerThemesFromPatient(req.query.patientId))
     } catch (err) {
         manageAllErrors(res, err)

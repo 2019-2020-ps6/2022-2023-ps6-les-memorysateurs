@@ -4,16 +4,48 @@ import {Patient} from "../../models/patient.models";
 import {LISTE_PATIENT} from "../../moks/liste-patient.moks";
 import {Theme} from "../../models/theme.models";
 import {AuthentificationService} from "./authentification.service";
+import {HttpClient} from "@angular/common/http";
+import {GlobalsService} from "./globals.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PatientService {
-  public listePatient$: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>(LISTE_PATIENT);
-    public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(LISTE_PATIENT[0]);
+  private listePatient: Patient[] = [];
+  public listePatient$: BehaviorSubject<Patient[] | undefined> = new BehaviorSubject<Patient[] | undefined>(this.listePatient);
+  private patientSelectionne: Patient | undefined = undefined;
+  public patientSelectionne$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(this.patientSelectionne);
   public patientEdite$: BehaviorSubject<Patient | undefined> = new BehaviorSubject<Patient | undefined>(undefined);
 
+  constructor(private http: HttpClient, private globals: GlobalsService, private authentificationService: AuthentificationService) {
+    this.listePatient$.next(this.listePatient);
+
+    authentificationService.utilisateurConnecte$.subscribe(user => {
+      if (user != undefined) {
+        this.retrievePatient(this.globals.getURL() + "api/patient/?ergoId=" + user.id);
+      }
+    });
+
+    this.listePatient$.subscribe(liste => {
+      if (liste != undefined) {
+        this.listePatient = liste;
+      }
+    });
+
+    this.patientSelectionne$.subscribe(patient => {
+      if (patient != undefined) {
+        this.patientSelectionne = patient;
+      }
+    });
+
+    this.patientEdite$.subscribe(patient => {
+      if (patient != undefined) {
+        this.patientSelectionne = patient;
+      }
+    });
+
+  }
 
 
   public addPatient(patient : Patient){
@@ -21,12 +53,12 @@ export class PatientService {
     actualList.pipe(
       take(1)
     ).subscribe(liste =>{
-      liste.push(patient);
+      this.listePatient.push(patient);
       this.listePatient$.next(liste);});
 
   }
   get(i : number) {
-    return this.listePatient$.getValue()[i];
+    return this.listePatient[i];
   }
 
   setEditPatient(patient : Patient | undefined){
@@ -39,7 +71,7 @@ export class PatientService {
     actualList.pipe(
       take(1)
     ).subscribe(liste =>{
-      liste.forEach(chaine =>{
+      this.listePatient.forEach(chaine =>{
         if(chaine != patient){
           listeA.push(chaine);
         }
@@ -49,10 +81,26 @@ export class PatientService {
   }
 
   public getPatientById(id : number): Patient{
-    let patientById: Patient = this.listePatient$.getValue()[0];
-    this.listePatient$.getValue().forEach(patient => {
+    let patientById: Patient = this.listePatient[0];
+    this.listePatient.forEach(patient => {
       if(patient.id === id) patientById = patient;
     })
     return patientById;
   }
+  
+  retrievePatient(url : string) {
+    this.http.get<Patient[]>(url).subscribe((patientList) => {
+      patientList.forEach(p => {
+        let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
+        this.listePatient.push(patient);
+      });
+      if(this.listePatient != undefined){
+        console.log(this.listePatient);
+        this.listePatient$.next(this.listePatient);
+        console.log(this.listePatient$.getValue());
+      }//TODO: error
+    });
+  }
 }
+
+

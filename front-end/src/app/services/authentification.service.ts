@@ -17,8 +17,6 @@ export class AuthentificationService {
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
 
 
-  public userSelected$: Subject<CompteUtilisateur> = new Subject();
-
   constructor(private http: HttpClient, private globals: GlobalsService) {
   }
 
