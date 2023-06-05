@@ -11,31 +11,31 @@ export class Patient implements Cardable{
   prenom : string;
   photo : any;
   stade : 3 | 4 | 5 ;
-  themes : Theme[] = [];
-  stats : Statistiques[] = [];
+  ergoId : number;
+  //themes : Theme[] = [];
+  //stats : Statistiques[] = [];
 
-  idUtilisateur : number;
 
-
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,listeT:Theme[]|undefined,stats : Statistiques[]|undefined, idUtilisateur : number) {
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,/*listeT:Theme[]|undefined,stats : Statistiques[]|undefined,*/ ergoId : number, id : number) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
     this.photo = photo;
     this.stade = stade;
-    if(stats != undefined)
-      this.stats = stats;
+    this.ergoId = ergoId;
+    // if(stats != undefined)
+    //   this.stats = stats;
 
-    if(listeT !=undefined)
-    listeT.forEach(t =>{
-      this.themes.push(t);
-    })
-    else
-      LISTE_DEFAUT.forEach(t =>{
-        this.themes.push(t);
-      })
+    // if(listeT !=undefined)
+    // listeT.forEach(t =>{
+    //   this.themes.push(t);
+    // })
+    // else
+    //   LISTE_DEFAUT.forEach(t =>{
+    //     this.themes.push(t);
+    //   })
 
-    this.idUtilisateur = idUtilisateur;
+    this.id = id;
   }
 
 
@@ -57,25 +57,28 @@ export class Patient implements Cardable{
   }
 
   getThemes() : Theme[]{
-    return this.themes;
+    // return this.themes;
+    return [];
   }
-  setThemes(themes2 : Theme[]) {
-    this.themes = themes2;
+  setThemes(themes2:Theme[]|undefined) {
+    // this.themes = themes2;
   }
   ajouterTheme(t : Theme){
-    this.themes.push(t);
+    // this.themes.push(t);
   }
 
   getStats() : Statistiques[]{
-    return this.stats;
+    // return this.stats;
+    return [];
   }
   getStat(i : number) : Statistiques | undefined{
-    return this.stats.at(i);
+    // return this.stats.at(i);
+    return undefined;
   }
   setStats(stats : Statistiques[]) {
-    this.stats = stats;
+    // this.stats = stats;
   }
   addStats(stats : Statistiques){
-    this.stats.push(stats);
+    // this.stats.push(stats);
   }
 }

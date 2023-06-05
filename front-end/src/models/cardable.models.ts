@@ -1,6 +1,6 @@
 export interface Cardable {
   getID(): number;
   getTitre(): string;
-  getImage(): any;
+  getImage(): string;
   getType(): "patient" | "theme";
 }

@@ -12,45 +12,59 @@ import { GlobalsService } from "./globals.service";
 })
 export class AuthentificationService {
 
-  private users: CompteUtilisateur[] = [];
+  private user?: CompteUtilisateur;
 
-  public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>([]);
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
 
 
-  public userSelected$: Subject<CompteUtilisateur> = new Subject();
-
   constructor(private http: HttpClient, private globals: GlobalsService) {
-    this.retrieveUsers(globals.getURL() + "api/ergo");
   }
 
-  retrieveUsers(url : string): void {
-    this.http.get<CompteUtilisateur[]>(url).subscribe((userList) => {
-      this.users = userList;
-      this.listeUtilisateurs$.next(this.users);
+
+
+
+  retrieveUser(url : string): boolean {
+    this.http.get<CompteUtilisateur>(url).subscribe((userList) => {
+      this.user = userList;
+      if(this.user != undefined){
+        console.log(this.user);
+        this.utilisateurConnecte$.next(this.user);
+        console.log(this.utilisateurConnecte$.getValue());
+      }//TODO: error
     });
+    return (this.user != undefined);
   }
 
-  login(identifiant: string, motDePasse: string){
+  login(identifiant: string, motDePasse: string) : boolean {
     console.log(identifiant);
     console.log(motDePasse);
 
-    this.retrieveUsers(this.globals.getURL() + "api/ergo/" + identifiant + "/" + motDePasse + "/");
+    return this.retrieveUser(this.globals.getURL() + "api/ergo/" + identifiant + "/" + motDePasse + "/");
 
 
   }
 
+  
+  logout(){
+    this.user=undefined;
+    this.utilisateurConnecte$.next(undefined);
+
+  }
+
+  public getValue(){
+    return this.utilisateurConnecte$.getValue();
+  }
+
   public addCompteUtilisateur(compteUtilisateur : CompteUtilisateur){
-    let actualList = this.listeUtilisateurs$.asObservable();
-    actualList.pipe(
-      take(1)
-    ).subscribe(liste =>{
-      liste.push(compteUtilisateur);
-      this.listeUtilisateurs$.next(liste);});
+    // actualList.pipe(
+    //   take(1)
+    // ).subscribe(liste =>{
+    //   liste.push(compteUtilisateur);
+    //   this.listeUtilisateurs$.next(liste);});
 
   }
 
   isAuthentifie(): boolean {
-    return !(this.utilisateurConnecte$.getValue() == undefined);
+    return (this.utilisateurConnecte$.getValue() != undefined);
   }
 }
