@@ -48,6 +48,6 @@ export class ProfilPatientComponent {
   }
 
   retour(): void {
-    window.history.back();
+    this.router.navigateByUrl("liste-patient");
   }
 }

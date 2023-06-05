@@ -70,7 +70,7 @@ afficherPhoto(){
 
 retour(){
   this.patientService.setEditPatient(undefined);
-  window.history.back();
+  this.router.navigateByUrl("liste-patient");
 }
 creerProfilPatient(){
 

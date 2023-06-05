@@ -91,6 +91,6 @@ export class CreerMemoryComponent implements OnInit {
   }
 
   retour(): void {
-    window.history.back();
+    this.router.navigateByUrl("profil-patient");
   }
 }
