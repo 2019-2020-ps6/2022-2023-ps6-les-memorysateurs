@@ -102,10 +102,9 @@ export class HintContainer implements OnInit, AfterViewInit {
     });
     this.gameService.nomBoutonIndice$.subscribe(nom => {
       let button = document.getElementById("indiceButton");
-      //bouton nommé indicé quand cartes torunées
-      if(button != null) {
-        button.innerHTML = nom;
-      } 
+      if(button != this.isRunning) {
+        button?.innerHTML = nom;
+      }
     });
   }
   ngAfterViewInit(): void {
