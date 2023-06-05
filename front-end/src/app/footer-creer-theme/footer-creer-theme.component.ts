@@ -38,7 +38,7 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
   }
   retourListeTheme() {
     this.themeService.setEditTheme(undefined);
-    window.history.back();
+    this.router.navigateByUrl("liste-theme");
   }
 
   ajouterTheme(){
