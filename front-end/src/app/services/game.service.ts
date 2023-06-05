@@ -12,6 +12,7 @@ import {Patient} from "../../models/patient.models";
 export class GameService {
   public nombreCartes$: BehaviorSubject<number> = new BehaviorSubject<number>(6);
   public nombreCartesIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(4);
+  public nomBoutonIndice$: BehaviorSubject<string> = new BehaviorSubject<string>("Lancer");
 
   public nombreErreurAvantIndice$: BehaviorSubject<number> = new BehaviorSubject<number>(3);
   public nombreCombinaison$: BehaviorSubject<number> = new BehaviorSubject<number>(3);
