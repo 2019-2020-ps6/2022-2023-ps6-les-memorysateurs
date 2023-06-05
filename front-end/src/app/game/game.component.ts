@@ -59,9 +59,17 @@ export class Game implements OnInit {
       <div id="meter">
         <div id="meter-bar"><!--{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}--></div>
       </div>
+      <div *ngIf="!isRunning">
       <button (click)="toggleTimer()">
         Indice
       </button>
+      </div>
+      <div *ngIf="isRunning">
+      <button (click)="toggleTimer()">
+        Lancer
+      </button>
+    </div>
+      
 </section>
   `,
   styleUrls: ['./game.component.scss', '../utilities/button/btn.component.scss']
@@ -99,12 +107,6 @@ export class HintContainer implements OnInit, AfterViewInit {
             popuptext.innerHTML = "Cette combinaison est revenue " + this.gameService.combinations$.value.recurenceOfLastCombinaison().toString() + " fois";
           }
        }
-    });
-    this.gameService.nomBoutonIndice$.subscribe(nom => {
-      let button = document.getElementById("indiceButton");
-      if(button != this.isRunning) {
-        button?.innerHTML = nom;
-      }
     });
   }
   ngAfterViewInit(): void {
