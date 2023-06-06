@@ -48,15 +48,15 @@ export class PatientService {
   }
 
 
-  public addPatient(patient : Patient){
-    let actualList = this.listePatient$.asObservable();
-    actualList.pipe(
-      take(1)
-    ).subscribe(liste =>{
-      this.listePatient.push(patient);
-      this.listePatient$.next(liste);});
+  // public addPatient(patient : Patient){
+  //   let actualList = this.listePatient$.asObservable();
+  //   actualList.pipe(
+  //     take(1)
+  //   ).subscribe(liste =>{
+  //     this.listePatient.push(patient);
+  //     this.listePatient$.next(liste);});
 
-  }
+  // }
   get(i : number) {
     return this.listePatient[i];
   }
@@ -65,20 +65,20 @@ export class PatientService {
     this.patientEdite$.next(patient);
   }
 
-  removePatient(patient : Patient | undefined){
-    let actualList = this.listePatient$.asObservable();
-    let listeA : Patient[] = [];
-    actualList.pipe(
-      take(1)
-    ).subscribe(liste =>{
-      this.listePatient.forEach(chaine =>{
-        if(chaine != patient){
-          listeA.push(chaine);
-        }
-      })
-    });
-    this.listePatient$.next(listeA);
-  }
+  // removePatient(patient : Patient | undefined){
+  //   let actualList = this.listePatient$.asObservable();
+  //   let listeA : Patient[] = [];
+  //   actualList.pipe(
+  //     take(1)
+  //   ).subscribe(liste =>{
+  //     this.listePatient.forEach(chaine =>{
+  //       if(chaine != patient){
+  //         listeA.push(chaine);
+  //       }
+  //     })
+  //   });
+  //   this.listePatient$.next(listeA);
+  // }
 
   public getPatientById(id : number): Patient{
     let patientById: Patient = this.listePatient[0];
@@ -89,6 +89,8 @@ export class PatientService {
   }
   
   retrievePatient(url : string) {
+    this.listePatient = [];
+    this.listePatient$.next(this.listePatient);
     this.http.get<Patient[]>(url).subscribe((patientList) => {
       patientList.forEach(p => {
         let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
@@ -99,6 +101,31 @@ export class PatientService {
         this.listePatient$.next(this.listePatient);
         console.log(this.listePatient$.getValue());
       }//TODO: error
+    });
+  }
+
+  addPatient(patient : Patient){
+    let ergoId = this.authentificationService.utilisateurConnecte$.getValue()?.id;
+    if(ergoId == undefined) return;
+    patient.ergoId = ergoId;
+    let url = this.globals.getURL() + "api/patient/";
+    this.http.post<Patient>(url, patient).subscribe((patient) => {
+      this.listePatient.push(patient);
+      this.listePatient$.next(this.listePatient);
+    });
+  }
+
+  removePatient(patient : Patient | undefined){
+    if(patient == undefined) return;
+    let url = this.globals.getURL() + "api/patient/" + patient.id;
+    this.http.delete<Patient>(url).subscribe((patient) => {
+      let listeA : Patient[] = [];
+      this.listePatient.forEach(chaine =>{
+        if(chaine != patient){
+          listeA.push(chaine);
+        }
+      })
+      this.listePatient$.next(listeA);
     });
   }
 }

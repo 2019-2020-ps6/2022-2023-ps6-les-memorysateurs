@@ -11,14 +11,11 @@ import { PatientService } from "./patient.service";
 })
 
 export class ThemeService {
-  private listeThemes: Theme[] | undefined = undefined;
-  public listeThemes$: BehaviorSubject<Theme[] | undefined> = new BehaviorSubject<Theme[] | undefined>(this.listeThemes);
+  public themes: Theme[] = [];
+  public listeThemes$: BehaviorSubject<Theme[] | undefined> = new BehaviorSubject<Theme[] | undefined>(this.themes);
   public themeEdite$: BehaviorSubject<Theme | undefined> = new BehaviorSubject<Theme | undefined>(undefined);
   private themeSelectionne: Theme | undefined = undefined;
   public themeSelectionne$: BehaviorSubject<Theme|undefined> = new BehaviorSubject<Theme|undefined>(this.themeSelectionne);
-
-  public themes: Theme[] = [];
-
 
 
   constructor(private http: HttpClient, private globals: GlobalsService, public patientService: PatientService) {
@@ -30,7 +27,7 @@ export class ThemeService {
 
     this.listeThemes$.subscribe(liste => {
       if (liste != undefined) {
-        this.listeThemes = liste;
+        this.themes = liste;
       }
     }
     );
@@ -52,6 +49,8 @@ export class ThemeService {
 
   
   retrieveThemes(url: string): void {
+    this.themes = [];
+    this.listeThemes$.next(this.themes);
     this.http.get<Theme[]>(url).subscribe((themeList) => {
       themeList.forEach(t => {
         this.themes.push(new Theme(t.titre, t.images, t.id));
@@ -63,50 +62,20 @@ export class ThemeService {
     });
   }
 
-public addTheme(theme : Theme){
-  let actualList = this.listeThemes$.asObservable();
-  actualList.pipe(
-    take(1)
-  ).subscribe(liste =>{
-  //liste.push(theme);
-  this.listeThemes$.next(liste);});
-
-}
   get(i : number) {
-    // if(this.listeThemes$ != undefined){
-    //   return this.listeThemes$.getValue()[i];
-    // }
+    return this.themes[i];
   }
 
   setEditTheme(theme : Theme | undefined){
     this.themeEdite$.next(theme);
   }
 
-  removeTheme(theme : Theme | undefined){
-  //   let actualList = this.listeThemes$.asObservable();
-
-  //   let listeA : Theme[] = [];
-  //   actualList.pipe(
-  //     take(1)
-  //   ).subscribe(liste =>{
-  //     liste.forEach(chaine =>{
-
-  //       if(chaine.id != theme?.id){
-  //         listeA.push(chaine);
-  //       }
-  //      })
-  // });
-  //   this.listeThemes$.next(listeA);
-
-  }
-
   public getThemeById(id : number): Theme{
-    // let themeById: Theme = this.listeThemes$.getValue()[0];
-    // this.listeThemes$.getValue().forEach(theme => {
-    //   if(theme.id === id) themeById = theme;
-    // })
-    // return themeById;
-    return new Theme("", []);
+    let themeById: Theme = this.themes[0];
+    this.themes.forEach(theme => {
+      if(theme.id === id) themeById = theme;
+    })
+    return themeById;
   }
 
   public setThemes(themes : Theme[]|undefined){
@@ -114,6 +83,37 @@ public addTheme(theme : Theme){
       this.listeThemes$.next(themes);
       this.themeSelectionne$.next(themes[0]);
     }
+  }
+
+  public addTheme(theme : Theme){
+    let patientId = this.patientService.patientSelectionne$.getValue()?.id;
+    this.http.post<Theme>(this.globals.getURL() + "api/theme?patientId=" + patientId, theme).subscribe((t) => {
+      this.themes.push(new Theme(t.titre, t.images, t.id));
+      this.listeThemes$.next(this.themes);
+      this.themeSelectionne$.next(t);
+    });
+  }
+
+  public updateTheme(theme : Theme){
+    this.http.put<Theme>(this.globals.getURL() + "api/theme", theme).subscribe((theme) => {
+      this.themes.forEach((t, i) => {
+        if(t.id === theme.id) this.themes[i] = new Theme(t.titre, t.images, t.id);
+      });
+      this.listeThemes$.next(this.themes);
+      this.themeSelectionne$.next(theme);
+    });
+  }
+
+  public removeTheme(theme : Theme | undefined){
+    if(theme == undefined) return;
+    this.http.delete<Theme>(this.globals.getURL() + "api/theme/" + theme.id).subscribe((theme) => {
+      this.themes.forEach((tt, i) => {
+        let t = new Theme(tt.titre, tt.images, tt.id);
+        if(t.id === theme.id) this.themes.splice(i, 1);
+      });
+      this.listeThemes$.next(this.themes);
+      this.themeSelectionne$.next(this.themes[0]);
+    });
   }
 }
 

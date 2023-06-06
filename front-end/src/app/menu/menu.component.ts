@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthentificationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent {
   isMenuOpen = false;
-  constructor(public router: Router) { }
+  constructor(public router: Router, public authentification : AuthentificationService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -29,7 +30,7 @@ export class MenuComponent {
     let bool = confirm('Êtes-vous sûr de vouloir vous déconnecter ?');
 
     if(bool) {
-
+      this.authentification.logout();
       this.router.navigate(['/authentification']);
     }
     this.toggleMenu();

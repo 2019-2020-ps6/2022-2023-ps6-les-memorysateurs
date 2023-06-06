@@ -17,11 +17,14 @@ export class AuthentificationComponent {
       identifiant: [null],
       motDePasse: [null]
       });
-    this.authentificationService.utilisateurConnecte$.subscribe(user => {
-      if(user != undefined){
-        this.router.navigate(['/liste-patient']);
-      }
-    });
+
+    
+      this.authentificationService.inConnect$.subscribe(c => {
+        if(c){
+          this.router.navigate(['/liste-patient']);
+          this.authentificationService.inConnect$.next(false);
+        }
+      });
   }
 
   onLogin(){
