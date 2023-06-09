@@ -48,7 +48,8 @@ export class PartagerThemeComponent {
 
   retour(){
     this.themeService.setEditTheme(undefined);
-    this.router.navigateByUrl("creer-theme");
+
+    window.history.back();
   }
 
   envoyer(){
