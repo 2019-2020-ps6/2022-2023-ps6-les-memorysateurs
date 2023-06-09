@@ -28,7 +28,7 @@ export class CreerMemoryComponent implements OnInit {
 
 
   constructor(public router: Router, public themeService: ThemeService, public gameService: GameService,public patientService : PatientService) {
-    gameService.setReglages(patientService.patientSelectionne$.value);
+
     gameService.nombreCartes$.subscribe((nombreCarte: number) => {
       this.nombreCarte = nombreCarte;
       let nbCardsForTips = nombreCarte/2;
