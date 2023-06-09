@@ -32,12 +32,12 @@ export class CreerMemoryComponent implements OnInit {
     gameService.nombreCartes$.subscribe((nombreCarte: number) => {
       this.nombreCarte = nombreCarte;
       let nbCardsForTips = nombreCarte/2;
-      this.numberOfCardsTips = [2];
+      this.numberOfCardsTips = [1];
       for (let i = 1; i < nbCardsForTips; i++) {
-        this.numberOfCardsTips.push((i+1)*2);
+        this.numberOfCardsTips.push(i+1);
       }
-      if(this.nombreCartesIndice >= nbCardsForTips*2) {
-        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
+      if(this.nombreCartesIndice >= nbCardsForTips*4) {
+        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]*2);
       }
     })
 

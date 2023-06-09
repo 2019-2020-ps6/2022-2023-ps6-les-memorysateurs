@@ -68,21 +68,21 @@ export class GameService {
     switch(patient?.stade){
       case 3:
         this.nombreCartes$.next(8);
-        this.nombreCartesIndice$.next(6);
+        this.nombreCartesIndice$.next(3);
         this.nombreErreurAvantIndice$.next(3);
         this.nombreCombinaison$.next(4);
         this.dureeIndice$.next(20);
         break;
       case 4:
         this.nombreCartes$.next(6);
-        this.nombreCartesIndice$.next(4);
+        this.nombreCartesIndice$.next(2);
         this.nombreErreurAvantIndice$.next(3);
         this.nombreCombinaison$.next(3);
         this.dureeIndice$.next(30);
         break;
       case 5:
         this.nombreCartes$.next(4);
-        this.nombreCartesIndice$.next(2);
+        this.nombreCartesIndice$.next(1);
         this.nombreErreurAvantIndice$.next(1);
         this.nombreCombinaison$.next(3);
         this.dureeIndice$.next(40);
