@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output } from '@angular/core';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";

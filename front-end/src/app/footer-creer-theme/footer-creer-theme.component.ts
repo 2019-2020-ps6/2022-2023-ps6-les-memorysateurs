@@ -44,6 +44,7 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
+
     const theme: Theme = new Theme(this.nom, this. images)
     this.theme = theme;
     ajout = true;
