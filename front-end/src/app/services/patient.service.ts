@@ -21,7 +21,9 @@ export class PatientService {
     actualList.pipe(
       take(1)
     ).subscribe(liste =>{
+      liste.reverse();
       liste.push(patient);
+      liste.reverse();
       this.listePatient$.next(liste);});
 
   }
