@@ -1,6 +1,8 @@
 <div class="stat-lines">
     <div class="header">
         <p class="title">{{title}}</p>
+        <p class="info" *ngIf="progres"> En progression</p>
+        <p class="info" *ngIf="!progres"> En régression</p>
         <span [ngClass]="{'triangle-vert' : progres,'triangle-rouge' : !progres}" >&#x25B2;</span>
         <button class="plus" (click)="toggle()" [ngClass]="{'active' : isActive}">{{(isActive)?"-":"+"}}</button>
     </div>
