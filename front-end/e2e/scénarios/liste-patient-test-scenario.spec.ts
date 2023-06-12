@@ -7,9 +7,21 @@ test.describe('Liste des patients', () => {
     await page.goto(`${testUrl}/liste-patient`);
     const appComponentFixture = new AppFixture(page);
 
-    // Vérifications
-    expect(await (await page.waitForSelector('h2')).textContent()).toBe('Ajouter un patient');
-    expect(await (await page.waitForSelector('.bouton-ajouter-patient')).isVisible()).toBe(true);
+    // Vérification du titre
+    const title = await page.waitForSelector('h2');
+    const titleText = await title.textContent();
+    expect(titleText).toBe('Ajouter un patient');
+
+    // Vérification de l'existence du bouton "Ajouter un patient"
+    const ajouterPatientButton = await page.waitForSelector('.bouton-ajouter-patient');
+    const isButtonVisible = await ajouterPatientButton.isVisible();
+    expect(isButtonVisible).toBe(true);
+
+    //Verification de l'action du bouton "Ajouter un patient"
+    await ajouterPatientButton.click();
+    const url = await page.url();
+    expect(url).toBe(`${testUrl}/creer-patient`);
+    await page.goBack();
 
     // Vérification des éléments de la liste des patients
     const items = await page.$$('app-item-frame');
@@ -41,5 +53,6 @@ test.describe('Liste des patients', () => {
         }
        });
     }
+    await page.goBack();
   });
 });
