@@ -53,7 +53,7 @@ export class ThemeService {
     this.listeThemes$.next(this.themes);
     this.http.get<Theme[]>(url).subscribe((themeList) => {
       themeList.forEach(t => {
-        this.themes.push(new Theme(t.titre, t.images, t.id));
+        this.themes.push(new Theme(t.titre, t.images, t.id, t.patientId));
       });
       this.listeThemes$.next(this.themes);
       if(this.themes.length > 0)
@@ -87,7 +87,7 @@ export class ThemeService {
   public addTheme(theme : Theme){
     let patientId = this.patientService.patientSelectionne$.getValue()?.id;
     this.http.post<Theme>(this.globals.getURL() + "api/theme?patientId=" + patientId, theme).subscribe((t) => {
-      this.themes.push(new Theme(t.titre, t.images, t.id));
+      this.themes.push(new Theme(t.titre, t.images, t.id, t.patientId));
       this.listeThemes$.next(this.themes);
       this.themeSelectionne$.next(t);
     });
@@ -97,7 +97,7 @@ export class ThemeService {
     this.http.put<Theme>(this.globals.getURL() + "api/theme/" + theme.getID(), theme).subscribe((theme) => {
       this.themes.forEach((t, i) => {
         if(t.id === theme.id) {
-          this.themes[i] = new Theme(t.titre, t.images, t.id);
+          this.themes[i] = new Theme(t.titre, t.images, t.id, t.patientId);
           this.listeThemes$.next(this.themes);
           this.themeSelectionne$.next(theme);
         }
@@ -110,7 +110,7 @@ export class ThemeService {
     this.http.delete<Theme[]>(this.globals.getURL() + "api/theme/" + theme.id).subscribe((themeList) => {
       this.themes = [];
       themeList.forEach(t => {
-        this.themes.push(new Theme(t.titre, t.images, t.id));
+        this.themes.push(new Theme(t.titre, t.images, t.id, t.patientId));
       });
       this.listeThemes$.next(this.themes);
       this.themeSelectionne$.next(undefined);

@@ -4,17 +4,17 @@ import {Theme} from "./theme.models";
 import {LISTE_DEFAUT, LISTE_THEME, LISTE_THEME_1} from "../moks/liste-theme.moks";
 import {Statistiques} from "./statistiques.models";
 
-export class Patient implements Cardable{
+export class Patient implements Cardable {
   static nextId: number = 0;
   id: number;
-  nom : string;
-  prenom : string;
-  photo : any;
-  stade : 3 | 4 | 5 ;
-  ergoId : number;
+  nom: string;
+  prenom: string;
+  photo: any;
+  stade: 3 | 4 | 5;
+  ergoId: number;
 
 
-  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,/*listeT:Theme[]|undefined,stats : Statistiques[]|undefined,*/ ergoId : number, id : number) {
+  constructor(nom: string, prenom: string, photo: any, stade: 3 | 4 | 5,/*listeT:Theme[]|undefined,stats : Statistiques[]|undefined,*/ ergoId: number, id: number) {
     this.id = Patient.nextId++;
     this.nom = nom;
     this.prenom = prenom;
@@ -24,7 +24,6 @@ export class Patient implements Cardable{
 
     this.id = id;
   }
-
 
 
   getID(): number {
@@ -41,5 +40,28 @@ export class Patient implements Cardable{
 
   getType(): "patient" | "theme" {
     return "patient";
+  }
+
+
+  isEditable(): boolean {
+    return false;
+  }
+
+  getThemes(): Theme[] {
+    // return this.themes;
+    return [];
+  }
+
+  setThemes(themes2: Theme[] | undefined) {
+    // this.themes = themes2;
+  }
+
+  ajouterTheme(t: Theme) {
+    // this.themes.push(t);
+  }
+
+  getStats(): Statistiques[] {
+    // return this.stats;
+    return [];
   }
 }

@@ -12,7 +12,6 @@ import {Cardable} from "../../models/cardable.models";
 export class ItemFrameComponent {
   @Input() item!: Cardable;
 
-  @Input() editerEnable?: boolean = true;
   @Input() selectionnerText?: string = "SELECTIONNER";
 
   @Output()

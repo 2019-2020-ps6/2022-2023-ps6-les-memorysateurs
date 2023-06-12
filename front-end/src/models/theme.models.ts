@@ -5,11 +5,14 @@ export class Theme implements Cardable{
   id: number;
   titre: string;
   images: any[];
+  patientId?: number;
 
-  constructor(titre: string, images: any[], id?: number){
+  constructor(titre: string, images: any[], id?: number, patientId?: number){
     this.id = id||0;
     this.titre = titre;
     this.images = images;
+    console.log("update theme", patientId);
+    this.patientId = patientId||undefined;
   }
 
 
@@ -27,6 +30,10 @@ export class Theme implements Cardable{
 
   getType(): "patient" | "theme" {
     return "theme";
+  }
+
+  isEditable(): boolean {
+      return this.patientId != undefined;
   }
 
 }
