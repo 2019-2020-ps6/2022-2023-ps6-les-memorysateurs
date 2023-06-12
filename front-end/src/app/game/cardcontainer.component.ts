@@ -261,7 +261,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       let patient = this.patientService.patientSelectionne$.getValue();
 
       // @ts-ignore
-      this.statsService.addStatistiques(new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date(),this.initCards.length,patient?.stade ))
+      this.statsService.addStatistiques(new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date().toDateString(),this.initCards.length,patient?.stade ))
       this.gameService.resetGameStats();
       this.intervalId.unsubscribe();
       this.router.navigateByUrl("resultat-partie");

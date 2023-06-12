@@ -1,7 +1,7 @@
 const Joi = require('joi')
 const BaseModel = require('../utils/base-model.js')
 
-module.exports = new BaseModel('Stats', {
+module.exports = new BaseModel('Statistiques', {
     patientId: Joi.number().required(),
     date: Joi.string().required(),
     temps: Joi.number().required(),

@@ -22,6 +22,7 @@ import {Statistiques} from "../../models/statistiques.models";
     constructor(private patientService: PatientService, public statsService: StatistiquesService) {
       statsService.listeStatistiques$.subscribe((statistiques) => {
         this.listeStatistiques = statistiques;
+        this.setUp();
       })
     }
     ngOnInit(): void {
@@ -29,7 +30,6 @@ import {Statistiques} from "../../models/statistiques.models";
     }
 
     ngAfterViewInit(): void {
-        this.setUp();
     }
 
     setUp(){
@@ -52,8 +52,8 @@ import {Statistiques} from "../../models/statistiques.models";
               grid.append(stade);
               let date = document.createElement('p');
               //date
-              let tmp: Date | undefined = this.listeStatistiques[i].getDate();
-              date.innerHTML = "" + tmp?.toLocaleDateString('fr-FR');
+              let tmp: String | undefined = this.listeStatistiques[i].getDate();
+              date.innerHTML = "" + tmp;
               grid.append(date);
               //nb carte
               let cartes = document.createElement('p');

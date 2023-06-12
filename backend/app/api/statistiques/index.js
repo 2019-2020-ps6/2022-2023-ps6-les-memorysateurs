@@ -1,8 +1,8 @@
 const { Router } = require('express')
 
-const { Stats, Patient} = require('../../models')
+const { Statistiques, Patient} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-const {filtrerStatsFromPatient} = require("../stats/manager");
+const {filtrerStatsFromPatient} = require(".//manager");
 const {stringify} = require("nodemon/lib/utils");
 
 const router = new Router()
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     Patient.getById(req.query.patientId)
     const statToCreate = req.body
     statToCreate.patientId = req.query.patientId
-    const stat = Stats.create(statToCreate)
+    const stat = Statistiques.create(statToCreate)
     res.status(201).json(stat)
   } catch (err) {
     manageAllErrors(res, err)

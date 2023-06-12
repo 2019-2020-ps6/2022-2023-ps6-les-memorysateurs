@@ -17,7 +17,8 @@ export class StatistiquesService {
   constructor(private http: HttpClient, private globals: GlobalsService, public patientService: PatientService) {
     patientService.patientSelectionne$.subscribe(patient => {
       if (patient != undefined) {
-        this.retrieveStatistiques(globals.getURL() + "api/Statistiques?patientId=" + patient.id);
+        this.retrieveStatistiques(globals.getURL() + "api/statistiques?patientId=" + patient.id);
+        console.log(globals.getURL() + "api/statistiques?patientId=" + patient.id)
       }
     });
 
@@ -35,9 +36,11 @@ export class StatistiquesService {
     this.listeStatistiques$.next(this.statistiques);
     this.http.get<Statistiques[]>(url).subscribe((statistiques) => {
       statistiques.forEach(statistique => {
-        this.statistiques.push(new Statistiques(statistique.getTemps(), statistique.getEssais(), statistique.getErreurs(), statistique.getIndices(), statistique.getDate(), statistique.getNbCartes(), statistique.getStade()));
+        console.log(statistique)
+        this.statistiques.push(new Statistiques(statistique.temps, statistique.essais, statistique.erreurs, statistique.indices, statistique.date, statistique.nbCartes, statistique.stade));
       });
       this.listeStatistiques$.next(this.statistiques);
+      console.log(this.listeStatistiques$)
     });
   }
 
@@ -50,10 +53,11 @@ export class StatistiquesService {
   }
 
   public addStatistiques(statistiques : Statistiques){
+    console.log(statistiques)
     let patientId = this.patientService.patientSelectionne$.getValue()?.id;
-    this.http.post<Statistiques>(this.globals.getURL() + "api/theme?patientId=" + patientId, statistiques).subscribe(
+    this.http.post<Statistiques>(this.globals.getURL() + "api/statistiques?patientId=" + patientId, statistiques).subscribe(
       (statistique) => {
-      this.statistiques.push(new Statistiques(statistique.getTemps(), statistique.getEssais(), statistique.getErreurs(), statistique.getIndices(), statistique.getDate(), statistique.getNbCartes(), statistique.getStade()));
+        this.statistiques.push(new Statistiques(statistique.temps, statistique.essais, statistique.erreurs, statistique.indices, statistique.date, statistique.nbCartes, statistique.stade));
       this.listeStatistiques$.next(this.statistiques);
     });
   }
