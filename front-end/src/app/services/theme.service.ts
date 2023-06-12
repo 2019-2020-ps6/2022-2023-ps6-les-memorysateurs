@@ -56,7 +56,6 @@ export class ThemeService {
         this.themes.push(new Theme(t.titre, t.images, t.id));
       });
       this.listeThemes$.next(this.themes);
-      console.log(this.themes);
       if(this.themes.length > 0)
         this.themeSelectionne$.next(this.themes[0]);
     });
@@ -95,24 +94,26 @@ export class ThemeService {
   }
 
   public updateTheme(theme : Theme){
-    this.http.put<Theme>(this.globals.getURL() + "api/theme", theme).subscribe((theme) => {
+    this.http.put<Theme>(this.globals.getURL() + "api/theme/" + theme.getID(), theme).subscribe((theme) => {
       this.themes.forEach((t, i) => {
-        if(t.id === theme.id) this.themes[i] = new Theme(t.titre, t.images, t.id);
+        if(t.id === theme.id) {
+          this.themes[i] = new Theme(t.titre, t.images, t.id);
+          this.listeThemes$.next(this.themes);
+          this.themeSelectionne$.next(theme);
+        }
       });
-      this.listeThemes$.next(this.themes);
-      this.themeSelectionne$.next(theme);
     });
   }
 
   public removeTheme(theme : Theme | undefined){
     if(theme == undefined) return;
-    this.http.delete<Theme>(this.globals.getURL() + "api/theme/" + theme.id).subscribe((theme) => {
-      this.themes.forEach((tt, i) => {
-        let t = new Theme(tt.titre, tt.images, tt.id);
-        if(t.id === theme.id) this.themes.splice(i, 1);
+    this.http.delete<Theme[]>(this.globals.getURL() + "api/theme/" + theme.id).subscribe((themeList) => {
+      this.themes = [];
+      themeList.forEach(t => {
+        this.themes.push(new Theme(t.titre, t.images, t.id));
       });
       this.listeThemes$.next(this.themes);
-      this.themeSelectionne$.next(this.themes[0]);
+      this.themeSelectionne$.next(undefined);
     });
   }
 }

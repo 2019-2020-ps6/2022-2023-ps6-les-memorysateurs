@@ -11,13 +11,13 @@ const filtrerThemesFromPatient = (idPatient) => {
 
 
 
-const getThemeFromPatient = (patientId, themeId) => {
-    const themesPatient = filtrerThemesFromPatient(patientId);
+const getThemeFromPatient = (themeId) => {
     const themeIdInt = parseInt(themeId, 10);
-    const theme = themesPatient.find((theme) => theme.id === themeIdInt
+    const theme = Theme.find((theme) => theme.id === themeIdInt
     );
-    if (!theme || theme.id !== themeIdInt) {
-        throw new NotFoundError(`${themeId} was not found for patientId=${patientId}`);
+    
+    if (!theme) {
+        throw new NotFoundError(`${themeId} was not found`);
     }
     return theme;
 };

@@ -32,21 +32,4 @@ router.post('/', (req, res) => {
   }
 })
 
-router.put('/:ergoId', (req, res) => {
-  try {
-    res.status(200).json(Ergo.update(req.params.ergoId, req.body))
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
-
-router.delete('/:ergoId', (req, res) => {
-  try {
-    Ergo.delete(req.params.ergoId)
-    res.status(204).end()
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
-
 module.exports = router

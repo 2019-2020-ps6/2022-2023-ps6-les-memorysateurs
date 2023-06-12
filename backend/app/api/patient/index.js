@@ -27,6 +27,17 @@ router.get('/:patientId', (req, res) => {
   }
 })
 
+router.post('/:patientId', (req, res) => {
+  try {
+    // Check if ergoId exists, if not it will throw a NotFoundError
+    Ergo.getById(req.query.ergoId)
+    const patient = getPatientFromErgo(req.query.ergoId, req.params.patientId)
+    res.status(200).json(patient)
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
 router.post('/', (req, res) => {
   try {
     // Check if ergoId exists, if not it will throw a NotFoundError
@@ -44,30 +55,31 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:patientId', (req, res) => {
-
+  console.log("put ", req.params.patientId, " ", req.body)
+  let patientUpdate;
+  let updatedPatient;
   try {
-    // Check if the patient id exists & if the patient has the same ergoId as the one provided in the url.
-    const patient = getPatientFromErgo(req.query.ergoId, req.params.patientId)
-
-    const patientUpdate = req.body
-    patientUpdate.ergoId = patient.ergoId
-
-    const updatedPatient = Patient.update(req.params.patientId, patientUpdate)
-    res.status(200).json(updatedPatient)
+      patientUpdate = req.body
+      updatedPatient = Patient.update(parseInt(req.params.patientId, 10), patientUpdate)
+      res.status(200).json(updatedPatient)
   } catch (err) {
-    manageAllErrors(res, err)
+      manageAllErrors(res, err)
   }
+  
+  console.log("updatedPatient ", patientUpdate)
+  console.log(updatedPatient)
+
 })
+
 
 router.delete('/:patientId', (req, res) => {
   try {
-    // Check if the patient id exists & if the patient has the same ergoId as the one provided in the url.
-    getPatientFromErgo(req.params.ergoId, req.params.patientId)
-    Patient.delete(req.params.patientId)
-    res.status(204).end()
+    Patient.delete(parseInt(req.params.patientId, 10))
+    res.status(200).json(filterPatientsFromErgo(req.query.ergoId))
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
+
 
 module.exports = router

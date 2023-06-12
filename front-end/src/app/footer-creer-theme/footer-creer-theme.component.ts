@@ -59,6 +59,9 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
       if(ajout) {
         this.themeService.addTheme(this.theme);
       }
+      else {
+        this.themeService.updateTheme(this.theme);
+      }
       this.router.navigate(['/liste-theme']);
     } else {
       this.erreur.emit(true);

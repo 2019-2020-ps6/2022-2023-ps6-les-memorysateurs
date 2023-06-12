@@ -23,7 +23,7 @@ export class PatientService {
 
     authentificationService.utilisateurConnecte$.subscribe(user => {
       if (user != undefined) {
-        this.retrievePatient(this.globals.getURL() + "api/patient/?ergoId=" + user.id);
+        this.retrievePatient(this.globals.getURL() + "api/patient?ergoId=" + user.id);
       }
     });
 
@@ -47,16 +47,6 @@ export class PatientService {
 
   }
 
-
-  // public addPatient(patient : Patient){
-  //   let actualList = this.listePatient$.asObservable();
-  //   actualList.pipe(
-  //     take(1)
-  //   ).subscribe(liste =>{
-  //     this.listePatient.push(patient);
-  //     this.listePatient$.next(liste);});
-
-  // }
   get(i : number) {
     return this.listePatient[i];
   }
@@ -64,21 +54,6 @@ export class PatientService {
   setEditPatient(patient : Patient | undefined){
     this.patientEdite$.next(patient);
   }
-
-  // removePatient(patient : Patient | undefined){
-  //   let actualList = this.listePatient$.asObservable();
-  //   let listeA : Patient[] = [];
-  //   actualList.pipe(
-  //     take(1)
-  //   ).subscribe(liste =>{
-  //     this.listePatient.forEach(chaine =>{
-  //       if(chaine != patient){
-  //         listeA.push(chaine);
-  //       }
-  //     })
-  //   });
-  //   this.listePatient$.next(listeA);
-  // }
 
   public getPatientById(id : number): Patient{
     let patientById: Patient = this.listePatient[0];
@@ -108,24 +83,35 @@ export class PatientService {
     let ergoId = this.authentificationService.utilisateurConnecte$.getValue()?.id;
     if(ergoId == undefined) return;
     patient.ergoId = ergoId;
-    let url = this.globals.getURL() + "api/patient/";
-    this.http.post<Patient>(url, patient).subscribe((patient) => {
+    let url = this.globals.getURL() + "api/patient";
+    this.http.post<Patient>(url + "?ergoId="+ergoId, patient).subscribe((p) => {
+      let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
       this.listePatient.push(patient);
       this.listePatient$.next(this.listePatient);
     });
   }
 
-  removePatient(patient : Patient | undefined){
-    if(patient == undefined) return;
-    let url = this.globals.getURL() + "api/patient/" + patient.id;
-    this.http.delete<Patient>(url).subscribe((patient) => {
-      let listeA : Patient[] = [];
-      this.listePatient.forEach(chaine =>{
-        if(chaine != patient){
-          listeA.push(chaine);
+  public updateTheme(patient : Patient){
+    this.http.put<Patient>(this.globals.getURL() + "api/patient/" + patient.getID(), patient).subscribe((patient) => {
+      this.listePatient.forEach((p, i) => {
+        if(p.id === patient.id) {
+          this.listePatient[i] = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
+          this.listePatient$.next(this.listePatient);
+          this.patientEdite$.next(this.listePatient[i]);
         }
-      })
-      this.listePatient$.next(listeA);
+      });
+    });
+  }
+
+  public removePatient(patient : Patient | undefined){
+    if(patient == undefined) return;
+    this.http.delete<Patient[]>(this.globals.getURL() + "api/patient/" + patient.id + "?ergoId="+ this.authentificationService.getValue()?.id).subscribe((patientList) => {
+      this.listePatient = [];
+      patientList.forEach(p => {
+        this.listePatient.push(new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id)); 
+      });
+      this.listePatient$.next(this.listePatient);
+      this.patientEdite$.next(undefined);
     });
   }
 }
