@@ -7,15 +7,9 @@ test.describe('Liste des patients', () => {
     await page.goto(`${testUrl}/liste-patient`);
     const appComponentFixture = new AppFixture(page);
 
-    // Vérification du titre
-    const title = await page.waitForSelector('h2');
-    const titleText = await title.textContent();
-    expect(titleText).toBe('Ajouter un patient');
-
-    // Vérification de l'existence du bouton "Ajouter un patient"
-    const ajouterPatientButton = await page.waitForSelector('.bouton-ajouter-patient');
-    const isButtonVisible = await ajouterPatientButton.isVisible();
-    expect(isButtonVisible).toBe(true);
+    // Vérifications
+    expect(await (await page.waitForSelector('h2')).textContent()).toBe('Ajouter un patient');
+    expect(await (await page.waitForSelector('.bouton-ajouter-patient')).isVisible()).toBe(true);
 
     // Vérification des éléments de la liste des patients
     const items = await page.$$('app-item-frame');
@@ -23,19 +17,29 @@ test.describe('Liste des patients', () => {
 
     // Vérification des attributs et événements des éléments de la liste
     for (const item of items) {
-      // Vérification de l'attribut "item" avec les données du patient
       const patientData = await item.getAttribute('item');
       expect(patientData).toBeDefined();
 
-      // Vérification de la désactivation de l'édition (attribut "editerEnable")
       const editerEnable = await item.getAttribute('editerEnable');
       expect(editerEnable).toBe(null);
 
-      // Simulation d'un événement d'édition
-      await item.dispatchEvent('editerEvent', {  });
+      await item.dispatchEvent('editerEvent', { 
+        detail: {
+          nom: 'nom',
+          prenom: 'prenom',
+          stade: 'stade',
+          id: 'id'
+        }
+       });
 
-      // Simulation d'un événement de sélection
-      await item.dispatchEvent('selectionneEvent', {  });
+      await item.dispatchEvent('selectionneEvent', { 
+        detail: {
+          nom: 'nom',
+          prenom: 'prenom',
+          stade: 'stade',
+          id: 'id'
+        }
+       });
     }
   });
 });
