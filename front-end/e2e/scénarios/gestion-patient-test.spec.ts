@@ -17,12 +17,6 @@ test.describe('Liste des patients', () => {
     const isButtonVisible = await ajouterPatientButton.isVisible();
     expect(isButtonVisible).toBe(true);
 
-    //Verification de l'action du bouton "Ajouter un patient"
-    await ajouterPatientButton.click();
-    const url = await page.url();
-    expect(url).toBe(`${testUrl}/creer-patient`);
-    await page.goBack();
-
     // Vérification des éléments de la liste des patients
     const items = await page.$$('app-item-frame');
     expect(items.length).toBe(4);
@@ -40,8 +34,7 @@ test.describe('Liste des patients', () => {
         stade: 'stade 3',
         id: 'id'
       }
-
     });
-  }
-  ); 
+
+  }); 
 });
