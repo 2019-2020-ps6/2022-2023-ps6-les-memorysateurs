@@ -36,8 +36,8 @@ export class CreerMemoryComponent implements OnInit {
       for (let i = 1; i < nbCardsForTips; i++) {
         this.numberOfCardsTips.push(i+1);
       }
-      if(this.nombreCartesIndice >= nbCardsForTips*4) {
-        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]*2);
+      if(this.nombreCartesIndice >= nbCardsForTips) {
+        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
       }
     })
 
