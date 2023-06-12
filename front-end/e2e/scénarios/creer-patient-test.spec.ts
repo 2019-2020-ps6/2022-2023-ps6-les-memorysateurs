@@ -16,7 +16,7 @@ test.describe('Création nouveau patient', () => {
     await page.fill('#input-prenom', 'Lucy');
     await page.fill('#input-nom', 'Borg');
     await page.check('#radio1');
-    await page.setInputFiles('#photo-button', ['src/assets/images/patient-homme.png']);
+    await page.setInputFiles('#photo-button', ['src/assets/images/patient-femme.png']);
 
     // Validation de la création du profil du patient
     const creerProfilButton = await page.waitForSelector('#creer-profil');
