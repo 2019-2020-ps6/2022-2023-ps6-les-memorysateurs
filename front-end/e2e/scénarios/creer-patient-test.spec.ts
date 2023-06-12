@@ -15,7 +15,7 @@ test.describe('Création nouveau patient', () => {
     // Remplissage des informations du patient
     await page.fill('#input-prenom', 'Lucy');
     await page.fill('#input-nom', 'Borg');
-    await page.check('#radio1');
+    await page.dispatchEvent('#radio2', 'click');
     await page.setInputFiles('#photo-button', ['src/assets/images/patient-femme.png']);
 
     // Validation de la création du profil du patient
@@ -40,7 +40,7 @@ test.describe('Création nouveau patient', () => {
       detail: {
         nom: 'Perroti',
         prenom: 'Marie',
-        stade: 'stade 3',
+        stade: 'stade 4',
         id: 'id'
       }
     });
