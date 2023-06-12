@@ -1,42 +1,38 @@
 const { Router } = require('express')
 
-const { Stats } = require('../../models')
+const { Stats, Patient} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
+const {filtrerStatsFromPatient} = require("../stats/manager");
+const {stringify} = require("nodemon/lib/utils");
 
 const router = new Router()
 
-router.get('/:patientId', (req, res) => {
+router.get('/', (req, res) => {
   try {
-    res.status(200).json(Patient.getById(req.params.patientId))
+    // Check if patientId exists, if not it will throw a NotFoundError
+    Patient.getById(req.query.patientId)
+
+    res.status(200).json(filtrerStatsFromPatient(req.query.patientId))
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
+
 
 router.post('/', (req, res) => {
   try {
-    const patient = Patient.create({ ...req.body })
-    res.status(201).json(patient)
+    // Check if patient exists, if not it will throw a NotFoundError
+    Patient.getById(req.query.patientId)
+    const statToCreate = req.body
+    statToCreate.patientId = req.query.patientId
+    const stat = Stats.create(statToCreate)
+    res.status(201).json(stat)
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
 
-router.put('/:patientId', (req, res) => {
-  try {
-    res.status(200).json(Patient.update(req.params.patientId, req.body))
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
 
-router.delete('/:patientId', (req, res) => {
-  try {
-    Patient.delete(req.params.patientId)
-    res.status(204).end()
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
 
 module.exports = router
+
