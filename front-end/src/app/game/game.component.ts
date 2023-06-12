@@ -86,10 +86,13 @@ export class HintContainer implements OnInit, AfterViewInit {
       if(bar != null) {
         bar.style.width = (num/this.sender.getDuration()*100) + "%";
       }
-      if (num == 0) {
-        this.nameButton = "Indice";
-      } else {
+      if (num != 0)
+      {
         this.nameButton = "Lancer";
+      }
+      else if(num == 0 || !this.sender.isEnableTimer())
+      {
+        this.nameButton = "Indice";
       }
     });
     this.gameService.isRecurentCombinaison$.subscribe(isRecurrent => {
