@@ -56,6 +56,10 @@ export class Patient implements Cardable{
     return "patient";
   }
 
+  isEditable(): boolean {
+    return false;
+  }
+
   getThemes() : Theme[]{
     // return this.themes;
     return [];
