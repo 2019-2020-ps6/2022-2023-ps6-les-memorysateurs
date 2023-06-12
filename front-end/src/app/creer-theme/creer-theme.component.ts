@@ -112,7 +112,8 @@ export class CreerThemeComponent {
       imageElement.src = reader.result as string;
     }
     reader.readAsDataURL(file as Blob);
-    stockImage.prepend(imageElement);
+    stockImage2.append(imageElement);
+    this.images.push(imageElement.src);
     imageElement.addEventListener("click",() =>{
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
@@ -206,7 +207,8 @@ export class CreerThemeComponent {
     imageElement.style.width = "160px";
     const reader = new FileReader();
     imageElement.src = this.URL;
-    stockImage.prepend(imageElement);
+    stockImage2.append(imageElement);
+    this.images.push(imageElement.src);
     imageElement.addEventListener("click",() =>{
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
