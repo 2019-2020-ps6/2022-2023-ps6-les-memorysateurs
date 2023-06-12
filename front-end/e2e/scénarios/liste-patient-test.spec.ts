@@ -17,6 +17,13 @@ test.describe('Liste des patients', () => {
     const isButtonVisible = await ajouterPatientButton.isVisible();
     expect(isButtonVisible).toBe(true);
 
+    // Vérification de l'action du bouton "Ajouter un patient"
+    await page.click('.bouton-ajouter-patient');
+    const url = await page.url();
+    expect(url).toContain(`${testUrl}/creer-patient`);
+
+    await page.goBack();
+
     // Vérification des éléments de la liste des patients
     const items = await page.$$('app-item-frame');
     expect(items.length).toBe(4);
