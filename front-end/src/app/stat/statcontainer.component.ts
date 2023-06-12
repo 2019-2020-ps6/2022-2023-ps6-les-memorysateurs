@@ -98,7 +98,7 @@ import { PatientService } from '../services/patient.service';
 
     toggle() {
         this.isActive = !this.isActive;
-        this.activeEmitter.emit(this.data);
+        //this.activeEmitter.emit(this.data);
     }
 
 }
