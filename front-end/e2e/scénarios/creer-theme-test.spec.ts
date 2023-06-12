@@ -34,13 +34,14 @@ test.describe('Création d\'un nouveau thème', () => {
     const nomThemeValue = await inputNomTheme.inputValue();
     expect(nomThemeValue).toBe('Nouveau thème');
 
-    // Clique sur le bouton d'importation d'une URL
+    // Ajouter URL d'une image
+    await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
     await page.click('#importer-URL');
+    await page.dblclick('#imageEnAttente img');
 
     // Vérification de la présence de l'image en attente après l'importation d'une URL
-    const imageEnAttenteAfterURL = await page.waitForSelector('#imageEnAttente');
-    const imageEnAttenteChildrenAfterURL = await imageEnAttenteAfterURL.$$eval('img', (imgs) => imgs.length);
-    expect(imageEnAttenteChildrenAfterURL).toBe(3);
+    const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
+    expect(imageChoisiChildrenURL).toBe(4);
 
     // Vérification de l'URL importée
     const urlInput = await page.waitForSelector('#url-image');
@@ -52,12 +53,9 @@ test.describe('Création d\'un nouveau thème', () => {
     const formThemeValue = await formTheme.$eval('input', (input) => input.value);
     expect(formThemeValue).toBe('Nouveau thème');
 
-    // ajout de 2 autres images
-    await page.dblclick('#imageEnAttente img');
-    await page.dblclick('#imageEnAttente img');
-
     // Clique sur le bouton de validation du thème
     await page.click('#boutonValidationTheme');
+    
 
     // Vérification de la création réussie
     const profilPatientUrl = await page.url();
