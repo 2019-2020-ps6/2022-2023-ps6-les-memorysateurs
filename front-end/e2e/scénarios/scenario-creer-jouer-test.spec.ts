@@ -204,6 +204,6 @@ test.describe('Scénario global', () => {
     await boutonStat[0].click();
     expect(page.url()).toBe('http://localhost:4200/stat');
 
-  
+
   })
 })
