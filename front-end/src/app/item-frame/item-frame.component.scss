@@ -53,7 +53,7 @@
   }
 }
 h2{
-
-  width: 230px;
-  overflow: hidden;
+  width: 240px;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }

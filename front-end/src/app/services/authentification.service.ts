@@ -50,6 +50,10 @@ export class AuthentificationService {
         console.log(this.utilisateurConnecte$.getValue());
         this.inConnect$.next(this.isConnected());
       }//TODO: error
+      else
+      {
+        alert("Identifiant ou mot de passe incorrect");
+      }
     });
     return (this.user != undefined);
   }
