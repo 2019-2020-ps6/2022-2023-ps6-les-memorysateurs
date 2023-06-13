@@ -1,6 +1,8 @@
 <div id="container-creer-memory">
   <div id="div-theme-choisi">
-    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [editerEnable]="false" [selectionnerText]="'CHOISIR UN THEME'"></app-item-frame>
+
+    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [selectionnerText]="'CHOISIR UN THEME'" ></app-item-frame>
+
   </div>
   <div class="centered">
     <div id="container-parametres">
@@ -14,7 +16,7 @@
           <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
           <input id="enableTimer" type="checkbox" (click)="toggleEnableTimer()" checked/>
         </div>
-            <p id="texte-temps-memo">Personnaliser le temps de mémorisation</p>
+            <p id="texte-temps-memo">Personnaliser le temps de l'indice</p>
         <div class="slider">
             <input #range type="range" min="{{min}}" max="{{max}}" value="{{dureeIndice}}" name="slider" id="sliderTime" ng-model="value" (input)="onValueTimeChange(range.valueAsNumber)">
             <div class="rangeTimer" id="divSliderTimeOut">

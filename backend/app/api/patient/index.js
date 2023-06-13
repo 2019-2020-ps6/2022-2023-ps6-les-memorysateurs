@@ -1,13 +1,16 @@
 const { Router } = require('express')
 
-const { Patient } = require('../../models')
+const { Ergo, Patient, Theme} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
+const { filterPatientsFromErgo, getPatientFromErgo } = require('./manager')
 
-const router = new Router()
+const router = new Router({ mergeParams: true })
 
 router.get('/', (req, res) => {
   try {
-    res.status(200).json(Patient.get())
+    // Check if ergoId exists, if not it will throw a NotFoundError
+    Ergo.getById(req.query.ergoId)
+    res.status(200).json(filterPatientsFromErgo(req.query.ergoId))
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -15,7 +18,21 @@ router.get('/', (req, res) => {
 
 router.get('/:patientId', (req, res) => {
   try {
-    res.status(200).json(Patient.getById(req.params.patientId))
+    // Check if ergoId exists, if not it will throw a NotFoundError
+    Ergo.getById(req.query.ergoId)
+    const patient = getPatientFromErgo(req.query.ergoId, req.params.patientId)
+    res.status(200).json(patient)
+  } catch (err) {
+    manageAllErrors(res, err)
+  }
+})
+
+router.post('/:patientId', (req, res) => {
+  try {
+    // Check if ergoId exists, if not it will throw a NotFoundError
+    Ergo.getById(req.query.ergoId)
+    const patient = getPatientFromErgo(req.query.ergoId, req.params.patientId)
+    res.status(200).json(patient)
   } catch (err) {
     manageAllErrors(res, err)
   }
@@ -23,28 +40,46 @@ router.get('/:patientId', (req, res) => {
 
 router.post('/', (req, res) => {
   try {
-    const patient = Patient.create({ ...req.body })
+    // Check if ergoId exists, if not it will throw a NotFoundError
+    Ergo.getById(req.query.ergoId)
+    const ergoId = parseInt(req.query.ergoId, 10)
+    const patientToCreate = req.body
+    patientToCreate.ergoId = ergoId
+    console.log(patientToCreate)
+    let patient = Patient.create(patientToCreate)
     res.status(201).json(patient)
   } catch (err) {
     manageAllErrors(res, err)
   }
+
 })
 
 router.put('/:patientId', (req, res) => {
+  console.log("put ", req.params.patientId, " ", req.body)
+  let patientUpdate;
+  let updatedPatient;
   try {
-    res.status(200).json(Patient.update(req.params.patientId, req.body))
+      patientUpdate = req.body
+      updatedPatient = Patient.update(parseInt(req.params.patientId, 10), patientUpdate)
+      res.status(200).json(updatedPatient)
+  } catch (err) {
+      manageAllErrors(res, err)
+  }
+  
+  console.log("updatedPatient ", patientUpdate)
+  console.log(updatedPatient)
+
+})
+
+
+router.delete('/:patientId', (req, res) => {
+  try {
+    Patient.delete(parseInt(req.params.patientId, 10))
+    res.status(200).json(filterPatientsFromErgo(req.query.ergoId))
   } catch (err) {
     manageAllErrors(res, err)
   }
 })
 
-router.delete('/:patientId', (req, res) => {
-  try {
-    Patient.delete(req.params.patientId)
-    res.status(204).end()
-  } catch (err) {
-    manageAllErrors(res, err)
-  }
-})
 
 module.exports = router

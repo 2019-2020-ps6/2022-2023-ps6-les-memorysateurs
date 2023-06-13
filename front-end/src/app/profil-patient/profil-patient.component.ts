@@ -3,6 +3,7 @@ import {Patient} from "../../models/patient.models";
 import {Router} from "@angular/router";
 import {PatientService} from "../services/patient.service";
 import {ThemeService} from "../services/theme.service";
+import {GameService} from "../services/game.service";
 
 
 @Component({
@@ -13,10 +14,11 @@ import {ThemeService} from "../services/theme.service";
 export class ProfilPatientComponent {
   public patient = this.patientService.patientSelectionne$;
 
-  constructor(private router: Router,private patientService : PatientService,private themeService : ThemeService) {}
+  constructor(private router: Router,private patientService : PatientService,private themeService : ThemeService,private gameService : GameService) {}
 
   ngOnInit(): void {
     this.remplirData();
+    this.gameService.setReglages(this.patientService.patientSelectionne$.value);
   }
   remplirData(){
     const name = document.getElementById("input-nom") as HTMLInputElement;
@@ -38,7 +40,6 @@ export class ProfilPatientComponent {
 
   navReglagePartie(){
     let patientSelect: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
-    this.themeService.setThemes(patientSelect.themes);
     this.router.navigateByUrl('creer-memory');
   }
 
@@ -49,6 +50,6 @@ export class ProfilPatientComponent {
   }
 
   retour(): void {
-    window.history.back();
+    this.router.navigateByUrl("liste-patient");
   }
 }

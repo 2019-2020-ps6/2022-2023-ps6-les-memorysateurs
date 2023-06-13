@@ -74,7 +74,7 @@ export class CreerPatientComponent {
 
 retour(){
   this.patientService.setEditPatient(undefined);
-  window.history.back();
+  this.router.navigateByUrl("liste-patient");
 }
 creerProfilPatient(){
 
@@ -87,7 +87,7 @@ creerProfilPatient(){
   }
 if(!erreur) {
   if (this.patient == undefined) {
-    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'],undefined,undefined, 0);
+    const patient: Patient = new Patient(this.patientForm.value['nom'], this.patientForm.value['prenom'], image.src, this.patientForm.value['stade'], /*undefined,undefined,*/ 0, 0); //to redifine
     this.patient = patient;
     ajout = true;
   } else {
@@ -172,9 +172,12 @@ if(this.patientForm.value['nom']==''){
 
   }
   supprimerPatient(){
-    this.patientService.removePatient(this.patient);
-    this.patientService.setEditPatient(undefined);
-    this.router.navigate(['/liste-patient']);
+    let bool = confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');
+    if(bool) {
+      this.patientService.removePatient(this.patient);
+      this.patientService.setEditPatient(undefined);
+      this.router.navigate(['/liste-patient']);
+    }
   }
   popupChange(value : boolean){
     this.popup = value;

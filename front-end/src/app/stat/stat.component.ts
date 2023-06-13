@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Patient} from "../../models/patient.models";
 import {PatientService} from "../services/patient.service";
+import {StatistiquesService} from "../services/statistiques.service";
+import {Statistiques} from "../../models/statistiques.models";
 
 @Component({
   selector: 'app-stat',
@@ -8,6 +10,7 @@ import {PatientService} from "../services/patient.service";
   styleUrls: ['./stat.component.scss']
 })
 export class StatComponent implements OnInit {
+  public listeStatistiques: Statistiques[] | undefined = []
   public patient = this.patientService.patientSelectionne$;
   public partiesJouees: number = 0;
   public nom: string = "";
@@ -20,7 +23,10 @@ export class StatComponent implements OnInit {
   public isEssais: boolean = false;
   public isDisplayed: boolean = this.isTemps || this.isIndices || this.isErreurs || this.isEssais;
 
-  constructor(private patientService: PatientService) {
+  constructor(private patientService: PatientService, public statsService: StatistiquesService) {
+    statsService.listeStatistiques$.subscribe((statistiques) => {
+      this.listeStatistiques = statistiques;
+    })
   }
 
 
@@ -31,7 +37,7 @@ export class StatComponent implements OnInit {
     this.stade = "Stade " + this.patient.value?.stade as string;
 
     // On remplit des données pour l'exemple
-    this.partiesJouees = <number>this.patient.getValue()?.getStats()?.length;
+    this.partiesJouees = <number> this.listeStatistiques?.length;
   }
 
   activeStat(event: string) {
