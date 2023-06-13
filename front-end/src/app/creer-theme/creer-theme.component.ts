@@ -110,11 +110,13 @@ export class CreerThemeComponent {
     const reader = new FileReader();
     reader.onload = () => {
       imageElement.src = reader.result as string;
+      this.images.push(imageElement.src);
     }
     reader.readAsDataURL(file as Blob);
     stockImage2.append(imageElement);
-    this.images.push(imageElement.src);
+
     imageElement.addEventListener("click",() =>{
+
       if(stockImage.contains(imageElement)) {
         stockImage.removeChild(imageElement);
         stockImage2.appendChild(imageElement);

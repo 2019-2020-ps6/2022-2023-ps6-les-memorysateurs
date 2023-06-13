@@ -42,6 +42,10 @@ export class ResultatPartieComponent {
 
   onRelancerPartie() {
 
+    this.router.navigateByUrl("game");
+  }
+
+  onNouvellePartie(){
     this.router.navigateByUrl("creer-memory");
   }
 }

@@ -104,7 +104,7 @@ import {Statistiques} from "../../models/statistiques.models";
 
     toggle() {
         this.isActive = !this.isActive;
-        this.activeEmitter.emit(this.data);
+        //this.activeEmitter.emit(this.data);
     }
 
 }

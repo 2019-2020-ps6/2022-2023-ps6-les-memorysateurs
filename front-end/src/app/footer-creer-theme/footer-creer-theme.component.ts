@@ -45,7 +45,7 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
     let ajout : boolean = false;
   if(this.theme == undefined) {
 
-    const theme: Theme = new Theme(this.nom, this. images)
+    const theme: Theme = new Theme(this.nom, this.images)
     this.theme = theme;
     ajout = true;
   }
@@ -69,6 +69,7 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
       this.theme = undefined;
     }
     this.themeService.setEditTheme(undefined);
+    console.log(this.images);
   }
 
   clickPartagerOuSupprimer(){
