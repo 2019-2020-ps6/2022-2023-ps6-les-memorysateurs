@@ -19,6 +19,14 @@ test.describe('Création nouveau patient', () => {
     const isButtonVisible = await ajouterPatientButton.isVisible();
     expect(isButtonVisible).toBe(true);
 
+    for (const patient of patients) {
+      const patientData = await patient.getAttribute('item');
+      expect(patientData).toBeDefined();
+
+      const editerEnable = await patient.getAttribute('editerEnable');
+      expect(editerEnable).toBe(null);
+    }
+
     // Vérification de l'action "Ajouter un patient"
     await page.click('.bouton-ajouter-patient');
     const url = await page.url();
