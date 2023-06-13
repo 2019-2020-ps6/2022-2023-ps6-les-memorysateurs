@@ -60,7 +60,8 @@ export class Game implements OnInit {
       <div id="meter">
         <div id="meter-bar"><!--{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}--></div>
       </div>
-      <button (click)="toggleTimer()">
+      
+      <button id="boutonIndice"(click)="toggleTimer()">
         {{nameButton}}
       </button>
 </section>
