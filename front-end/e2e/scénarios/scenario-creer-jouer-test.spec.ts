@@ -203,7 +203,11 @@ test.describe('Scénario global', () => {
     const boutonStat = await page.getByRole('button', {name:'Statistiques'}).all();
     await boutonStat[0].click();
     expect(page.url()).toBe('http://localhost:4200/stat');
-
+    const statsTableau = await page.locator(' app-statcontainer').all();
+    for(let i =0;i<statsTableau.length;i++){
+      const tab = await statsTableau[i].locator('.tableau').all();
+      expect(tab.length).toBe(1);
+    }
 
   })
 })
