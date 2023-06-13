@@ -67,23 +67,7 @@ test.describe('Création nouveau patient', () => {
 
     await patientsApresAjout[4].click();
 
-<<<<<<< HEAD
-    const detailsPatientUrl = await page.url();
-    expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
 
-    const prenomText = await page.textContent('#input-prenom');
-    expect(prenomText).toBe('Lucy');
-
-    const nomText = await page.textContent('#input-nom');
-    expect(nomText).toBe('Borg');
-
-    const stadeText = await page.textContent('#info-stade');
-    expect(stadeText).toBe('Stade 5');
-
-     // Modification du profil patient
-
-=======
->>>>>>> 69e427309bb4109d4f39d7aa6d7769838e3476c3
     await page.click('#modifier-le-profil');
 
     await page.fill('#input-prenom', 'John');
@@ -114,8 +98,7 @@ test.describe('Création nouveau patient', () => {
     const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
     expect(patientsApresSuppression.length).toBe(4);
 
-<<<<<<< HEAD
-=======
+
 
     // Verification profil patient
 
@@ -158,13 +141,16 @@ test.describe('Création nouveau patient', () => {
         expect(isVisible).toBe(true);
 
         const statistiquesPlus = await statcontainer.$('.plus');
-        await statistiquesPlus.click();
+        // @ts-ignore
+      await statistiquesPlus.click();
 
         const toggleButton = await statcontainer.$('.plus');
+      // @ts-ignore
         const isVisiblePlus = await toggleButton.isVisible();
         expect(isVisiblePlus).toBe(true);
 
         const contentStat = await statcontainer.$('.content');
+      // @ts-ignore
         const isActive = await contentStat.getAttribute('class');
         expect(isActive).toContain('active');
 
@@ -177,12 +163,13 @@ test.describe('Création nouveau patient', () => {
         }
 
         const tableauStat = await statcontainer.$('.tableau');
+      // @ts-ignore
         const idTab = await tableauStat.getAttribute('id');
         expect(idTab).not.toBe('');
-
+// @ts-ignore
         await statistiquesPlus.click();
     }
->>>>>>> 69e427309bb4109d4f39d7aa6d7769838e3476c3
+
 
   });
 
