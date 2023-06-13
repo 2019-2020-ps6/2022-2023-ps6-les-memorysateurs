@@ -1,35 +1,104 @@
-import {BehaviorSubject, take} from "rxjs";
+import {BehaviorSubject, Subject, take} from "rxjs";
 import {CompteUtilisateur} from "../../models/compte-utilisateur.models";
-import {UTILISATEURS} from "../../moks/utilisateurs.moks";
 import {Injectable} from "@angular/core";
 import {Theme} from "../../models/theme.models";
+
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { GlobalsService } from "./globals.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
-  public listeUtilisateurs$: BehaviorSubject<CompteUtilisateur[]> = new BehaviorSubject<CompteUtilisateur[]>(UTILISATEURS);
+
+  private user?: CompteUtilisateur;
+
+  inConnect: boolean = false;
+
+  public inConnect$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.inConnect);
+
   public utilisateurConnecte$: BehaviorSubject<CompteUtilisateur | undefined> = new BehaviorSubject<CompteUtilisateur | undefined>(undefined);
 
-  login(identifiant: string, motDePasse: string){
+
+  constructor(private http: HttpClient, private globals: GlobalsService) {
+    let userStore = localStorage.getItem("user");
+    if(userStore != null){
+      let userJSON = JSON.parse(userStore);
+      let compte = new CompteUtilisateur(userJSON.name, userJSON.email, userJSON.password, userJSON.id);
+      this.utilisateurConnecte$.next(compte);
+    }
+    this.utilisateurConnecte$.subscribe((user) => {
+      if(user != undefined){
+        this.inConnect = true;
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+    });
+    this.inConnect$.next(this.isConnected());
+  }
+
+
+
+
+  retrieveUser(url : string): boolean {
+    this.http.get<CompteUtilisateur>(url).subscribe((userList) => {
+      this.user = userList;
+      if(this.user != undefined){
+        console.log(this.user);
+        this.utilisateurConnecte$.next(this.user);
+        console.log(this.utilisateurConnecte$.getValue());
+        this.inConnect$.next(this.isConnected());
+      }//TODO: error
+    });
+    return (this.user != undefined);
+  }
+
+  login(identifiant: string, motDePasse: string) : boolean {
     console.log(identifiant);
     console.log(motDePasse);
-    this.listeUtilisateurs$.getValue().forEach(utilisateur => {
-      if((identifiant == utilisateur.identifiant) && (utilisateur.isCorrect(motDePasse))) this.utilisateurConnecte$.next(utilisateur);
-    } );
+
+    return this.retrieveUser(this.globals.getURL() + "api/ergo/" + identifiant + "/" + motDePasse + "/");
   }
 
-  public addCompteUtilisateur(compteUtilisateur : CompteUtilisateur){
-    let actualList = this.listeUtilisateurs$.asObservable();
-    actualList.pipe(
-      take(1)
-    ).subscribe(liste =>{
-      liste.push(compteUtilisateur);
-      this.listeUtilisateurs$.next(liste);});
+  addCompteUtilisateur(user: CompteUtilisateur): boolean {
+    
+    let body = JSON.stringify( user );
+    console.log(body);
+    console.log(user);        
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
 
+    this.http.post<CompteUtilisateur>(this.globals.getURL() + "api/ergo/", body, options).subscribe((us) => {
+      this.user = us;
+      if(this.user != undefined){
+        console.log(this.user);
+        this.utilisateurConnecte$.next(this.user);
+        console.log(this.utilisateurConnecte$.getValue());
+        this.inConnect$.next(this.isConnected());
+      }
+    });
+    return (this.user != undefined);
   }
+  
+  logout(){
+    this.user=undefined;
+    this.utilisateurConnecte$.next(undefined);
+    localStorage.removeItem("user");
+    localStorage.removeItem("patient");
+    this.inConnect$.next(this.isConnected());
+  }
+
+  public getValue(){
+    return this.utilisateurConnecte$.getValue();
+  }
+
 
   isAuthentifie(): boolean {
-    return !(this.utilisateurConnecte$.getValue() == undefined);
+    return (this.utilisateurConnecte$.getValue() != undefined);
+  }
+
+  isConnected(): boolean {
+    return localStorage.getItem("user") != null;
   }
 }

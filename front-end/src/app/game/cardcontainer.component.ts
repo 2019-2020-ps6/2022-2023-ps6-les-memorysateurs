@@ -10,6 +10,7 @@ import {PatientService} from "../services/patient.service";
 import {Statistiques} from "../../models/statistiques.models";
 import { Combinaison } from 'src/models/combinaison.models';
 import { ListCombinaison } from 'src/models/listcombinaison.models';
+import {StatistiquesService} from "../services/statistiques.service";
 
 
 @Component({
@@ -48,7 +49,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
 
   @Input()
   indices : number =0;
-  constructor(private sender : TimerService, public gameService: GameService, public router : Router,public patientService : PatientService) {
+  constructor(private sender : TimerService, public gameService: GameService, public router : Router,public patientService : PatientService, public statsService: StatistiquesService) {
     this.subscription = this.sender.getTimer().subscribe( num => {
       if(num == 0 && !this.isAnimating) {
         this.isHinted = false;
@@ -260,8 +261,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
       let patient = this.patientService.patientSelectionne$.getValue();
 
       // @ts-ignore
-      let stats = new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date(),this.initCards.length,patient?.stade );
-      patient?.addStats(stats);
+      this.statsService.addStatistiques(new Statistiques(this.temps,this.gameService.nombreEssais$.value,this.gameService.nombreErreurs$.value,this.gameService.nombreIndices$.value,new Date().toDateString(),this.initCards.length,patient?.stade ))
       this.gameService.resetGameStats();
       this.intervalId.unsubscribe();
       this.router.navigateByUrl("resultat-partie");

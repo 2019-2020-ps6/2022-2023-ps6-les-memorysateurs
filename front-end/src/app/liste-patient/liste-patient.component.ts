@@ -12,11 +12,14 @@ import {PatientService} from "../services/patient.service";
   styleUrls: ['./liste-patient.component.scss']
 })
 export class ListePatientComponent {
-  listePatient: Cardable[] = [];
+  listePatient: Patient[] = [];
 
   constructor(public router: Router, public patientService: PatientService) {
-    this.patientService.listePatient$.subscribe((patients: Patient[]) => {
-      this.listePatient = patients;
+    this.patientService.listePatient$.subscribe(liste => {
+      if (liste != undefined) {
+        this.listePatient = liste;
+        console.log(this.listePatient);
+      }
     });
   }
 

@@ -60,6 +60,9 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
       if(ajout) {
         this.themeService.addTheme(this.theme);
       }
+      else {
+        this.themeService.updateTheme(this.theme);
+      }
       this.router.navigate(['/liste-theme']);
     } else {
       this.erreur.emit(true);
@@ -75,8 +78,6 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
         this.themeService.removeTheme(this.theme);
         this.themeService.setEditTheme(undefined);
         const patient = this.patientService.patientSelectionne$;
-        let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
-        patientSelect.setThemes(this.themeService.listeThemes$.value);
 
         this.router.navigate(['/liste-theme']);
       }

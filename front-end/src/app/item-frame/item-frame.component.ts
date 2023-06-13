@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {Theme} from "../../models/theme.models";
 import {ThemeService} from "../services/theme.service";
 import {Router} from "@angular/router";
@@ -12,7 +12,6 @@ import {Cardable} from "../../models/cardable.models";
 export class ItemFrameComponent {
   @Input() item!: Cardable;
 
-  @Input() editerEnable?: boolean = true;
   @Input() selectionnerText?: string = "SELECTIONNER";
 
   @Output()
@@ -20,10 +19,6 @@ export class ItemFrameComponent {
 
   @Output()
   editerEvent: EventEmitter<number> = new EventEmitter<number>();
-
-
-  constructor(public router: Router, public itemService: ThemeService) {
-  }
 
 
   onSelectionner(){

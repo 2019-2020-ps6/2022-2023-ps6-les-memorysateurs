@@ -1,14 +1,18 @@
 const { Router } = require('express')
 
-const { Theme } = require('../../models')
+const { Theme, Patient} = require('../../models')
 const manageAllErrors = require('../../utils/routes/error-management')
-const { filtrerThemesFromErgo, getThemeFromErgo } = require('./manager')
+const { filtrerThemesFromPatient, getThemeFromPatient } = require('./manager')
+const { getById } = require('../../models/patient.model')
 
 const router = new Router()
 
 router.get('/', (req, res) => {
     try {
-        res.status(200).json(filtrerThemesFromErgo(req.query.idErgo))
+        // Check if patientId exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+    
+        res.status(200).json(filtrerThemesFromPatient(req.query.patientId))
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -16,7 +20,9 @@ router.get('/', (req, res) => {
 
 router.get('/:themeId', (req, res) => {
     try {
-        res.status(200).json(getThemeFromErgo(req.query.idErgo, req.params.themeId))
+        // Check if patientId exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+        res.status(200).json(getThemeFromPatient(req.query.patientId, req.params.themeId))
     } catch (err) {
         manageAllErrors(res, err)
     }
@@ -25,7 +31,11 @@ router.get('/:themeId', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        const theme = Theme.create({ ...req.body })
+        // Check if patient exists, if not it will throw a NotFoundError
+        Patient.getById(req.query.patientId)
+        const themeToCreate = req.body
+        themeToCreate.patientId = req.query.patientId
+        const theme = Theme.create(themeToCreate)
         res.status(201).json(theme)
     } catch (err) {
         manageAllErrors(res, err)
@@ -33,17 +43,27 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:themeId', (req, res) => {
+    console.log("put ", req.params.themeId, " ", req.body)
+    let themeUpdate;
+    let updatedTheme;
     try {
-        res.status(200).json(Theme.update(req.params.themeId, req.body))
+
+        themeUpdate = req.body
+        updatedTheme = Theme.update(parseInt(req.params.themeId, 10), themeUpdate)
+        res.status(200).json(updatedTheme)
     } catch (err) {
         manageAllErrors(res, err)
     }
+    
+    console.log("updatedTheme ", themeUpdate)
+    console.log(updatedTheme)
+
 })
 
 router.delete('/:themeId', (req, res) => {
     try {
-        Theme.delete(req.params.themeId)
-        res.status(204).end()
+        Theme.delete(parseInt(req.params.themeId,10))
+        res.status(200).json(filtrerThemesFromPatient(req.query.patientId))
     } catch (err) {
         manageAllErrors(res, err)
     }
