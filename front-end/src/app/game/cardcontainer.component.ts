@@ -68,7 +68,7 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
     });
 
     this.gameService.nombreCartesIndice$.subscribe(nbCards => {
-      this.nbCardsForHint = nbCards;
+      this.nbCardsForHint = nbCards *2;
     });
     this.intervalId = interval(1000).subscribe(() => {
       this.temps++;
@@ -230,8 +230,8 @@ export class CardsContainer implements OnInit, OnChanges, AfterViewInit {
         //display tips
         this.sender.resetTimer();
         if(this.erreurConsecutives%this.gameService.nombreErreurAvantIndice$.getValue() == 0) {
-          if(this.erreurConsecutives >= 2 * this.gameService.nombreErreurAvantIndice$.getValue() && this.gameService.nombreCartesIndice$.getValue()>2 ){
-            this.gameService.nombreCartesIndice$.next(this.gameService.nombreCartesIndice$.getValue()-2)
+          if(this.erreurConsecutives > 2 * this.gameService.nombreErreurAvantIndice$.getValue() && this.gameService.nombreCartesIndice$.getValue()>1 ){
+            this.gameService.nombreCartesIndice$.next(this.gameService.nombreCartesIndice$.getValue()-1)
           }
           this.sender.startTimer();
         }

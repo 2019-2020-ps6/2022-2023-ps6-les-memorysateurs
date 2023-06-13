@@ -48,6 +48,7 @@ export class PartagerThemeComponent {
 
   retour(){
     this.themeService.setEditTheme(undefined);
+
     window.history.back();
   }
 

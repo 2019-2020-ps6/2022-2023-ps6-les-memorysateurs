@@ -26,6 +26,7 @@
       width: 90%;
       height: auto;
       object-fit: cover;
+      aspect-ratio: 1/1;
       border-radius: 12px;
     }
   }
@@ -50,4 +51,9 @@
     color: #FFFFFF;
     font-weight: bold;
   }
+}
+h2{
+
+  width: 230px;
+  overflow: hidden;
 }

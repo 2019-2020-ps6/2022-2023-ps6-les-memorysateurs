@@ -10,7 +10,7 @@
         </form>
         <div style="display: flex; align-content: flex-end; width: 100%">
           <p class="donnee-patient">Stade de la maladie :</p>
-          <button id="info-stade" (click)="changeInfoBooleen()">i</button>
+          <button id="info-stade" (click)="changeInfoBooleen()">+ d'infos</button>
         </div>
         <form id="container-radio-button" [formGroup]="patientForm">
           <div class="stade">
@@ -36,7 +36,7 @@
       <label class="bouton-vert" id="charger-une-photo" for="photo-button">Charger une photo</label>
       <input id="photo-button"type="file" (change)="afficherPhoto()" [formControlName]="'photo'"/>
     </form>
-    
+
     <div id="bouton-en-plus">
       <button class="bouton-rouge" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
       <button class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</button>

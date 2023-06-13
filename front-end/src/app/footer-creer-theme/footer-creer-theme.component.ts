@@ -38,12 +38,13 @@ export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
   }
   retourListeTheme() {
     this.themeService.setEditTheme(undefined);
-    window.history.back();
+    this.router.navigateByUrl("liste-theme");
   }
 
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
+
     const theme: Theme = new Theme(this.nom, this. images)
     this.theme = theme;
     ajout = true;
