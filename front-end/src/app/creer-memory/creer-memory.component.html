@@ -1,36 +1,35 @@
-<div id="container-creer-memory">
-  <div id="div-theme-choisi">
-    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [selectionnerText]="'CHOISIR UN THEME'" ></app-item-frame>
-  </div>
-  <div class="centered">
-    <div id="container-parametres">
-      <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'" [name]="'nbcard'" [service]="gameService.nombreCartes$"></app-slider-number>
-      <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
-      <app-slider-number [numbers]="numberOfErrors" [title]="'Nombre d\'erreurs consécutives avant l\'activation de l\'indice'" [name]="'nbErreurs'" [service]="gameService.nombreErreurAvantIndice$"></app-slider-number>
-      <app-slider-number [numbers]="numberRecc" [title]="'Nombre de fois qu\'une combinaison est faite avant avertissement'" [name]="'nbCombinaisonRecurence'" [service]="gameService.nombreCombinaison$"></app-slider-number>
-
-      <div id="div-slider">
-        <div id="div-timer-enable">
-          <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
-          <input id="enableTimer" type="checkbox" (click)="toggleEnableTimer()" checked/>
+<div id="container-all">
+  <div id="container-creer-memory">
+    <div id="div-theme-choisi">
+      <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [selectionnerText]="'CHOISIR UN THEME'" ></app-item-frame>
+    </div>
+    <div class="centered">
+      <div id="container-parametres">
+        <app-slider-number [numbers]="numberOfCards" [title]="'Nombre de cartes'" [name]="'nbcard'" [service]="gameService.nombreCartes$"></app-slider-number>
+        <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
+        <app-slider-number [numbers]="numberOfErrors" [title]="'Nombre d\'erreurs consécutives avant l\'activation de l\'indice'" [name]="'nbErreurs'" [service]="gameService.nombreErreurAvantIndice$"></app-slider-number>
+        <app-slider-number [numbers]="numberRecc" [title]="'Nombre de fois qu\'une combinaison est faite avant avertissement'" [name]="'nbCombinaisonRecurence'" [service]="gameService.nombreCombinaison$"></app-slider-number>
+  
+        <div id="div-slider">
+          <div id="div-timer-enable">
+            <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
+            <input id="enableTimer" type="checkbox" (click)="toggleEnableTimer()" checked/>
+          </div>
+              <p id="texte-temps-memo">Personnaliser le temps de l'indice</p>
+          <div class="slider">
+              <input #range type="range" min="{{min}}" max="{{max}}" value="{{dureeIndice}}" name="slider" id="sliderTime" ng-model="value" (input)="onValueTimeChange(range.valueAsNumber)">
+              <div class="rangeTimer" id="divSliderTimeOut">
+                <output #output id="sliderTimeOut" ng-model="value">{{timerEnabled?((dureeIndice)| number:'2.0-0'): '--'}}s</output>
+              </div>
+          </div>
+          <div class="background-slider"></div>
         </div>
-            <p id="texte-temps-memo">Personnaliser le temps de l'indice</p>
-        <div class="slider">
-            <input #range type="range" min="{{min}}" max="{{max}}" value="{{dureeIndice}}" name="slider" id="sliderTime" ng-model="value" (input)="onValueTimeChange(range.valueAsNumber)">
-            <div class="rangeTimer" id="divSliderTimeOut">
-              <output #output id="sliderTimeOut" ng-model="value">{{timerEnabled?((dureeIndice)| number:'2.0-0'): '--'}}s</output>
-            </div>
-        </div>
-        <div class="background-slider"></div>
+  
       </div>
-
+    </div>
+    <div class="bas-vert">
+      <button class="bouton-retour" (click)="retour()">Retour</button>
+      <button class="btn-lauch" (click)="lancerPartie()">Lancer Partie</button>
     </div>
   </div>
-  <br>
-  <div class="bas-vert">
-    <button class="btn-lauch" (click)="lancerPartie()">Lancer Partie</button>
-  </div>
-
 </div>
-
-<button class="bouton-retour" (click)="retour()">Retour</button>
