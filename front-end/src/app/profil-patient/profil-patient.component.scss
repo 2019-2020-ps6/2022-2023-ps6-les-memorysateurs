@@ -172,7 +172,11 @@ app-info-stade{
     width: 45%;
     height: 80px;
     border-radius: 20px;
-    border: #006A52;
+    border: none;
+  }
+  &>*:last-child {
+    background-color: #FCC938;
+    color: #5C3E34;
   }
 }
 
