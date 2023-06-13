@@ -2,24 +2,32 @@ import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
 import { AppFixture } from 'src/app/app.fixture';
 
-test.describe('Création d\'un nouveau thème', () => {
-  test('Test de création du thème avec une image', async ({ page }) => {
-    await page.goto(`${testUrl}/creer-theme`);
-    const appComponentFixture = new AppFixture(page);
+test.describe('Modification du profil d\'un patient', () => {
+    test('Test de modification du profil du patient', async ({ page }) => {
+      await page.goto(`${testUrl}/liste-theme`);
+      const appComponentFixture = new AppFixture(page);
+  
+      // Cliquer sur le bouton de modification du profil du patient
+      const themes = await page.$$('app-item-frame');
+      await themes[0].dispatchEvent('editerEvent', 'click');
 
     // Vérification du texte "NOUVEAU THEME"
     const titre = await page.waitForSelector('#Titre-Nouveau-theme');
     const titreText = await titre.textContent();
-    expect(titreText).toBe('NOUVEAU THEME');
+    expect(titreText).toBe('MODIFIER LE THEME');
 
     // Remplissage des informations du thème
-    await page.fill('#div-nom-theme', 'Nouveau thème');
+    await page.fill('#div-nom-theme', 'test modifier thème');
+
+    //Retirer une image des images choisies
+    await page.dblclick('#imageChoisi img');
+
     await page.setInputFiles('#recup-fichier', ['src/assets/images/patient-homme.png']);
 
     // Vérification de la présence de l'image en attente
     const imageEnAttente = await page.waitForSelector('#imageEnAttente');
     const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
-    expect(imageEnAttenteChildren).toBe(5);
+    expect(imageEnAttenteChildren).toBe(7);
 
     // double-Clique sur l'image en attente pour la déplacer vers les images choisies
     await page.dblclick('#imageEnAttente img');
@@ -27,31 +35,12 @@ test.describe('Création d\'un nouveau thème', () => {
     // Vérification de la présence de l'image dans les images choisies
     const imageChoisi = await page.waitForSelector('#imageChoisi');
     const imageChoisiChildren = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildren).toBe(2);
+    expect(imageChoisiChildren).toBe(4);
 
     // Vérification du nom du thème
     const inputNomTheme = await page.waitForSelector('#div-nom-theme');
     const nomThemeValue = await inputNomTheme.inputValue();
-    expect(nomThemeValue).toBe('Nouveau thème');
-
-    // Ajouter URL d'une image
-    await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
-    await page.click('#importer-URL');
-    await page.dblclick('#imageEnAttente img');
-
-    // Vérification de la présence de l'image en attente après l'importation d'une URL
-    const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildrenURL).toBe(4);
-
-    // Vérification de l'URL importée
-    const urlInput = await page.waitForSelector('#url-image');
-    const urlInputValue = await urlInput.inputValue();
-    expect(urlInputValue).toBe('');
-
-    // Vérification du formulaire de thème
-    const formTheme = await page.waitForSelector('#form-nom-theme');
-    const formThemeValue = await formTheme.$eval('input', (input) => input.value);
-    expect(formThemeValue).toBe('Nouveau thème');
+    expect(nomThemeValue).toBe('test modifier thème');
 
     // Clique sur le bouton de validation du thème
     await page.click('#boutonValidationTheme');
@@ -73,7 +62,7 @@ test.describe('Création d\'un nouveau thème', () => {
 
     await items[1].dispatchEvent('selectionneEvent', { 
     detail: {
-        nom: 'Nouveau thème',
+        nom: 'test modifier thème',
         id: 'id'
     }
     });
