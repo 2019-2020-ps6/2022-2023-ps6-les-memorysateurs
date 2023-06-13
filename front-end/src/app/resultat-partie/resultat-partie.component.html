@@ -2,7 +2,7 @@
   <div id="profil-patient">
     <img id="photo-patient" [src]="patientSelectionne.getImage()">
     <h3 id="nom-patient">{{patientSelectionne.getTitre()}}</h3>
-    <p id="nb-parties-jouees-patient">{{patientSelectionne.getStats().length}} Parties jouées</p>
+    <p *ngIf="listeStatistiques != undefined" id="nb-parties-jouees-patient">{{listeStatistiques.length}} Parties jouées</p>
   </div>
 
   <div id="boite-droite">

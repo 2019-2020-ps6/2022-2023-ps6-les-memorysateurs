@@ -1,26 +1,28 @@
-const { Ergo, Theme } = require('../../models')
+const { Patient, Theme } = require('../../models')
 const NotFoundError = require('../../utils/errors/not-found-error.js')
 
 
 
 
-const filtrerThemesFromErgo = (idErgo) => {
+const filtrerThemesFromPatient = (idPatient) => {
     const themes = Theme.get()
-    return themes.filter((theme) => theme.idErgo === idErgo)
+    return themes.filter((theme) => theme.patientId === idPatient || theme.patientId === undefined)
 }
 
-const getThemeFromErgo = (ergoId, themeId) => {
-    const themesErgo = filtrerThemesFromErgo(ergoId);
+
+
+const getThemeFromPatient = (themeId) => {
     const themeIdInt = parseInt(themeId, 10);
-    const theme = themesErgo.find((theme) => theme.id === themeIdInt
+    const theme = Theme.find((theme) => theme.id === themeIdInt
     );
-    if (!theme || theme.id !== themeIdInt) {
-        throw new NotFoundError(`${themeId} was not found for ergoId=${ergoId}`);
+    
+    if (!theme) {
+        throw new NotFoundError(`${themeId} was not found`);
     }
     return theme;
 };
 
 module.exports = {
-    filtrerThemesFromErgo,
-    getThemeFromErgo,
+    filtrerThemesFromPatient,
+    getThemeFromPatient,
 }

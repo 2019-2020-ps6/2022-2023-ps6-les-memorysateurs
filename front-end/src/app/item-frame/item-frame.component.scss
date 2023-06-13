@@ -1,6 +1,6 @@
 .item{
   display: grid;
-  grid-template-rows: 2fr .5fr .3fr .5fr;
+  grid-template-rows: 2fr .5fr .5fr .6fr;
   align-items: center;
   justify-items: center;
   height: 500px;
@@ -53,7 +53,7 @@
   }
 }
 h2{
-
-  width: 230px;
-  overflow: hidden;
+  width: 240px;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }

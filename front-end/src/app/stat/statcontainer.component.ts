@@ -1,5 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
 import { PatientService } from '../services/patient.service';
+import {StatistiquesService} from "../services/statistiques.service";
+import {Statistiques} from "../../models/statistiques.models";
 
 @Component({
     selector: 'app-statcontainer',
@@ -7,7 +9,7 @@ import { PatientService } from '../services/patient.service';
     styleUrls: ['./statcontainer.component.scss']
   })
   export class StatContainerComponent implements AfterViewInit, OnInit {
-
+    public listeStatistiques: Statistiques[] | undefined = []
     public patient = this.patientService.patientSelectionne$;
     @Input() public progres: boolean = false;
     @Input() public title: string = "Title";
@@ -17,14 +19,18 @@ import { PatientService } from '../services/patient.service';
     @Output() activeEmitter = new EventEmitter<string>();
     public moyenne: number = 0;
 
-    constructor(private patientService: PatientService) {
+    constructor(private patientService: PatientService, public statsService: StatistiquesService) {
+      
     }
     ngOnInit(): void {
         this.idTab = "tab"+this.data;
     }
 
     ngAfterViewInit(): void {
+      this.statsService.listeStatistiques$.subscribe((statistiques) => {
+        this.listeStatistiques = statistiques;
         this.setUp();
+      })
     }
 
     setUp(){
@@ -32,49 +38,49 @@ import { PatientService } from '../services/patient.service';
         let total = 0;
 
 
+        if(this.listeStatistiques != undefined && this.listeStatistiques.length != 0) {
 
-
-        // @ts-ignore
-        for( let i =this.patient.getValue()?.getStats()?.length-1; i>=Math.max(0, this.patient.getValue()?.getStats()?.length-4);i--){
-
+          // @ts-ignore
+          for(let i = this.listeStatistiques?.length - 1; i>=Math.max(0, this.listeStatistiques?.length -4); i--){
 
             //stade
             let stade = document.createElement('p');
-            stade.innerHTML = "" + this.patient.getValue()?.getStat(i)?.getStade();
+            stade.innerHTML = "" + this.listeStatistiques[i].getStade();
             console.log("tab filling" + this.data + " " + this.idTab);
             grid.append(stade);
             let date = document.createElement('p');
             //date
-            let tmp : Date | undefined = this.patient.getValue()?.getStat(i)?.getDate();
-            date.innerHTML = "" +tmp?.toLocaleDateString('fr-FR');
+            let tmp: String | undefined = this.listeStatistiques[i].getDate();
+            date.innerHTML = "" + tmp;
             grid.append(date);
             //nb carte
             let cartes = document.createElement('p');
-            cartes.innerHTML = "" +this.patient.getValue()?.getStat(i)?.getNbCartes();
+            cartes.innerHTML = "" + this.listeStatistiques[i].getNbCartes();
             grid.append(cartes);
             //data
             let datap = document.createElement('p');
-            let datas = this.patient.getValue()?.getStat(i)?.getByDataTypeToString(this.data);
+            let datas = this.listeStatistiques[i].getByDataTypeToString(this.data);
             datap.innerHTML = "" + datas;
-            let datai = this.patient.getValue()?.getStat(i)?.getByDataType(this.data);
-            if(datai != undefined)
-                total += datai;
+            let datai = this.listeStatistiques[i].getByDataType(this.data);
+            if (datai != undefined)
+              total += datai;
             grid.append(datap);
+          
+
+          }
+        
+        let moyennep = document.getElementById("moyenne"+this.idTab) as HTMLParagraphElement;
 
 
-        }
-
-      let moyennep = document.getElementById("moyenne"+this.idTab) as HTMLParagraphElement;
-
-
-      // @ts-ignore
-      total = total/this.patient.getValue()?.getStats()?.length;
-      moyennep.innerHTML = this.moyenneToString(total,this.data);
         // @ts-ignore
-        if(total >= this.patient.getValue()?.getStat(this.patient.getValue()?.getStats()?.length-1)?.getByDataType(this.data)){
-          this.progres = true;
-        }else{
-          this.progres = false;
+        total = total/this.listeStatistiques?.length;
+        moyennep.innerHTML = this.moyenneToString(total,this.data);
+          // @ts-ignore
+          if(total >= this.listeStatistiques[this.listeStatistiques?.length - 1].getByDataType(this.data)){
+            this.progres = true;
+          }else{
+            this.progres = false;
+          }
         }
       }
 

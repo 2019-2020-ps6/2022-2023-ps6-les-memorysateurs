@@ -41,7 +41,8 @@ export class Game implements OnInit {
       this.timer = num;
     });
     this.themeService.themeSelectionne$.subscribe( theme => {
-      this.theme = theme;
+      if(theme != undefined)
+        this.theme = theme;
     });
     this.gameService.combinations$.subscribe( combinaison => {
       this.lastCombinaison = combinaison.lastCombinaison;
@@ -86,10 +87,13 @@ export class HintContainer implements OnInit, AfterViewInit {
       if(bar != null) {
         bar.style.width = (num/this.sender.getDuration()*100) + "%";
       }
-      if (num == 0) {
-        this.nameButton = "Indice";
-      } else {
+      if (num != 0)
+      {
         this.nameButton = "Lancer";
+      }
+      else if(num == 0 || !this.sender.isEnableTimer())
+      {
+        this.nameButton = "Indice";
       }
     });
     this.gameService.isRecurentCombinaison$.subscribe(isRecurrent => {

@@ -1,18 +1,17 @@
 export class CompteUtilisateur {
-  static nextId: number;
-  id: number;
-  identifiant: string;
+  id?: number;
   email: string;
-  private motDePasse: string;
+  name : string;
+  private password?: string;
 
-  constructor(identifiant: string, email: string, motDePasse: string) {
-    this.id = CompteUtilisateur.nextId++;
-    this.identifiant = identifiant;
+  constructor(name: string, email: string, motDePasse?: string, id?: number) {
+    if(id != undefined) this.id = id;
     this.email = email;
-    this.motDePasse =motDePasse;
+    this.name = name;
+    this.password =motDePasse;
   }
 
   isCorrect(str:string): boolean {
-    return str == this.motDePasse;
+    return str == this.password;
   }
 }

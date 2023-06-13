@@ -53,8 +53,10 @@ export class CreerMemoryComponent implements OnInit {
       this.timerEnabled = timerEnabled;
     })
 
-    themeService.themeSelectionne$.subscribe((theme: Theme) => {
-      this.themeSelectionne = theme;
+    themeService.themeSelectionne$.subscribe((theme) => {
+      if(theme != undefined) {
+        this.themeSelectionne = theme;
+      }
     })
 
   }
