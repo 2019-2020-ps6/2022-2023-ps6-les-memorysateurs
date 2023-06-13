@@ -1,6 +1,6 @@
 <div id="container-creer-memory">
   <div id="div-theme-choisi">
-    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [editerEnable]="false" [selectionnerText]="'Choisir un Thème'"></app-item-frame>
+    <app-item-frame  (selectionneEvent)="onChangerTheme()" [item]="themeSelectionne" [editerEnable]="false" [selectionnerText]="'CHOISIR UN THEME'"></app-item-frame>
   </div>
   <div class="centered">
     <div id="container-parametres">
@@ -8,7 +8,7 @@
       <app-slider-number [numbers]="numberOfCardsTips" [title]="'Nombre de cartes retournées à l\'indice (par paire)'" [name]="'nbcardtip'" [service]="gameService.nombreCartesIndice$"></app-slider-number>
       <app-slider-number [numbers]="numberOfErrors" [title]="'Nombre d\'erreurs consécutives avant l\'activation de l\'indice'" [name]="'nbErreurs'" [service]="gameService.nombreErreurAvantIndice$"></app-slider-number>
       <app-slider-number [numbers]="numberRecc" [title]="'Nombre de fois qu\'une combinaison est faite avant avertissement'" [name]="'nbCombinaisonRecurence'" [service]="gameService.nombreCombinaison$"></app-slider-number>
-  
+
       <div id="div-slider">
         <div id="div-timer-enable">
           <label for="enableTimer">{{timerEnabled ? 'Désactiver le timer' : 'Activer le timer'}}</label>
@@ -23,7 +23,7 @@
         </div>
         <div class="background-slider"></div>
       </div>
-  
+
     </div>
   </div>
   <br>

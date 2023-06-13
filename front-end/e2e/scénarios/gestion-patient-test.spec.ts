@@ -22,7 +22,7 @@ test.describe('Création nouveau patient', () => {
     // Vérification de l'action "Ajouter un patient"
     await page.click('.bouton-ajouter-patient');
     const url = await page.url();
-    expect(url).toContain(`${testUrl}/creer-patient`);    
+    expect(url).toContain(`${testUrl}/creer-patient`);
 
     const titre = await page.waitForSelector('#text-nouveau-profil');
     const titreText = await titre.textContent();
@@ -59,7 +59,7 @@ test.describe('Création nouveau patient', () => {
     expect(nomText).toBe('Borg');
 
     const stadeText = await page.textContent('#info-stade');
-    expect(stadeText).toBe('Stade 3');
+    expect(stadeText).toBe('Stade 5');
 
      // Modification du profil patient
 
@@ -92,7 +92,7 @@ test.describe('Création nouveau patient', () => {
 
     const patientsApresSuppression = await page.$$('app-item-frame');
     expect(patientsApresSuppression.length).toBe(4);
-    
+
 
   });
 

@@ -64,7 +64,7 @@ test.describe('Jouer une partie', () => {
     //test erreur
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('2')].click();
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(5000);
     //tester le nombre de cartes retournés par indices
     flipped= await page.locator('.flipped').all();
     await expect(flipped.length-2).toBe(nombreIndices);
@@ -73,7 +73,7 @@ test.describe('Jouer une partie', () => {
     await expect(cards.length-2).toBe(nombreDeCartes);
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('2')].click();
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(5000);
     //tester l'avertissement
     const avertissement = await page.waitForSelector('#combSection ');
     await avertissement.click();
@@ -82,7 +82,7 @@ test.describe('Jouer une partie', () => {
 
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('4')].click();
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(5000);
     //tester que l'indice a diminué
     flipped= await page.locator('.flipped').all();
     await expect(flipped.length-2).toBe(nombreIndices-2);
@@ -110,5 +110,7 @@ test.describe('Jouer une partie', () => {
     await page.waitForTimeout(5000);
     expect(page.url()).toBe('http://localhost:4200/resultat-partie');
   });
+
+
 
 });

@@ -16,7 +16,7 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
-  
+
   @Input()
   erreurNom = false;
   @Input()
@@ -44,7 +44,7 @@ export class CreerPatientComponent {
 
 
 
-afficherPhoto(){
+  afficherPhoto(){
     const input = document.getElementById("photo-button") as HTMLInputElement;
     const file = input.files?.[0];
     const stockImage = document.getElementById("affichage-photo") as HTMLImageElement;
@@ -53,19 +53,23 @@ afficherPhoto(){
       stockImage.src = reader.result as string;
     }
     reader.readAsDataURL(file as Blob);
-  this.erreurPhotoDisable();
+    this.erreurPhotoDisable();
 
   }
+
   setStade(){
     const stade3 = document.getElementById("radio1") as HTMLInputElement;
     const stade4 = document.getElementById("radio2") as HTMLInputElement;
     const stade5 = document.getElementById("radio3") as HTMLInputElement;
+
     if(stade3.checked)
-      this.patientForm.value.stade = 3;
+      this.patientForm.patchValue({ stade: 3 });
     else if(stade4.checked)
-      this.patientForm.value.stade = 4;
+      this.patientForm.patchValue({ stade: 4 });
     else if(stade5.checked)
-      this.patientForm.value.stade = 5;
+      this.patientForm.patchValue({ stade: 5 });
+
+
   }
 
 retour(){
