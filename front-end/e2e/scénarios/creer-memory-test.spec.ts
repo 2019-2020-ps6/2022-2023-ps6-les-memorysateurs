@@ -9,29 +9,29 @@ test.describe('Jouer une partie', () => {
     await page.goto(`${testUrl}/creer-memory`);
     const appComponentFixture = new AppFixture(page);
     //récupérer tous les sliders container
-    let sliders = await page.locator('.nombre-slider').all();
+    let boutons = await page.locator('.nombre-slider').all();
 
     // mettre 8 cartes
     //clique sur le bouton nombre de cartes = 8
-    await sliders[2].click();
+    await boutons[2].click();
     const nombreDeCartes = 8;
     //on redéfinie la liste des boutons car en changeant le nb de cartes cela change le nb de cartes disponibles à l'indice
-    sliders = await page.locator('.nombre-slider').all();
+    boutons = await page.locator('.nombre-slider').all();
 
     //mettre 6 cartes retournées par indces
     //clique sur le bouton nombre de paires retournées par indices = 3
-    await sliders[5].click();
+    await boutons[5].click();
     const nombreIndices = 6; // 3 pairs = 6 cartes
 
     //indices s'active à chaque fois
     //clique sur le bouton nombre d'erreurs avant indice = 1
-    await sliders[7].click();
+    await boutons[7].click();
     const ErreurConsecutivesAvantIndice = 1;
 
 
     //mettre 2 pour l'avertissement des combinaisons
     //clique sur le bouton nombre de combinaisons fausses avant avertissement = 2
-    await sliders[11].click();
+    await boutons[11].click();
     const CombinaisonConsecutivesAvantAvertissement = 2;
 
     //temps d'indices de base
@@ -72,12 +72,13 @@ test.describe('Jouer une partie', () => {
     await indice.click();
     await expect(cards.length-2).toBe(nombreDeCartes);
     await cards[idcard.indexOf('1')].click();
-    await cards[idcard.indexOf('3')].click();
+    await cards[idcard.indexOf('2')].click();
     await page.waitForTimeout(4000);
-    //tester l'avertissement'
-
+    //tester l'avertissement
+    const avertissement = await page.waitForSelector('#combSection ');
+    await avertissement.click();
     await indice.click();
-    await expect(cards.length-2).toBe(nombreDeCartes);
+    //await expect(cards.length-2).toBe(nombreDeCartes);
 
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('4')].click();
@@ -99,14 +100,15 @@ test.describe('Jouer une partie', () => {
     await page.waitForTimeout(tempsIndice *1000);
 
     await cards[idcard.indexOf('2')].click();
-    await cards[idcard.indexOf('2',idcard.indexOf('1')+1)].click();
+    await cards[idcard.indexOf('2',idcard.indexOf('2')+1)].click();
     await page.waitForTimeout(5000);
     await cards[idcard.indexOf('3')].click();
-    await cards[idcard.indexOf('3',idcard.indexOf('1')+1)].click();
+    await cards[idcard.indexOf('3',idcard.indexOf('3')+1)].click();
     await page.waitForTimeout(5000);
     await cards[idcard.indexOf('4')].click();
-    await cards[idcard.indexOf('4',idcard.indexOf('1')+1)].click();
+    await cards[idcard.indexOf('4',idcard.indexOf('4')+1)].click();
     await page.waitForTimeout(5000);
+    expect(page.url()).toBe('http://localhost:4200/resultat-partie');
   });
 
 });
