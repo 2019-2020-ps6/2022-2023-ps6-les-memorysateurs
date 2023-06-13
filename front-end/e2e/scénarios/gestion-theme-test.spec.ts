@@ -60,11 +60,11 @@ test.describe('Liste des themes', () => {
     const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
     expect(imageEnAttenteChildren).toBe(5);
 
-    await page.dblclick('#imageEnAttente img');
+    await page.click('#imageEnAttente img');
 
     const imageChoisi = await page.waitForSelector('#imageChoisi');
     const imageChoisiChildren = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildren).toBe(2);
+    expect(imageChoisiChildren).toBe(1);
 
     const inputNomTheme = await page.waitForSelector('#div-nom-theme');
     const nomThemeValue = await inputNomTheme.inputValue();
@@ -72,10 +72,10 @@ test.describe('Liste des themes', () => {
 
     await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
     await page.click('#importer-URL');
-    await page.dblclick('#imageEnAttente img');
+    await page.click('#imageEnAttente img');
 
     const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildrenURL).toBe(4);
+    expect(imageChoisiChildrenURL).toBe(2);
 
     const urlInput = await page.waitForSelector('#url-image');
     const urlInputValue = await urlInput.inputValue();
@@ -84,6 +84,9 @@ test.describe('Liste des themes', () => {
     const formTheme = await page.waitForSelector('#form-nom-theme');
     const formThemeValue = await formTheme.$eval('input', (input) => input.value);
     expect(formThemeValue).toBe('test nouveau thème');
+
+    await page.click('#imageEnAttente img');
+    await page.click('#imageEnAttente img');
 
     await page.click('#boutonValidationTheme');
     
@@ -101,15 +104,16 @@ test.describe('Liste des themes', () => {
 
     await page.fill('#div-nom-theme', 'test modifier thème');
 
-    await page.dblclick('#imageChoisi img');
+    await page.click('#imageChoisi img');
 
-    await page.setInputFiles('#recup-fichier', ['src/assets/images/patient-homme.png']);
+    await page.fill('#url-image', 'https://teteamodeler.ouest-france.fr/assets/coloriages/dessin-dune-tte-de-koala.png');
+    await page.click('#importer-URL');
 
     const imageEnAttenteModif = await page.waitForSelector('#imageEnAttente');
     const imageEnAttenteChildrenModif = await imageEnAttenteModif.$$eval('img', (imgs) => imgs.length);
-    expect(imageEnAttenteChildrenModif).toBe(7);
+    expect(imageEnAttenteChildrenModif).toBe(6);
 
-    await page.dblclick('#imageEnAttente img');
+    await page.click('#imageEnAttente img');
 
     const imageChoisiModif = await page.waitForSelector('#imageChoisi');
     const imageChoisiChildrenModif = await imageChoisiModif.$$eval('img', (imgs) => imgs.length);
