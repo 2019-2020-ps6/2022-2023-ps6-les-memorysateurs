@@ -27,8 +27,9 @@ export class ProfilPatientComponent {
     stockImage.src = this.patient.value?.photo as string;
     const stade = document.getElementById("info-stade") as HTMLInputElement;
     stade.innerHTML = "Stade " + this.patient.value?.stade ;
+    console.log(this.patient);
   }
-  
+
   modifierProfil(){
     let patientEdite: Patient = this.patientService.getPatientById(this.patient.value?.id as number);
     this.patientService.patientEdite$.next(patientEdite);

@@ -40,7 +40,7 @@ test.describe('Création nouveau patient', () => {
     // Vérification de l'action "Ajouter un patient"
     await page.click('.bouton-ajouter-patient');
     const url = await page.url();
-    expect(url).toContain(`${testUrl}/creer-patient`);    
+    expect(url).toContain(`${testUrl}/creer-patient`);
 
     const titre = await page.waitForSelector('#text-nouveau-profil');
     const titreText = await titre.textContent();
@@ -66,6 +66,7 @@ test.describe('Création nouveau patient', () => {
      // Modification du profil patient
 
     await patientsApresAjout[4].click();
+
 
     await page.click('#modifier-le-profil');
 
@@ -96,6 +97,7 @@ test.describe('Création nouveau patient', () => {
 
     const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
     expect(patientsApresSuppression.length).toBe(4);
+
 
 
     // Verification profil patient
@@ -139,13 +141,16 @@ test.describe('Création nouveau patient', () => {
         expect(isVisible).toBe(true);
 
         const statistiquesPlus = await statcontainer.$('.plus');
-        await statistiquesPlus.click();
+        // @ts-ignore
+      await statistiquesPlus.click();
 
         const toggleButton = await statcontainer.$('.plus');
+      // @ts-ignore
         const isVisiblePlus = await toggleButton.isVisible();
         expect(isVisiblePlus).toBe(true);
 
         const contentStat = await statcontainer.$('.content');
+      // @ts-ignore
         const isActive = await contentStat.getAttribute('class');
         expect(isActive).toContain('active');
 
@@ -158,11 +163,13 @@ test.describe('Création nouveau patient', () => {
         }
 
         const tableauStat = await statcontainer.$('.tableau');
+      // @ts-ignore
         const idTab = await tableauStat.getAttribute('id');
         expect(idTab).not.toBe('');
-
+// @ts-ignore
         await statistiquesPlus.click();
     }
+
 
   });
 
