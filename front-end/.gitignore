@@ -49,3 +49,5 @@ Thumbs.db
 
 /playwright-report
 /playwright-report/index.html
+
+/test-results
