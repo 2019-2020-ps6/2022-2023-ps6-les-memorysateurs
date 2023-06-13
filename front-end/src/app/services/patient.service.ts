@@ -20,6 +20,14 @@ export class PatientService {
 
   constructor(private http: HttpClient, private globals: GlobalsService, private authentificationService: AuthentificationService) {
     this.listePatient$.next(this.listePatient);
+    
+    let patientStore = localStorage.getItem("patient");
+    
+    if(patientStore != null){
+      let patientJSON = JSON.parse(patientStore);
+      let patient = new Patient(patientJSON.nom, patientJSON.prenom, patientJSON.photo, patientJSON.stade, patientJSON.ergoId, patientJSON.id);
+      this.patientSelectionne$.next(patient);
+    }
 
     authentificationService.utilisateurConnecte$.subscribe(user => {
       if (user != undefined) {
@@ -35,6 +43,7 @@ export class PatientService {
 
     this.patientSelectionne$.subscribe(patient => {
       if (patient != undefined) {
+        localStorage.setItem("patient", JSON.stringify(patient));
         this.patientSelectionne = patient;
       }
     });

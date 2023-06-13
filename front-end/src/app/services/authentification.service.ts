@@ -23,8 +23,19 @@ export class AuthentificationService {
 
 
   constructor(private http: HttpClient, private globals: GlobalsService) {
-    this.inConnect = false;
-    this.inConnect$.next(this.inConnect);
+    let userStore = localStorage.getItem("user");
+    if(userStore != null){
+      let userJSON = JSON.parse(userStore);
+      let compte = new CompteUtilisateur(userJSON.name, userJSON.email, userJSON.password, userJSON.id);
+      this.utilisateurConnecte$.next(compte);
+    }
+    this.utilisateurConnecte$.subscribe((user) => {
+      if(user != undefined){
+        this.inConnect = true;
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+    });
+    this.inConnect$.next(this.isConnected());
   }
 
 
@@ -37,8 +48,7 @@ export class AuthentificationService {
         console.log(this.user);
         this.utilisateurConnecte$.next(this.user);
         console.log(this.utilisateurConnecte$.getValue());
-        this.inConnect = true;
-        this.inConnect$.next(this.inConnect);
+        this.inConnect$.next(this.isConnected());
       }//TODO: error
     });
     return (this.user != undefined);
@@ -65,8 +75,7 @@ export class AuthentificationService {
         console.log(this.user);
         this.utilisateurConnecte$.next(this.user);
         console.log(this.utilisateurConnecte$.getValue());
-        this.inConnect = true;
-        this.inConnect$.next(this.inConnect);
+        this.inConnect$.next(this.isConnected());
       }
     });
     return (this.user != undefined);
@@ -75,7 +84,9 @@ export class AuthentificationService {
   logout(){
     this.user=undefined;
     this.utilisateurConnecte$.next(undefined);
-    this.inConnect = true;
+    localStorage.removeItem("user");
+    localStorage.removeItem("patient");
+    this.inConnect$.next(this.isConnected());
   }
 
   public getValue(){
@@ -85,5 +96,9 @@ export class AuthentificationService {
 
   isAuthentifie(): boolean {
     return (this.utilisateurConnecte$.getValue() != undefined);
+  }
+
+  isConnected(): boolean {
+    return localStorage.getItem("user") != null;
   }
 }
