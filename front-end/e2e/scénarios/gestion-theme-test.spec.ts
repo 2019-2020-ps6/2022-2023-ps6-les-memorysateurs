@@ -24,6 +24,7 @@ test.describe('Liste des themes', () => {
     await lienTheme.click();
 
     // Liste des themes
+    
     const title = await page.waitForSelector('h2');
     const titleText = await title.textContent();
     expect(titleText).toBe('Ajouter un thème');

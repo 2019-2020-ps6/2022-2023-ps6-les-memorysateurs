@@ -63,23 +63,9 @@ test.describe('Création nouveau patient', () => {
     const patientData = await patientsApresAjout[4].getAttribute('item');
     expect(patientData).toBeDefined();
 
-    // Verification profil patient
+     // Modification du profil patient
 
     await patientsApresAjout[4].click();
-
-    const detailsPatientUrl = await page.url();
-    expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
-
-    const prenomText = await page.textContent('#input-prenom');
-    expect(prenomText).toBe('Lucy');
-
-    const nomText = await page.textContent('#input-nom');
-    expect(nomText).toBe('Borg');
-
-    const stadeText = await page.textContent('#info-stade');
-    expect(stadeText).toBe('Stade 3');
-
-     // Modification du profil patient
 
     await page.click('#modifier-le-profil');
 
@@ -108,8 +94,32 @@ test.describe('Création nouveau patient', () => {
     await page.click('#modifier-le-profil');
     await page.click('#supprimer-profil');
 
-    const patientsApresSuppression = await page.$$('app-item-frame');
+    const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
     expect(patientsApresSuppression.length).toBe(4);
+
+
+    // Verification profil patient
+
+    await patientsApresSuppression[0].click();
+
+    const detailsPatientUrl = await page.url();
+    expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
+
+    const prenomText = await page.textContent('#input-prenom');
+    expect(prenomText).toBe('Marie');
+
+    const nomText = await page.textContent('#input-nom');
+    expect(nomText).toBe('Perroti');
+
+    const stadeText = await page.textContent('#info-stade');
+    expect(stadeText).toBe('Stade 3');
+
+
+    // Verification des statistiques
+
+    const statistiquesButton = await page.waitForSelector('#stats');
+
+
     
 
   });
