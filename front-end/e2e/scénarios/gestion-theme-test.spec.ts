@@ -4,8 +4,24 @@ import { AppFixture } from 'src/app/app.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
-    await page.goto(`${testUrl}/liste-theme`);
+    await page.goto(`${testUrl}/authentification`);
     const appComponentFixture = new AppFixture(page);
+
+    // Connexion
+    const titreConnexion = await page.waitForSelector('#connexion');
+    const titreTextConnexion = await titreConnexion.textContent();
+    expect(titreTextConnexion).toBe('CONNEXION');
+
+    await page.fill('#identifiant', 'SarahGentille');
+    await page.fill('#motDePasse', '1234');
+
+    await page.getByRole('button', {name:'Me Connecter'}).click();
+
+    const menuItems = await page.locator('.burger-menu').all();
+    await menuItems[0].click();
+
+    const lienTheme =await page.locator('#lien-themes');
+    await lienTheme.click();
 
     // Liste des themes
     const title = await page.waitForSelector('h2');

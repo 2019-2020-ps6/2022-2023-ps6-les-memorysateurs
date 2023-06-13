@@ -4,8 +4,18 @@ import { AppFixture } from 'src/app/app.fixture';
 
 test.describe('Création nouveau patient', () => {
   test('Test de création du profil du patient', async ({ page }) => {
-    await page.goto(`${testUrl}/liste-patient`);
+    await page.goto(`${testUrl}/authentification`);
     const appComponentFixture = new AppFixture(page);
+
+    // Connexion
+    const titreConnexion = await page.waitForSelector('#connexion');
+    const titreTextConnexion = await titreConnexion.textContent();
+    expect(titreTextConnexion).toBe('CONNEXION');
+
+    await page.fill('#identifiant', 'SarahGentille');
+    await page.fill('#motDePasse', '1234');
+
+    await page.getByRole('button', {name:'Me Connecter'}).click();
 
     // Vérification page liste des patients
     const title = await page.waitForSelector('h2');
