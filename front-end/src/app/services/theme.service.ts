@@ -16,7 +16,7 @@ export class ThemeService {
   public themeEdite$: BehaviorSubject<Theme | undefined> = new BehaviorSubject<Theme | undefined>(undefined);
   private themeSelectionne: Theme | undefined = undefined;
   public themeSelectionne$: BehaviorSubject<Theme|undefined> = new BehaviorSubject<Theme|undefined>(this.themeSelectionne);
-
+  public tousThemes$ : BehaviorSubject<Theme[] | undefined> = new BehaviorSubject<Theme[] | undefined>(this.themes);
 
   constructor(private http: HttpClient, private globals: GlobalsService, public patientService: PatientService) {
     patientService.patientSelectionne$.subscribe(patient => {
@@ -47,7 +47,7 @@ export class ThemeService {
     );
   }
 
-  
+
   retrieveThemes(url: string): void {
     this.themes = [];
     this.listeThemes$.next(this.themes);

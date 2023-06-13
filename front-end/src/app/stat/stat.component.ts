@@ -27,6 +27,7 @@ export class StatComponent implements OnInit {
     statsService.listeStatistiques$.subscribe((statistiques) => {
       this.listeStatistiques = statistiques;
     })
+
   }
 
 
@@ -36,9 +37,9 @@ export class StatComponent implements OnInit {
     this.stockImage = this.patient.value?.photo as string;
     this.stade = "Stade " + this.patient.value?.stade as string;
 
-    // On remplit des données pour l'exemple
-    this.partiesJouees = <number> this.listeStatistiques?.length;
+
   }
+
 
   activeStat(event: string) {
     event = event.toLowerCase();
@@ -57,6 +58,14 @@ export class StatComponent implements OnInit {
           break;
       }
       this.isDisplayed = this.isTemps || this.isIndices || this.isErreurs || this.isEssais;
+  }
+
+  partiesJoueesUpdate(event : number){
+
+    const texteParties = document.getElementById("profil-parties");
+    // @ts-ignore
+    texteParties.innerText = this.partiesJouees + "parties jouées";
+
   }
 
   retour(): void {

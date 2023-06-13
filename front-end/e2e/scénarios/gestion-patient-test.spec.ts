@@ -65,7 +65,7 @@ test.describe('Création nouveau patient', () => {
 
      // Modification du profil patient
 
-    await patientsApresAjout[4].click();
+    await patientsApresAjout[0].click();
 
 
     await page.click('#modifier-le-profil');
@@ -78,7 +78,7 @@ test.describe('Création nouveau patient', () => {
     await page.click('#creer-profil');
 
     const patientsApresModif = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-    await patientsApresModif[4].click();
+    await patientsApresModif[0].click();
 
     const prenomTextApresModif = await page.textContent('#input-prenom');
     expect(prenomTextApresModif).toBe('John');
@@ -93,7 +93,13 @@ test.describe('Création nouveau patient', () => {
     // Suppression du profil patient
 
     await page.click('#modifier-le-profil');
+    await page.on('dialog', async (dialog) => {
+      await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
+    });
     await page.click('#supprimer-profil');
+
+
+
 
     const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
     expect(patientsApresSuppression.length).toBe(4);
@@ -111,7 +117,7 @@ test.describe('Création nouveau patient', () => {
     expect(prenomText).toBe('Marie');
 
     const nomText = await page.textContent('#input-nom');
-    expect(nomText).toBe('Perroti');
+    expect(nomText).toBe('Stade3');
 
     const stadeText = await page.textContent('#info-stade');
     expect(stadeText).toBe('Stade 3');
@@ -125,7 +131,7 @@ test.describe('Création nouveau patient', () => {
     const prenomStat = await page.textContent('.profil-prenom');
     const nomStat = await page.textContent('.profil-nom');
     expect(prenomStat).toBe('Marie');
-    expect(nomStat).toBe('Perroti');
+    expect(nomStat).toBe('Stade3');
 
     const stadeStat = await page.textContent('.profil-stade');
     expect(stadeStat).toBe('Stade 3');
