@@ -2,6 +2,6 @@
   <button class="bas-vert" (click)="retourListeTheme()">RETOUR</button>
   <button id="boutonChangeant"[ngClass]="{'bas-jaune':bas_jaune,'supprimer':supprimer }" *ngIf=" theme?.titre !='Défaut'" (click)="clickPartagerOuSupprimer()">Partager la création</button>
 
-  <button class="bas-vert" (click)="ajouterTheme()">VALIDER</button>
+  <button id="boutonValidationTheme" class="bas-vert" (click)="ajouterTheme()">VALIDER</button>
 
 </div>

@@ -4,7 +4,7 @@
         <p class="info" *ngIf="progres"> En progression</p>
         <p class="info" *ngIf="!progres"> En régression</p>
         <span [ngClass]="{'triangle-vert' : progres,'triangle-rouge' : !progres}" >&#x25B2;</span>
-        <button class="plus" (click)="toggle()" [ngClass]="{'active' : isActive}">{{(isActive)?"-":"+"}}</button>
+        <button id="plus" class="plus" (click)="toggle()" [ngClass]="{'active' : isActive}">{{(isActive)?"-":"+"}}</button>
     </div>
 
     <div class="content" [class.active]="isActive">

@@ -38,7 +38,7 @@
     </form>
 
     <div id="bouton-en-plus">
-      <button class="bouton-rouge" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
+      <button class="bouton-rouge" id="supprimer-profil" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
       <button class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</button>
     </div>
   </div>
