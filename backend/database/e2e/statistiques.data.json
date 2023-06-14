@@ -75,5 +75,16 @@
     "date": "Wed Jun 14 2023",
     "patientId": "1686667283392",
     "id": 1686746363815
+  },
+  {
+    "temps": 61,
+    "essais": 7,
+    "erreurs": 3,
+    "indices": 1,
+    "nbCartes": 8,
+    "stade": 4,
+    "date": "Wed Jun 14 2023",
+    "patientId": "1686667283392",
+    "id": 1686747290683
   }
 ]

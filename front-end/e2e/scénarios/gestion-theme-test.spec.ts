@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
 import { AuthentificationFixture } from 'src/app/authentification/authentification.fixture';
 import { AppFixture } from 'src/app/app.fixture';
+import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
+import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
@@ -13,6 +15,7 @@ test.describe('Liste des themes', () => {
     const authentificationFixture = new AuthentificationFixture(page);
 
 
+
     // Connexion
     await test.step('Connexion', async () => {
 
@@ -20,6 +23,7 @@ test.describe('Liste des themes', () => {
 
       const titreTextConnexion = await titreConnexion.textContent();
       expect(titreTextConnexion).toBe('CONNEXION');
+
 
       const inputName = await authentificationFixture.getInput('identifiant');
       await inputName.type('SarahGentille');
@@ -35,6 +39,7 @@ test.describe('Liste des themes', () => {
 
       const detailsPatientUrl = await page.url();
       expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
+
 
       const menuItems = await page.locator('.burger-menu').all();
       await menuItems[0].click();
