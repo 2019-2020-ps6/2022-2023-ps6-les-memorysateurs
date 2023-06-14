@@ -27,6 +27,7 @@ export class ListeThemeComponent {
 
   ngOnInit(): void {
     let patientSelect = this.patientService.patientSelectionne$;
+    console.log("patient : " +  patientSelect.value);
     //this.themeService.setThemes(patientSelect.value?.themes);
   }
 

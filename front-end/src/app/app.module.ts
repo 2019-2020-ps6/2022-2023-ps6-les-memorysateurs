@@ -26,8 +26,6 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { ResultatPartieComponent } from './resultat-partie/resultat-partie.component';
 
-import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
-import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
 
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { CreerCompteComponent } from './creer-compte/creer-compte.component';
@@ -37,7 +35,6 @@ import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
 import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
-import { ErreurPartagerThemeComponent } from './erreur-partager-theme/erreur-partager-theme.component';
 import { StatContainerComponent } from './stat/statcontainer.component';
 
 @NgModule({
@@ -62,12 +59,9 @@ import { StatContainerComponent } from './stat/statcontainer.component';
     ResultatPartieComponent,
     SliderNumberComponent,
     MenuComponent,
-    ErreurCreerThemeComponent,
-    ErreurCreerPatientComponent,
     GameMenuComponent,
     StatComponent,
     PartagerThemeComponent,
-    ErreurPartagerThemeComponent,
     StatContainerComponent,
     AuthentificationComponent,
     CreerCompteComponent,

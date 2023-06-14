@@ -3,6 +3,7 @@ import { PatientService } from '../services/patient.service';
 import {StatistiquesService} from "../services/statistiques.service";
 import {Statistiques} from "../../models/statistiques.models";
 
+
 @Component({
     selector: 'app-statcontainer',
     templateUrl: './statcontainer.component.html',
@@ -18,12 +19,13 @@ import {Statistiques} from "../../models/statistiques.models";
     public isActive: boolean = false;
     @Output() activeEmitter = new EventEmitter<string>();
     public moyenne: number = 0;
-
+  @Output() partiesJoueees = new EventEmitter<number>();
     constructor(private patientService: PatientService, public statsService: StatistiquesService) {
-      
+
     }
     ngOnInit(): void {
         this.idTab = "tab"+this.data;
+
     }
 
     ngAfterViewInit(): void {
@@ -31,9 +33,13 @@ import {Statistiques} from "../../models/statistiques.models";
         this.listeStatistiques = statistiques;
         this.setUp();
       })
+
     }
 
     setUp(){
+      // On remplit des données pour l'exemple
+
+
         let grid = document.getElementById(this.idTab) as HTMLDivElement;
         let total = 0;
 
@@ -65,10 +71,10 @@ import {Statistiques} from "../../models/statistiques.models";
             if (datai != undefined)
               total += datai;
             grid.append(datap);
-          
+
 
           }
-        
+
         let moyennep = document.getElementById("moyenne"+this.idTab) as HTMLParagraphElement;
 
 
@@ -82,7 +88,8 @@ import {Statistiques} from "../../models/statistiques.models";
             this.progres = false;
           }
         }
-      }
+
+    }
 
     moyenneToString(n : number, type : string) : string {
         type = type.toLowerCase();

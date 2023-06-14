@@ -20,9 +20,9 @@ export class PatientService {
 
   constructor(private http: HttpClient, private globals: GlobalsService, private authentificationService: AuthentificationService) {
     this.listePatient$.next(this.listePatient);
-    
+
     let patientStore = localStorage.getItem("patient");
-    
+
     if(patientStore != null){
       let patientJSON = JSON.parse(patientStore);
       let patient = new Patient(patientJSON.nom, patientJSON.prenom, patientJSON.photo, patientJSON.stade, patientJSON.ergoId, patientJSON.id);
@@ -37,6 +37,7 @@ export class PatientService {
 
     this.listePatient$.subscribe(liste => {
       if (liste != undefined) {
+        liste.reverse();
         this.listePatient = liste;
       }
     });
@@ -71,13 +72,13 @@ export class PatientService {
     })
     return patientById;
   }
-  
+
   retrievePatient(url : string) {
     this.listePatient = [];
     this.listePatient$.next(this.listePatient);
     this.http.get<Patient[]>(url).subscribe((patientList) => {
       patientList.forEach(p => {
-        let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
+        let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id);
         this.listePatient.push(patient);
       });
       if(this.listePatient != undefined){
@@ -94,8 +95,9 @@ export class PatientService {
     patient.ergoId = ergoId;
     let url = this.globals.getURL() + "api/patient";
     this.http.post<Patient>(url + "?ergoId="+ergoId, patient).subscribe((p) => {
-      let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
-      this.listePatient.push(patient);
+
+      let patient = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id);
+      this.listePatient.reverse().push(patient);
       this.listePatient$.next(this.listePatient);
     });
   }
@@ -104,7 +106,7 @@ export class PatientService {
     this.http.put<Patient>(this.globals.getURL() + "api/patient/" + patient.getID(), patient).subscribe((patient) => {
       this.listePatient.forEach((p, i) => {
         if(p.id === patient.id) {
-          this.listePatient[i] = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id); 
+          this.listePatient[i] = new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id);
           this.listePatient$.next(this.listePatient);
           this.patientEdite$.next(this.listePatient[i]);
         }
@@ -117,7 +119,7 @@ export class PatientService {
     this.http.delete<Patient[]>(this.globals.getURL() + "api/patient/" + patient.id + "?ergoId="+ this.authentificationService.getValue()?.id).subscribe((patientList) => {
       this.listePatient = [];
       patientList.forEach(p => {
-        this.listePatient.push(new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id)); 
+        this.listePatient.push(new Patient(p.nom, p.prenom, p.photo, p.stade, p.ergoId, p.id));
       });
       this.listePatient$.next(this.listePatient);
       this.patientEdite$.next(undefined);

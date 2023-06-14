@@ -12,7 +12,6 @@ import {Statistiques} from "../../models/statistiques.models";
 export class StatComponent implements OnInit {
   public listeStatistiques: Statistiques[] | undefined = []
   public patient = this.patientService.patientSelectionne$;
-  public partiesJouees: number = 0;
   public nom: string = "";
   public prenom: string = "";
   public stockImage: string = "";
@@ -27,6 +26,7 @@ export class StatComponent implements OnInit {
     statsService.listeStatistiques$.subscribe((statistiques) => {
       this.listeStatistiques = statistiques;
     })
+
   }
 
 
@@ -36,9 +36,9 @@ export class StatComponent implements OnInit {
     this.stockImage = this.patient.value?.photo as string;
     this.stade = "Stade " + this.patient.value?.stade as string;
 
-    // On remplit des données pour l'exemple
-    this.partiesJouees = <number> this.listeStatistiques?.length;
+
   }
+
 
   activeStat(event: string) {
     event = event.toLowerCase();
@@ -58,6 +58,7 @@ export class StatComponent implements OnInit {
       }
       this.isDisplayed = this.isTemps || this.isIndices || this.isErreurs || this.isEssais;
   }
+
 
   retour(): void {
     window.history.back();

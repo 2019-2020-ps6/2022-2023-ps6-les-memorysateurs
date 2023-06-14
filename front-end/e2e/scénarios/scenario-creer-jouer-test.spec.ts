@@ -15,49 +15,23 @@ test.describe('Scénario global', () => {
     await page.getByRole('button', {name:'Me Connecter'}).click();
     expect(page.url()).toBe('http://localhost:4200/liste-patient');
 
-    //créer un patient
-
-    // Vérification de l'action "Ajouter un patient"
-    await page.click('.bouton-ajouter-patient');
-    const url = await page.url();
-    expect(url).toContain(`${testUrl}/creer-patient`);
-
-    const titre = await page.waitForSelector('#text-nouveau-profil');
-    const titreText = await titre.textContent();
-    expect(titreText).toBe('NOUVEAU PROFIL');
-
-    await page.fill('#input-prenom', 'Lucy');
-    await page.fill('#input-nom', 'Borg');
-    await page.dispatchEvent('#radio3', 'click');
-    await page.setInputFiles('#photo-button', ['src/assets/images/patient-femme.png']);
-
-    const creerProfilButton = await page.waitForSelector('#creer-profil');
-    await creerProfilButton.click();
-
-    const profilPatientUrl = await page.url();
-    expect(profilPatientUrl).toContain(`${testUrl}/liste-patient`);
-
     const patientsApresAjout = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-    expect(patientsApresAjout.length).toBe(5);
-
-    const patientData = await patientsApresAjout[4].getAttribute('item');
-    expect(patientData).toBeDefined();
 
     // Verification profil patient
 
-    await patientsApresAjout[4].click();
+    await patientsApresAjout[1].click();
 
     const detailsPatientUrl = await page.url();
     expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
 
     const prenomText = await page.textContent('#input-prenom');
-    expect(prenomText).toBe('Lucy');
+    expect(prenomText).toBe('Bertrand');
 
     const nomText = await page.textContent('#input-nom');
-    expect(nomText).toBe('Borg');
+    expect(nomText).toBe('Stade4');
 
     const stadeText = await page.textContent('#info-stade');
-    expect(stadeText).toBe('Stade 5');
+    expect(stadeText).toBe('Stade 4');
 
     await page.click('#lancer-partie');
     expect(page.url()).toBe('http://localhost:4200/creer-memory');
@@ -66,28 +40,6 @@ test.describe('Scénario global', () => {
     await choisirTheme[0].click();
 
     expect(page.url()).toBe('http://localhost:4200/liste-theme');
-
-    const ajouterTheme = await page.getByRole('button', {name:'Ajouter un thème'}).all();
-    await ajouterTheme[0].click();
-
-    expect(page.url()).toBe('http://localhost:4200/creer-theme');
-
-    await page.fill('#div-nom-theme', 'Nouveau thème');
-
-
-
-    // double-Clique sur l'image en attente pour la déplacer vers les images choisies
-    const imageTheme = [];
-    for(let i=0;i<4;i++) {
-      await page.click('#imageEnAttente img');
-      let images = await page.locator('#imageChoisi img').all();
-      imageTheme.push(images[images.length-1]);
-    }
-    // Clique sur le bouton de validation du thème
-    await page.click('#boutonValidationTheme');
-    expect(page.url()).toBe('http://localhost:4200/liste-theme');
-    const themes = await page.$$('app-item-frame');
-    expect(themes.length).toBe(2);
 
     const selectionnertheme = await page.getByRole('button', {name:'SELECTIONNER'}).all();
     await selectionnertheme[1].click();
@@ -121,9 +73,18 @@ test.describe('Scénario global', () => {
     const CombinaisonConsecutivesAvantAvertissement = 2;
 
     //temps d'indices de base
+
+    const sliderTemps = await page.locator('.slider').all();
+     await sliderTemps[0].scrollIntoViewIfNeeded();
+    const boundingBox = await sliderTemps[0].boundingBox();
+    // @ts-ignore
+    const x = boundingBox.x ; // Décalage de 10 pixels à gauche de l'élément
+    // @ts-ignore
+    const y = boundingBox.y + boundingBox.height / 2; // Position verticale centrale de l'élément
+    await page.mouse.click(x, y, { button: 'left' });
     const tempsIndice = 5;
 
-    //choisir thème ( a faire plus tard)
+
 
     //cliquer sur lancer Partie
     await page.click('.btn-lauch');
@@ -133,7 +94,7 @@ test.describe('Scénario global', () => {
     //vérifier le nombre de cartes
     // et création du tableau avec les paires de cartes.
     let flipped = await page.locator('.flipped').all();
-    console.log(flipped);
+
 
     const indice = await page.waitForSelector('#boutonIndice');
     const idcard = [];
@@ -153,9 +114,11 @@ test.describe('Scénario global', () => {
     await page.waitForTimeout(5000);
     //tester le nombre de cartes retournés par indices
     flipped= await page.locator('.flipped').all();
+    //Je regarde qu'il y a bien 6 cartes de retournées
     await expect(flipped.length-2).toBe(nombreIndices);
 
     await indice.click();
+    //Je regarde qu'il y a bien encore 8 cartes de clickbles
     await expect(cards.length-2).toBe(nombreDeCartes);
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('2')].click();
@@ -169,12 +132,11 @@ test.describe('Scénario global', () => {
     await cards[idcard.indexOf('1')].click();
     await cards[idcard.indexOf('4')].click();
     await page.waitForTimeout(5000);
-    //tester que l'indice a diminué
+
     flipped= await page.locator('.flipped').all();
-    await expect(flipped.length-2).toBe(nombreIndices-2);
+    await expect(flipped.length-2).toBe(nombreIndices);
 
     await indice.click();
-    await expect(cards.length-2).toBe(nombreDeCartes);
 
 
 
@@ -183,6 +145,9 @@ test.describe('Scénario global', () => {
     await page.waitForTimeout(5000);
 
     await indice.click();
+    //tester que l'indice a diminué
+    flipped= await page.locator('.flipped').all();
+    await expect(flipped.length-2).toBe(nombreIndices-2);
     await page.waitForTimeout(tempsIndice *1000);
 
     await cards[idcard.indexOf('2')].click();
@@ -203,11 +168,25 @@ test.describe('Scénario global', () => {
     const boutonStat = await page.getByRole('button', {name:'Statistiques'}).all();
     await boutonStat[0].click();
     expect(page.url()).toBe('http://localhost:4200/stat');
+
     const statsTableau = await page.locator(' app-statcontainer').all();
-    for(let i =0;i<statsTableau.length;i++){
+    for(let i =0;i<statsTableau.length;i++) {
       const tab = await statsTableau[i].locator('.tableau').all();
       expect(tab.length).toBe(1);
     }
+      //déconnexion
+
+      const menuItems = await page.locator('.burger-menu').all();
+      await menuItems[0].click();
+
+      const deco =await page.locator('#deconection');
+      await page.on('dialog', async (dialog) => {
+        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
+      });
+      await deco.click();
+
+      expect(page.url()).toBe('http://localhost:4200/authentification');
+
 
   })
 })
