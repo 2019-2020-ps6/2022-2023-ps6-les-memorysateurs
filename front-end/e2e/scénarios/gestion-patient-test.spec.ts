@@ -136,7 +136,7 @@ test.describe('Création nouveau patient', () => {
     const stadeStat = await page.textContent('.profil-stade');
     expect(stadeStat).toBe('Stade 3');
 
-    const partiesJoueesStat = await page.textContent('.profil-parties');
+    const partiesJoueesStat = await page.textContent('#profil-parties');
     expect(partiesJoueesStat).not.toBe('');
 
     const statContainers = await page.$$('.containerStats app-statcontainer');

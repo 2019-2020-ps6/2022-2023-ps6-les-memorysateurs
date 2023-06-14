@@ -88,14 +88,6 @@ import {Statistiques} from "../../models/statistiques.models";
             this.progres = false;
           }
         }
-      // @ts-ignore
-      const tabChild = document.querySelector(".tableau");
-      // @ts-ignore
-      const p = tabChild.getElementsByTagName('p').length /4 ;
-
-
-      this.partiesJoueees.emit(4);
-      console.log("heeee ohhhh" + p);
 
     }
 
