@@ -5,8 +5,12 @@ RUN apk add curl
 USER node
 WORKDIR /backend
 
+
 COPY --chown=node:node package.json .
 COPY --chown=node:node package-lock.json .
+
+RUN npm install
+
 COPY --chown=node:node app ./app
 
 #VOLUME ["./database"]
