@@ -19,7 +19,4 @@ export class AuthentificationFixture extends E2EComponentFixture {
         return this.getConnectButton().click({ clickCount: numberOfClick });
     }
 
-
-
-
 }

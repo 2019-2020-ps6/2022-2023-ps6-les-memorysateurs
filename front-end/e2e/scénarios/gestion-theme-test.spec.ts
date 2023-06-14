@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
 import { AuthentificationFixture } from 'src/app/authentification/authentification.fixture';
 import { AppFixture } from 'src/app/app.fixture';
+import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
+import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
@@ -11,13 +13,14 @@ test.describe('Liste des themes', () => {
 
     const appComponentFixture = new AppFixture(page);
     const authentificationFixture = new AuthentificationFixture(page);
+    const listePatientFixture = new ListePatientFixture(page);
+    const listeThemeFixture = new ListeThemeFixture(page);
     
 
     // Connexion
     await test.step('Connexion', async () => {
       const titreConnexion = authentificationFixture.getByLabel('CONNEXION');
-      const titreTextConnexion = await titreConnexion.textContent();
-      expect(titreTextConnexion).toBe('CONNEXION');
+      expect(await titreConnexion.textContent()).toEqual('CONNEXION');
 
       const inputName = await authentificationFixture.getInput('identifiant');
       await inputName.type('SarahGentille');
@@ -30,15 +33,12 @@ test.describe('Liste des themes', () => {
     // Liste des themes
 
     await test.step('Liste des themes', async () => { 
-      const menuItems = await page.locator('.burger-menu').all();
-      await menuItems[0].click();
-
-      const lienTheme =await page.locator('#lien-themes');
-      await lienTheme.click();
-         
-      const title = authentificationFixture.getByLabel('h2');
-      const titleText = await title.textContent();
-      expect(titleText).toBe('Ajouter un thème');
+      await listePatientFixture.ouvrirMenu();
+      await listePatientFixture.goTheme();
+      
+      const title = listeThemeFixture.getTitle();
+      expect(await title.textContent()).toEqual('Ajouter un thème');
+      
 
       const ajouterThemeButton = authentificationFixture.getByLabel('.bouton-ajouter-theme');
       const isThemeVisible = await ajouterThemeButton.isVisible();
