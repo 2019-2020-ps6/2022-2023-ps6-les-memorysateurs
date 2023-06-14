@@ -87,6 +87,7 @@ export class ThemeService {
   public addTheme(theme : Theme){
     let patientId = this.patientService.patientSelectionne$.getValue()?.id;
     this.http.post<Theme>(this.globals.getURL() + "api/theme?patientId=" + patientId, theme).subscribe((t) => {
+      console.log("patient id ajouté : ", t.patientId);
       this.themes.push(new Theme(t.titre, t.images, t.id, t.patientId));
       this.listeThemes$.next(this.themes);
       this.themeSelectionne$.next(t);
@@ -108,13 +109,9 @@ export class ThemeService {
   public removeTheme(theme : Theme | undefined){
     if(theme == undefined) return;
     this.http.delete<Theme[]>(this.globals.getURL() + "api/theme/" + theme.id).subscribe((themeList) => {
-      this.themes = [];
-      themeList.forEach(t => {
-        this.themes.push(new Theme(t.titre, t.images, t.id, t.patientId));
-      });
-      this.listeThemes$.next(this.themes);
-      this.themeSelectionne$.next(undefined);
+      this.retrieveThemes(this.globals.getURL() + "api/theme?patientId=" + theme.patientId);
     });
+
   }
 }
 

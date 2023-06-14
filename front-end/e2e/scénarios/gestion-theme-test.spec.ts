@@ -11,17 +11,25 @@ test.describe('Liste des themes', () => {
 
     const appComponentFixture = new AppFixture(page);
     const authentificationFixture = new AuthentificationFixture(page);
-    
+
 
     // Connexion
     await test.step('Connexion', async () => {
-      const titreConnexion = authentificationFixture.getByLabel('CONNEXION').textContent();
-      expect(titreConnexion).toBe('CONNEXION');
+      const titreConnexion = await page.waitForSelector('#connexion');
+      const titreTextConnexion = await titreConnexion.textContent();
+      expect(titreTextConnexion).toBe('CONNEXION');
 
       await page.fill('#identifiant', 'SarahGentille');
       await page.fill('#motDePasse', '1234');
 
       await page.getByRole('button', {name:'Me Connecter'}).click();
+
+      const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
+
+      await patientsApresSuppression[0].click();
+
+      const detailsPatientUrl = await page.url();
+      expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
 
       const menuItems = await page.locator('.burger-menu').all();
       await menuItems[0].click();
@@ -32,9 +40,7 @@ test.describe('Liste des themes', () => {
 
     // Liste des themes
 
-    await test.step('Liste des themes', async () => {    
-      const title = await authentificationFixture.getByLabel('h2').textContent();
-      expect(title).toBe('Ajouter un thème');
+    await test.step('Liste des themes', async () => {
 
       const ajouterThemeButton = await page.waitForSelector('.bouton-ajouter-theme');
       const isThemeVisible = await ajouterThemeButton.isVisible();
@@ -46,7 +52,7 @@ test.describe('Liste des themes', () => {
       for (const theme of themes) {
         const themeData = await theme.getAttribute('item');
         expect(themeData).toBeDefined();
-  
+
         const editerEnable = await theme.getAttribute('editerEnable');
         expect(editerEnable).toBe(null);
       }
@@ -65,26 +71,28 @@ test.describe('Liste des themes', () => {
       await page.fill('#div-nom-theme', 'test nouveau thème');
       await page.setInputFiles('#recup-fichier', ['src/assets/images/patient-homme.png']);
 
-      const imageEnAttente = await page.waitForSelector('#imageEnAttente');
-      const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
-      expect(imageEnAttenteChildren).toBe(5);
-
-      await page.click('#imageEnAttente img');
 
       const imageChoisi = await page.waitForSelector('#imageChoisi');
       const imageChoisiChildren = await imageChoisi.$$eval('img', (imgs) => imgs.length);
       expect(imageChoisiChildren).toBe(1);
 
+      const imageEnAttente = await page.waitForSelector('#imageEnAttente');
+      const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
+      expect(imageEnAttenteChildren).toBe(4);
+
+      await page.click('#imageEnAttente img');
+
+
       const inputNomTheme = await page.waitForSelector('#div-nom-theme');
       const nomThemeValue = await inputNomTheme.inputValue();
-      expect(nomThemeValue).toBe('test nouveau thème'); 
+      expect(nomThemeValue).toBe('test nouveau thème');
 
       await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
       await page.click('#importer-URL');
       await page.click('#imageEnAttente img');
 
       const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-      expect(imageChoisiChildrenURL).toBe(2);
+      expect(imageChoisiChildrenURL).toBe(4);
 
       const urlInput = await page.waitForSelector('#url-image');
       const urlInputValue = await urlInput.inputValue();
@@ -94,11 +102,9 @@ test.describe('Liste des themes', () => {
       const formThemeValue = await formTheme.$eval('input', (input) => input.value);
       expect(formThemeValue).toBe('test nouveau thème');
 
-      await page.click('#imageEnAttente img');
-      await page.click('#imageEnAttente img');
 
       await page.click('#boutonValidationTheme');
-      
+
       const profilPatientUrl = await page.url();
       expect(profilPatientUrl).toContain(`${testUrl}/liste-theme`);
 
@@ -111,7 +117,7 @@ test.describe('Liste des themes', () => {
 
     await test.step('Modifier un theme', async () => {
       const themesApresCreation = await page.getByRole('button', {name:'EDITER'}).all();
-      await themesApresCreation[2].click();
+      await themesApresCreation[1].click();
 
       await page.fill('#div-nom-theme', 'test modifier thème');
 
@@ -122,9 +128,9 @@ test.describe('Liste des themes', () => {
 
       const imageEnAttenteModif = await page.waitForSelector('#imageEnAttente');
       const imageEnAttenteChildrenModif = await imageEnAttenteModif.$$eval('img', (imgs) => imgs.length);
-      expect(imageEnAttenteChildrenModif).toBe(6);
+      expect(imageEnAttenteChildrenModif).toBe(5);
 
-      await page.click('#imageEnAttente img');
+      //await page.click('#imageEnAttente img');
 
       const imageChoisiModif = await page.waitForSelector('#imageChoisi');
       const imageChoisiChildrenModif = await imageChoisiModif.$$eval('img', (imgs) => imgs.length);
@@ -135,7 +141,7 @@ test.describe('Liste des themes', () => {
       expect(nomThemeValueModif).toBe('test modifier thème');
 
       await page.click('#boutonValidationTheme');
-      
+
       const profilPatientUrlModif = await page.url();
       expect(profilPatientUrlModif).toContain(`${testUrl}/liste-theme`);
     });
@@ -145,9 +151,12 @@ test.describe('Liste des themes', () => {
 
     await test.step('Supprimer un theme', async () => {
       const themesApresModification = await page.getByRole('button', {name:'EDITER'}).all();
-      await themesApresModification[2].click();
-      await page.click('#boutonChangeant'); 
-    });   
+      await themesApresModification[1].click();
+      await page.on('dialog', async (dialog) => {
+        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
+      });
+      await page.click('#boutonChangeant');
+    });
 
 
     // Selectionner un theme
@@ -157,5 +166,5 @@ test.describe('Liste des themes', () => {
       await themeChoisi[1].click();
     });
 
-  }); 
+  });
 });
