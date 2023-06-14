@@ -31,5 +31,12 @@ export class CreerPatientFixture extends E2EComponentFixture {
         await this.page.setInputFiles('#photo-button', [photo]);
     }
 
+    async supprimerPatient() {
+        await this.page.on('dialog', async (dialog) => {
+            await dialog.accept(); 
+          });
+        await this.page.click('#supprimer-profil');
+    }
+
 
 }

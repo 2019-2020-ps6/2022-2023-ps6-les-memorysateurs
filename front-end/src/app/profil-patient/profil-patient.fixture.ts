@@ -8,7 +8,12 @@ export class ProfilPatientFixture extends E2EComponentFixture {
     }
 
     async getPatientData(label: string) {
-        return await this.page.textContent('label');
+        return await this.page.textContent(label);
+    }
+
+    async voirStatistiques() {
+        const statistiquesButton = await this.page.waitForSelector('#stats');
+        await statistiquesButton.click();
     }
 
 }

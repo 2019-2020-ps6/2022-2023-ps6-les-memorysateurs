@@ -5,6 +5,7 @@ import { AuthentificationFixture } from 'src/app/authentification/authentificati
 import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
 import { CreerPatientFixture } from 'src/app/creer-patient/creer-patient.fixture';
 import { ProfilPatientFixture } from 'src/app/profil-patient/profil-patient.fixture';
+import { StatistiquesFixture } from 'src/app/stat/stat.fixture';
 
 test.describe('Création nouveau patient', () => {
   test('Test de création du profil du patient', async ({ page }) => {
@@ -16,7 +17,8 @@ test.describe('Création nouveau patient', () => {
     const authentificationFixture = new AuthentificationFixture(page);
     const listePatientFixture = new ListePatientFixture(page);
     const creerPatientFixture = new CreerPatientFixture(page);
-    const profilPatientFixture = new ProfilPatientFixture(page);    
+    const profilPatientFixture = new ProfilPatientFixture(page);   
+    const statistiquesFixture = new StatistiquesFixture(page); 
 
     // Connexion
 
@@ -68,6 +70,7 @@ test.describe('Création nouveau patient', () => {
       expect(await listePatientFixture.getPatientsLength()).toBe(5);
 
       expect(await listePatientFixture.getPatientData(4)).toBeDefined();
+
     });
 
      // Modification du profil patient
@@ -77,10 +80,12 @@ test.describe('Création nouveau patient', () => {
 
       await profilPatientFixture.modifierProfil();
 
+      expect(await page.url()).toContain(`${testUrl}/creer-patient`);
+
       const inputName = await creerPatientFixture.getInput('input-prenom');
-      await inputName.type('John');
+      await inputName.fill('John');
       const inputFirstName = await creerPatientFixture.getInput('input-nom');
-      await inputFirstName.type('Doe'); 
+      await inputFirstName.fill('Doe'); 
 
       await creerPatientFixture.clickRadioButton('#radio3'); 
       expect(await creerPatientFixture.getRadioButtonChecked('radio3')).toBe(true);
@@ -102,14 +107,15 @@ test.describe('Création nouveau patient', () => {
 
 
     await test.step('Suppresion patient', async () => {
-      await page.click('#modifier-le-profil');
-      await page.on('dialog', async (dialog) => {
-        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
-      });
-      await page.click('#supprimer-profil');
+
+      await profilPatientFixture.modifierProfil();
+
+      await creerPatientFixture.supprimerPatient();
+
+      expect(await page.url()).toContain(`${testUrl}/liste-patient`);
     
-      const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-      expect(patientsApresSuppression.length).toBe(4);
+      expect(await listePatientFixture.getPatientsLength()).toBe(4);
+
     });
 
 
@@ -117,74 +123,47 @@ test.describe('Création nouveau patient', () => {
     // Verification profil patient
 
     await test.step('Profil patient', async () => {
-      const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-      await patientsApresSuppression[0].click();
+      
+      await listePatientFixture.selectionnerPatient(0);
 
-      const detailsPatientUrl = await page.url();
-      expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
+      expect(await page.url()).toContain(`${testUrl}/profil-patient`);
 
-      const prenomText = await page.textContent('#input-prenom');
-      expect(prenomText).toBe('Marie');
+      expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('Marie');
+      expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Stade3');
+      expect(await profilPatientFixture.getPatientData('#info-stade')).toEqual('Stade 3');
 
-      const nomText = await page.textContent('#input-nom');
-      expect(nomText).toBe('Stade3');
-
-      const stadeText = await page.textContent('#info-stade');
-      expect(stadeText).toBe('Stade 3');
     });
 
     // Verification des statistiques
 
     await test.step('Modification patient', async () => {
-      const statistiquesButton = await page.waitForSelector('#stats');
-      await statistiquesButton.click();
+      
+      await profilPatientFixture.voirStatistiques();
 
-      const prenomStat = await page.textContent('.profil-prenom');
-      const nomStat = await page.textContent('.profil-nom');
-      expect(prenomStat).toBe('Marie');
-      expect(nomStat).toBe('Stade3');
+      expect(await page.url()).toContain(`${testUrl}/stat`);
 
-      const stadeStat = await page.textContent('.profil-stade');
-      expect(stadeStat).toBe('Stade 3');
+      expect(await profilPatientFixture.getPatientData('.profil-prenom')).toEqual('Marie');
+      expect(await profilPatientFixture.getPatientData('.profil-nom')).toEqual('Stade3');
+      expect(await profilPatientFixture.getPatientData('.profil-stade')).toEqual('Stade 3');
+      expect(await profilPatientFixture.getPatientData('#profil-parties')).not.toBe('');
+      
+      expect(await statistiquesFixture.getNombreContainers()).toBe(4);
 
-      const partiesJoueesStat = await page.textContent('#profil-parties');
-      expect(partiesJoueesStat).not.toBe('');
-
-      const statContainers = await page.$$('.containerStats app-statcontainer');
-      expect(statContainers.length).toBe(4);
+      const statContainers = await statistiquesFixture.getContainers();
 
       for (const statcontainer of statContainers) {
-        const isVisible = await statcontainer.isVisible();
-        expect(isVisible).toBe(true);
+        
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        expect(await statistiquesFixture.getContainerVisible(statcontainer)).toContain('active');
 
-        const statistiquesPlus = await statcontainer.$('.plus');
-        // @ts-ignore
-        await statistiquesPlus.click();
+        ;
 
-        const toggleButton = await statcontainer.$('.plus');
-        // @ts-ignore
-        const isVisiblePlus = await toggleButton.isVisible();
-        expect(isVisiblePlus).toBe(true);
+        expect(await statistiquesFixture.getNombreHeadersTableau(statcontainer)).toBe(4);
+        expect(await statistiquesFixture.getTableau(statcontainer)).not.toBe('');
 
-        const contentStat = await statcontainer.$('.content');
-        // @ts-ignore
-        const isActive = await contentStat.getAttribute('class');
-        expect(isActive).toContain('active');
-
-        const headersStat = await statcontainer.$$('#header p');
-        expect(headersStat.length).toBe(4);
-
-        for (const headerStat of headersStat) {
-          const text = await headerStat.textContent();
-          expect(text).not.toBe('');
-        }
-
-        const tableauStat = await statcontainer.$('.tableau');
-        // @ts-ignore
-        const idTab = await tableauStat.getAttribute('id');
-        expect(idTab).not.toBe('');
-        // @ts-ignore
-        await statistiquesPlus.click();
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
       }
 
     });
