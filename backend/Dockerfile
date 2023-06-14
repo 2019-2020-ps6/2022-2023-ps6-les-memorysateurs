@@ -12,6 +12,7 @@ COPY --chown=node:node package-lock.json .
 RUN npm install
 
 COPY --chown=node:node app ./app
+COPY --chown=node:node database ./database
 
 #VOLUME ["./database"]
 
