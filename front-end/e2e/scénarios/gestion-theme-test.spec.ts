@@ -15,28 +15,32 @@ test.describe('Liste des themes', () => {
 
     // Connexion
     await test.step('Connexion', async () => {
-      const titreConnexion = authentificationFixture.getByLabel('CONNEXION').textContent();
-      expect(titreConnexion).toBe('CONNEXION');
+      const titreConnexion = authentificationFixture.getByLabel('CONNEXION');
+      const titreTextConnexion = await titreConnexion.textContent();
+      expect(titreTextConnexion).toBe('CONNEXION');
 
-      await page.fill('#identifiant', 'SarahGentille');
-      await page.fill('#motDePasse', '1234');
+      const inputName = await authentificationFixture.getInput('identifiant');
+      await inputName.type('SarahGentille');
+      const inputPassword = await authentificationFixture.getInput('motDePasse');
+      await inputPassword.type('1234');
 
-      await page.getByRole('button', {name:'Me Connecter'}).click();
+      await authentificationFixture.seConnecter();
+    });
 
+    // Liste des themes
+
+    await test.step('Liste des themes', async () => { 
       const menuItems = await page.locator('.burger-menu').all();
       await menuItems[0].click();
 
       const lienTheme =await page.locator('#lien-themes');
       await lienTheme.click();
-    });
+         
+      const title = authentificationFixture.getByLabel('h2');
+      const titleText = await title.textContent();
+      expect(titleText).toBe('Ajouter un thème');
 
-    // Liste des themes
-
-    await test.step('Liste des themes', async () => {    
-      const title = await authentificationFixture.getByLabel('h2').textContent();
-      expect(title).toBe('Ajouter un thème');
-
-      const ajouterThemeButton = await page.waitForSelector('.bouton-ajouter-theme');
+      const ajouterThemeButton = authentificationFixture.getByLabel('.bouton-ajouter-theme');
       const isThemeVisible = await ajouterThemeButton.isVisible();
       expect(isThemeVisible).toBe(true);
 
