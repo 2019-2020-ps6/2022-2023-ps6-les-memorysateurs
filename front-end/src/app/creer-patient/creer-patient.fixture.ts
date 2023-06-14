@@ -12,15 +12,15 @@ export class CreerPatientFixture extends E2EComponentFixture {
     }  
 
     async creerPatient() {
-        await this.page.click('#creer-patient');
+        await this.page.click('#creer-profil');
     }
 
     async getCreerPatientButtonVisible() {
-        return this.page.isVisible('#creer-patient');
+        return this.page.isVisible('#creer-profil');
     }
 
     async clickRadioButton(id: string) {
-        await this.page.click(`#${id}`);
+        await this.page.dispatchEvent(id, 'click');
     }
 
     async getRadioButtonChecked(id: string) {

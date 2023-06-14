@@ -48,4 +48,9 @@ export class ListePatientFixture extends E2EComponentFixture {
         await ajouterPatientButton.click();
     }
 
+    async selectionnerPatient(index: number) {
+        const patient = await this.getPatient(index);
+        await patient.click();
+    }
+
 }

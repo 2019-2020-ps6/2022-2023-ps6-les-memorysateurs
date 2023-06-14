@@ -4,6 +4,7 @@ import { AppFixture } from 'src/app/app.fixture';
 import { AuthentificationFixture } from 'src/app/authentification/authentification.fixture';
 import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
 import { CreerPatientFixture } from 'src/app/creer-patient/creer-patient.fixture';
+import { ProfilPatientFixture } from 'src/app/profil-patient/profil-patient.fixture';
 
 test.describe('Création nouveau patient', () => {
   test('Test de création du profil du patient', async ({ page }) => {
@@ -15,7 +16,7 @@ test.describe('Création nouveau patient', () => {
     const authentificationFixture = new AuthentificationFixture(page);
     const listePatientFixture = new ListePatientFixture(page);
     const creerPatientFixture = new CreerPatientFixture(page);
-    
+    const profilPatientFixture = new ProfilPatientFixture(page);    
 
     // Connexion
 
@@ -55,7 +56,7 @@ test.describe('Création nouveau patient', () => {
       const inputFirstName = await creerPatientFixture.getInput('input-nom');
       await inputFirstName.type('Borg'); 
 
-      await creerPatientFixture.clickRadioButton('sradio2'); 
+      await creerPatientFixture.clickRadioButton('#radio2'); 
       expect(await creerPatientFixture.getRadioButtonChecked('radio2')).toBe(true);
 
       await creerPatientFixture.ajouterPhoto('src/assets/images/patient-femme.png');
@@ -72,29 +73,28 @@ test.describe('Création nouveau patient', () => {
      // Modification du profil patient
 
     await test.step('Modification patient', async () => {
-      const patientsApresAjout = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-      await patientsApresAjout[0].click();
+      await listePatientFixture.selectionnerPatient(4);
 
-      await page.click('#modifier-le-profil');
+      await profilPatientFixture.modifierProfil();
 
-      await page.fill('#input-prenom', 'John');
-      await page.fill('#input-nom', 'Doe');
-      await page.dispatchEvent('#radio3', 'click');
-      await page.setInputFiles('#photo-button', ['src/assets/images/patient-homme.png']);
+      const inputName = await creerPatientFixture.getInput('input-prenom');
+      await inputName.type('John');
+      const inputFirstName = await creerPatientFixture.getInput('input-nom');
+      await inputFirstName.type('Doe'); 
 
-      await page.click('#creer-profil');
+      await creerPatientFixture.clickRadioButton('#radio3'); 
+      expect(await creerPatientFixture.getRadioButtonChecked('radio3')).toBe(true);
 
-      const patientsApresModif = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-      await patientsApresModif[0].click();
+      await creerPatientFixture.ajouterPhoto('src/assets/images/patient-homme.png');
 
-      const prenomTextApresModif = await page.textContent('#input-prenom');
-      expect(prenomTextApresModif).toBe('John');
+      await creerPatientFixture.creerPatient();
 
-      const nomTextApresModif = await page.textContent('#input-nom');
-      expect(nomTextApresModif).toBe('Doe');
+      await listePatientFixture.selectionnerPatient(4);
 
-      const stadeTextApresModif = await page.textContent('#info-stade');
-      expect(stadeTextApresModif).toBe('Stade 5');
+      expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('John');
+      expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Doe');
+      expect(await profilPatientFixture.getPatientData('#info-stade')).toEqual('Stade 5');
+
     });
 
 
