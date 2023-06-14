@@ -63,7 +63,8 @@ router.put('/:themeId', (req, res) => {
 router.delete('/:themeId', (req, res) => {
     try {
         Theme.delete(parseInt(req.params.themeId,10))
-        res.status(200).json(filtrerThemesFromPatient(req.query.patientId))
+        console.log(req.query.patientId);
+        res.status(200).json(filtrerThemesFromPatient(parseInt(req.query.patientId)))
     } catch (err) {
         manageAllErrors(res, err)
     }
