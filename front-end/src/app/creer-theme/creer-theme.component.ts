@@ -198,9 +198,10 @@ export class CreerThemeComponent {
          this.erreurImageDisable();
        }
      }
+     this.messageErreur += " pour le thème";
+     alert(this.messageErreur);
    }
-   this.messageErreur += " pour le thème";
-   alert(this.messageErreur);
+
   }
 
 
