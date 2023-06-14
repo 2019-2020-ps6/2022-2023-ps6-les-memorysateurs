@@ -25,8 +25,7 @@ export class ListePatientFixture extends E2EComponentFixture {
         return patients[index];
     }
 
-    async getPatientData(index: number) {
-        const patient = await this.getPatient(index);
+    async getPatientData(patient: any) {
         return await patient.getAttribute('item');
     }
 
@@ -46,6 +45,11 @@ export class ListePatientFixture extends E2EComponentFixture {
     async ajouterPatient() {
         const ajouterPatientButton = await this.getAjouterPatientButton();
         await ajouterPatientButton.click();
+    }
+
+    async selectionnerPatient(index: number) {
+        const patients = await this.page.getByRole('button', {name:'SELECTIONNER'}).all();
+        await patients[0].click();
     }
 
 }
