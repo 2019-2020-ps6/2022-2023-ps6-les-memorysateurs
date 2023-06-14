@@ -7,7 +7,7 @@ import {BehaviorSubject, take} from "rxjs";
   })
 
 export class GlobalsService {
-    static url : String = "http://localhost:9428/";
+    static url : String = "http://localhost:8000/";
 
     public getURL() : String {
         return GlobalsService.url;
