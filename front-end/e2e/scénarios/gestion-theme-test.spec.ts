@@ -13,17 +13,16 @@ test.describe('Liste des themes', () => {
 
     const appComponentFixture = new AppFixture(page);
     const authentificationFixture = new AuthentificationFixture(page);
+    const listePatientFixture = new ListePatientFixture(page);
+    const listeThemeFixture = new ListeThemeFixture(page);
 
 
 
     // Connexion
+
     await test.step('Connexion', async () => {
-
-      const titreConnexion = await page.waitForSelector('#connexion');
-
-      const titreTextConnexion = await titreConnexion.textContent();
-      expect(titreTextConnexion).toBe('CONNEXION');
-
+      const titreConnexion = authentificationFixture.getByLabel('CONNEXION');
+      expect(await titreConnexion.textContent()).toEqual('CONNEXION');
 
       const inputName = await authentificationFixture.getInput('identifiant');
       await inputName.type('SarahGentille');
@@ -33,40 +32,23 @@ test.describe('Liste des themes', () => {
       await authentificationFixture.seConnecter();
     });
 
-      const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-
-      await patientsApresSuppression[0].click();
-
-      const detailsPatientUrl = await page.url();
-      expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
-
-
-      const menuItems = await page.locator('.burger-menu').all();
-      await menuItems[0].click();
-
-
-    const themeBTN =await page.locator('#lien-themes');
-    await themeBTN.click();
-
-    expect(page.url()).toContain(`${testUrl}/liste-theme`);
     // Liste des themes
 
     await test.step('Liste des themes', async () => {
 
-      const ajouterThemeButton = await page.waitForSelector('.bouton-ajouter-theme');
+      await listePatientFixture.ouvrirMenu();
+      await listePatientFixture.goTheme();
 
-      const isThemeVisible = await ajouterThemeButton.isVisible();
-      expect(isThemeVisible).toBe(true);
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
-      const themes = await page.$$('app-item-frame');
-      expect(themes.length).toBe(2);
+      expect(await listeThemeFixture.getThemesLength()).toBe(2);
+
+      expect(await listeThemeFixture.getAjouterThemeButtonVisible()).toBe(true);
+
+      const themes = await listeThemeFixture.getThemes();
 
       for (const theme of themes) {
-        const themeData = await theme.getAttribute('item');
-        expect(themeData).toBeDefined();
-
-        const editerEnable = await theme.getAttribute('editerEnable');
-        expect(editerEnable).toBe(null);
+        expect(await listeThemeFixture.getThemeData(theme)).toBeDefined();
       }
     });
 
@@ -74,8 +56,8 @@ test.describe('Liste des themes', () => {
     // Creation d'un nouveau theme
 
     await test.step('Creer un theme', async () => {
-      await page.click('.bouton-ajouter-theme');
-
+      await listeThemeFixture.ajouterTheme();
+      
       const titre = await page.waitForSelector('#Titre-Nouveau-theme');
       const titreText = await titre.textContent();
       expect(titreText).toBe('NOUVEAU THEME');

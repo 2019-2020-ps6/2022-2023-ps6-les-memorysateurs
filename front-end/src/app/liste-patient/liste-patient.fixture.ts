@@ -25,8 +25,7 @@ export class ListePatientFixture extends E2EComponentFixture {
         return patients[index];
     }
 
-    async getPatientData(index: number) {
-        const patient = await this.getPatient(index);
+    async getPatientData(patient: any) {
         return await patient.getAttribute('item');
     }
 
