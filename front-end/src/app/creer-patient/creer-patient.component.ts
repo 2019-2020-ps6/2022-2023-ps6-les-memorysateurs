@@ -16,16 +16,14 @@ export class CreerPatientComponent {
   public patient : Patient |undefined;
   public patientForm : FormGroup;
   public info = false;
+  private messageErreur = "";
 
-  @Input()
   erreurNom = false;
-  @Input()
+
   erreurPrenom = false;
-  @Input()
+
   erreurPhoto = false;
 
-
-  popup=false;
   constructor(private router: Router,public formBuilder: FormBuilder,private patientService : PatientService) {
     this.patientForm = this.formBuilder.group({
       nom : [''],
@@ -106,12 +104,14 @@ if(!erreur) {
 }
 }
 afficherErreur(erreur : boolean){
+  this.messageErreur = "Veuillez saisir";
 
-if(this.patientForm.value['nom']==''){
+  if(this.patientForm.value['nom']==''){
   const nom = document.getElementById("input-nom") as HTMLInputElement;
   nom.style.background = "#F00000";
   nom.style.opacity = "0.5";
   this.erreurNom = erreur;
+  this.messageErreur += " un nom";
 }else{
   this.erreurNomDisable();
 }
@@ -120,6 +120,9 @@ if(this.patientForm.value['nom']==''){
     prenom.style.background = "#F00000";
     prenom.style.opacity = "0.5";
     this.erreurPrenom = erreur;
+    if(this.erreurNom)
+      this.messageErreur += " et";
+    this.messageErreur += " un prénom";
   }else{
    this.erreurPrenomDisable();
   }
@@ -128,10 +131,14 @@ if(this.patientForm.value['nom']==''){
     image.style.background = "#F00000";
     image.style.opacity = "0.5";
     this.erreurPhoto = erreur;
+    if(this.erreurNom ||this.erreurPrenom)
+      this.messageErreur += " et";
+    this.messageErreur += " une photo";
   }else{
     this.erreurPhotoDisable();
   }
-  this.popup = erreur;
+  this.messageErreur += " pour le patient."
+  alert(this.messageErreur);
 }
 
 
@@ -179,21 +186,20 @@ if(this.patientForm.value['nom']==''){
       this.router.navigate(['/liste-patient']);
     }
   }
-  popupChange(value : boolean){
-    this.popup = value;
-  }
 
   erreurNomDisable(){
     const nom = document.getElementById("input-nom") as HTMLInputElement;
     nom.style.background = "#FFFFFF";
     nom.style.opacity = "1";
     this.erreurNom = false;
+
   }
   erreurPrenomDisable(){
     const prenom = document.getElementById("input-prenom") as HTMLInputElement;
     prenom.style.background = "#FFFFFF";
     prenom.style.opacity = "1";
     this.erreurPrenom = false;
+
   }
 
   erreurPhotoDisable(){
@@ -201,5 +207,6 @@ if(this.patientForm.value['nom']==''){
     image.style.background = "#FFFFFF";
     image.style.opacity = "1";
     this.erreurPhoto = false;
+
   }
 }

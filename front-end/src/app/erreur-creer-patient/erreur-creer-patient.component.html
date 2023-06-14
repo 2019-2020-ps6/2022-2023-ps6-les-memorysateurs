@@ -1,8 +1,0 @@
-<div id="pop-up">
-  <p class="message-erreur" id="erreur-nom" *ngIf="erreurNom" >VEUILLEZ SAISIR UN NOM POUR LE PATIENT</p>
-  <p class="message-erreur"  *ngIf="erreurNom && erreurPrenom" >ET</p>
-  <p class="message-erreur" id="erreur-prenom" *ngIf="erreurPrenom">VEUILLEZ SAISIR UN PRÉNOM POUR LE PATIENT</p>
-  <p class="message-erreur"  *ngIf="(erreurPrenom && erreurPhoto) || (erreurPhoto && erreurNom)" >ET</p>
-  <p class="message-erreur" id="erreur-photo" *ngIf="erreurPhoto">VEUILLEZ AJOUTER UNE PHOTO POUR LE PATIENT</p>
-  <button id="ok-pop-up" (click)="fermerPopup()"> ok</button>
-</div>

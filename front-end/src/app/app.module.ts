@@ -37,7 +37,6 @@ import { GameMenuComponent } from './game-menu/game-menu.component';
 import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
 import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
-import { ErreurPartagerThemeComponent } from './erreur-partager-theme/erreur-partager-theme.component';
 import { StatContainerComponent } from './stat/statcontainer.component';
 
 @NgModule({
@@ -67,7 +66,6 @@ import { StatContainerComponent } from './stat/statcontainer.component';
     GameMenuComponent,
     StatComponent,
     PartagerThemeComponent,
-    ErreurPartagerThemeComponent,
     StatContainerComponent,
     AuthentificationComponent,
     CreerCompteComponent,
