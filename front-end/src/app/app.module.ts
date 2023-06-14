@@ -26,8 +26,6 @@ import { Button } from './utilities/button/btn.component';
 import { Timer } from './game/meter.component';
 import { ResultatPartieComponent } from './resultat-partie/resultat-partie.component';
 
-import { ErreurCreerThemeComponent } from './erreur-creer-theme/erreur-creer-theme.component';
-import { ErreurCreerPatientComponent } from './erreur-creer-patient/erreur-creer-patient.component';
 
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { CreerCompteComponent } from './creer-compte/creer-compte.component';
@@ -61,8 +59,6 @@ import { StatContainerComponent } from './stat/statcontainer.component';
     ResultatPartieComponent,
     SliderNumberComponent,
     MenuComponent,
-    ErreurCreerThemeComponent,
-    ErreurCreerPatientComponent,
     GameMenuComponent,
     StatComponent,
     PartagerThemeComponent,
