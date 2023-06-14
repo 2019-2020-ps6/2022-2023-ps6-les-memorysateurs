@@ -1,0 +1,7 @@
+
+Ntypescript:S1128"&Remove this unused import of 'OnInit'.(´Üâ”ÿÿÿÿÿ8ä¾¤ó1
+Htypescript:S1128"%Remove this unused import of 'Theme'.(³äÆÀ8å¾¤ó1
+Otypescript:S1128",Remove this unused import of 'DomSanitizer'.(‘ÿß¼8æ¾¤ó1
+Ztypescript:S1128"7Remove this unused import of 'AuthentificationService'.(à‰‹á8ç¾¤ó1
+‡typescript:S4165^"eReview this redundant assignment: "ajout" already holds the assigned value along all execution paths.(¬›ĞN8è¾¤ó1
+?typescript:S1116‹"Unnecessary semicolon.(Éœ…úÿÿÿÿ8é¾¤ó1
