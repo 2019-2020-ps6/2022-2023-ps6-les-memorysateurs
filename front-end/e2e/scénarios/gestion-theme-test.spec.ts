@@ -15,14 +15,19 @@ test.describe('Liste des themes', () => {
 
     // Connexion
     await test.step('Connexion', async () => {
+
       const titreConnexion = await page.waitForSelector('#connexion');
+
       const titreTextConnexion = await titreConnexion.textContent();
       expect(titreTextConnexion).toBe('CONNEXION');
 
-      await page.fill('#identifiant', 'SarahGentille');
-      await page.fill('#motDePasse', '1234');
+      const inputName = await authentificationFixture.getInput('identifiant');
+      await inputName.type('SarahGentille');
+      const inputPassword = await authentificationFixture.getInput('motDePasse');
+      await inputPassword.type('1234');
 
-      await page.getByRole('button', {name:'Me Connecter'}).click();
+      await authentificationFixture.seConnecter();
+    });
 
       const patientsApresSuppression = await page.getByRole('button', {name:'SELECTIONNER'}).all();
 
@@ -34,15 +39,17 @@ test.describe('Liste des themes', () => {
       const menuItems = await page.locator('.burger-menu').all();
       await menuItems[0].click();
 
-      const lienTheme =await page.locator('#lien-themes');
-      await lienTheme.click();
-    });
 
+    const themeBTN =await page.locator('#lien-themes');
+    await themeBTN.click();
+
+    expect(page.url()).toContain(`${testUrl}/liste-theme`);
     // Liste des themes
 
     await test.step('Liste des themes', async () => {
 
       const ajouterThemeButton = await page.waitForSelector('.bouton-ajouter-theme');
+
       const isThemeVisible = await ajouterThemeButton.isVisible();
       expect(isThemeVisible).toBe(true);
 
