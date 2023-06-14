@@ -42,49 +42,5 @@
     "date": "Mon Jun 12 2023",
     "patientId": "1686667237489",
     "id": 1686582668748
-  },
-  {
-    "temps": 61,
-    "essais": 7,
-    "erreurs": 3,
-    "indices": 1,
-    "nbCartes": 8,
-    "stade": 4,
-    "date": "Wed Jun 14 2023",
-    "patientId": "1686667283392",
-    "id": 1686731217713
-  },
-  {
-    "temps": 11,
-    "essais": 2,
-    "erreurs": 0,
-    "indices": 0,
-    "nbCartes": 4,
-    "stade": 3,
-    "date": "Wed Jun 14 2023",
-    "patientId": "1686667237489",
-    "id": 1686731790889
-  },
-  {
-    "temps": 11,
-    "essais": 2,
-    "erreurs": 0,
-    "indices": 0,
-    "nbCartes": 4,
-    "stade": 3,
-    "date": "Wed Jun 14 2023",
-    "patientId": "1686667237489",
-    "id": 1686731832404
-  },
-  {
-    "temps": 17,
-    "essais": 3,
-    "erreurs": 0,
-    "indices": 0,
-    "nbCartes": 6,
-    "stade": 3,
-    "date": "Wed Jun 14 2023",
-    "patientId": "1686667237489",
-    "id": 1686731975307
   }
 ]
