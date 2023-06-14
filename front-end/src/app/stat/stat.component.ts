@@ -12,7 +12,6 @@ import {Statistiques} from "../../models/statistiques.models";
 export class StatComponent implements OnInit {
   public listeStatistiques: Statistiques[] | undefined = []
   public patient = this.patientService.patientSelectionne$;
-  public partiesJouees: number = 0;
   public nom: string = "";
   public prenom: string = "";
   public stockImage: string = "";
@@ -60,13 +59,6 @@ export class StatComponent implements OnInit {
       this.isDisplayed = this.isTemps || this.isIndices || this.isErreurs || this.isEssais;
   }
 
-  partiesJoueesUpdate(event : number){
-
-    const texteParties = document.getElementById("profil-parties");
-    // @ts-ignore
-    texteParties.innerText = this.partiesJouees + "parties jouées";
-
-  }
 
   retour(): void {
     window.history.back();

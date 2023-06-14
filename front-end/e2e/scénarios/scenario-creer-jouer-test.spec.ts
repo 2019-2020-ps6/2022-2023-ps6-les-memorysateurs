@@ -186,7 +186,7 @@ test.describe('Scénario global', () => {
       await deco.click();
 
       expect(page.url()).toBe('http://localhost:4200/authentification');
-    
+
 
   })
 })
