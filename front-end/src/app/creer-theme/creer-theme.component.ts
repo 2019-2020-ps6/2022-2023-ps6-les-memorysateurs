@@ -22,12 +22,12 @@ export class CreerThemeComponent {
   URL : string="";
   @Input()
   theme : Theme |undefined;
-  @Input()
+  messageErreur = "";
   erreurImage = false;
-  @Input()
+
   erreurTitre = false;
 
-  popup=false;
+
 
 
   constructor(private router: Router,private http:HttpClient,public formThemeService: FormThemeService,
@@ -171,7 +171,7 @@ export class CreerThemeComponent {
 
     }
   afficherErreur(value : boolean){
-    this.popup = value;
+    this.messageErreur = "Veuillez saisir";
    if(value){
      const inputTitre = document.getElementById("div-nom-theme") as HTMLInputElement;
      const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
@@ -180,6 +180,7 @@ export class CreerThemeComponent {
 
        imageChoisi.style.background = "#F00000";
        imageChoisi.style.opacity = "0.5";
+       this.messageErreur += " 4 images";
        if(this.themeForm.value.name !=""){
          if(this.themeForm.value.name != undefined) {
            this.erreurTitreDisable();
@@ -190,11 +191,16 @@ export class CreerThemeComponent {
 
        inputTitre.style.background = "#F00000";
        inputTitre.style.opacity = "0.5";
+       if(this.erreurImage)
+         this.messageErreur +=" et";
+       this.messageErreur += " un titre";
        if(imageChoisi.childElementCount >=4){
          this.erreurImageDisable();
        }
      }
    }
+   this.messageErreur += " pour le thème";
+   alert(this.messageErreur);
   }
 
 
@@ -232,9 +238,7 @@ export class CreerThemeComponent {
     this.URL ="";
   }
 
-  popupChange(value : boolean){
-    this.popup = value;
-  }
+
   erreurImageDisable(){
     const imageChoisi = document.getElementById("imageChoisi") as HTMLDivElement;
     this.erreurImage = false;
