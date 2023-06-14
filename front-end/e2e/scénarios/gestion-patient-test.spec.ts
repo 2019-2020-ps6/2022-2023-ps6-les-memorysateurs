@@ -71,12 +71,17 @@ test.describe('Création nouveau patient', () => {
 
       expect(await listePatientFixture.getPatientData(4)).toBeDefined();
 
+      await listePatientFixture.selectionnerPatient(4);
+
+      expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('Lucy');
+      expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Borg');
+      expect(await profilPatientFixture.getPatientData('#info-stade')).toEqual('Stade 4');
+
     });
 
      // Modification du profil patient
 
     await test.step('Modification patient', async () => {
-      await listePatientFixture.selectionnerPatient(4);
 
       await profilPatientFixture.modifierProfil();
 
@@ -117,7 +122,6 @@ test.describe('Création nouveau patient', () => {
       expect(await listePatientFixture.getPatientsLength()).toBe(4);
 
     });
-
 
 
     // Verification profil patient
