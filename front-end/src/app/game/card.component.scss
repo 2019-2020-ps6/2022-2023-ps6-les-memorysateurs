@@ -19,6 +19,14 @@ div.card {
     transform: rotateY(180deg);
     transition: scale $timeanimation/2 ease-in-out, transform $timeanimation ease-in-out, background-color $timeanimation/2 ease-in-out;
 
+    &>img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 12px;
+    }
+
     &::after {
         content: '';
         z-index: 1;

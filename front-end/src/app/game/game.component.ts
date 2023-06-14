@@ -41,7 +41,8 @@ export class Game implements OnInit {
       this.timer = num;
     });
     this.themeService.themeSelectionne$.subscribe( theme => {
-      this.theme = theme;
+      if(theme != undefined)
+        this.theme = theme;
     });
     this.gameService.combinations$.subscribe( combinaison => {
       this.lastCombinaison = combinaison.lastCombinaison;
@@ -59,8 +60,9 @@ export class Game implements OnInit {
       <div id="meter">
         <div id="meter-bar"><!--{{(sender.isInRun() && sender.isEnableTimer()) ? (((progress/60) | number:'2.0-0') + ":" + (progress%60 | number:'2.0-0')):''}}--></div>
       </div>
+      
       <button id="boutonIndice"(click)="toggleTimer()">
-        Indice
+        {{nameButton}}
       </button>
 </section>
   `,
@@ -72,6 +74,7 @@ export class HintContainer implements OnInit, AfterViewInit {
   isRunning : boolean = false;
   progress : number = 0;
   subscription: Subscription;
+  nameButton : string = "Lancer";
   @Input() public enableTimer : boolean = true;
   //stats
 
@@ -84,6 +87,14 @@ export class HintContainer implements OnInit, AfterViewInit {
       let bar = document.getElementById("meter-bar");
       if(bar != null) {
         bar.style.width = (num/this.sender.getDuration()*100) + "%";
+      }
+      if (num != 0)
+      {
+        this.nameButton = "Lancer";
+      }
+      else if(num == 0 || !this.sender.isEnableTimer())
+      {
+        this.nameButton = "Indice";
       }
     });
     this.gameService.isRecurentCombinaison$.subscribe(isRecurrent => {

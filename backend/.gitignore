@@ -3,3 +3,5 @@
 node_modules/
 database/*
 !database/.gitkeep
+!database/e2e-starter
+!database/e2e

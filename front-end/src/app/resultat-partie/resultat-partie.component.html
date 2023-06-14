@@ -2,8 +2,7 @@
   <div id="profil-patient">
     <img id="photo-patient" [src]="patientSelectionne.getImage()">
     <h3 id="nom-patient">{{patientSelectionne.getTitre()}}</h3>
-    <p id="stade-patient">Stade {{patientSelectionne.stade}}</p>
-    <p id="nb-parties-jouees-patient">{{patientSelectionne.getStats().length}} Parties jouées</p>
+    <p *ngIf="listeStatistiques != undefined" id="nb-parties-jouees-patient">{{listeStatistiques.length}} Parties jouées</p>
   </div>
 
   <div id="boite-droite">
@@ -15,6 +14,7 @@
     <div id="boite-boutons-resultat-partie">
       <button (click)="onStatistiques()" id="bouton-statistiques">Statistiques</button>
       <button (click)="onRelancerPartie()" id="bouton-relancer-partie">Relancer Partie</button>
+      <button (click)="onNouvellePartie()" id="bouton-nouvelle-partie">Nouvelle Partie</button>
     </div>
 
   </div>

@@ -1,6 +1,7 @@
 export interface Cardable {
   getID(): number;
   getTitre(): string;
-  getImage(): any;
+  getImage(): string;
+  isEditable(): boolean;
   getType(): "patient" | "theme";
 }

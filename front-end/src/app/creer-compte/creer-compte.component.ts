@@ -19,6 +19,14 @@ export class CreerCompteComponent {
       motDePasse: [null],
       confirmerMotDePasse: [null]
     });
+
+
+    this.authentificationService.inConnect$.subscribe(c => {
+      if(c){
+        this.router.navigate(['/liste-patient']);
+        this.authentificationService.inConnect$.next(false);
+      }
+    });
   }
 
   /*
@@ -27,7 +35,8 @@ export class CreerCompteComponent {
 
   onValider() {
     this.authentificationService.addCompteUtilisateur(new CompteUtilisateur(this.formGroup.value['identifiant'],
-      this.formGroup.value['email'], this.formGroup.value['motDePasse']));
+      this.formGroup.value['adresseEmail'], this.formGroup.value['motDePasse']));
+    
   }
 
   isValidEmail(str: string): boolean {

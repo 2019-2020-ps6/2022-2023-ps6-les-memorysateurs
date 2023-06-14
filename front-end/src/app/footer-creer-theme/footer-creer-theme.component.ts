@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Output, EventEmitter, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormThemeService} from "../services/formTheme.service";
 import {Theme} from "../../models/theme.models";
@@ -12,7 +12,7 @@ import {PatientService} from "../services/patient.service";
   templateUrl: './footer-creer-theme.component.html',
   styleUrls: ['./footer-creer-theme.component.scss']
 })
-export class FooterCreerThemeComponent {
+export class FooterCreerThemeComponent implements OnInit,AfterViewInit{
   // @ts-ignore
   nom : string ="";
   // @ts-ignore
@@ -34,26 +34,18 @@ export class FooterCreerThemeComponent {
     this.formThemeService.imageSubject$.subscribe(images => {
       this.images = images;
     });
-    const bouton = document.getElementById("boutonChangeant") as HTMLButtonElement;
-    if(this.theme == undefined){
-      this.bas_jaune = true;
-      this.supprimer = false;
-      bouton.innerHTML = "Partager la Création";
-    }else{
-      this.bas_jaune = false;
-      this.supprimer = true;
-      bouton.innerHTML = "Supprimer";
-    }
+
   }
   retourListeTheme() {
     this.themeService.setEditTheme(undefined);
-    window.history.back();
+    this.router.navigateByUrl("liste-theme");
   }
 
   ajouterTheme(){
     let ajout : boolean = false;
   if(this.theme == undefined) {
-    const theme: Theme = new Theme(this.nom, this. images)
+
+    const theme: Theme = new Theme(this.nom, this.images)
     this.theme = theme;
     ajout = true;
   }
@@ -68,26 +60,44 @@ export class FooterCreerThemeComponent {
       if(ajout) {
         this.themeService.addTheme(this.theme);
       }
+      else {
+        this.themeService.updateTheme(this.theme);
+      }
       this.router.navigate(['/liste-theme']);
     } else {
       this.erreur.emit(true);
       this.theme = undefined;
     }
     this.themeService.setEditTheme(undefined);
+    console.log(this.images);
   }
 
   clickPartagerOuSupprimer(){
     if(this.supprimer) {
-      this.themeService.removeTheme(this.theme);
-      this.themeService.setEditTheme(undefined);
-      const patient = this.patientService.patientSelectionne$;
-      let patientSelect: Patient = this.patientService.getPatientById(patient.value?.id as number);
-      patientSelect.setThemes(this.themeService.listeThemes$.value);
+      let bool = confirm('Êtes-vous sûr de vouloir supprimer ce thème ?');
+      if(bool) {
+        this.themeService.removeTheme(this.theme);
+        this.themeService.setEditTheme(undefined);
+        const patient = this.patientService.patientSelectionne$;
 
-      this.router.navigate(['/liste-theme']);
+        this.router.navigate(['/liste-theme']);
+      }
     }
     if(this.bas_jaune){
       this.router.navigate(['/partager-theme']);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    const bouton = document.getElementById("boutonChangeant") as HTMLButtonElement;
+    if(this.theme == undefined){
+      this.bas_jaune = true;
+      this.supprimer = false;
+      bouton.innerHTML = "Partager la Création";
+    }else{
+      this.bas_jaune = false;
+      this.supprimer = true;
+      bouton.innerHTML = "Supprimer";
     }
   }
 }

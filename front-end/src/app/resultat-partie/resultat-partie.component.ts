@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {Theme} from "../../models/theme.models";
 import {PatientService} from "../services/patient.service";
 import {Patient} from "../../models/patient.models";
+import {StatistiquesService} from "../services/statistiques.service";
+import {Statistiques} from "../../models/statistiques.models";
 
 @Component({
   selector: 'app-resultat-partie',
@@ -14,8 +16,9 @@ import {Patient} from "../../models/patient.models";
 export class ResultatPartieComponent {
   imageTrouvees!: string[];
   patientSelectionne!: Patient;
+  public listeStatistiques: Statistiques[] | undefined = []
 
-  constructor(public router: Router, public themeService: ThemeService,public patientService: PatientService, public gameService: GameService) {
+  constructor(public router: Router, public themeService: ThemeService,public patientService: PatientService, public gameService: GameService, public statsService: StatistiquesService) {
     gameService.imagesCartesTrouvees$.subscribe((images: string[]) =>{
       this.imageTrouvees = images;
     });
@@ -26,6 +29,10 @@ export class ResultatPartieComponent {
 
       }
     });
+
+    statsService.listeStatistiques$.subscribe((statistiques) => {
+      this.listeStatistiques = statistiques;
+    });
   }
 
   onStatistiques() {
@@ -35,6 +42,10 @@ export class ResultatPartieComponent {
 
   onRelancerPartie() {
 
+    this.router.navigateByUrl("game");
+  }
+
+  onNouvellePartie(){
     this.router.navigateByUrl("creer-memory");
   }
 }

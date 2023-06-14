@@ -15,8 +15,11 @@ export class ListeThemeComponent {
   listeTheme: Cardable[] = [];
 
   constructor(public router: Router, public themeService: ThemeService,public patientService : PatientService) {
-    this.themeService.listeThemes$.subscribe((themes: Theme[]) => {
-      this.listeTheme = themes;
+    this.themeService.listeThemes$.subscribe(themes => {
+      if (themes != undefined)
+        this.listeTheme = themes;
+      else
+        this.listeTheme = [];
     });
 
 
@@ -24,7 +27,8 @@ export class ListeThemeComponent {
 
   ngOnInit(): void {
     let patientSelect = this.patientService.patientSelectionne$;
-    this.themeService.setThemes(patientSelect.value?.themes);
+    console.log("patient : " +  patientSelect.value);
+    //this.themeService.setThemes(patientSelect.value?.themes);
   }
 
   onSelectionner(id : number){
