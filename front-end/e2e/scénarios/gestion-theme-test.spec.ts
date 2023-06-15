@@ -5,6 +5,7 @@ import { AppFixture } from 'src/app/app.fixture';
 import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
 import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
 import { CreerThemeFixture } from 'src/app/creer-theme/creer-theme.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
@@ -17,6 +18,7 @@ test.describe('Liste des themes', () => {
     const listePatientFixture = new ListePatientFixture(page);
     const listeThemeFixture = new ListeThemeFixture(page);
     const creerThemeFixture = new CreerThemeFixture(page);
+    const menuFixture = new MenuFixture(page);
 
 
     // Connexion
@@ -38,8 +40,8 @@ test.describe('Liste des themes', () => {
     await test.step('Liste des themes', async () => {
 
       await listePatientFixture.selectionnerPatient(0);
-      await listePatientFixture.ouvrirMenu();
-      await listePatientFixture.goTheme();
+      await menuFixture.ouvrirMenu();
+      await menuFixture.goTheme();
 
       expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
@@ -133,6 +135,16 @@ test.describe('Liste des themes', () => {
 
     await test.step('Selectionner un theme', async () => {
       await listeThemeFixture.selectionnerTheme(1);
+    });
+
+    // Déconnexion
+
+    await test.step('Deconnexion', async () => {
+
+      await menuFixture.deconnexion();
+
+      expect(await page.url()).toContain(`${testUrl}/authentification`);
+
     });
 
   });

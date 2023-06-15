@@ -9,6 +9,8 @@ import { StatistiquesFixture } from 'src/app/stat/stat.fixture';
 import { CreerMemoryFixture } from 'src/app/creer-memory/creer-memory.fixture';
 import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
 import { GameFixture } from 'src/app/game/game.fixture';
+import { ResultatPartieFixture } from 'src/app/resultat-partie/resultat-partie.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Scénario global', () => {
   test('Scénario création de compte + jeu ', async ({page}) => {
@@ -25,6 +27,8 @@ test.describe('Scénario global', () => {
     const creerMemoryFixture = new CreerMemoryFixture(page);
     const listeThemeFixture = new ListeThemeFixture(page);
     const gameFixture = new GameFixture(page);
+    const resultatPartieFixture = new ResultatPartieFixture(page);
+    const menuFixture = new MenuFixture(page);
 
     // Connexion
 
@@ -132,31 +136,47 @@ test.describe('Scénario global', () => {
 
     expect(await page.url()).toContain(`${testUrl}/resultat-partie`);
 
-    const imageTrouvees = await page.locator('#boite-images-trouvees img').all();
-    expect(imageTrouvees.length).toBe(4);
+    expect((await resultatPartieFixture.getImagesLength)).toBe(4);
 
+    // Verification statistiques
 
-    const boutonStat = await page.getByRole('button', {name:'Statistiques'}).all();
-    await boutonStat[0].click();
-    expect(page.url()).toBe('http://localhost:4200/stat');
+    await resultatPartieFixture.voirStatistiques();
+    expect(await page.url()).toContain(`${testUrl}/stat`);
 
-    const statsTableau = await page.locator(' app-statcontainer').all();
-    for(let i =0;i<statsTableau.length;i++) {
-      const tab = await statsTableau[i].locator('.tableau').all();
-      expect(tab.length).toBe(1);
-    }
-      //déconnexion
+    expect(await profilPatientFixture.getPatientData('.profil-prenom')).toEqual('Bertrand');
+      expect(await profilPatientFixture.getPatientData('.profil-nom')).toEqual('Stade4');
+      expect(await profilPatientFixture.getPatientData('.profil-stade')).toEqual('Stade 4');
+      expect(await profilPatientFixture.getPatientData('#profil-parties')).not.toBe('');
+      
+      expect(await statistiquesFixture.getNombreContainers()).toBe(4);
 
-      const menuItems = await page.locator('.burger-menu').all();
-      await menuItems[0].click();
+      const statContainers = await statistiquesFixture.getContainers();
 
-      const deco =await page.locator('#deconection');
-      await page.on('dialog', async (dialog) => {
-        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
+      for (const statcontainer of statContainers) {
+        
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        expect(await statistiquesFixture.getContainerVisible(statcontainer)).toContain('active');
+
+        ;
+
+        expect(await statistiquesFixture.getNombreHeadersTableau(statcontainer)).toBe(4);
+        expect(await statistiquesFixture.getTableau(statcontainer)).not.toBe('');
+
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
+      }
+
+    
+      // Déconnexion
+
+      await test.step('Deconnexion', async () => {
+
+        await menuFixture.deconnexion();
+  
+        expect(await page.url()).toContain(`${testUrl}/authentification`);
+  
       });
-      await deco.click();
-
-      expect(page.url()).toBe('http://localhost:4200/authentification');
 
 
   })

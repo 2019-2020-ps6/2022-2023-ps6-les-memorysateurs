@@ -6,16 +6,6 @@ export class ListePatientFixture extends E2EComponentFixture {
         return this.page.getByText(label, { exact: true });
     }
 
-    async ouvrirMenu(numberOfClick = 1) {
-        const menuItems = await this.page.locator('.burger-menu').all();
-        return menuItems[0].click();
-    }
-
-    async goTheme() {
-        const lienTheme = await this.page.locator('#lien-themes');
-        return await lienTheme.click();
-    }
-
     async getPatients() {
         return await this.page.$$('app-item-frame');
     }

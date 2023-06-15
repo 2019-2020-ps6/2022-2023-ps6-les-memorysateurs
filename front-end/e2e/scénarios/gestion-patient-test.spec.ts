@@ -6,6 +6,7 @@ import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture
 import { CreerPatientFixture } from 'src/app/creer-patient/creer-patient.fixture';
 import { ProfilPatientFixture } from 'src/app/profil-patient/profil-patient.fixture';
 import { StatistiquesFixture } from 'src/app/stat/stat.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Création nouveau patient', () => {
   test('Test de création du profil du patient', async ({ page }) => {
@@ -19,6 +20,7 @@ test.describe('Création nouveau patient', () => {
     const creerPatientFixture = new CreerPatientFixture(page);
     const profilPatientFixture = new ProfilPatientFixture(page);   
     const statistiquesFixture = new StatistiquesFixture(page); 
+    const menuFixture = new MenuFixture(page);
 
     // Connexion
 
@@ -167,6 +169,16 @@ test.describe('Création nouveau patient', () => {
 
         await statistiquesFixture.appuyerSurPlus(statcontainer);
       }
+
+    });
+
+    // Déconnexion
+
+    await test.step('Deconnexion', async () => {
+
+      await menuFixture.deconnexion();
+
+      expect(await page.url()).toContain(`${testUrl}/authentification`);
 
     });
 
