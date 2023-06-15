@@ -4,6 +4,7 @@ import { AuthentificationFixture } from 'src/app/authentification/authentificati
 import { AppFixture } from 'src/app/app.fixture';
 import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
 import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
+import { CreerThemeFixture } from 'src/app/creer-theme/creer-theme.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
@@ -15,7 +16,7 @@ test.describe('Liste des themes', () => {
     const authentificationFixture = new AuthentificationFixture(page);
     const listePatientFixture = new ListePatientFixture(page);
     const listeThemeFixture = new ListeThemeFixture(page);
-
+    const creerThemeFixture = new CreerThemeFixture(page);
 
 
     // Connexion
@@ -36,6 +37,7 @@ test.describe('Liste des themes', () => {
 
     await test.step('Liste des themes', async () => {
 
+      await listePatientFixture.selectionnerPatient(0);
       await listePatientFixture.ouvrirMenu();
       await listePatientFixture.goTheme();
 
@@ -46,10 +48,6 @@ test.describe('Liste des themes', () => {
       expect(await listeThemeFixture.getAjouterThemeButtonVisible()).toBe(true);
 
       const themes = await listeThemeFixture.getThemes();
-
-      for (const theme of themes) {
-        expect(await listeThemeFixture.getThemeData(theme)).toBeDefined();
-      }
     });
 
 
@@ -57,53 +55,36 @@ test.describe('Liste des themes', () => {
 
     await test.step('Creer un theme', async () => {
       await listeThemeFixture.ajouterTheme();
-      
-      const titre = await page.waitForSelector('#Titre-Nouveau-theme');
-      const titreText = await titre.textContent();
-      expect(titreText).toBe('NOUVEAU THEME');
 
-      await page.fill('#div-nom-theme', 'test nouveau thème');
-      await page.setInputFiles('#recup-fichier', ['src/assets/images/patient-homme.png']);
+      expect(await page.url()).toContain(`${testUrl}/creer-theme`);
 
-
-      const imageChoisi = await page.waitForSelector('#imageChoisi');
-      const imageChoisiChildren = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-      expect(imageChoisiChildren).toBe(1);
-
-      const imageEnAttente = await page.waitForSelector('#imageEnAttente');
-      const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
-      expect(imageEnAttenteChildren).toBe(4);
-
-      await page.click('#imageEnAttente img');
+      const inputName = await creerThemeFixture.getInput('div-nom-theme');
+      await inputName.type('test nouveau thème');
+      expect(await inputName.inputValue()).toBe('test nouveau thème');
 
 
-      const inputNomTheme = await page.waitForSelector('#div-nom-theme');
-      const nomThemeValue = await inputNomTheme.inputValue();
-      expect(nomThemeValue).toBe('test nouveau thème');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(0);
+      await creerThemeFixture.importerPhoto('src/assets/images/patient-homme.png');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(1);
 
-      await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
-      await page.click('#importer-URL');
-      await page.click('#imageEnAttente img');
-
-      const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-      expect(imageChoisiChildrenURL).toBe(4);
+      await creerThemeFixture.importerPhotoUrl('https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(2);
 
       const urlInput = await page.waitForSelector('#url-image');
       const urlInputValue = await urlInput.inputValue();
       expect(urlInputValue).toBe('');
 
-      const formTheme = await page.waitForSelector('#form-nom-theme');
-      const formThemeValue = await formTheme.$eval('input', (input) => input.value);
-      expect(formThemeValue).toBe('test nouveau thème');
-
+      await creerThemeFixture.ajoutePhoto();
+      await creerThemeFixture.ajoutePhoto();
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(4);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(2);
 
       await page.click('#boutonValidationTheme');
 
-      const profilPatientUrl = await page.url();
-      expect(profilPatientUrl).toContain(`${testUrl}/liste-theme`);
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
-      const themesApresCreationListe = await page.$$('app-item-frame');
-      expect(themesApresCreationListe.length).toBe(3);
+      expect(await listeThemeFixture.getThemesLength()).toBe(3);
+
     });
 
 

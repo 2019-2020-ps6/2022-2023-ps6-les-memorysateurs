@@ -43,12 +43,6 @@ test.describe('Création nouveau patient', () => {
 
       expect(await listePatientFixture.getAjouterPatientButtonVisible()).toBe(true);
 
-      const patients = await listePatientFixture.getPatients();
-
-      for (const patient of patients) {
-        expect(await listePatientFixture.getPatientData(patient)).toBeDefined();
-      }
-
     });
 
     // Vérification de l'action "Ajouter un patient"
@@ -74,8 +68,6 @@ test.describe('Création nouveau patient', () => {
       expect(await page.url()).toContain(`${testUrl}/liste-patient`);
 
       expect(await listePatientFixture.getPatientsLength()).toBe(5);
-
-      expect(await listePatientFixture.getPatientData(4)).toBeDefined();
 
       await listePatientFixture.selectionnerPatient(4);
 

@@ -2,6 +2,10 @@ import { E2EComponentFixture } from "e2e/e2e-component.fixture";
 
 export class ListeThemeFixture extends E2EComponentFixture {
 
+  getByLabel(label: string) {
+    return this.page.getByText(label, { exact: true });
+  }
+
   async getThemes() {
     return await this.page.$$('app-item-frame');
   }
@@ -9,11 +13,7 @@ export class ListeThemeFixture extends E2EComponentFixture {
   async getTheme(index: number) {
       const themes = await this.getThemes();
       return themes[index];
-  }
-
-  async getThemeData(theme: any) {
-    return await theme.getAttribute('item');
-}
+  } 
 
   async getThemesLength() {
       return this.page.$$('app-item-frame').then((themes) => themes.length);
