@@ -1,15 +1,15 @@
 services:
   front:
     build:
-      context: ./frontend
+      context: ../front-end
       dockerfile: Dockerfile
     ports:
       - 8080:80
   back:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: Dockerfile
     ports:
       - 8000:9428
     volumes:
-      - ./backend/database:/backend/database
+      - ./database:/backend/database
