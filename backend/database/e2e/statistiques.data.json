@@ -44,7 +44,7 @@
     "id": 1686582668748
   },
   {
-    "temps": 83,
+    "temps": 85,
     "essais": 7,
     "erreurs": 3,
     "indices": 2,
@@ -52,10 +52,10 @@
     "stade": 4,
     "date": "Thu Jun 15 2023",
     "patientId": "1686667283392",
-    "id": 1686831089759
+    "id": 1686835184693
   },
   {
-    "temps": 83,
+    "temps": 85,
     "essais": 7,
     "erreurs": 3,
     "indices": 2,
@@ -63,6 +63,6 @@
     "stade": 4,
     "date": "Thu Jun 15 2023",
     "patientId": "1686667283392",
-    "id": 1686831259481
+    "id": 1686835376158
   }
 ]

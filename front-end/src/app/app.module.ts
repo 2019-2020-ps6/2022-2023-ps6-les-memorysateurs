@@ -36,6 +36,7 @@ import { StatComponent } from './stat/stat.component';
 import {MenuComponent} from "./menu/menu.component";
 import { PartagerThemeComponent } from './partager-theme/partager-theme.component';
 import { StatContainerComponent } from './stat/statcontainer.component';
+import { RedirectionComponent } from './redirection/redirection.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { StatContainerComponent } from './stat/statcontainer.component';
     AuthentificationComponent,
     CreerCompteComponent,
     MotDePasseOublieComponent,
+    RedirectionComponent,
   ],
   imports: [
     BrowserModule,

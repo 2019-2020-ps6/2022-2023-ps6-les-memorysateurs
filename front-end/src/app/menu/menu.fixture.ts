@@ -1,5 +1,6 @@
 import { E2EComponentFixture } from "e2e/e2e-component.fixture";
 
+
 export class MenuFixture extends E2EComponentFixture {
 
     getByLabel(label: string) {
@@ -24,10 +25,16 @@ export class MenuFixture extends E2EComponentFixture {
     async deconnexion() {
         await this.ouvrirMenu();
         const deco =await this.page.locator('#deconection');
-        await this.page.on('dialog', async (dialog) => {
-            await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
-        });
         await deco.click();
     }
+
+  async deconnexionAvecHandle() {
+    await this.ouvrirMenu();
+    const deco =await this.page.locator('#deconection');
+      await this.page.on('dialog', async (dialog) => {
+        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
+      });
+    await deco.click();
+  }
 
 }
