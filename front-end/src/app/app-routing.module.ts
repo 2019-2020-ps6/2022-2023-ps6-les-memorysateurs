@@ -11,7 +11,6 @@ import {ListePatientComponent} from "./liste-patient/liste-patient.component";
 import {ProfilPatientComponent} from "./profil-patient/profil-patient.component";
 import { Game } from './game/game.component';
 import {ResultatPartieComponent} from "./resultat-partie/resultat-partie.component";
-import {ErreurCreerThemeComponent} from "./erreur-creer-theme/erreur-creer-theme.component";
 import { StatComponent } from './stat/stat.component';
 import {PartagerThemeComponent} from "./partager-theme/partager-theme.component";
 import {AuthentificationComponent} from "./authentification/authentification.component";
@@ -27,7 +26,6 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'liste-patient', component: ListePatientComponent},
   {path: 'profil-patient', component: ProfilPatientComponent},
   {path: 'resultat-partie', component: ResultatPartieComponent},
-  { path: 'erreur-creer-theme', component: ErreurCreerThemeComponent },
   {path: 'game', component: Game},
   {path: 'partager-theme', component: PartagerThemeComponent },
   {path: 'stat', component: StatComponent},

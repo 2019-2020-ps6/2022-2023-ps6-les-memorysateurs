@@ -1,145 +1,151 @@
 import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
+import { AuthentificationFixture } from 'src/app/authentification/authentification.fixture';
 import { AppFixture } from 'src/app/app.fixture';
+import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
+import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
+import { CreerThemeFixture } from 'src/app/creer-theme/creer-theme.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Liste des themes', () => {
   test('Basic test', async ({ page }) => {
     await page.goto(`${testUrl}/authentification`);
+
+    //create all fixtures
+
     const appComponentFixture = new AppFixture(page);
+    const authentificationFixture = new AuthentificationFixture(page);
+    const listePatientFixture = new ListePatientFixture(page);
+    const listeThemeFixture = new ListeThemeFixture(page);
+    const creerThemeFixture = new CreerThemeFixture(page);
+    const menuFixture = new MenuFixture(page);
+
 
     // Connexion
-    const titreConnexion = await page.waitForSelector('#connexion');
-    const titreTextConnexion = await titreConnexion.textContent();
-    expect(titreTextConnexion).toBe('CONNEXION');
 
-    await page.fill('#identifiant', 'SarahGentille');
-    await page.fill('#motDePasse', '1234');
+    await test.step('Connexion', async () => {
+      const titreConnexion = authentificationFixture.getByLabel('CONNEXION');
+      expect(await titreConnexion.textContent()).toEqual('CONNEXION');
 
-    await page.getByRole('button', {name:'Me Connecter'}).click();
+      const inputName = await authentificationFixture.getInput('identifiant');
+      await inputName.type('SarahGentille');
+      const inputPassword = await authentificationFixture.getInput('motDePasse');
+      await inputPassword.type('1234');
 
-    const menuItems = await page.locator('.burger-menu').all();
-    await menuItems[0].click();
-
-    const lienTheme =await page.locator('#lien-themes');
-    await lienTheme.click();
+      await authentificationFixture.seConnecter();
+    });
 
     // Liste des themes
-    
-    const title = await page.waitForSelector('h2');
-    const titleText = await title.textContent();
-    expect(titleText).toBe('Ajouter un thème');
 
-    const ajouterThemeButton = await page.waitForSelector('.bouton-ajouter-theme');
-    const isThemeVisible = await ajouterThemeButton.isVisible();
-    expect(isThemeVisible).toBe(true);
+    await test.step('Liste des themes', async () => {
 
-    const themes = await page.$$('app-item-frame');
-    expect(themes.length).toBe(2);
+      await listePatientFixture.selectionnerPatient(0);
+      await menuFixture.ouvrirMenu();
+      await menuFixture.goTheme();
 
-    for (const theme of themes) {
-        const themeData = await theme.getAttribute('item');
-        expect(themeData).toBeDefined();
-  
-        const editerEnable = await theme.getAttribute('editerEnable');
-        expect(editerEnable).toBe(null);
-      }
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
+
+      expect(await listeThemeFixture.getThemesLength()).toBe(2);
+
+      expect(await listeThemeFixture.getAjouterThemeButtonVisible()).toBe(true);
+
+      const themes = await listeThemeFixture.getThemes();
+    });
 
 
     // Creation d'un nouveau theme
 
-    await page.click('.bouton-ajouter-theme');
+    await test.step('Creer un theme', async () => {
+      await listeThemeFixture.ajouterTheme();
 
-    const titre = await page.waitForSelector('#Titre-Nouveau-theme');
-    const titreText = await titre.textContent();
-    expect(titreText).toBe('NOUVEAU THEME');
+      expect(await page.url()).toContain(`${testUrl}/creer-theme`);
 
-    await page.fill('#div-nom-theme', 'test nouveau thème');
-    await page.setInputFiles('#recup-fichier', ['src/assets/images/patient-homme.png']);
+      const inputName = await creerThemeFixture.getInput('div-nom-theme');
+      await inputName.fill('test nouveau thème');
+      expect(await inputName.inputValue()).toBe('test nouveau thème');
 
-    const imageEnAttente = await page.waitForSelector('#imageEnAttente');
-    const imageEnAttenteChildren = await imageEnAttente.$$eval('img', (imgs) => imgs.length);
-    expect(imageEnAttenteChildren).toBe(5);
 
-    await page.click('#imageEnAttente img');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(0);
+      await creerThemeFixture.importerPhoto('src/assets/images/patient-homme.png');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(1);
 
-    const imageChoisi = await page.waitForSelector('#imageChoisi');
-    const imageChoisiChildren = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildren).toBe(1);
+      await creerThemeFixture.importerPhotoUrl('https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(2);
 
-    const inputNomTheme = await page.waitForSelector('#div-nom-theme');
-    const nomThemeValue = await inputNomTheme.inputValue();
-    expect(nomThemeValue).toBe('test nouveau thème');
+      const urlInput = await page.waitForSelector('#url-image');
+      const urlInputValue = await urlInput.inputValue();
+      expect(urlInputValue).toBe('');
 
-    await page.fill('#url-image', 'https://img.freepik.com/vecteurs-premium/pouce-air-traiter-accepter-symbole-silhouette-geste-bras-noir_532867-358.jpg');
-    await page.click('#importer-URL');
-    await page.click('#imageEnAttente img');
+      await creerThemeFixture.ajoutePhoto();
+      await creerThemeFixture.ajoutePhoto();
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(4);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(2);
 
-    const imageChoisiChildrenURL = await imageChoisi.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildrenURL).toBe(2);
+      await page.click('#boutonValidationTheme');
 
-    const urlInput = await page.waitForSelector('#url-image');
-    const urlInputValue = await urlInput.inputValue();
-    expect(urlInputValue).toBe('');
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
-    const formTheme = await page.waitForSelector('#form-nom-theme');
-    const formThemeValue = await formTheme.$eval('input', (input) => input.value);
-    expect(formThemeValue).toBe('test nouveau thème');
+      expect(await listeThemeFixture.getThemesLength()).toBe(3);
 
-    await page.click('#imageEnAttente img');
-    await page.click('#imageEnAttente img');
-
-    await page.click('#boutonValidationTheme');
-    
-    const profilPatientUrl = await page.url();
-    expect(profilPatientUrl).toContain(`${testUrl}/liste-theme`);
-
-    const themesApresCreationListe = await page.$$('app-item-frame');
-    expect(themesApresCreationListe.length).toBe(3);
+    });
 
 
     // Modification d'un theme
 
-    const themesApresCreation = await page.getByRole('button', {name:'EDITER'}).all();
-    await themesApresCreation[2].click();
+    await test.step('Modifier un theme', async () => {
+      await listeThemeFixture.editerTheme(1);
 
-    await page.fill('#div-nom-theme', 'test modifier thème');
+      expect(await page.url()).toContain(`${testUrl}/creer-theme`);
 
-    await page.click('#imageChoisi img');
+      const inputName = await creerThemeFixture.getInput('div-nom-theme');
+      await inputName.fill('test modifier thème');
+      expect(await inputName.inputValue()).toBe('test modifier thème');
 
-    await page.fill('#url-image', 'https://teteamodeler.ouest-france.fr/assets/coloriages/dessin-dune-tte-de-koala.png');
-    await page.click('#importer-URL');
+      await creerThemeFixture.retirerPhoto();
 
-    const imageEnAttenteModif = await page.waitForSelector('#imageEnAttente');
-    const imageEnAttenteChildrenModif = await imageEnAttenteModif.$$eval('img', (imgs) => imgs.length);
-    expect(imageEnAttenteChildrenModif).toBe(6);
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(3);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(5);
 
-    await page.click('#imageEnAttente img');
+      await creerThemeFixture.importerPhotoUrl('https://teteamodeler.ouest-france.fr/assets/coloriages/dessin-dune-tte-de-koala.png')
 
-    const imageChoisiModif = await page.waitForSelector('#imageChoisi');
-    const imageChoisiChildrenModif = await imageChoisiModif.$$eval('img', (imgs) => imgs.length);
-    expect(imageChoisiChildrenModif).toBe(4);
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(4);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(5);
 
-    const inputNomThemeModif = await page.waitForSelector('#div-nom-theme');
-    const nomThemeValueModif = await inputNomThemeModif.inputValue();
-    expect(nomThemeValueModif).toBe('test modifier thème');
+      await creerThemeFixture.creerTheme();
 
-    await page.click('#boutonValidationTheme');
-    
-    const profilPatientUrlModif = await page.url();
-    expect(profilPatientUrlModif).toContain(`${testUrl}/liste-theme`);
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
+
+    });
 
 
     // Suppression d'un theme
 
-    const themesApresModification = await page.getByRole('button', {name:'EDITER'}).all();
-    await themesApresModification[2].click();
-    await page.click('#boutonChangeant');    
+    await test.step('Supprimer un theme', async () => {
+      await listeThemeFixture.editerTheme(1);
+      await creerThemeFixture.supprimerTheme();
+
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
+
+      expect(await listeThemeFixture.getThemesLength()).toBe(2);
+
+    });
 
 
     // Selectionner un theme
 
-    const themeChoisi = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-    await themeChoisi[1].click();
+    await test.step('Selectionner un theme', async () => {
+      await listeThemeFixture.selectionnerTheme(1);
+    });
 
-  }); 
+    // Déconnexion
+
+    await test.step('Deconnexion', async () => {
+
+      await menuFixture.deconnexion();
+
+      expect(await page.url()).toContain(`${testUrl}/authentification`);
+
+    });
+
+  });
 });

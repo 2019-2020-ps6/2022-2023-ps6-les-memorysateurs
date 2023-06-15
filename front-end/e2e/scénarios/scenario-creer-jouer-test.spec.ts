@@ -1,213 +1,194 @@
 import { test, expect } from '@playwright/test';
 import { testUrl } from 'e2e/e2e.config';
 import { AppFixture } from 'src/app/app.fixture';
+import { AuthentificationFixture } from 'src/app/authentification/authentification.fixture';
+import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture';
+import { ProfilPatientFixture } from 'src/app/profil-patient/profil-patient.fixture';
+import { StatistiquesFixture } from 'src/app/stat/stat.fixture';
+import { CreerMemoryFixture } from 'src/app/creer-memory/creer-memory.fixture';
+import { ListeThemeFixture } from 'src/app/liste-theme/liste-theme.fixture';
+import { GameFixture } from 'src/app/game/game.fixture';
+import { ResultatPartieFixture } from 'src/app/resultat-partie/resultat-partie.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Scénario global', () => {
   test('Scénario création de compte + jeu ', async ({page}) => {
     await page.goto(`${testUrl}/authentification`);
+
+    //create all fixtures
+
     const appComponentFixture = new AppFixture(page);
+    const authentificationFixture = new AuthentificationFixture(page);
+    const listePatientFixture = new ListePatientFixture(page);
+    const profilPatientFixture = new ProfilPatientFixture(page);   
+    const statistiquesFixture = new StatistiquesFixture(page); 
+    const creerMemoryFixture = new CreerMemoryFixture(page);
+    const listeThemeFixture = new ListeThemeFixture(page);
+    const gameFixture = new GameFixture(page);
+    const resultatPartieFixture = new ResultatPartieFixture(page);
+    const menuFixture = new MenuFixture(page);
 
+    // Connexion
 
-    // Remplissage des informations du patient
-    await page.fill('#identifiant', 'SarahGentille');
-    await page.fill('#motDePasse', '1234');
+    await test.step('Connexion', async () => {
+      const titreConnexion = authentificationFixture.getByLabel('CONNEXION');
+      expect(await titreConnexion.textContent()).toEqual('CONNEXION');
 
-    await page.getByRole('button', {name:'Me Connecter'}).click();
-    expect(page.url()).toBe('http://localhost:4200/liste-patient');
+      const inputName = await authentificationFixture.getInput('identifiant');
+      await inputName.type('SarahGentille');
+      const inputPassword = await authentificationFixture.getInput('motDePasse');
+      await inputPassword.type('1234');
 
-    //créer un patient
-
-    // Vérification de l'action "Ajouter un patient"
-    await page.click('.bouton-ajouter-patient');
-    const url = await page.url();
-    expect(url).toContain(`${testUrl}/creer-patient`);
-
-    const titre = await page.waitForSelector('#text-nouveau-profil');
-    const titreText = await titre.textContent();
-    expect(titreText).toBe('NOUVEAU PROFIL');
-
-    await page.fill('#input-prenom', 'Lucy');
-    await page.fill('#input-nom', 'Borg');
-    await page.dispatchEvent('#radio3', 'click');
-    await page.setInputFiles('#photo-button', ['src/assets/images/patient-femme.png']);
-
-    const creerProfilButton = await page.waitForSelector('#creer-profil');
-    await creerProfilButton.click();
-
-    const profilPatientUrl = await page.url();
-    expect(profilPatientUrl).toContain(`${testUrl}/liste-patient`);
-
-    const patientsApresAjout = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-    expect(patientsApresAjout.length).toBe(5);
-
-    const patientData = await patientsApresAjout[4].getAttribute('item');
-    expect(patientData).toBeDefined();
+      await authentificationFixture.seConnecter();
+    });
 
     // Verification profil patient
 
-    await patientsApresAjout[4].click();
+    await test.step('Profil patient', async () => {
+      await listePatientFixture.selectionnerPatient(1);
 
-    const detailsPatientUrl = await page.url();
-    expect(detailsPatientUrl).toContain(`${testUrl}/profil-patient`);
+      expect(await page.url()).toContain(`${testUrl}/profil-patient`);
 
-    const prenomText = await page.textContent('#input-prenom');
-    expect(prenomText).toBe('Lucy');
-
-    const nomText = await page.textContent('#input-nom');
-    expect(nomText).toBe('Borg');
-
-    const stadeText = await page.textContent('#info-stade');
-    expect(stadeText).toBe('Stade 5');
-
-    await page.click('#lancer-partie');
-    expect(page.url()).toBe('http://localhost:4200/creer-memory');
-
-    const choisirTheme = await page.getByRole('button', {name:'CHOISIR UN THEME'}).all();
-    await choisirTheme[0].click();
-
-    expect(page.url()).toBe('http://localhost:4200/liste-theme');
-
-    const ajouterTheme = await page.getByRole('button', {name:'Ajouter un thème'}).all();
-    await ajouterTheme[0].click();
-
-    expect(page.url()).toBe('http://localhost:4200/creer-theme');
-
-    await page.fill('#div-nom-theme', 'Nouveau thème');
+      expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('Bertrand');
+      expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Stade4');
+      expect(await profilPatientFixture.getPatientData('#info-stade')).toEqual('Stade 4');
+    });
 
 
+    // Creation memory
 
-    // double-Clique sur l'image en attente pour la déplacer vers les images choisies
-    const imageTheme = [];
-    for(let i=0;i<4;i++) {
-      await page.click('#imageEnAttente img');
-      let images = await page.locator('#imageChoisi img').all();
-      imageTheme.push(images[images.length-1]);
-    }
-    // Clique sur le bouton de validation du thème
-    await page.click('#boutonValidationTheme');
-    expect(page.url()).toBe('http://localhost:4200/liste-theme');
-    const themes = await page.$$('app-item-frame');
-    expect(themes.length).toBe(2);
+    await test.step('Parametres', async () => {
+      await profilPatientFixture.lancePartie();
+      expect(await page.url()).toContain(`${testUrl}/creer-memory`);
 
-    const selectionnertheme = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-    await selectionnertheme[1].click();
-    expect(page.url()).toBe('http://localhost:4200/creer-memory');
+      await creerMemoryFixture.choisirTheme();
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
+      await listeThemeFixture.selectionnerTheme(1);
+      expect(await page.url()).toContain(`${testUrl}/creer-memory`);
 
-    //récupérer tous les sliders container
-    let boutons = await page.locator('.nombre-slider').all();
+      await creerMemoryFixture.setNombreDeCartes(8);
+      await creerMemoryFixture.setNombreIndices(6);
+      await creerMemoryFixture.setNombreErreurs(1);
+      await creerMemoryFixture.setNombreCombinaisons(2);
 
-    // mettre 8 cartes
-    //clique sur le bouton nombre de cartes = 8
-    await boutons[2].click();
-    const nombreDeCartes = 8;
-    //on redéfinie la liste des boutons car en changeant le nb de cartes cela change le nb de cartes disponibles à l'indice
-    boutons = await page.locator('.nombre-slider').all();
+      await creerMemoryFixture.setTempsIndice(5);
 
-    //mettre 6 cartes retournées par indces
-    //clique sur le bouton nombre de paires retournées par indices = 3
-    await boutons[5].click();
-    const nombreIndices = 6; // 3 pairs = 6 cartes
+      await creerMemoryFixture.lancePartie();
+    });
 
-    //indices s'active à chaque fois
-    //clique sur le bouton nombre d'erreurs avant indice = 1
-    await boutons[7].click();
-    const ErreurConsecutivesAvantIndice = 1;
+    // Verification jeu
 
+    await test.step('Jeu', async () => {
 
-    //mettre 2 pour l'avertissement des combinaisons
-    //clique sur le bouton nombre de combinaisons fausses avant avertissement = 2
-    await boutons[11].click();
-    const CombinaisonConsecutivesAvantAvertissement = 2;
+      expect(await page.url()).toContain(`${testUrl}/game`);
 
-    //temps d'indices de base
-    const tempsIndice = 5;
+      expect((await gameFixture.getCards()).length-2).toBe(8);//car ca prend les 2 cartes de l'avertissement
 
-    //choisir thème ( a faire plus tard)
+      const idcard = await gameFixture.getIdCards();
+      expect(idcard.length).toBe(8);
 
-    //cliquer sur lancer Partie
-    await page.click('.btn-lauch');
+      await page.waitForTimeout(2000);
+      await gameFixture.indice();
 
-    //tester avec le jeu
+      await page.waitForTimeout(2000);
+      await gameFixture.indice();
+      await expect((await gameFixture.getFlipped()).length-2).toBe(6);
+      await page.waitForTimeout(500);
+      await gameFixture.indice();
 
-    //vérifier le nombre de cartes
-    // et création du tableau avec les paires de cartes.
-    let flipped = await page.locator('.flipped').all();
-    console.log(flipped);
+      let cards = await gameFixture.getCards();
+      await expect(cards.length-2).toBe(8);
+      await gameFixture.retournerCarte('1');
+      await gameFixture.retournerCarte('2');
+      await page.waitForTimeout(5000);
+      await expect((await gameFixture.getFlipped()).length-2).toBe(6);
+      await page.waitForTimeout(5000);
 
-    const indice = await page.waitForSelector('#boutonIndice');
-    const idcard = [];
-    let cards = await page.locator('.card').all();
-    expect(cards.length-2).toBe(nombreDeCartes);//car ca prend les 2 cartes de l'avertissement
-    for(let i=0;i<cards.length;i++ ) {
-      let num = await cards[i].getAttribute('id');
-      if(num !='0')
-        idcard.push(num);
+      await gameFixture.retournerCarte('1');
+      await gameFixture.retournerCarte('2');
+      await page.waitForTimeout(5000);
+      await expect((await gameFixture.getFlipped()).length-2).toBe(6);
+      await page.waitForTimeout(4000);
 
-    }
-    expect(idcard.length).toBe(nombreDeCartes);
-    await indice.click();
-    //test erreur
-    await cards[idcard.indexOf('1')].click();
-    await cards[idcard.indexOf('2')].click();
-    await page.waitForTimeout(5000);
-    //tester le nombre de cartes retournés par indices
-    flipped= await page.locator('.flipped').all();
-    await expect(flipped.length-2).toBe(nombreIndices);
+      await gameFixture.avertissement();
+      await page.waitForTimeout(3000);
 
-    await indice.click();
-    await expect(cards.length-2).toBe(nombreDeCartes);
-    await cards[idcard.indexOf('1')].click();
-    await cards[idcard.indexOf('2')].click();
-    await page.waitForTimeout(5000);
-    //tester l'avertissement
-    const avertissement = await page.waitForSelector('#combSection ');
-    await avertissement.click();
-    await indice.click();
-    //await expect(cards.length-2).toBe(nombreDeCartes);
+      await gameFixture.retournerCarte('1');
+      await gameFixture.retournerCarte('4');
+      await page.waitForTimeout(5000);
+      await expect((await gameFixture.getFlipped()).length-2).toBe(6);
+      await page.waitForTimeout(6000);
 
-    await cards[idcard.indexOf('1')].click();
-    await cards[idcard.indexOf('4')].click();
-    await page.waitForTimeout(5000);
-    //tester que l'indice a diminué
-    flipped= await page.locator('.flipped').all();
-    await expect(flipped.length-2).toBe(nombreIndices-2);
+      await gameFixture.indice();
+      await expect((await gameFixture.getFlipped()).length-2).toBe(6-2);
+      await page.waitForTimeout(6000);
 
-    await indice.click();
-    await expect(cards.length-2).toBe(nombreDeCartes);
+      await gameFixture.retournerCarte('1');
+      await gameFixture.retournerCarte('1',idcard.indexOf('1')+1);
+      await page.waitForTimeout(5000);
 
+      await gameFixture.retournerCarte('2');
+      await gameFixture.retournerCarte('2',idcard.indexOf('2')+1);
+      await page.waitForTimeout(5000);
 
+      await gameFixture.retournerCarte('3');
+      await gameFixture.retournerCarte('3',idcard.indexOf('3')+1);
+      await page.waitForTimeout(5000);
 
-    await cards[idcard.indexOf('1')].click();
-    await cards[idcard.indexOf('1',idcard.indexOf('1')+1)].click();
-    await page.waitForTimeout(5000);
+      await gameFixture.retournerCarte('4');
+      await gameFixture.retournerCarte('4',idcard.indexOf('4')+1);
+      await page.waitForTimeout(7000);
 
-    await indice.click();
-    await page.waitForTimeout(tempsIndice *1000);
+      expect(await page.url()).toContain(`${testUrl}/resultat-partie`);
 
-    await cards[idcard.indexOf('2')].click();
-    await cards[idcard.indexOf('2',idcard.indexOf('2')+1)].click();
-    await page.waitForTimeout(5000);
-    await cards[idcard.indexOf('3')].click();
-    await cards[idcard.indexOf('3',idcard.indexOf('3')+1)].click();
-    await page.waitForTimeout(5000);
-    await cards[idcard.indexOf('4')].click();
-    await cards[idcard.indexOf('4',idcard.indexOf('4')+1)].click();
-    await page.waitForTimeout(5000);
-    expect(page.url()).toBe('http://localhost:4200/resultat-partie');
+      expect((await resultatPartieFixture.getImages()).length).toBe(4);
 
-    const imageTrouvees = await page.locator('#boite-images-trouvees img').all();
-    expect(imageTrouvees.length).toBe(4);
+    });
 
+    // Verification statistiques
 
-    const boutonStat = await page.getByRole('button', {name:'Statistiques'}).all();
-    await boutonStat[0].click();
-    expect(page.url()).toBe('http://localhost:4200/stat');
-    const statsTableau = await page.locator(' app-statcontainer').all();
-    for(let i =0;i<statsTableau.length;i++){
-      const tab = await statsTableau[i].locator('.tableau').all();
-      expect(tab.length).toBe(1);
-    }
+    await test.step('Statistiques', async () => {
+      await resultatPartieFixture.voirStatistiques();
+      expect(await page.url()).toContain(`${testUrl}/stat`);
+
+      expect(await profilPatientFixture.getPatientData('.profil-prenom')).toEqual('Bertrand');
+      expect(await profilPatientFixture.getPatientData('.profil-nom')).toEqual('Stade4');
+      expect(await profilPatientFixture.getPatientData('.profil-stade')).toEqual('Stade 4');
+      expect(await profilPatientFixture.getPatientData('#profil-parties')).not.toBe('');
+      
+      expect(await statistiquesFixture.getNombreContainers()).toBe(4);
+
+      const statContainers = await statistiquesFixture.getContainers();
+
+      for (const statcontainer of statContainers) {
+        
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
+        expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
+        expect(await statistiquesFixture.getContainerVisible(statcontainer)).toContain('active');
+
+        ;
+
+        expect(await statistiquesFixture.getNombreHeadersTableau(statcontainer)).toBe(4);
+        expect(await statistiquesFixture.getTableau(statcontainer)).not.toBe('');
+
+        await statistiquesFixture.appuyerSurPlus(statcontainer);
+      }
+    });
+
+  
+    // Déconnexion
+
+    await test.step('Deconnexion', async () => {
+
+      await menuFixture.deconnexion();
+
+      expect(await page.url()).toContain(`${testUrl}/authentification`);
+
+    });
+
 
   })
 })
+
