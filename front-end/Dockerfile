@@ -1,5 +1,8 @@
 FROM node:16.16.0-alpine as build
 
+ARG URLBACK
+ARG CMDBUILD
+
 USER node
 WORKDIR /frontend
 
@@ -7,7 +10,10 @@ COPY --chown=node:node . .
 
 RUN npm install
 
-RUN npm run build:prod
+# Remplacer l'URL du back-end dans le fichier de configuration
+RUN sed -i "s/localhost:9428/${URLBACK}/g" ./src/app/services/globals.service.ts
+
+RUN npm run ${CMDBUILD}
 
 
 ###########################################

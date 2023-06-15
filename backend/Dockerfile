@@ -1,5 +1,7 @@
 FROM node:16.16.0-alpine
 
+ARG CMDRUN
+
 RUN apk add curl
 
 USER node
@@ -16,7 +18,7 @@ COPY --chown=node:node database ./database
 
 VOLUME /database
 
-ENTRYPOINT ["npm","run","start"]
+ENTRYPOINT npm run $CMDRUN
 
 
 

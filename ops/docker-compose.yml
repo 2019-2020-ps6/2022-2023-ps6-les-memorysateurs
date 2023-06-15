@@ -3,13 +3,26 @@ services:
     build:
       context: ../front-end
       dockerfile: Dockerfile
+      args:
+        - URLBACK=localhost:8000
+        - CMDBUILD=build:prod
     ports:
       - 8080:80
+    healthcheck:
+      test: curl "http://back:8000/api/status" | grep "ok" || exit 1
+      interval: 5s
+      timeout: 15s
+      retries: 5
+      start_period: 15s
+
+
   back:
+    environment:
+      - CMDRUN=start
     build:
       context: ../backend
       dockerfile: Dockerfile
     ports:
       - 8000:9428
     volumes:
-      - ./database:/backend/database
+      - ../backend/database:/backend/database
