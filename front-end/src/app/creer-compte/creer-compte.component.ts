@@ -34,9 +34,12 @@ export class CreerCompteComponent {
    */
 
   onValider() {
-    this.authentificationService.addCompteUtilisateur(new CompteUtilisateur(this.formGroup.value['identifiant'],
-      this.formGroup.value['adresseEmail'], this.formGroup.value['motDePasse']));
-    
+    if(this.formGroup.get('motDePasse')?.value == this.formGroup.get('confirmerMotDePasse')?.value) {
+      this.authentificationService.addCompteUtilisateur(new CompteUtilisateur(this.formGroup.value['identifiant'],
+        this.formGroup.value['adresseEmail'], this.formGroup.value['motDePasse']));
+    }else {
+      alert("Votre mot de passe est différent entre le champ Mot de passe et le champ de confirmation")
+    }
   }
 
   isValidEmail(str: string): boolean {

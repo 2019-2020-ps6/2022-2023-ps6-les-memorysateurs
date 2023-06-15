@@ -18,8 +18,8 @@ test.describe('Création nouveau patient', () => {
     const authentificationFixture = new AuthentificationFixture(page);
     const listePatientFixture = new ListePatientFixture(page);
     const creerPatientFixture = new CreerPatientFixture(page);
-    const profilPatientFixture = new ProfilPatientFixture(page);   
-    const statistiquesFixture = new StatistiquesFixture(page); 
+    const profilPatientFixture = new ProfilPatientFixture(page);
+    const statistiquesFixture = new StatistiquesFixture(page);
     const menuFixture = new MenuFixture(page);
 
     // Connexion
@@ -58,9 +58,9 @@ test.describe('Création nouveau patient', () => {
       const inputName = await creerPatientFixture.getInput('input-prenom');
       await inputName.type('Lucy');
       const inputFirstName = await creerPatientFixture.getInput('input-nom');
-      await inputFirstName.type('Borg'); 
+      await inputFirstName.type('Borg');
 
-      await creerPatientFixture.clickRadioButton('#radio2'); 
+      await creerPatientFixture.clickRadioButton('#radio2');
       expect(await creerPatientFixture.getRadioButtonChecked('radio2')).toBe(true);
 
       await creerPatientFixture.ajouterPhoto('src/assets/images/patient-femme.png');
@@ -90,9 +90,9 @@ test.describe('Création nouveau patient', () => {
       const inputName = await creerPatientFixture.getInput('input-prenom');
       await inputName.fill('John');
       const inputFirstName = await creerPatientFixture.getInput('input-nom');
-      await inputFirstName.fill('Doe'); 
+      await inputFirstName.fill('Doe');
 
-      await creerPatientFixture.clickRadioButton('#radio3'); 
+      await creerPatientFixture.clickRadioButton('#radio3');
       expect(await creerPatientFixture.getRadioButtonChecked('radio3')).toBe(true);
 
       await creerPatientFixture.ajouterPhoto('src/assets/images/patient-homme.png');
@@ -118,7 +118,7 @@ test.describe('Création nouveau patient', () => {
       await creerPatientFixture.supprimerPatient();
 
       expect(await page.url()).toContain(`${testUrl}/liste-patient`);
-    
+
       expect(await listePatientFixture.getPatientsLength()).toBe(4);
 
     });
@@ -127,7 +127,7 @@ test.describe('Création nouveau patient', () => {
     // Verification profil patient
 
     await test.step('Profil patient', async () => {
-      
+
       await listePatientFixture.selectionnerPatient(0);
 
       expect(await page.url()).toContain(`${testUrl}/profil-patient`);
@@ -141,7 +141,7 @@ test.describe('Création nouveau patient', () => {
     // Verification des statistiques
 
     await test.step('Modification patient', async () => {
-      
+
       await profilPatientFixture.voirStatistiques();
 
       expect(await page.url()).toContain(`${testUrl}/stat`);
@@ -150,13 +150,13 @@ test.describe('Création nouveau patient', () => {
       expect(await profilPatientFixture.getPatientData('.profil-nom')).toEqual('Stade3');
       expect(await profilPatientFixture.getPatientData('.profil-stade')).toEqual('Stade 3');
       expect(await profilPatientFixture.getPatientData('#profil-parties')).not.toBe('');
-      
+
       expect(await statistiquesFixture.getNombreContainers()).toBe(4);
 
       const statContainers = await statistiquesFixture.getContainers();
 
       for (const statcontainer of statContainers) {
-        
+
         expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
         await statistiquesFixture.appuyerSurPlus(statcontainer);
         expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
