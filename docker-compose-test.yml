@@ -1,0 +1,21 @@
+services:
+  front-test:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile-test
+    ports:
+      - 8080:80
+  back-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-test
+    ports:
+      - 8000:9428
+    volumes:
+      - ./backend/database:/backend/database
+
+  playwright:
+    build:
+
+    ports:
+      -
