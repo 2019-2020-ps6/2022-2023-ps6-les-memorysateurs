@@ -16,4 +16,8 @@ export class ProfilPatientFixture extends E2EComponentFixture {
         await statistiquesButton.click();
     }
 
+    async lancePartie() {
+        await this.page.click('#lancer-partie');
+    }
+
 }
