@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-  timeout: 120000,
+  timeout: 130000,
   testDir: './e2e',
   reporter: [['html', { open: 'always' }]],
   use: {

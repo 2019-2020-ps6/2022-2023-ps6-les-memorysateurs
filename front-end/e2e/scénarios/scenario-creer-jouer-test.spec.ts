@@ -20,8 +20,8 @@ test.describe('Scénario global', () => {
     const appComponentFixture = new AppFixture(page);
     const authentificationFixture = new AuthentificationFixture(page);
     const listePatientFixture = new ListePatientFixture(page);
-    const profilPatientFixture = new ProfilPatientFixture(page);   
-    const statistiquesFixture = new StatistiquesFixture(page); 
+    const profilPatientFixture = new ProfilPatientFixture(page);
+    const statistiquesFixture = new StatistiquesFixture(page);
     const creerMemoryFixture = new CreerMemoryFixture(page);
     const listeThemeFixture = new ListeThemeFixture(page);
     const gameFixture = new GameFixture(page);
@@ -156,13 +156,13 @@ test.describe('Scénario global', () => {
       expect(await profilPatientFixture.getPatientData('.profil-nom')).toEqual('Stade4');
       expect(await profilPatientFixture.getPatientData('.profil-stade')).toEqual('Stade 4');
       expect(await profilPatientFixture.getPatientData('#profil-parties')).not.toBe('');
-      
+
       expect(await statistiquesFixture.getNombreContainers()).toBe(4);
 
       const statContainers = await statistiquesFixture.getContainers();
 
       for (const statcontainer of statContainers) {
-        
+
         expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
         await statistiquesFixture.appuyerSurPlus(statcontainer);
         expect(await statistiquesFixture.getPlusVisible(statcontainer)).toBe(true);
@@ -177,12 +177,12 @@ test.describe('Scénario global', () => {
       }
     });
 
-  
+
     // Déconnexion
 
     await test.step('Deconnexion', async () => {
 
-      await menuFixture.deconnexion();
+      await menuFixture.deconnexionAvecHandle();
 
       expect(await page.url()).toContain(`${testUrl}/authentification`);
 
