@@ -1,21 +1,28 @@
 services:
-  front-test:
+  front:
     build:
       context: ../front-end
-      dockerfile: ../front-end/Dockerfile-test
+      dockerfile: Dockerfile
+      args:
+        - URLBACK=localhost:8000
+        - CMDBUILD=test:e2e
     ports:
       - 8080:80
-  back-test:
+    healthcheck:
+      test: curl "http://back:8000/api/status" | grep "ok" || exit 1
+      interval: 5s
+      timeout: 15s
+      retries: 5
+      start_period: 15s
+
+
+  back:
+    environment:
+      - CMDRUN=start:e2e
     build:
       context: ../backend
-      dockerfile: ../backend/Dockerfile-test
+      dockerfile: Dockerfile
     ports:
       - 8000:9428
     volumes:
-      - ./backend/database:/backend/database
-
-  playwright:
-    build:
-
-    ports:
-      -
+      - ../backend/database:/backend/database
