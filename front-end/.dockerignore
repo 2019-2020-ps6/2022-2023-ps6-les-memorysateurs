@@ -2,5 +2,4 @@
 gitignore
 README.md
 component-generator.ps1
-e2e/
 node_modules/
