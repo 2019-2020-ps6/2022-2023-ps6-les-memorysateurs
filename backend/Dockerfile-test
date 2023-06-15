@@ -14,9 +14,9 @@ RUN npm install
 COPY --chown=node:node app ./app
 COPY --chown=node:node database ./database
 
-VOLUME /database
+#VOLUME ["./database"]
 
-ENTRYPOINT ["npm","run","start"]
+ENTRYPOINT ["npm","run","start:e2e"]
 
 
 
