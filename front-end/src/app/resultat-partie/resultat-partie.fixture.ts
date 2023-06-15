@@ -6,10 +6,6 @@ export class ResultatPartieFixture extends E2EComponentFixture {
         return await this.page.locator('#boite-images-trouvees img').all();
     }
 
-    async getImagesLength() {
-        return (await this.getImages()).length;
-    }
-
     async voirStatistiques() {
         const boutonStat = await this.page.getByRole('button', {name:'Statistiques'}).all();
         await boutonStat[0].click();

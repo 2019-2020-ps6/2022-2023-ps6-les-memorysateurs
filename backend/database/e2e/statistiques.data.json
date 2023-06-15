@@ -44,14 +44,25 @@
     "id": 1686582668748
   },
   {
-    "temps": 241,
-    "essais": 3,
-    "erreurs": 0,
-    "indices": 1,
-    "nbCartes": 6,
-    "stade": 3,
+    "temps": 83,
+    "essais": 7,
+    "erreurs": 3,
+    "indices": 2,
+    "nbCartes": 8,
+    "stade": 4,
     "date": "Thu Jun 15 2023",
-    "patientId": "1686667237489",
-    "id": 1686828227886
+    "patientId": "1686667283392",
+    "id": 1686831089759
+  },
+  {
+    "temps": 83,
+    "essais": 7,
+    "erreurs": 3,
+    "indices": 2,
+    "nbCartes": 8,
+    "stade": 4,
+    "date": "Thu Jun 15 2023",
+    "patientId": "1686667283392",
+    "id": 1686831259481
   }
 ]

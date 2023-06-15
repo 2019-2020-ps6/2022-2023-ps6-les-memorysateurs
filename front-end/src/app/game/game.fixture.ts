@@ -26,13 +26,13 @@ export class GameFixture extends E2EComponentFixture {
         await indice.click();
     }
 
-    async retournerCarte(idcard : string, idcard2 : any = null) {
+    async retournerCarte(idcard1 : string, idcard2 : any = null) {
         const cards = await this.getCards();
-        const id = await this.getIdCards();
+        const idcard = await this.getIdCards();
         if(idcard2 == null) {
-            await cards[idcard.indexOf(idcard)].click();
+            await cards[idcard.indexOf(idcard1)].click();
         } else {
-            await cards[idcard.indexOf(idcard,idcard2)].click();
+            await cards[idcard.indexOf(idcard1,idcard2)].click();
         }
     }
 
