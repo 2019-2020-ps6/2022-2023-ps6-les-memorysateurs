@@ -4,10 +4,11 @@ USER pwuser
 
 WORKDIR /usr/local/app
 
+COPY --chown=pwuser:pwuser ./playwright.config.ts /usr/local/app/playwright.config.e2e.ts
 COPY --chown=pwuser:pwuser ./ /usr/local/app/
 RUN mkdir test-results playwright-report
 
 
-RUN npm install
+RUN npm install --loglevel verbose
 
 ENTRYPOINT ["npx", "playwright", "test", "--config", "playwright.config.e2e.ts"]
