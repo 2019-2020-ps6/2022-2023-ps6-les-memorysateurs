@@ -6,6 +6,7 @@ import { ListePatientFixture } from 'src/app/liste-patient/liste-patient.fixture
 import { CreerPatientFixture } from 'src/app/creer-patient/creer-patient.fixture';
 import { ProfilPatientFixture } from 'src/app/profil-patient/profil-patient.fixture';
 import { StatistiquesFixture } from 'src/app/stat/stat.fixture';
+import { MenuFixture } from 'src/app/menu/menu.fixture';
 
 test.describe('Création nouveau patient', () => {
   test('Test de création du profil du patient', async ({ page }) => {
@@ -19,6 +20,7 @@ test.describe('Création nouveau patient', () => {
     const creerPatientFixture = new CreerPatientFixture(page);
     const profilPatientFixture = new ProfilPatientFixture(page);   
     const statistiquesFixture = new StatistiquesFixture(page); 
+    const menuFixture = new MenuFixture(page);
 
     // Connexion
 
@@ -42,12 +44,6 @@ test.describe('Création nouveau patient', () => {
       expect(await listePatientFixture.getPatientsLength()).toBe(4);
 
       expect(await listePatientFixture.getAjouterPatientButtonVisible()).toBe(true);
-
-      const patients = await listePatientFixture.getPatients();
-
-      for (const patient of patients) {
-        expect(await listePatientFixture.getPatientData(patient)).toBeDefined();
-      }
 
     });
 
@@ -75,9 +71,7 @@ test.describe('Création nouveau patient', () => {
 
       expect(await listePatientFixture.getPatientsLength()).toBe(5);
 
-      expect(await listePatientFixture.getPatientData(4)).toBeDefined();
-
-      await listePatientFixture.selectionnerPatient(4);
+      await listePatientFixture.selectionnerPatient(0);
 
       expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('Lucy');
       expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Borg');
@@ -105,7 +99,7 @@ test.describe('Création nouveau patient', () => {
 
       await creerPatientFixture.creerPatient();
 
-      await listePatientFixture.selectionnerPatient(4);
+      await listePatientFixture.selectionnerPatient(0);
 
       expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('John');
       expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Doe');
@@ -175,6 +169,16 @@ test.describe('Création nouveau patient', () => {
 
         await statistiquesFixture.appuyerSurPlus(statcontainer);
       }
+
+    });
+
+    // Déconnexion
+
+    await test.step('Deconnexion', async () => {
+
+      await menuFixture.deconnexion();
+
+      expect(await page.url()).toContain(`${testUrl}/authentification`);
 
     });
 

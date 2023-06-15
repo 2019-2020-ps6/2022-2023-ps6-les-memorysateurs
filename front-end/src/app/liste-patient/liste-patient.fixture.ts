@@ -6,16 +6,6 @@ export class ListePatientFixture extends E2EComponentFixture {
         return this.page.getByText(label, { exact: true });
     }
 
-    async ouvrirMenu(numberOfClick = 1) {
-        const menuItems = await this.page.locator('.burger-menu').all();
-        return menuItems[0].click();
-    }
-
-    async goTheme() {
-        const lienTheme = await this.page.locator('#lien-themes');
-        return await lienTheme.click();
-    }
-
     async getPatients() {
         return await this.page.$$('app-item-frame');
     }
@@ -23,10 +13,6 @@ export class ListePatientFixture extends E2EComponentFixture {
     async getPatient(index: number) {
         const patients = await this.getPatients();
         return patients[index];
-    }
-
-    async getPatientData(patient: any) {
-        return await patient.getAttribute('item');
     }
 
     async getPatientsLength() {
@@ -49,7 +35,7 @@ export class ListePatientFixture extends E2EComponentFixture {
 
     async selectionnerPatient(index: number) {
         const patients = await this.page.getByRole('button', {name:'SELECTIONNER'}).all();
-        await patients[0].click();
+        await patients[index].click();
     }
 
 }
