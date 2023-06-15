@@ -6,8 +6,6 @@ services:
       args:
         - URLBACK=localhost:8000
         - CMDBUILD=test:e2e
-    ports:
-      - 8080:80
     healthcheck:
       test: curl "http://back:8000/api/status" | grep "ok" || exit 1
       interval: 5s
