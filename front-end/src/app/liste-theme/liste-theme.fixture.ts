@@ -35,12 +35,12 @@ export class ListeThemeFixture extends E2EComponentFixture {
 
 async selectionnerTheme(index: number) {
     const themes = await this.page.getByRole('button', {name:'SELECTIONNER'}).all();
-    await themes[0].click();
+    await themes[index].click();
 }
 
 async editerTheme(index: number) {
   const themes = await this.page.getByRole('button', {name:'EDITER'}).all();
-  await themes[0].click();
+  await themes[index].click();
 }
 
 }

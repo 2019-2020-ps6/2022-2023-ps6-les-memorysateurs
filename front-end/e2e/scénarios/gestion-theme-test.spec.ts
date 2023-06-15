@@ -59,7 +59,7 @@ test.describe('Liste des themes', () => {
       expect(await page.url()).toContain(`${testUrl}/creer-theme`);
 
       const inputName = await creerThemeFixture.getInput('div-nom-theme');
-      await inputName.type('test nouveau thème');
+      await inputName.fill('test nouveau thème');
       expect(await inputName.inputValue()).toBe('test nouveau thème');
 
 
@@ -91,54 +91,48 @@ test.describe('Liste des themes', () => {
     // Modification d'un theme
 
     await test.step('Modifier un theme', async () => {
-      const themesApresCreation = await page.getByRole('button', {name:'EDITER'}).all();
-      await themesApresCreation[1].click();
+      await listeThemeFixture.editerTheme(1);
 
-      await page.fill('#div-nom-theme', 'test modifier thème');
+      expect(await page.url()).toContain(`${testUrl}/creer-theme`);
 
-      await page.click('#imageChoisi img');
+      const inputName = await creerThemeFixture.getInput('div-nom-theme');
+      await inputName.fill('test modifier thème');
+      expect(await inputName.inputValue()).toBe('test modifier thème');
 
-      await page.fill('#url-image', 'https://teteamodeler.ouest-france.fr/assets/coloriages/dessin-dune-tte-de-koala.png');
-      await page.click('#importer-URL');
+      await creerThemeFixture.retirerPhoto();
 
-      const imageEnAttenteModif = await page.waitForSelector('#imageEnAttente');
-      const imageEnAttenteChildrenModif = await imageEnAttenteModif.$$eval('img', (imgs) => imgs.length);
-      expect(imageEnAttenteChildrenModif).toBe(5);
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(3);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(5);
 
-      //await page.click('#imageEnAttente img');
+      await creerThemeFixture.importerPhotoUrl('https://teteamodeler.ouest-france.fr/assets/coloriages/dessin-dune-tte-de-koala.png')
 
-      const imageChoisiModif = await page.waitForSelector('#imageChoisi');
-      const imageChoisiChildrenModif = await imageChoisiModif.$$eval('img', (imgs) => imgs.length);
-      expect(imageChoisiChildrenModif).toBe(4);
+      expect (await creerThemeFixture.getPhotosChoisies()).toBe(4);
+      expect (await creerThemeFixture.getPhotosEnAttente()).toBe(5);
 
-      const inputNomThemeModif = await page.waitForSelector('#div-nom-theme');
-      const nomThemeValueModif = await inputNomThemeModif.inputValue();
-      expect(nomThemeValueModif).toBe('test modifier thème');
+      await creerThemeFixture.creerTheme();
 
-      await page.click('#boutonValidationTheme');
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
 
-      const profilPatientUrlModif = await page.url();
-      expect(profilPatientUrlModif).toContain(`${testUrl}/liste-theme`);
     });
 
 
     // Suppression d'un theme
 
     await test.step('Supprimer un theme', async () => {
-      const themesApresModification = await page.getByRole('button', {name:'EDITER'}).all();
-      await themesApresModification[1].click();
-      await page.on('dialog', async (dialog) => {
-        await dialog.accept(); // Accepter la fenêtre contextuelle (appuyer sur OK)
-      });
-      await page.click('#boutonChangeant');
+      await listeThemeFixture.editerTheme(1);
+      await creerThemeFixture.supprimerTheme();
+
+      expect(await page.url()).toContain(`${testUrl}/liste-theme`);
+
+      expect(await listeThemeFixture.getThemesLength()).toBe(2);
+
     });
 
 
     // Selectionner un theme
 
     await test.step('Selectionner un theme', async () => {
-      const themeChoisi = await page.getByRole('button', {name:'SELECTIONNER'}).all();
-      await themeChoisi[1].click();
+      await listeThemeFixture.selectionnerTheme(1);
     });
 
   });

@@ -69,7 +69,7 @@ test.describe('Création nouveau patient', () => {
 
       expect(await listePatientFixture.getPatientsLength()).toBe(5);
 
-      await listePatientFixture.selectionnerPatient(4);
+      await listePatientFixture.selectionnerPatient(0);
 
       expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('Lucy');
       expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Borg');
@@ -97,7 +97,7 @@ test.describe('Création nouveau patient', () => {
 
       await creerPatientFixture.creerPatient();
 
-      await listePatientFixture.selectionnerPatient(4);
+      await listePatientFixture.selectionnerPatient(0);
 
       expect(await profilPatientFixture.getPatientData('#input-prenom')).toEqual('John');
       expect(await profilPatientFixture.getPatientData('#input-nom')).toEqual('Doe');

@@ -26,6 +26,10 @@ export class CreerThemeFixture extends E2EComponentFixture {
         await this.page.click('#imageEnAttente img');
     }
 
+    async retirerPhoto() {
+        await this.page.click('#imageChoisi img');
+    }
+
     async creerTheme() {
         await this.page.click('#boutonValidationTheme');
     }

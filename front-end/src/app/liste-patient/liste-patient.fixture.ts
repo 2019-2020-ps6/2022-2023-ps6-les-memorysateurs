@@ -45,7 +45,7 @@ export class ListePatientFixture extends E2EComponentFixture {
 
     async selectionnerPatient(index: number) {
         const patients = await this.page.getByRole('button', {name:'SELECTIONNER'}).all();
-        await patients[0].click();
+        await patients[index].click();
     }
 
 }
