@@ -1,0 +1,15 @@
+#docker file for reverse proxy with apache 
+FROM httpd:2.4
+
+ARG URLBACK=memorysateurs.com
+
+COPY proxy.conf /usr/local/apache2/conf/extra/proxy.conf
+
+COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+#RUN echo "Include conf/extra/proxy.conf" >> /usr/local/apache2/conf/httpd.conf
+RUN sed -i "s/<PROXY>/$URLBACK/g" /usr/local/apache2/conf/extra/proxy.conf
+
+EXPOSE 80
+
+# Launch Apache
+CMD ["httpd-foreground"]

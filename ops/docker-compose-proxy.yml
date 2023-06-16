@@ -4,15 +4,8 @@ services:
       context: ../front-end
       dockerfile: Dockerfile
       args:
-        - URLBACK=back:9428
+        - URLBACK=memorysateurs.com\/back
         - CMDBUILD=build:prod
-    healthcheck:
-      test: curl --fail http://localhost || exit 1
-      interval: 5s
-      timeout: 15s
-      retries: 5
-      start_period: 15s
-
     depends_on:
       back:
         condition: service_healthy
@@ -20,7 +13,7 @@ services:
 
   back:
     environment:
-      - CMDRUN=start:e2e
+      - CMDRUN=start
     build:
       context: ../backend
       dockerfile: Dockerfile
@@ -28,21 +21,20 @@ services:
       - ../backend/database:/backend/database
 
     healthcheck:
-      test: curl "http://back:9428/api/status" | grep "ok" || exit 1
+      test: curl "http://localhost:9428/api/status" | grep "ok" || exit 1
       interval: 5s
       timeout: 15s
       retries: 5
       start_period: 15s
-
-  e2e:
+    
+  reverseproxy:
     build:
-      context: ../front-end
-      dockerfile: Dockerfile-e2e
+      context: ./
+      dockerfile: Dockerfile-proxy
       args:
-        - URLFRONT=front:80
-    volumes:
-      - ./e2e:/usr/local/app/test-results
-
+        - URLBACK=memorysateurs.com
+    ports:
+      - 80:80
     depends_on:
-      front:
-        condition: service_healthy
+      - front
+      - back
