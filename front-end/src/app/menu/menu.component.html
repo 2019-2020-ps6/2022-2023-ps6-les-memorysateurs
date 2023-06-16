@@ -18,7 +18,7 @@
           <div class="menu-header-cross-close" (click)="toggleMenu()"></div>
         </div>
         <div class="menu-body">
-          <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active"  (click)="toggleMenu()">
+          <div class="menu-body-item" routerLink="/liste-patient" routerLinkActive="active" id="lien-accueil" (click)="toggleMenu()">
             <a>Accueil</a>
           </div>
           <div *ngIf="router.url !== '/liste-patient' && router.url !== '/creer-patient'" class="menu-body-item" id="lien-themes" routerLink="/liste-theme" routerLinkActive="active" (click)="toggleMenu()">
