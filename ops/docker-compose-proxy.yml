@@ -6,6 +6,12 @@ services:
       args:
         - URLBACK=memorysateurs.com\/back
         - CMDBUILD=build:prod
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      interval: 5s
+      timeout: 15s
+      retries: 5
+      start_period: 15s
     depends_on:
       back:
         condition: service_healthy
