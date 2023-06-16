@@ -9,7 +9,7 @@ export class CreerPatientFixture extends E2EComponentFixture {
     getInput(id: string) {
         const selector = `#${id}`;
         return this.page.waitForSelector(selector);
-    }  
+    }
 
     async creerPatient() {
         await this.page.click('#creer-profil');
@@ -33,10 +33,13 @@ export class CreerPatientFixture extends E2EComponentFixture {
 
     async supprimerPatient() {
         await this.page.on('dialog', async (dialog) => {
-            await dialog.accept(); 
+            await dialog.accept();
           });
         await this.page.click('#supprimer-profil');
     }
+  async supprimerPatientSansHandle() {
 
+    await this.page.click('#supprimer-profil');
+  }
 
 }

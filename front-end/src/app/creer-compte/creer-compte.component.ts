@@ -34,11 +34,16 @@ export class CreerCompteComponent {
    */
 
   onValider() {
-    if(this.formGroup.get('motDePasse')?.value == this.formGroup.get('confirmerMotDePasse')?.value) {
+    console.log(this.formGroup);
+    if(this.formGroup.get('motDePasse')?.value == this.formGroup.get('confirmerMotDePasse')?.value && this.formGroup.get('motDePasse')?.value != null) {
       this.authentificationService.addCompteUtilisateur(new CompteUtilisateur(this.formGroup.value['identifiant'],
         this.formGroup.value['adresseEmail'], this.formGroup.value['motDePasse']));
-    }else {
-      alert("Votre mot de passe est différent entre le champ Mot de passe et le champ de confirmation")
+    }else if(this.formGroup.get('motDePasse')?.value ==null || this.formGroup.get('confirmerMotDePasse')?.value == null||
+      this.formGroup.get('identifiant')?.value == null|| this.formGroup.get('adresseEmail')?.value == null){
+      alert("Veuillez remplir tous les champs.");
+    }
+    else {
+      alert("Votre mot de passe est différent entre le champ Mot de passe et le champ de confirmation.")
     }
   }
 
