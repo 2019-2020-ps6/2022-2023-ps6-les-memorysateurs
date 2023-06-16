@@ -4,7 +4,7 @@ services:
       context: ../front-end
       dockerfile: Dockerfile
       args:
-        - URLBACK=back:8000
+        - URLBACK=back:9428
         - CMDBUILD=build:prod
     healthcheck:
       test: curl "http://back:8000/api/status" | grep "ok" || exit 1
@@ -20,8 +20,6 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    ports:
-      - 8000:9428
     volumes:
       - ../backend/database:/backend/database
 
@@ -30,4 +28,4 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
     volumes:
-      - ./e2e:/e2e
+      - ./e2e:/usr/local/app/test-results
