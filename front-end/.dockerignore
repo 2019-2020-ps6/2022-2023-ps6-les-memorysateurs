@@ -3,3 +3,5 @@ gitignore
 README.md
 component-generator.ps1
 node_modules/
+playwright-report
+test-results

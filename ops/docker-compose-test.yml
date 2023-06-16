@@ -39,10 +39,14 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
       args:
-        - URLFRONT=front:4200
+        - URLFRONT=front
     volumes:
-      - ./e2e:/usr/local/app/test-results
+      - e2e:/usr/local/app/test-results
 
     depends_on:
       front:
         condition: service_healthy
+
+volumes:
+  e2e:
+    external: true
