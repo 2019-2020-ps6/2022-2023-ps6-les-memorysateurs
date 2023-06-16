@@ -48,4 +48,17 @@ export class ResultatPartieComponent {
   onNouvellePartie(){
     this.router.navigateByUrl("creer-memory");
   }
+
+  getImage() {
+    return this.patientSelectionne.photo;
+  }
+
+  getPrenom() {
+    return this.patientSelectionne.prenom;
+  }
+
+  getNom() {
+    return this.patientSelectionne.nom;
+  }
+  
 }

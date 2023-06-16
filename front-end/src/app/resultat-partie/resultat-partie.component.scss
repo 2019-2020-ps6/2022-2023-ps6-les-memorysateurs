@@ -1,31 +1,88 @@
 .resultat-partie {
-  display: flex;
-  height: 600px;
+  display: grid;
+  grid-template-columns: .3fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  //align-items: center;
+  justify-content: center;
 }
 
-#profil-patient, #boite-droite {
-  margin: 20px;
+p {
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.centered {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#container-infos {
+  display: grid;
+  grid-template-rows: .7fr .3fr;
+
+  height: 450px;
+  width: 300px;
+  background: #CFCFCF;
+  border-radius: 20px;
+  gap: 10px;
+  padding: 20px;
+}
+
+#photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  &>img{
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+  }
+  background-color: #FFFFFF;
+  border-radius: 15px;
+}
+
+.profil-info {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  background: #CFCFCF;
-  border-radius: 12px;
-}
-#profil-patient {
-
-  width: 30%;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
-#boite-droite {
-  width: 70%;
+.profil-nom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+  margin-bottom: 0px;
+
 }
 
-#photo-patient {
-  width: 220px;
-  height: 220px;
-  border-radius: 12px;
-  background: #FFFFFF;
+.nomprenom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0px;
+
+}
+
+.profil-prenom {
+  font-size: 30px;
+  font-weight: bold;
+  color: #006A52;
+
 }
 
 #nom-patient {
@@ -33,16 +90,31 @@
   color: #006A52;
 }
 
-#nb-parties-jouees-patient {
-  font-size: 25px;
+#profil-parties {
+  font-size: 20px;
   font-weight: bold;
-  margin: 0;
+  color: black;
+}
+
+
+#boite-droite {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #CFCFCF;
+  border-radius: 20px;
 }
 
 #message-felicitation {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   margin: 0;
+  margin-top: 30px;
   color: #006A52;
 }
 
@@ -51,7 +123,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   overflow-y: scroll;
-  width: 60%;
+  width: 75%;
   height: 140px;
   padding: 40px;
   background: #FFFFFF;
@@ -65,11 +137,34 @@
 }
 #boite-boutons-resultat-partie {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: space-between;
+  margin: 20px 0 40px 0;
+  width: 80%;
 }
-#bouton-statistiques, #bouton-relancer-partie, #bouton-nouvelle-partie {
-  padding: 20px;
+#bouton-relancer-partie {
+  width: 24vw;
+  height: 80px;
+  color: #5C3E34;
+  background-color: #FCC938;
+  border: 0;
+  border-radius: 12px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#bouton-nouvelle-partie {
+  width: 19vw;
+  height: 80px;
+  color: #006A52;
+  border: 0;
+  border-radius: 12px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#bouton-statistiques {
+  padding: 15px 0;
+  width: 100%;
   background: #006A52;
   color: #FFFFFF;
   border: 0;
@@ -85,8 +180,35 @@
 }
 
 #texte-images-trouvees {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   margin: 0;
 }
 
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #EFEFEF;
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #006A52;
+  border-radius: 30px;
+  :hover {
+    background: #006A52;
+  }
+}
+
+.centered-h{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}

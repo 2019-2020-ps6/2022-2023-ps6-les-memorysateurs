@@ -38,8 +38,8 @@
     </form>
 
     <div id="bouton-en-plus">
-      <button class="bouton-rouge" id="supprimer-profil" *ngIf="patient != undefined" (click)="supprimerPatient()">Supprimer</button>
-      <button class="bouton-vert"  id="creer-profil" (click)="creerProfilPatient()">CREER LE PROFIL</button>
+      <button class="bouton-jaune"  id="creer-profil" (click)="creerProfilPatient()">{{(patient == undefined) ?"CREER LE PROFIL" : "VALIDER" | uppercase}}</button>
+      <button class="bouton-rouge" id="supprimer-profil" *ngIf="patient != undefined" (click)="supprimerPatient()">{{"Supprimer"|uppercase}}</button>
     </div>
   </div>
 </div>

@@ -27,6 +27,17 @@ $widthbtn: 150px;
     width: 60%;
 }
 
+.progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .stat-lines {
     position: relative;
     background-color: #CFCFCF;
@@ -124,12 +135,12 @@ $widthbtn: 150px;
 
   .triangle-vert {
     color: #12DE4B;
-    font-size: 65px;
+    font-size: 55px;
   }
 
   .triangle-rouge {
     color: #F64F38;
-    font-size: 65px;
+    font-size: 55px;
     rotate: 180deg;
   }
   .tab-header{
@@ -157,10 +168,14 @@ $widthbtn: 150px;
     justify-items: center;
   }
   .info{
-    opacity: 80%;
-   text-align: center;
-    font-size: 20px;
+    opacity: 100%;
+    text-align: center;
+    font-size: 18px;
     font-weight: bold;
-    color: black;
-
+  }
+  #inforegr {
+    color: #F64F38;
+  }
+  #infopro {
+    color: #006A52;
   }

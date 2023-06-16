@@ -16,6 +16,7 @@ import {PartagerThemeComponent} from "./partager-theme/partager-theme.component"
 import {AuthentificationComponent} from "./authentification/authentification.component";
 import {CreerCompteComponent} from "./creer-compte/creer-compte.component";
 import {MotDePasseOublieComponent} from "./mot-de-passe-oublie/mot-de-passe-oublie.component";
+import {RedirectionComponent} from "./redirection/redirection.component";
 
 const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'creer-memory', component: CreerMemoryComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [ {path: 'creer-theme', component: CreerThemeComponent},
   {path: 'game', component: Game },
   {path: 'authentification', component: AuthentificationComponent},
   {path: 'creer-compte', component: CreerCompteComponent},
-  {path: 'mot-de-passe-oublie', component: MotDePasseOublieComponent}
+  {path: 'mot-de-passe-oublie', component: MotDePasseOublieComponent},
+  {path: '', component: RedirectionComponent}
   ];
 
 @NgModule({
