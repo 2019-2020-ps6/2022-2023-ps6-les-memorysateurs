@@ -39,7 +39,7 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
       args:
-        - URLFRONT=front
+        - URLFRONT=front:80
     volumes:
       - e2e:/usr/local/app/test-results
 
@@ -49,4 +49,3 @@ services:
 
 volumes:
   e2e:
-    external: true
