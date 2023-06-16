@@ -43,7 +43,6 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:themeId', (req, res) => {
-    console.log("put ", req.params.themeId, " ", req.body)
     let themeUpdate;
     let updatedTheme;
     try {
@@ -55,15 +54,12 @@ router.put('/:themeId', (req, res) => {
         manageAllErrors(res, err)
     }
     
-    console.log("updatedTheme ", themeUpdate)
-    console.log(updatedTheme)
 
 })
 
 router.delete('/:themeId', (req, res) => {
     try {
         Theme.delete(parseInt(req.params.themeId,10))
-        console.log(req.query.patientId);
         res.status(200).json(filtrerThemesFromPatient(parseInt(req.query.patientId)))
     } catch (err) {
         manageAllErrors(res, err)

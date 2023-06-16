@@ -45,7 +45,6 @@ router.post('/', (req, res) => {
     const ergoId = parseInt(req.query.ergoId, 10)
     const patientToCreate = req.body
     patientToCreate.ergoId = ergoId
-    console.log(patientToCreate)
     let patient = Patient.create(patientToCreate)
     res.status(201).json(patient)
   } catch (err) {
@@ -55,7 +54,6 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:patientId', (req, res) => {
-  console.log("put ", req.params.patientId, " ", req.body)
   let patientUpdate;
   let updatedPatient;
   try {
@@ -65,9 +63,7 @@ router.put('/:patientId', (req, res) => {
   } catch (err) {
       manageAllErrors(res, err)
   }
-  
-  console.log("updatedPatient ", patientUpdate)
-  console.log(updatedPatient)
+
 
 })
 
