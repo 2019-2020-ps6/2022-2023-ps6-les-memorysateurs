@@ -29,18 +29,6 @@ export class CreerMemoryComponent implements OnInit {
 
   constructor(public router: Router, public themeService: ThemeService, public gameService: GameService,public patientService : PatientService) {
 
-    gameService.nombreCartes$.subscribe((nombreCarte: number) => {
-      this.nombreCarte = nombreCarte;
-      let nbCardsForTips = nombreCarte/2;
-      this.numberOfCardsTips = [1];
-      for (let i = 1; i < nbCardsForTips; i++) {
-        this.numberOfCardsTips.push(i+1);
-      }
-      if(this.nombreCartesIndice >= nbCardsForTips) {
-        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
-      }
-    })
-
     gameService.nombreCartesIndice$.subscribe((nombreCartesIndice: number) => {
       this.nombreCartesIndice = nombreCartesIndice;
     })
@@ -58,6 +46,19 @@ export class CreerMemoryComponent implements OnInit {
         this.themeSelectionne = theme;
       }
     })
+    
+    gameService.nombreCartes$.subscribe((nombreCarte: number) => {
+      this.nombreCarte = nombreCarte;
+      let nbCardsForTips = nombreCarte/2;
+      this.numberOfCardsTips = [1];
+      for (let i = 1; i < nbCardsForTips; i++) {
+        this.numberOfCardsTips.push(i+1);
+      }
+      if(this.nombreCartesIndice >= nbCardsForTips) {
+        gameService.nombreCartesIndice$.next(this.numberOfCardsTips[this.numberOfCardsTips.length-1]);
+      }
+    })
+
 
   }
   ngOnInit(): void {

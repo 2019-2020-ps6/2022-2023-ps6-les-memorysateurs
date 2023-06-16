@@ -1,21 +1,37 @@
-<div class="resultat-partie">
-  <div id="profil-patient">
-    <img id="photo-patient" [src]="patientSelectionne.getImage()">
-    <h3 id="nom-patient">{{patientSelectionne.getTitre()}}</h3>
-    <p *ngIf="listeStatistiques != undefined" id="nb-parties-jouees-patient">{{listeStatistiques.length}} Parties jouées</p>
-  </div>
 
-  <div id="boite-droite">
-    <h3 id="message-felicitation">Bravo pour cette partie !</h3>
-    <p id="texte-images-trouvees">Les images que vous avez trouvées :</p>
-    <div id="boite-images-trouvees">
-      <img *ngFor="let image of imageTrouvees" class="image-trouvee" [src]="image">
-    </div>
-    <div id="boite-boutons-resultat-partie">
-      <button (click)="onStatistiques()" id="bouton-statistiques">Statistiques</button>
-      <button (click)="onRelancerPartie()" id="bouton-relancer-partie">Relancer Partie</button>
-      <button (click)="onNouvellePartie()" id="bouton-nouvelle-partie">Nouvelle Partie</button>
-    </div>
+<div class="centered">
+  <div class="resultat-partie">
+      <div id="profil-patient">
 
+        <div class="centered-h">
+          <div id="container-infos">
+            <div id="photo">
+              <img [src]="getImage()">
+            </div>
+            <div class="profil-info">
+              <div class="nomprenom">
+                <p class="profil-prenom">{{getPrenom()}}</p>
+                <p class="profil-nom">{{getNom()}}</p>
+              </div>
+              <button (click)="onStatistiques()" id="bouton-statistiques">Statistiques</button>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+    <div class="centered">
+      <div id="boite-droite">
+        <h3 id="message-felicitation">Bravo pour cette partie !</h3>
+        <p id="texte-images-trouvees">Les images que vous avez trouvées :</p>
+          <div id="boite-images-trouvees">
+            <img *ngFor="let image of imageTrouvees" class="image-trouvee" [src]="image">
+          </div>
+          <div id="boite-boutons-resultat-partie">
+            <button (click)="onNouvellePartie()" id="bouton-nouvelle-partie">Nouvelle Partie</button>
+            <button (click)="onRelancerPartie()" id="bouton-relancer-partie">Relancer Partie</button>
+          </div>
+      </div>
+
+    </div>
   </div>
 </div>

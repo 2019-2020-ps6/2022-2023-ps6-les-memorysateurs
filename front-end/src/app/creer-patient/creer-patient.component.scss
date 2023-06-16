@@ -146,7 +146,7 @@ img{
 #bouton-en-plus{
   display: flex;
   width: 100%;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: flex-end;
   grid-column: 1/3;
@@ -157,7 +157,6 @@ img{
     font-size: 180%;
     bottom: 0%;
     font-weight: bold;
-    color: #FFFFFF;
     width: 45%;
     height: 80px;
     border-radius: 20px;
@@ -170,16 +169,20 @@ img{
   border-radius: 15px;
   text-align: center;
   cursor: pointer;
+  border: none;
 }
 
 .bouton-vert {
   background: #006A52;
-  border: #006A52;
+}
+
+.bouton-jaune {
+  background-color: #FCC938;
+  color: #5C3E34;
 }
 
 .bouton-rouge {
     background: #F64F38;
-    border:#F64F38;
 }
 
 #charger-une-photo{
