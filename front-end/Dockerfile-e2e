@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/playwright:v1.35.0-jammy
+
+USER pwuser
+ARG URLFRONT
+
+WORKDIR /usr/local/app
+
+COPY --chown=pwuser:pwuser ./playwright.config.ts /usr/local/app/playwright.config.e2e.ts
+COPY --chown=pwuser:pwuser ./ /usr/local/app/
+
+RUN rm -rf test-results playwright-report
+RUN mkdir test-results playwright-report
+
+RUN sed -i "s/localhost:4200/${URLFRONT}/g" ./e2e/e2e.config.ts
+
+
+
+RUN npm install --loglevel verbose
+
+ENTRYPOINT ["npx", "playwright", "test", "--config", "playwright.config.e2e.ts"]
