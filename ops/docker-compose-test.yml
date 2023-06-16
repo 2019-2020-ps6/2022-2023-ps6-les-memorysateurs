@@ -7,7 +7,7 @@ services:
         - URLBACK=back:9428
         - CMDBUILD=build:prod
     healthcheck:
-      test: curl "http://front:80/api/status" | grep "ok" || exit 1
+      test: curl --fail http://localhost || exit 1
       interval: 5s
       timeout: 15s
       retries: 5
@@ -39,7 +39,7 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
       args:
-        - URLFRONT=front:8080
+        - URLFRONT=front:4200
     volumes:
       - ./e2e:/usr/local/app/test-results
 
