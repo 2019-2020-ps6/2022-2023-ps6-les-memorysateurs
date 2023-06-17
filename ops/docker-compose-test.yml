@@ -5,14 +5,13 @@ services:
       dockerfile: Dockerfile
       args:
         - URLBACK=back:9428
-        - CMDBUILD=build:prod
+        - CMDBUILD=build:test
     healthcheck:
       test: curl --fail http://localhost || exit 1
       interval: 5s
       timeout: 15s
       retries: 5
       start_period: 15s
-
     depends_on:
       back:
         condition: service_healthy
@@ -28,7 +27,7 @@ services:
       - ../backend/database:/backend/database
 
     healthcheck:
-      test: curl "http://back:9428/api/status" | grep "ok" || exit 1
+      test: curl "http://localhost:9428/api/status" | grep "ok" || exit 1
       interval: 5s
       timeout: 15s
       retries: 5
@@ -39,7 +38,7 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
       args:
-        - URLFRONT=front:80
+        - URLFRONT=front
     volumes:
       - e2e:/usr/local/app/test-results
 
