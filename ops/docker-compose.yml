@@ -4,10 +4,14 @@ services:
       context: ../front-end
       dockerfile: Dockerfile
       args:
-        - URLBACK=localhost:8000
+        - URLBACK=memorysateurs.com\/back
         - CMDBUILD=build:prod
-    ports:
-      - 8080:80
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
+      interval: 5s
+      timeout: 15s
+      retries: 5
+      start_period: 15s
     depends_on:
       back:
         condition: service_healthy
@@ -19,8 +23,6 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    ports:
-      - 8000:9428
     volumes:
       - ../backend/database:/backend/database
 
@@ -30,3 +32,15 @@ services:
       timeout: 15s
       retries: 5
       start_period: 15s
+    
+  reverseproxy:
+    build:
+      context: ./
+      dockerfile: Dockerfile-proxy
+      args:
+        - URLBACK=memorysateurs.com
+    ports:
+      - 80:80
+    depends_on:
+      - front
+      - back

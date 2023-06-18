@@ -1,5 +1,5 @@
 #!/bin/bash
-docker compose -f docker-compose-proxy.yml build
-docker compose -f docker-compose-proxy.yml up -d
+docker compose build
+docker compose up -d
 
 exit 0
