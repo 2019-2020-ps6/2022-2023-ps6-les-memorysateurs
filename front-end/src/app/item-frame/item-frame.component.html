@@ -3,7 +3,7 @@
     <img [src]="item.getImage()">
   </div>
   <h2>{{ item.getTitre() | uppercase}}</h2>
-  <button *ngIf="item.isEditable()" (click)="onEditer()" class="bouton-editer-item"> EDITER </button>
-  <br *ngIf="!item.isEditable()">
+  <button *ngIf="item.isEditable() && router.url != '/creer-memory'" (click)="onEditer()" class="bouton-editer-item"> EDITER </button>
+  <br *ngIf="!item.isEditable() ||( router.url == '/creer-memory' && item.isEditable())">
   <button (click)="onSelectionner()" class="bouton-selectionner-item"> {{selectionnerText}} </button>
 </div>

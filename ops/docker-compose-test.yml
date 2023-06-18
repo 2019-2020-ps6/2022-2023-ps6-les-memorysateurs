@@ -1,11 +1,11 @@
 services:
-  front:
+  front-test:
     build:
       context: ../front-end
       dockerfile: Dockerfile
       args:
         - URLBACK=back:9428
-        - CMDBUILD=build:test
+        - CMDBUILD=build:prodnoproxy
     healthcheck:
       test: curl --fail http://localhost || exit 1
       interval: 5s
@@ -38,12 +38,12 @@ services:
       context: ../front-end
       dockerfile: Dockerfile-e2e
       args:
-        - URLFRONT=front
+        - URLFRONT=front-test
     volumes:
       - e2e:/usr/local/app/test-results
 
     depends_on:
-      front:
+      front-test:
         condition: service_healthy
 
 volumes:

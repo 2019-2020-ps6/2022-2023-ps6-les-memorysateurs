@@ -20,6 +20,8 @@ export class ItemFrameComponent {
   @Output()
   editerEvent: EventEmitter<number> = new EventEmitter<number>();
 
+  constructor(public router: Router) {
+  }
 
   onSelectionner(){
     this.selectionneEvent.emit(this.item.getID())
