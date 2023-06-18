@@ -4,7 +4,7 @@ services:
       context: ../front-end
       dockerfile: Dockerfile
       args:
-        - URLBACK=back:9428
+        - URLBACK=back-test:9428
         - CMDBUILD=build:prodnoproxy
     healthcheck:
       test: curl --fail http://localhost || exit 1
@@ -17,7 +17,7 @@ services:
         condition: service_healthy
 
 
-  back:
+  back-test:
     environment:
       - CMDRUN=start:e2e
     build:
